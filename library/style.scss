@@ -2,3 +2,59 @@
 @import 'assets/scss/mixins.scss';
 @import 'assets/scss/fonts.scss';
 
+:root {
+	font-size: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-main-bg;
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  height: 90px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $color-black-light;
+  @include flex-space;
+
+  &__title {
+    color: $color-white;
+    font-size: 3rem;
+    font-family: $font-main;
+    letter-spacing: 0.6px;
+  }
+
+  &__nav-profile {
+    width: 652px;
+    @include flex-space;
+
+    .navigation {
+      color: $color-white;
+      width: 584px;
+      font-size: 2rem;
+      list-style-type: none;
+      @include flex-space;
+      @include Inter ($style: regular); 
+
+      li {
+        letter-spacing: 0.1px;
+      }
+    }
+  }
+}
+
+
+
+
+
