@@ -190,7 +190,7 @@ body {
       @include Inter ($style: regular);
       font-size: 2rem;
       letter-spacing: 0.6px;
-      // margin-right: 80px;
+      position: absolute;
 
     }
 
@@ -225,6 +225,7 @@ body {
   &__button:first-child label {
     padding-left: 0;
   }
+
 
   .books {
     margin-top: 35px;
@@ -310,6 +311,116 @@ body {
     }
   }
   
+}
+
+.coffeeshop {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  padding-bottom: 40px;
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    @include text-inter-20;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    .drinks {
+      width: 438px;
+    }
+
+    .desserts {
+      width: 482px;
+    }
+
+    .menu {
+      
+           
+
+      &__title {
+        @include section-title;
+        color: $color-brown-light;
+        margin-top: 0;
+
+        &__desserts {
+          text-align: right;
+        }
+      }
+
+      &__price {
+    
+
+        .menu-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 40px;
+
+          &__desserts {
+            justify-content: flex-end;
+          }
+           
+          &__name {
+            width: 200px;
+            @include text-inter-20;
+
+           
+
+            &__desserts {
+              width: 215px;
+              text-align: right;
+            }
+          }
+
+          &__box {
+            display: flex;
+            align-items: center;
+
+            &__desserts {
+              margin-left: 59px;
+            }
+
+          }
+
+          &__line {
+            width: 100px;
+            height: 1px;
+            background-color: $color-brown-light;
+            margin-right: 60px;
+
+            
+          }
+
+          &__price {
+            font-family: $font-main;             
+            color: $color-black;           
+            font-size: 2rem;   
+            line-height: 4rem;
+            letter-spacing: 2px;
+     
+
+          }
+        }
+      }
+    }
+  }
+
 }
 
 

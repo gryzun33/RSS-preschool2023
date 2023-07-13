@@ -40,3 +40,11 @@
   letter-spacing: 1px;
   background-color: $color-white;
 }
+
+@mixin text-inter-20 {
+  color: $color-black;
+  font-size: 2rem;
+  line-height: 4rem;
+  letter-spacing: 2px;
+  @include Inter ($style: regular);
+}
