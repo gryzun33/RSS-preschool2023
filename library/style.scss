@@ -1,6 +1,7 @@
 @import 'assets/scss/variables.scss';
-@import 'assets/scss/mixins.scss';
 @import 'assets/scss/fonts.scss';
+@import 'assets/scss/mixins.scss';
+
 
 :root {
 	font-size: 10px;
@@ -86,21 +87,14 @@ body {
   height: 837px;
   display: flex;
   flex-direction: column;
+  background-color: $color-white;
 
   &__title {
-    color: $color-black-light;
-    font-family: $font-main;
-    font-size: 4rem;
-    line-height: 4rem;
-    letter-spacing: 2px;
-    margin: 20px auto 0 auto;   
+    @include section-title;  
   }
 
   &__line {
-    margin: 20px auto 0 auto; 
-    width: 50px;
-    height: 1px;
-    background-color: $color-black-light;
+    @include line-under-title;
   }
 
   &__text {
@@ -147,6 +141,185 @@ body {
 
   }
 }
+
+.favorites {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    color: $color-black;
+    @include Inter ($style: bold);
+    font-size: 2rem;
+    margin-top: 40px;
+    height: 24px;
+  }
+
+  &__buttons {
+    margin-top: 35px;
+    height: 34px;
+    width: 705px;
+    display: flex;
+    justify-content: space-between;
+    // margin-bottom: 35px;
+
+  
+
+
+    input {
+      position: absolute;
+      opacity: 0;
+  
+    }
+
+    label {
+      display: inline-block;
+      padding: 5px;
+      color: $color-black;
+      @include Inter ($style: regular);
+      font-size: 2rem;
+      letter-spacing: 0.6px;
+      // margin-right: 80px;
+
+    }
+
+    label:first-child {
+      padding-left: 0;
+      // margin-left: 0;
+    }
+
+  
+
+    input:checked + label {
+      font-weight: 700;
+    }
+
+    input:not(:checked) + label:before {
+      content: url(assets/icons/icon-non-checked.svg); 
+      display: inline-block;
+      margin-right: 20px;
+      margin-top: 1px; 
+    }
+
+    input:checked + label:before {
+      content: url(assets/icons/icon_checked.svg); 
+      display: inline-block;
+      margin-right: 20px;
+      margin-top: 1px;
+    
+    }
+
+  }
+
+  &__button:first-child label {
+    padding-left: 0;
+  }
+
+  .books {
+    margin-top: 35px;
+    
+    &__box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+
+      .book {
+        width: 590px;
+        height: 555px;
+        position: relative;
+        margin-bottom: 40px;
+
+        &__image {
+          width: 200px;
+          height: 300px;
+          position: absolute;
+          right:0;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        &__text {
+          border: 1px solid $color-black;
+          padding-left: 20px;
+          width: 550px;
+          height: 100%;
+        }
+
+        &__header-text {
+           color: $color-black;
+           font-family: $font-main;
+           font-size: 2rem;
+           line-height: 4rem;
+           letter-spacing: 2px;
+           margin-top: 13px;
+        }
+
+        &__header-line {
+          width: 60px;
+          height: 1px;
+          background-color: $color-brown-light;
+
+       }
+
+        &__title {
+          @include Inter ($style: bold); 
+          color: $color-black;
+          font-size: 1.5rem;
+          line-height: 4rem;
+          letter-spacing: 2px;
+          margin-top: 20px;
+
+          span {
+            text-transform: uppercase;
+          }
+
+        }
+        
+        &__description {
+          width: 357px;
+          height: 320px;
+          margin-top: 20px;
+          color: $color-black;
+          @include Inter ($style: regular);
+          font-size: 1.5rem;    
+          line-height: 4rem;
+          letter-spacing: 2px;
+          text-transform: capitalize;
+          
+        }
+
+        &__btn {
+          @include button-light;
+          margin-top: 15px;
+
+        }
+
+      }
+    }
+  }
+  
+}
+
+
+
+
+
+
+
+
+
 
 .footer {
   background-color: $color-black-light;
