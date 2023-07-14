@@ -209,7 +209,6 @@ body {
   font-family: "Inter", sans-serif;
   font-size: 2rem;
   letter-spacing: 0.6px;
-  position: absolute;
 }
 .favorites__buttons label:first-child {
   padding-left: 0;
@@ -415,6 +414,65 @@ body {
   font-size: 2rem;
   line-height: 4rem;
   letter-spacing: 2px;
+}
+
+.contacts {
+  width: 100%;
+  padding: 0 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+}
+.contacts__title {
+  color: #0C0C0E;
+  font-family: "Forum";
+  font-size: 4rem;
+  line-height: 4rem;
+  letter-spacing: 2px;
+  margin: 20px auto 0 auto;
+}
+.contacts__line {
+  margin: 20px auto 0 auto;
+  width: 50px;
+  height: 1px;
+  background-color: #0C0C0E;
+}
+.contacts__content {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.contacts__text {
+  color: #000000;
+  font-size: 2rem;
+  line-height: 4rem;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  text-transform: capitalize;
+}
+.contacts__subtitle {
+  font-weight: 700;
+}
+.contacts__subtitle__staff {
+  margin-top: 40px;
+}
+.contacts__subtitle__staff + ul {
+  margin-top: 20px;
+}
+.contacts__subtitle__staff + ul a {
+  font-weight: 700;
+}
+.contacts__list {
+  margin-top: 40px;
+}
+.contacts__list li {
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+.contacts__list li a {
+  text-decoration: none;
+  color: #000000;
 }
 
 .footer {

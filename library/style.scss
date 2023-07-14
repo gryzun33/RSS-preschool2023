@@ -190,7 +190,8 @@ body {
       @include Inter ($style: regular);
       font-size: 2rem;
       letter-spacing: 0.6px;
-      position: absolute;
+      // position: relative;
+     
 
     }
 
@@ -221,6 +222,11 @@ body {
     }
 
   }
+
+  // &__button {
+  //   position: relative;
+    
+  // }
 
   &__button:first-child label {
     padding-left: 0;
@@ -430,6 +436,64 @@ body {
     }
   }
 
+}
+
+.contacts {
+  width: 100%;
+  padding: 0 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__content {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text {
+    @include text-inter-20;
+    text-transform: capitalize;
+  }
+
+  &__subtitle {
+    font-weight: 700;
+
+    &__staff {
+      margin-top: 40px;
+    }
+    
+    &__staff + ul {
+      margin-top: 20px;
+
+      a {
+        font-weight: 700;
+      }
+    }
+
+  }
+
+  &__list {
+    margin-top: 40px;
+
+    li {
+      margin-bottom: 20px;
+      list-style-type: none;
+
+      a {
+        text-decoration: none;
+        color: $color-black;
+      }
+    }
+  }
 }
 
 
