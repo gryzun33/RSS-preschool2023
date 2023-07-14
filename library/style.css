@@ -309,6 +309,13 @@ body {
   background-color: #FFFFFF;
   margin-top: 15px;
 }
+.favorites .books__box .book:last-child .book__btn {
+  border-color: #BB945F;
+  color: #BB945F;
+}
+.favorites .books .spring, .favorites .books .summer, .favorites .books .autumn {
+  display: none;
+}
 
 .coffeeshop {
   padding-left: 20px;
@@ -439,6 +446,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.footer__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.footer__icon__twitter {
+  background-image: url("assets/icons/u_twitter-alt.svg");
+}
+.footer__icon__instagram {
+  background-image: url("assets/icons/u_instagram.svg");
+}
+.footer__icon__facebook {
+  background-image: url("assets/icons/u_facebook-f.svg");
 }
 .footer__schedule {
   width: 149px;

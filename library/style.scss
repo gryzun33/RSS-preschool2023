@@ -308,6 +308,15 @@ body {
         }
 
       }
+
+      .book:last-child .book__btn {
+        border-color: $color-brown-light;
+        color: $color-brown-light;
+      }
+    }
+
+    .spring, .summer, .autumn {
+      display: none;
     }
   }
   
@@ -462,7 +471,30 @@ body {
     width: 102px;
     height: 40px;
     @include flex-space;
+
+    
   }
+
+  &__icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    &__twitter {
+      background-image: url('assets/icons/u_twitter-alt.svg');
+    }
+
+    &__instagram {
+      background-image: url('assets/icons/u_instagram.svg');
+    }
+
+    &__facebook {
+      background-image: url('assets/icons/u_facebook-f.svg');
+    }
+  
+  }
+
+
 
   &__schedule {
     width: 149px;
