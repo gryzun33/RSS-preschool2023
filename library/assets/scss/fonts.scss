@@ -1,5 +1,3 @@
-$font-main: "Forum";
-
 @font-face {
   font-style: normal;
   font-family: "Forum";
@@ -21,14 +19,3 @@ $font-main: "Forum";
   src: url(assets/fonts/Inter-Bold.ttf);
 }
 
-@mixin Inter ($style: regular) {
-  @if $style == regular {
-    font-weight: 400;
-    font-family: "Inter", sans-serif;
-  }
-
-  @if $style == bold {
-    font-weight: 700;
-    font-family: "Inter", sans-serif;
-  }
-}

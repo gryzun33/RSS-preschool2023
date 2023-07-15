@@ -32,8 +32,8 @@ body {
   &__title {
     color: $color-white;
     font-size: 3rem;
-    font-family: $font-main;
     letter-spacing: 0.6px;
+    @include font-title;
   }
 
   &__nav-profile {
@@ -46,7 +46,7 @@ body {
       font-size: 2rem;
       list-style-type: none;
       @include flex-space;
-      @include Inter ($style: regular); 
+      @include text-regular; 
 
       li {
         letter-spacing: 0.1px;
@@ -66,7 +66,7 @@ body {
     // margin-top: 220px;
     background-color: $color-black-light;
     padding: 35px 40px;
-    font-family: $font-main;
+    // font-family: $font-main;
     color: $color-white;
     font-size: 4rem;
     text-align: center;
@@ -75,6 +75,7 @@ body {
     text-transform: uppercase;
     position: relative;
     top: 220px;
+    @include font-title;
 
     span {
       padding-right: 10px;
@@ -84,9 +85,10 @@ body {
 
 .about {
   width: 100%;
-  height: 837px;
-  display: flex;
-  flex-direction: column;
+  padding: 20px 20px 35px 20px;
+  // height: 837px;
+  // display: flex;
+  // flex-direction: column;
   background-color: $color-white;
 
   &__title {
@@ -100,14 +102,14 @@ body {
   &__text {
     margin-top: 40px;
     color: $color-black;
-    @include Inter ($style: regular);
+    @include text-regular;
     font-size: 2rem;
     line-height: 4rem;
     text-align: center;
   }
 
   .slider {
-    margin: 20px 20px 0 20px;
+    margin-top: 20px;
 
     &__inner {
       width: 100%;
@@ -147,8 +149,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: $color-white;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px 20px 0 20px;
 
   &__title {
     @include section-title;
@@ -160,7 +161,7 @@ body {
 
   &__text {
     color: $color-black;
-    @include Inter ($style: bold);
+    @include text-bold;
     font-size: 2rem;
     margin-top: 40px;
     height: 24px;
@@ -187,7 +188,7 @@ body {
       display: inline-block;
       padding: 5px;
       color: $color-black;
-      @include Inter ($style: regular);
+      @include text-regular;
       font-size: 2rem;
       letter-spacing: 0.6px;
       // position: relative;
@@ -223,10 +224,6 @@ body {
 
   }
 
-  // &__button {
-  //   position: relative;
-    
-  // }
 
   &__button:first-child label {
     padding-left: 0;
@@ -266,11 +263,12 @@ body {
 
         &__header-text {
            color: $color-black;
-           font-family: $font-main;
+          //  font-family: $font-main;
            font-size: 2rem;
            line-height: 4rem;
            letter-spacing: 2px;
            margin-top: 13px;
+           @include  font-title;
         }
 
         &__header-line {
@@ -281,7 +279,7 @@ body {
        }
 
         &__title {
-          @include Inter ($style: bold); 
+          @include text-bold; 
           color: $color-black;
           font-size: 1.5rem;
           line-height: 4rem;
@@ -299,7 +297,7 @@ body {
           height: 320px;
           margin-top: 20px;
           color: $color-black;
-          @include Inter ($style: regular);
+          @include text-regular;
           font-size: 1.5rem;    
           line-height: 4rem;
           letter-spacing: 2px;
@@ -329,13 +327,12 @@ body {
 }
 
 .coffeeshop {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px 20px 40px 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   background-color: $color-white;
-  padding-bottom: 40px;
+
 
   &__title {
     @include section-title;
@@ -372,6 +369,7 @@ body {
         @include section-title;
         color: $color-brown-light;
         margin-top: 0;
+        text-align: left;
 
         &__desserts {
           text-align: right;
@@ -423,7 +421,8 @@ body {
           }
 
           &__price {
-            font-family: $font-main;             
+            // font-family: $font-main;
+            @include font-title;             
             color: $color-black;           
             font-size: 2rem;   
             line-height: 4rem;
@@ -440,7 +439,7 @@ body {
 
 .contacts {
   width: 100%;
-  padding: 0 20px 40px 20px;
+  padding: 20px 20px 40px 20px;
   display: flex;
   flex-direction: column;
   background-color: $color-white;
@@ -496,6 +495,143 @@ body {
   }
 }
 
+.librarycard {
+  padding: 20px 20px 41px 20px;
+  background-color: $color-white;
+
+  &__title {
+    @include section-title; 
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    .cardfinder {
+      width: 600px;
+
+      &__title {
+        @include text-regular;
+        color: $color-black;
+        font-size: 3rem;
+        text-align: center;
+        letter-spacing: 0.6px;
+        line-height: 36px;
+
+      }
+
+      .card {
+        width: 600px;
+        height: 386px;
+        border: 3px solid $color-brown-light;
+        padding: 17px 17px 0 17px;
+        margin-top: 30px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+        &__content {
+          background-color: $color-brown-light;
+          height: 272px;
+          display: flex;
+          flex-direction: column;
+          padding: 20px 20px 0 20px;
+
+          input {
+            height: 66px;
+            border: none;
+            border-radius: 10px;
+            @include font-title;
+            font-size: 3rem;
+            letter-spacing: 0.6px;
+            line-height: 5rem;
+            padding-left: 20px;
+            padding-right: 20px;
+            outline: none;
+
+
+            &:invalid {
+              border: 3px solid red;
+            }
+          }
+
+      
+        }
+
+        &__title {
+          @include font-title;
+          color: $color-black;
+          font-size: 3rem;
+          line-height: 50px;
+          letter-spacing: 0.6px;
+        }
+
+        &__name {
+          margin-top: 20px;
+        }
+
+        &__number {
+          margin-top: 25px;
+
+       
+        }
+
+        &__btn {
+          display: block;
+          margin-top: 20px;
+          margin-right: auto;
+          margin-left: auto; 
+          @include button-light;
+          width: 242px;
+          height: 44px;
+          font-size: 2rem;
+        }
+
+      }
+    }
+
+    .readercard {
+      width: 456px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      &__title {
+        @include font-title;
+        color: $color-black;
+        // text-align: right;
+        font-size: 3rem;
+        letter-spacing: 0.6px;
+        line-height: 33px;
+      }
+
+      &__text {
+        margin-top: 35px;
+        @include text-inter-20;
+        color: $color-black;
+        text-align: right;
+        letter-spacing: 0.4px;
+
+      }
+
+      &__buttons {
+        margin-top: 35px;
+        width: 170px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__btn {
+        @include button-light;
+      }
+
+    }
+  }
+}
+
 
 
 
@@ -526,7 +662,7 @@ body {
       text-decoration: none;
       font-size: 1.5rem;
       line-height: 2rem;
-      @include Inter ($style: regular); 
+      @include text-regular; 
     }
   }
 
@@ -566,7 +702,7 @@ body {
     font-size: 1.5rem;
     line-height: 2rem;
     text-align: right;
-    @include Inter ($style: regular); 
+    @include text-regular; 
 
     .weekends {
       margin-top: 10px;
@@ -586,7 +722,7 @@ body {
     font-size: 2rem;
     letter-spacing: 2px;
     @include flex-space;
-    @include Inter ($style: regular); 
+    @include text-regular; 
 
     a {
       color: $color-white;
