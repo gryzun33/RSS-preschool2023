@@ -225,9 +225,8 @@ a {
 .favorites__buttons {
   margin-top: 35px;
   height: 34px;
-  width: 705px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .favorites__buttons input {
   position: absolute;
@@ -241,7 +240,7 @@ a {
   font-weight: 400;
   font-style: normal;
   font-size: 2rem;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
 }
 .favorites__buttons label:hover {
   cursor: pointer;
@@ -266,6 +265,18 @@ a {
 }
 .favorites__button:first-child label {
   padding-left: 0;
+}
+.favorites__button:first-child {
+  width: 188px;
+}
+.favorites__button:nth-child(2) {
+  width: 190px;
+}
+.favorites__button:nth-child(3) {
+  width: 207px;
+}
+.favorites__button:nth-child(4) {
+  width: 130px;
 }
 .favorites .books {
   margin-top: 35px;

@@ -189,9 +189,8 @@ a {
   &__buttons {
     margin-top: 35px;
     height: 34px;
-    width: 705px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     input {
       position: absolute;
@@ -204,7 +203,7 @@ a {
       color: $color-black;
       @include text-regular;
       font-size: 2rem;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
 
       &:hover {
         cursor: pointer;
@@ -236,6 +235,22 @@ a {
 
   &__button:first-child label {
     padding-left: 0;
+  }
+
+  &__button:first-child {
+    width: 188px;
+  }
+
+  &__button:nth-child(2) {
+    width: 190px;
+  }
+
+  &__button:nth-child(3) {
+    width: 207px;
+  }
+
+  &__button:nth-child(4) {
+    width: 130px;
   }
 
   .books {
