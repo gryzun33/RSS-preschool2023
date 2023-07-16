@@ -70,10 +70,7 @@ a {
         &:hover {
           cursor: pointer;
           border-bottom: 2px solid $color-white;
-          // border-top: 2px solid transparent;
-        }
-
-        
+        }        
       }
     }
   }
@@ -87,10 +84,8 @@ a {
   &__title {
     width: 600px;
     height: 220px;
-    // margin-top: 220px;
     background-color: $color-black-light;
     padding: 35px 40px;
-    // font-family: $font-main;
     color: $color-white;
     font-size: 4rem;
     text-align: center;
@@ -110,9 +105,6 @@ a {
 .about {
   width: 100%;
   padding: 20px 20px 35px 20px;
-  // height: 837px;
-  // display: flex;
-  // flex-direction: column;
   background-color: $color-white;
 
   &__title {
@@ -168,7 +160,6 @@ a {
         background-color: $color-brown-light;
       }
     }
-
   }
 }
 
@@ -201,15 +192,10 @@ a {
     width: 705px;
     display: flex;
     justify-content: space-between;
-    // margin-bottom: 35px;
-
-  
-
 
     input {
       position: absolute;
-      opacity: 0;
-  
+      opacity: 0;  
     }
 
     label {
@@ -219,21 +205,15 @@ a {
       @include text-regular;
       font-size: 2rem;
       letter-spacing: 0.6px;
-      // position: relative;
 
       &:hover {
         cursor: pointer;
       }
-     
-
     }
 
     label:first-child {
       padding-left: 0;
-      // margin-left: 0;
     }
-
-  
 
     input:checked + label {
       font-weight: 700;
@@ -250,21 +230,13 @@ a {
       content: url(assets/icons/icon_checked.svg); 
       display: inline-block;
       margin-right: 20px;
-      margin-top: 1px;
-    
+      margin-top: 1px;    
     }
-
   }
-
-  // &__button:hover {
-  //   cursor: pointer;
-  // }
-
 
   &__button:first-child label {
     padding-left: 0;
   }
-
 
   .books {
     margin-top: 35px;
@@ -273,7 +245,6 @@ a {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-
 
       .book {
         width: 590px;
@@ -299,7 +270,6 @@ a {
 
         &__header-text {
            color: $color-black;
-          //  font-family: $font-main;
            font-size: 2rem;
            line-height: 4rem;
            letter-spacing: 2px;
@@ -311,7 +281,6 @@ a {
           width: 60px;
           height: 1px;
           background-color: $color-brown-light;
-
        }
 
         &__title {
@@ -325,7 +294,6 @@ a {
           span {
             text-transform: uppercase;
           }
-
         }
         
         &__description {
@@ -337,41 +305,26 @@ a {
           font-size: 1.5rem;    
           line-height: 4rem;
           letter-spacing: 2px;
-          text-transform: capitalize;
-          
+          text-transform: capitalize;          
         }
 
         &__btn {
           @include button-light;
           margin-top: 15px;
-          // transition: background-color 0.3s ease-out;
-
-          // &:hover {
-          //   cursor: pointer;
-          //   background-color: $color-brown-light;
-          // }
 
           &:disabled {
             border-color: $color-brown-light;
             color: $color-brown-light;
             pointer-events: none;
           }
-
         }
-
       }
-
-      // .book:last-child .book__btn {
-      //   border-color: $color-brown-light;
-      //   color: $color-brown-light;
-      // }
     }
 
     .spring, .summer, .autumn {
       display: none;
     }
-  }
-  
+  }  
 }
 
 .coffeeshop {
@@ -380,7 +333,6 @@ a {
   display: flex;
   flex-direction: column;
   background-color: $color-white;
-
 
   &__title {
     @include section-title;
@@ -411,8 +363,6 @@ a {
 
     .menu {
       
-           
-
       &__title {
         @include section-title;
         color: $color-brown-light;
@@ -426,7 +376,6 @@ a {
 
       &__price {
     
-
         .menu-item {
           display: flex;
           justify-content: space-between;
@@ -441,8 +390,6 @@ a {
             width: 200px;
             @include text-inter-20;
 
-           
-
             &__desserts {
               width: 215px;
               text-align: right;
@@ -456,7 +403,6 @@ a {
             &__desserts {
               margin-left: 59px;
             }
-
           }
 
           &__line {
@@ -464,25 +410,20 @@ a {
             height: 1px;
             background-color: $color-brown-light;
             margin-right: 60px;
-
-            
+           
           }
 
           &__price {
-            // font-family: $font-main;
             @include font-title;             
             color: $color-black;           
             font-size: 2rem;   
             line-height: 4rem;
             letter-spacing: 2px;
-     
-
           }
         }
       }
     }
   }
-
 }
 
 .contacts {
@@ -525,7 +466,6 @@ a {
         font-weight: 700;
       }
     }
-
   }
 
   &__list {
@@ -575,7 +515,6 @@ a {
         text-align: center;
         letter-spacing: 0.6px;
         line-height: 36px;
-
       }
 
       .card {
@@ -605,13 +544,10 @@ a {
             padding-right: 20px;
             outline: none;
 
-
             &:invalid {
               border: 3px solid red;
             }
-          }
-
-      
+          }     
         }
 
         &__title {
@@ -627,9 +563,7 @@ a {
         }
 
         &__number {
-          margin-top: 25px;
-
-       
+          margin-top: 25px;      
         }
 
         &__btn {
@@ -642,7 +576,6 @@ a {
           height: 44px;
           font-size: 2rem;
         }
-
       }
     }
 
@@ -655,7 +588,6 @@ a {
       &__title {
         @include font-title;
         color: $color-black;
-        // text-align: right;
         font-size: 3rem;
         letter-spacing: 0.6px;
         line-height: 33px;
@@ -667,7 +599,6 @@ a {
         color: $color-black;
         text-align: right;
         letter-spacing: 0.4px;
-
       }
 
       &__buttons {
@@ -680,19 +611,9 @@ a {
       &__btn {
         @include button-light;
       }
-
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 .footer {
   background-color: $color-black-light;
@@ -709,7 +630,6 @@ a {
   &__location {
     width: 230px;
 
-
     a {
       color: $color-white;
       text-decoration: none;
@@ -722,18 +642,13 @@ a {
         color: $color-brown-light;
       }
     }
-
-
   }
 
   &__icons {
     margin-top: 10px;
     width: 102px;
     height: 40px;
-    @include flex-space;
-
-
-    
+    @include flex-space;    
   }
 
   &__icon {
@@ -741,7 +656,6 @@ a {
     width: 24px;
     height: 24px;
     
-
     & > svg > g > path {
       transition: fill 0.3s ease-out;
     }
@@ -749,27 +663,7 @@ a {
     &:hover > svg > g > path {
       fill: $color-brown-light;
      }
-
-    // &:hover {
-    //   color: red;
-    // }
-
-    // &__twitter {
-    //   background-image: url('assets/icons/u_twitter-alt.svg');
-       
-    // }
-
-    // &__instagram {
-    //   background-image: url('assets/icons/u_instagram.svg');
-    // }
-
-    // &__facebook {
-    //   background-image: url('assets/icons/u_facebook-f.svg');
-    // }
-  
   }
-
-
 
   &__schedule {
     width: 149px;
@@ -788,7 +682,6 @@ a {
     width: 100%;
     height: 1px;
     background-color: $color-white;
-    // background-color: $color-white;
   }
 
   &__rss {
@@ -807,7 +700,6 @@ a {
       &:hover {
         color: $color-brown-light;
       }
-
     }
 
     .rss {
@@ -815,8 +707,3 @@ a {
     }
   }
 }
-
-
-
-
-
