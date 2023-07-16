@@ -30,8 +30,16 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #F5F5F5;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -65,6 +73,7 @@ body {
 .header__nav-profile .navigation {
   color: #FFFFFF;
   width: 584px;
+  height: 4rem;
   font-size: 2rem;
   list-style-type: none;
   display: flex;
@@ -76,6 +85,16 @@ body {
 }
 .header__nav-profile .navigation li {
   letter-spacing: 0.1px;
+  transition: border 0.3s ease-out;
+  border-bottom: 2px solid transparent;
+  border-top: 2px solid transparent;
+}
+.header__nav-profile .navigation li a {
+  color: #FFFFFF;
+}
+.header__nav-profile .navigation li:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #FFFFFF;
 }
 
 .welcome {
@@ -157,6 +176,9 @@ body {
   justify-content: center;
   align-items: center;
 }
+.about .pagination__box:hover {
+  cursor: pointer;
+}
 .about .pagination__inner {
   width: 16px;
   height: 16px;
@@ -220,6 +242,9 @@ body {
   font-style: normal;
   font-size: 2rem;
   letter-spacing: 0.6px;
+}
+.favorites__buttons label:hover {
+  cursor: pointer;
 }
 .favorites__buttons label:first-child {
   padding-left: 0;
@@ -322,11 +347,18 @@ body {
   font-size: 1rem;
   letter-spacing: 1px;
   background-color: #FFFFFF;
+  transition: all 0.3s ease-out;
   margin-top: 15px;
 }
-.favorites .books__box .book:last-child .book__btn {
+.favorites .books__box .book__btn:hover {
+  cursor: pointer;
+  background-color: #BB945F;
+  border: 1px solid #BB945F;
+}
+.favorites .books__box .book__btn:disabled {
   border-color: #BB945F;
   color: #BB945F;
+  pointer-events: none;
 }
 .favorites .books .spring, .favorites .books .summer, .favorites .books .autumn {
   display: none;
@@ -502,6 +534,10 @@ body {
 .contacts__list li a {
   text-decoration: none;
   color: #000000;
+  transition: color 0.3s ease-out;
+}
+.contacts__list li a:hover {
+  color: #BB945F;
 }
 
 .librarycard {
@@ -605,9 +641,15 @@ body {
   font-size: 1rem;
   letter-spacing: 1px;
   background-color: #FFFFFF;
+  transition: all 0.3s ease-out;
   width: 242px;
   height: 44px;
   font-size: 2rem;
+}
+.librarycard__content .cardfinder .card__btn:hover {
+  cursor: pointer;
+  background-color: #BB945F;
+  border: 1px solid #BB945F;
 }
 .librarycard__content .readercard {
   width: 456px;
@@ -654,6 +696,12 @@ body {
   font-size: 1rem;
   letter-spacing: 1px;
   background-color: #FFFFFF;
+  transition: all 0.3s ease-out;
+}
+.librarycard__content .readercard__btn:hover {
+  cursor: pointer;
+  background-color: #BB945F;
+  border: 1px solid #BB945F;
 }
 
 .footer {
@@ -678,6 +726,10 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
+  transition: color 0.3s ease-out;
+}
+.footer__location a:hover {
+  color: #BB945F;
 }
 .footer__icons {
   margin-top: 10px;
@@ -692,14 +744,11 @@ body {
   width: 24px;
   height: 24px;
 }
-.footer__icon__twitter {
-  background-image: url("assets/icons/u_twitter-alt.svg");
+.footer__icon > svg > g > path {
+  transition: fill 0.3s ease-out;
 }
-.footer__icon__instagram {
-  background-image: url("assets/icons/u_instagram.svg");
-}
-.footer__icon__facebook {
-  background-image: url("assets/icons/u_facebook-f.svg");
+.footer__icon:hover > svg > g > path {
+  fill: #BB945F;
 }
 .footer__schedule {
   width: 149px;
@@ -734,6 +783,10 @@ body {
 .footer__rss a {
   color: #FFFFFF;
   text-decoration: none;
+  transition: color 0.3s ease-out;
+}
+.footer__rss a:hover {
+  color: #BB945F;
 }
 .footer__rss .rss {
   margin-left: 50px;

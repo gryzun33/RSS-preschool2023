@@ -13,8 +13,16 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: $color-main-bg;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {
@@ -43,6 +51,7 @@ body {
     .navigation {
       color: $color-white;
       width: 584px;
+      height: 4rem;
       font-size: 2rem;
       list-style-type: none;
       @include flex-space;
@@ -50,6 +59,21 @@ body {
 
       li {
         letter-spacing: 0.1px;
+        transition: border 0.3s ease-out;
+        border-bottom: 2px solid transparent;
+        border-top: 2px solid transparent;
+
+        a {
+          color: $color-white;
+        }
+
+        &:hover {
+          cursor: pointer;
+          border-bottom: 2px solid $color-white;
+          // border-top: 2px solid transparent;
+        }
+
+        
       }
     }
   }
@@ -128,6 +152,10 @@ body {
       width: 26px;
       height: 26px;
       @include flex-center;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &__inner {
@@ -192,6 +220,10 @@ body {
       font-size: 2rem;
       letter-spacing: 0.6px;
       // position: relative;
+
+      &:hover {
+        cursor: pointer;
+      }
      
 
     }
@@ -223,6 +255,10 @@ body {
     }
 
   }
+
+  // &__button:hover {
+  //   cursor: pointer;
+  // }
 
 
   &__button:first-child label {
@@ -308,15 +344,27 @@ body {
         &__btn {
           @include button-light;
           margin-top: 15px;
+          // transition: background-color 0.3s ease-out;
+
+          // &:hover {
+          //   cursor: pointer;
+          //   background-color: $color-brown-light;
+          // }
+
+          &:disabled {
+            border-color: $color-brown-light;
+            color: $color-brown-light;
+            pointer-events: none;
+          }
 
         }
 
       }
 
-      .book:last-child .book__btn {
-        border-color: $color-brown-light;
-        color: $color-brown-light;
-      }
+      // .book:last-child .book__btn {
+      //   border-color: $color-brown-light;
+      //   color: $color-brown-light;
+      // }
     }
 
     .spring, .summer, .autumn {
@@ -490,6 +538,11 @@ body {
       a {
         text-decoration: none;
         color: $color-black;
+        transition: color 0.3s ease-out;
+
+        &:hover {
+          color: $color-brown-light;
+        }
       }
     }
   }
@@ -662,8 +715,15 @@ body {
       text-decoration: none;
       font-size: 1.5rem;
       line-height: 2rem;
-      @include text-regular; 
+      @include text-regular;
+      transition: color 0.3s ease-out; 
+
+      &:hover {
+        color: $color-brown-light;
+      }
     }
+
+
   }
 
   &__icons {
@@ -672,6 +732,7 @@ body {
     height: 40px;
     @include flex-space;
 
+
     
   }
 
@@ -679,18 +740,32 @@ body {
     display: block;
     width: 24px;
     height: 24px;
+    
 
-    &__twitter {
-      background-image: url('assets/icons/u_twitter-alt.svg');
+    & > svg > g > path {
+      transition: fill 0.3s ease-out;
     }
 
-    &__instagram {
-      background-image: url('assets/icons/u_instagram.svg');
-    }
+    &:hover > svg > g > path {
+      fill: $color-brown-light;
+     }
 
-    &__facebook {
-      background-image: url('assets/icons/u_facebook-f.svg');
-    }
+    // &:hover {
+    //   color: red;
+    // }
+
+    // &__twitter {
+    //   background-image: url('assets/icons/u_twitter-alt.svg');
+       
+    // }
+
+    // &__instagram {
+    //   background-image: url('assets/icons/u_instagram.svg');
+    // }
+
+    // &__facebook {
+    //   background-image: url('assets/icons/u_facebook-f.svg');
+    // }
   
   }
 
@@ -727,6 +802,12 @@ body {
     a {
       color: $color-white;
       text-decoration: none;
+      transition: color 0.3s ease-out;
+
+      &:hover {
+        color: $color-brown-light;
+      }
+
     }
 
     .rss {

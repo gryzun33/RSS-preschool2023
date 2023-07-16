@@ -60,6 +60,15 @@
   font-size: 1rem;
   letter-spacing: 1px;
   background-color: $color-white;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-brown-light;
+    border: 1px solid $color-brown-light;
+  }
+
+  
 }
 
 @mixin text-inter-20 {
