@@ -1,0 +1,81 @@
+:root {
+	font-size: 10px;
+}
+
+@mixin flex-space($justify: space-between, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin font-title {
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-regular {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-bold {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin section-title {
+  color: $color-black-light;
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+  line-height: 4rem;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+@mixin line-under-title {
+  margin: 20px auto 0 auto; 
+  width: 50px;
+  height: 1px;
+  background-color: $color-black-light;
+}
+
+@mixin button-light {
+  width: 75px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid $color-black-light;
+  @include text-bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  background-color: $color-white;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-brown-light;
+    border: 1px solid $color-brown-light;
+  }
+
+  
+}
+
+@mixin text-inter-20 {
+  color: $color-black;
+  font-size: 2rem;
+  line-height: 4rem;
+  letter-spacing: 2px;
+  @include text-regular;
+}
+
