@@ -20,10 +20,6 @@
   font-size: 10px;
 }
 
-:root {
-  font-size: 10px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -59,7 +55,7 @@ a {
 }
 .header__title {
   color: #FFFFFF;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
   font-family: "Forum", cursive;
   font-weight: 400;
@@ -74,8 +70,8 @@ a {
 .header__nav-profile .navigation {
   color: #FFFFFF;
   width: 584px;
-  height: 4rem;
-  font-size: 2rem;
+  height: 40px;
+  font-size: 20px;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -126,9 +122,9 @@ a {
   background-color: #0C0C0E;
   padding: 35px 40px;
   color: #FFFFFF;
-  font-size: 4rem;
+  font-size: 40px;
   text-align: center;
-  line-height: 5rem;
+  line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
   position: relative;
@@ -176,8 +172,8 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   text-align: center;
 }
 .about .slider {
@@ -249,7 +245,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 20px;
   margin-top: 40px;
   height: 24px;
 }
@@ -270,7 +266,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 20px;
   letter-spacing: 0.5px;
 }
 .favorites__buttons label:hover {
@@ -339,8 +335,8 @@ a {
 }
 .favorites .books__box .book__header-text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   margin-top: 13px;
   font-family: "Forum", cursive;
@@ -357,8 +353,8 @@ a {
   font-weight: 700;
   font-style: normal;
   color: #000000;
-  font-size: 1.5rem;
-  line-height: 4rem;
+  font-size: 15px;
+  line-height: 40px;
   letter-spacing: 2px;
   margin-top: 20px;
 }
@@ -373,8 +369,8 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.5rem;
-  line-height: 4rem;
+  font-size: 15px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
 }
@@ -517,8 +513,8 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
 }
 
@@ -637,7 +633,7 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   text-align: center;
   letter-spacing: 0.6px;
   line-height: 36px;
@@ -664,9 +660,9 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
-  line-height: 5rem;
+  line-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
   outline: none;
@@ -679,7 +675,7 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   line-height: 50px;
   letter-spacing: 0.6px;
 }
@@ -707,7 +703,7 @@ a {
   transition: all 0.3s ease-out;
   width: 242px;
   height: 44px;
-  font-size: 2rem;
+  font-size: 20px;
 }
 .librarycard__content .cardfinder .card__btn:hover {
   cursor: pointer;
@@ -725,7 +721,7 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
   line-height: 33px;
 }
@@ -792,8 +788,8 @@ a {
 .footer__location a {
   color: #FFFFFF;
   text-decoration: none;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 15px;
+  line-height: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -824,8 +820,8 @@ a {
 .footer__schedule {
   width: 149px;
   color: #FFFFFF;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 15px;
+  line-height: 20px;
   text-align: right;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -842,7 +838,7 @@ a {
 .footer__rss {
   color: #FFFFFF;
   margin-top: 44px;
-  font-size: 2rem;
+  font-size: 20px;
   letter-spacing: 2px;
   display: flex;
   justify-content: space-between;

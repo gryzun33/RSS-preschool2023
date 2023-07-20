@@ -2,23 +2,12 @@
 @import 'assets/scss/fonts.scss';
 @import 'assets/scss/mixins.scss';
 
-
-:root {
-	font-size: 10px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-@mixin wrapper {
-  width: 1440px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
 
 html {
   scroll-behavior: smooth;
@@ -55,7 +44,7 @@ a {
 
   &__title {
     color: $color-white;
-    font-size: 3rem;
+    font-size: 30px;
     letter-spacing: 0.6px;
     @include font-title;
   }
@@ -67,8 +56,8 @@ a {
     .navigation {
       color: $color-white;
       width: 584px;
-      height: 4rem;
-      font-size: 2rem;
+      height: 40px;
+      font-size: 20px;
       list-style-type: none;
       @include flex-space;
       @include text-regular; 
@@ -120,9 +109,9 @@ a {
     background-color: $color-black-light;
     padding: 35px 40px;
     color: $color-white;
-    font-size: 4rem;
+    font-size: 40px;
     text-align: center;
-    line-height: 5rem;
+    line-height: 50px;
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
@@ -160,8 +149,8 @@ a {
     margin-top: 40px;
     color: $color-black;
     @include text-regular;
-    font-size: 2rem;
-    line-height: 4rem;
+    font-size: 20px;
+    line-height: 40px;
     text-align: center;
   }
 
@@ -229,7 +218,7 @@ a {
   &__text {
     color: $color-black;
     @include text-bold;
-    font-size: 2rem;
+    font-size: 20px;
     margin-top: 40px;
     height: 24px;
   }
@@ -250,7 +239,7 @@ a {
       padding: 5px;
       color: $color-black;
       @include text-regular;
-      font-size: 2rem;
+      font-size: 20px;
       letter-spacing: 0.5px;
 
       &:hover {
@@ -333,8 +322,8 @@ a {
 
         &__header-text {
            color: $color-black;
-           font-size: 2rem;
-           line-height: 4rem;
+           font-size: 20px;
+           line-height: 40px;
            letter-spacing: 2px;
            margin-top: 13px;
            @include  font-title;
@@ -349,8 +338,8 @@ a {
         &__title {
           @include text-bold; 
           color: $color-black;
-          font-size: 1.5rem;
-          line-height: 4rem;
+          font-size: 15px;
+          line-height: 40px;
           letter-spacing: 2px;
           margin-top: 20px;
 
@@ -365,8 +354,8 @@ a {
           margin-top: 20px;
           color: $color-black;
           @include text-regular;
-          font-size: 1.5rem;    
-          line-height: 4rem;
+          font-size: 15px;    
+          line-height: 40px;
           letter-spacing: 2px;
           text-transform: capitalize;          
         }
@@ -486,8 +475,8 @@ a {
           &__price {
             @include font-title;             
             color: $color-black;           
-            font-size: 2rem;   
-            line-height: 4rem;
+            font-size: 20px;   
+            line-height: 40px;
             letter-spacing: 2px;
           }
         }
@@ -594,7 +583,7 @@ a {
       &__title {
         @include text-regular;
         color: $color-black;
-        font-size: 3rem;
+        font-size: 30px;
         text-align: center;
         letter-spacing: 0.6px;
         line-height: 36px;
@@ -620,9 +609,9 @@ a {
             border: none;
             border-radius: 10px;
             @include font-title;
-            font-size: 3rem;
+            font-size: 30px;
             letter-spacing: 0.6px;
-            line-height: 5rem;
+            line-height: 50px;
             padding-left: 20px;
             padding-right: 20px;
             outline: none;
@@ -636,7 +625,7 @@ a {
         &__title {
           @include font-title;
           color: $color-black;
-          font-size: 3rem;
+          font-size: 30px;
           line-height: 50px;
           letter-spacing: 0.6px;
         }
@@ -657,7 +646,7 @@ a {
           @include button-light;
           width: 242px;
           height: 44px;
-          font-size: 2rem;
+          font-size: 20px;
         }
       }
     }
@@ -671,7 +660,7 @@ a {
       &__title {
         @include font-title;
         color: $color-black;
-        font-size: 3rem;
+        font-size: 30px;
         letter-spacing: 0.6px;
         line-height: 33px;
       }
@@ -723,8 +712,8 @@ a {
     a {
       color: $color-white;
       text-decoration: none;
-      font-size: 1.5rem;
-      line-height: 2rem;
+      font-size: 15px;
+      line-height: 20px;
       @include text-regular;
       transition: color 0.3s ease-out; 
 
@@ -758,8 +747,8 @@ a {
   &__schedule {
     width: 149px;
     color: $color-white;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 15px;
+    line-height: 20px;
     text-align: right;
     @include text-regular; 
 
@@ -777,7 +766,7 @@ a {
   &__rss {
     color: $color-white;
     margin-top: 44px;
-    font-size: 2rem;
+    font-size: 20px;
     letter-spacing: 2px;
     @include flex-space;
     @include text-regular; 
