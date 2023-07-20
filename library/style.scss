@@ -13,29 +13,45 @@
   padding: 0;
 }
 
+@mixin wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: $color-main-bg;
+
+  width: 100vw;
+  overflow-x: hidden;
+ 
 }
 
 a {
   text-decoration: none;
 }
 
-.container {
-  width: 1440px;
-  margin: 0 auto;
-}
+// .container {
+//   width: 1440px;
+//   margin: 0 auto;
+// }
 
 .header {
   height: 90px;
-  padding-left: 20px;
-  padding-right: 20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
   background-color: $color-black-light;
-  @include flex-space;
+  
+
+  &__wrapper {
+    @include wrapper();
+    @include flex-space;
+    height: 100%;
+  }
 
   &__title {
     color: $color-white;
@@ -79,7 +95,24 @@ a {
 .welcome {
   width: 100%;
   height: 600px;
-  background-image: url('assets/images/welcome-overlay.jpg');
+  background-image: url('assets/images/welcome-original.jpeg');
+  background-size: 100% auto;
+  background-position: 0% 50%;
+  position: relative;
+
+
+  &__overlay {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
+  }
+
+  &__wrapper {
+    @include wrapper();
+    padding: 0;
+    height: 100%;
+  }
 
   &__title {
     width: 600px;
@@ -94,6 +127,7 @@ a {
     text-transform: uppercase;
     position: relative;
     top: 220px;
+    // margin-top: 220px;
     @include font-title;
 
     span {
@@ -104,8 +138,15 @@ a {
 
 .about {
   width: 100%;
-  padding: 20px 20px 35px 20px;
+  // padding: 20px 20px 35px 20px;
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 35px;
+
+  }
 
   &__title {
     @include section-title;  
@@ -165,10 +206,17 @@ a {
 
 .favorites {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   background-color: $color-white;
-  padding: 20px 20px 0 20px;
+  // padding: 20px 20px 0 20px;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -343,11 +391,18 @@ a {
 }
 
 .coffeeshop {
-  padding: 20px 20px 40px 20px;
+  // padding: 20px 20px 40px 20px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -443,10 +498,17 @@ a {
 
 .contacts {
   width: 100%;
-  padding: 20px 20px 40px 20px;
-  display: flex;
-  flex-direction: column;
+  // padding: 20px 20px 40px 20px;
+ 
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -504,8 +566,14 @@ a {
 }
 
 .librarycard {
-  padding: 20px 20px 41px 20px;
+  // padding: 20px 20px 41px 20px;
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 41px;
+  }
 
   &__title {
     @include section-title; 
@@ -633,7 +701,14 @@ a {
 .footer {
   background-color: $color-black-light;
   height: 250px;
-  padding: 20px 20px 44px 20px;
+  // padding: 20px 20px 44px 20px;
+
+  &__wrapper {
+    @include wrapper();
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 44px;
+  }
 
   &__info {
     width: 100%;
@@ -718,7 +793,7 @@ a {
     }
 
     .rss {
-      margin-left: 50px;
+      margin-left: 123px;
     }
   }
 }

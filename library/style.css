@@ -35,26 +35,27 @@ html {
 }
 
 body {
-  background-color: #F5F5F5;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
 }
 
-.container {
-  width: 1440px;
-  margin: 0 auto;
-}
-
 .header {
   height: 90px;
+  background-color: #0C0C0E;
+}
+.header__wrapper {
+  width: 1440px;
+  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #0C0C0E;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 .header__title {
   color: #FFFFFF;
@@ -100,7 +101,24 @@ a {
 .welcome {
   width: 100%;
   height: 600px;
-  background-image: url("assets/images/welcome-overlay.jpg");
+  background-image: url("assets/images/welcome-original.jpeg");
+  background-size: 100% auto;
+  background-position: 0% 50%;
+  position: relative;
+}
+.welcome__overlay {
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%);
+}
+.welcome__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding: 0;
+  height: 100%;
 }
 .welcome__title {
   width: 600px;
@@ -125,8 +143,15 @@ a {
 
 .about {
   width: 100%;
-  padding: 20px 20px 35px 20px;
   background-color: #FFFFFF;
+}
+.about__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 .about__title {
   color: #0C0C0E;
@@ -191,10 +216,16 @@ a {
 
 .favorites {
   width: 100%;
+  background-color: #FFFFFF;
+}
+.favorites__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
-  padding: 20px 20px 0 20px;
 }
 .favorites__title {
   color: #0C0C0E;
@@ -376,11 +407,18 @@ a {
 }
 
 .coffeeshop {
-  padding: 20px 20px 40px 20px;
   width: 100%;
+  background-color: #FFFFFF;
+}
+.coffeeshop__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
 }
 .coffeeshop__title {
   color: #0C0C0E;
@@ -486,10 +524,17 @@ a {
 
 .contacts {
   width: 100%;
-  padding: 20px 20px 40px 20px;
+  background-color: #FFFFFF;
+}
+.contacts__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
 }
 .contacts__title {
   color: #0C0C0E;
@@ -552,8 +597,15 @@ a {
 }
 
 .librarycard {
-  padding: 20px 20px 41px 20px;
   background-color: #FFFFFF;
+}
+.librarycard__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 41px;
 }
 .librarycard__title {
   color: #0C0C0E;
@@ -718,7 +770,15 @@ a {
 .footer {
   background-color: #0C0C0E;
   height: 250px;
-  padding: 20px 20px 44px 20px;
+}
+.footer__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 44px;
 }
 .footer__info {
   width: 100%;
@@ -800,5 +860,5 @@ a {
   color: #BB945F;
 }
 .footer__rss .rss {
-  margin-left: 50px;
+  margin-left: 123px;
 }/*# sourceMappingURL=style.css.map */
