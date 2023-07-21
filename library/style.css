@@ -16,10 +16,6 @@
   font-weight: 700;
   src: url(assets/fonts/Inter-Bold.ttf);
 }
-:root {
-  font-size: 10px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -154,8 +150,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -228,8 +224,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -279,13 +275,13 @@ a {
   font-weight: 700;
 }
 .favorites__buttons input:not(:checked) + label:before {
-  content: url(assets/icons/icon-non-checked.svg);
+  content: url("assets/icons/icon-non-checked.svg");
   display: inline-block;
   margin-right: 20px;
   margin-top: 1px;
 }
 .favorites__buttons input:checked + label:before {
-  content: url(assets/icons/icon_checked.svg);
+  content: url("assets/icons/icon_checked.svg");
   display: inline-block;
   margin-right: 20px;
   margin-top: 1px;
@@ -382,7 +378,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
@@ -421,8 +417,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -435,8 +431,8 @@ a {
 }
 .coffeeshop__text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -460,8 +456,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -484,8 +480,8 @@ a {
 .coffeeshop__menu .menu__price .menu-item__name {
   width: 200px;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -537,8 +533,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -556,8 +552,8 @@ a {
 }
 .contacts__text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -608,8 +604,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -697,7 +693,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
@@ -728,8 +724,8 @@ a {
 .librarycard__content .readercard__text {
   margin-top: 35px;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -752,7 +748,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
