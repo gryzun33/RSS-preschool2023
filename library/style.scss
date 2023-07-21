@@ -8,34 +8,23 @@
   padding: 0;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-
   width: 100vw;
-  overflow-x: hidden;
- 
+  overflow-x: hidden; 
 }
 
 a {
   text-decoration: none;
 }
 
-// .container {
-//   width: 1440px;
-//   margin: 0 auto;
-// }
-
 .header {
   height: 90px;
-  // padding-left: 20px;
-  // padding-right: 20px;
   background-color: $color-black-light;
   
-
   &__wrapper {
     @include wrapper();
     @include flex-space;
@@ -89,7 +78,6 @@ a {
   background-position: 0% 50%;
   position: relative;
 
-
   &__overlay {
     position: absolute;
     width: 100%;
@@ -116,7 +104,6 @@ a {
     text-transform: uppercase;
     position: relative;
     top: 220px;
-    // margin-top: 220px;
     @include font-title;
 
     span {
@@ -127,7 +114,6 @@ a {
 
 .about {
   width: 100%;
-  // padding: 20px 20px 35px 20px;
   background-color: $color-white;
 
   &__wrapper {
@@ -195,10 +181,7 @@ a {
 
 .favorites {
   width: 100%;
-  // display: flex;
-  // flex-direction: column;
   background-color: $color-white;
-  // padding: 20px 20px 0 20px;
 
   &__wrapper {
     @include wrapper();
@@ -256,14 +239,14 @@ a {
     }
 
     input:not(:checked) + label:before {
-      content: url(assets/icons/icon-non-checked.svg); 
+      content: url('assets/icons/icon-non-checked.svg'); 
       display: inline-block;
       margin-right: 20px;
       margin-top: 1px; 
     }
 
     input:checked + label:before {
-      content: url(assets/icons/icon_checked.svg); 
+      content: url('assets/icons/icon_checked.svg'); 
       display: inline-block;
       margin-right: 20px;
       margin-top: 1px;    
@@ -380,9 +363,7 @@ a {
 }
 
 .coffeeshop {
-  // padding: 20px 20px 40px 20px;
   width: 100%;
-
   background-color: $color-white;
 
   &__wrapper {
@@ -468,8 +449,7 @@ a {
             width: 100px;
             height: 1px;
             background-color: $color-brown-light;
-            margin-right: 60px;
-           
+            margin-right: 60px;      
           }
 
           &__price {
@@ -486,9 +466,7 @@ a {
 }
 
 .contacts {
-  width: 100%;
-  // padding: 20px 20px 40px 20px;
- 
+  width: 100%; 
   background-color: $color-white;
 
   &__wrapper {
@@ -555,7 +533,6 @@ a {
 }
 
 .librarycard {
-  // padding: 20px 20px 41px 20px;
   background-color: $color-white;
 
   &__wrapper {
@@ -690,7 +667,6 @@ a {
 .footer {
   background-color: $color-black-light;
   height: 250px;
-  // padding: 20px 20px 44px 20px;
 
   &__wrapper {
     @include wrapper();
