@@ -2,11 +2,6 @@
 @import 'assets/scss/fonts.scss';
 @import 'assets/scss/mixins.scss';
 
-
-:root {
-	font-size: 10px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,28 +13,27 @@ html {
 }
 
 body {
-  background-color: $color-main-bg;
+  width: 100vw;
+  overflow-x: hidden; 
 }
 
 a {
   text-decoration: none;
 }
 
-.container {
-  width: 1440px;
-  margin: 0 auto;
-}
-
 .header {
   height: 90px;
-  padding-left: 20px;
-  padding-right: 20px;
   background-color: $color-black-light;
-  @include flex-space;
+  
+  &__wrapper {
+    @include wrapper();
+    @include flex-space;
+    height: 100%;
+  }
 
   &__title {
     color: $color-white;
-    font-size: 3rem;
+    font-size: 30px;
     letter-spacing: 0.6px;
     @include font-title;
   }
@@ -51,8 +45,8 @@ a {
     .navigation {
       color: $color-white;
       width: 584px;
-      height: 4rem;
-      font-size: 2rem;
+      height: 40px;
+      font-size: 20px;
       list-style-type: none;
       @include flex-space;
       @include text-regular; 
@@ -79,7 +73,23 @@ a {
 .welcome {
   width: 100%;
   height: 600px;
-  background-image: url('assets/images/welcome-overlay.jpg');
+  background-image: url('assets/images/welcome-original.jpeg');
+  background-size: 100% auto;
+  background-position: 0% 50%;
+  position: relative;
+
+  &__overlay {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
+  }
+
+  &__wrapper {
+    @include wrapper();
+    padding: 0;
+    height: 100%;
+  }
 
   &__title {
     width: 600px;
@@ -87,9 +97,9 @@ a {
     background-color: $color-black-light;
     padding: 35px 40px;
     color: $color-white;
-    font-size: 4rem;
+    font-size: 40px;
     text-align: center;
-    line-height: 5rem;
+    line-height: 50px;
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
@@ -104,8 +114,14 @@ a {
 
 .about {
   width: 100%;
-  padding: 20px 20px 35px 20px;
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 35px;
+
+  }
 
   &__title {
     @include section-title;  
@@ -119,8 +135,8 @@ a {
     margin-top: 40px;
     color: $color-black;
     @include text-regular;
-    font-size: 2rem;
-    line-height: 4rem;
+    font-size: 20px;
+    line-height: 40px;
     text-align: center;
   }
 
@@ -165,10 +181,14 @@ a {
 
 .favorites {
   width: 100%;
-  display: flex;
-  flex-direction: column;
   background-color: $color-white;
-  padding: 20px 20px 0 20px;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -181,7 +201,7 @@ a {
   &__text {
     color: $color-black;
     @include text-bold;
-    font-size: 2rem;
+    font-size: 20px;
     margin-top: 40px;
     height: 24px;
   }
@@ -202,7 +222,7 @@ a {
       padding: 5px;
       color: $color-black;
       @include text-regular;
-      font-size: 2rem;
+      font-size: 20px;
       letter-spacing: 0.5px;
 
       &:hover {
@@ -219,14 +239,14 @@ a {
     }
 
     input:not(:checked) + label:before {
-      content: url(assets/icons/icon-non-checked.svg); 
+      content: url('assets/icons/icon-non-checked.svg'); 
       display: inline-block;
       margin-right: 20px;
       margin-top: 1px; 
     }
 
     input:checked + label:before {
-      content: url(assets/icons/icon_checked.svg); 
+      content: url('assets/icons/icon_checked.svg'); 
       display: inline-block;
       margin-right: 20px;
       margin-top: 1px;    
@@ -285,8 +305,8 @@ a {
 
         &__header-text {
            color: $color-black;
-           font-size: 2rem;
-           line-height: 4rem;
+           font-size: 20px;
+           line-height: 40px;
            letter-spacing: 2px;
            margin-top: 13px;
            @include  font-title;
@@ -301,8 +321,8 @@ a {
         &__title {
           @include text-bold; 
           color: $color-black;
-          font-size: 1.5rem;
-          line-height: 4rem;
+          font-size: 15px;
+          line-height: 40px;
           letter-spacing: 2px;
           margin-top: 20px;
 
@@ -317,8 +337,8 @@ a {
           margin-top: 20px;
           color: $color-black;
           @include text-regular;
-          font-size: 1.5rem;    
-          line-height: 4rem;
+          font-size: 15px;    
+          line-height: 40px;
           letter-spacing: 2px;
           text-transform: capitalize;          
         }
@@ -343,11 +363,16 @@ a {
 }
 
 .coffeeshop {
-  padding: 20px 20px 40px 20px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -424,15 +449,14 @@ a {
             width: 100px;
             height: 1px;
             background-color: $color-brown-light;
-            margin-right: 60px;
-           
+            margin-right: 60px;      
           }
 
           &__price {
             @include font-title;             
             color: $color-black;           
-            font-size: 2rem;   
-            line-height: 4rem;
+            font-size: 20px;   
+            line-height: 40px;
             letter-spacing: 2px;
           }
         }
@@ -442,11 +466,16 @@ a {
 }
 
 .contacts {
-  width: 100%;
-  padding: 20px 20px 40px 20px;
-  display: flex;
-  flex-direction: column;
+  width: 100%; 
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+  }
 
   &__title {
     @include section-title;
@@ -504,8 +533,13 @@ a {
 }
 
 .librarycard {
-  padding: 20px 20px 41px 20px;
   background-color: $color-white;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 41px;
+  }
 
   &__title {
     @include section-title; 
@@ -526,7 +560,7 @@ a {
       &__title {
         @include text-regular;
         color: $color-black;
-        font-size: 3rem;
+        font-size: 30px;
         text-align: center;
         letter-spacing: 0.6px;
         line-height: 36px;
@@ -552,9 +586,9 @@ a {
             border: none;
             border-radius: 10px;
             @include font-title;
-            font-size: 3rem;
+            font-size: 30px;
             letter-spacing: 0.6px;
-            line-height: 5rem;
+            line-height: 50px;
             padding-left: 20px;
             padding-right: 20px;
             outline: none;
@@ -568,7 +602,7 @@ a {
         &__title {
           @include font-title;
           color: $color-black;
-          font-size: 3rem;
+          font-size: 30px;
           line-height: 50px;
           letter-spacing: 0.6px;
         }
@@ -589,7 +623,7 @@ a {
           @include button-light;
           width: 242px;
           height: 44px;
-          font-size: 2rem;
+          font-size: 20px;
         }
       }
     }
@@ -603,7 +637,7 @@ a {
       &__title {
         @include font-title;
         color: $color-black;
-        font-size: 3rem;
+        font-size: 30px;
         letter-spacing: 0.6px;
         line-height: 33px;
       }
@@ -633,7 +667,13 @@ a {
 .footer {
   background-color: $color-black-light;
   height: 250px;
-  padding: 20px 20px 44px 20px;
+
+  &__wrapper {
+    @include wrapper();
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 44px;
+  }
 
   &__info {
     width: 100%;
@@ -648,8 +688,8 @@ a {
     a {
       color: $color-white;
       text-decoration: none;
-      font-size: 1.5rem;
-      line-height: 2rem;
+      font-size: 15px;
+      line-height: 20px;
       @include text-regular;
       transition: color 0.3s ease-out; 
 
@@ -683,8 +723,8 @@ a {
   &__schedule {
     width: 149px;
     color: $color-white;
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 15px;
+    line-height: 20px;
     text-align: right;
     @include text-regular; 
 
@@ -702,7 +742,7 @@ a {
   &__rss {
     color: $color-white;
     margin-top: 44px;
-    font-size: 2rem;
+    font-size: 20px;
     letter-spacing: 2px;
     @include flex-space;
     @include text-regular; 
@@ -718,7 +758,7 @@ a {
     }
 
     .rss {
-      margin-left: 50px;
+      margin-left: 123px;
     }
   }
 }

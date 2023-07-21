@@ -16,14 +16,6 @@
   font-weight: 700;
   src: url(assets/fonts/Inter-Bold.ttf);
 }
-:root {
-  font-size: 10px;
-}
-
-:root {
-  font-size: 10px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,30 +27,31 @@ html {
 }
 
 body {
-  background-color: #F5F5F5;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
 }
 
-.container {
-  width: 1440px;
-  margin: 0 auto;
-}
-
 .header {
   height: 90px;
+  background-color: #0C0C0E;
+}
+.header__wrapper {
+  width: 1440px;
+  margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #0C0C0E;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 .header__title {
   color: #FFFFFF;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
   font-family: "Forum", cursive;
   font-weight: 400;
@@ -73,8 +66,8 @@ a {
 .header__nav-profile .navigation {
   color: #FFFFFF;
   width: 584px;
-  height: 4rem;
-  font-size: 2rem;
+  height: 40px;
+  font-size: 20px;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -100,7 +93,24 @@ a {
 .welcome {
   width: 100%;
   height: 600px;
-  background-image: url("assets/images/welcome-overlay.jpg");
+  background-image: url("assets/images/welcome-original.jpeg");
+  background-size: 100% auto;
+  background-position: 0% 50%;
+  position: relative;
+}
+.welcome__overlay {
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%);
+}
+.welcome__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding: 0;
+  height: 100%;
 }
 .welcome__title {
   width: 600px;
@@ -108,9 +118,9 @@ a {
   background-color: #0C0C0E;
   padding: 35px 40px;
   color: #FFFFFF;
-  font-size: 4rem;
+  font-size: 40px;
   text-align: center;
-  line-height: 5rem;
+  line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
   position: relative;
@@ -125,16 +135,23 @@ a {
 
 .about {
   width: 100%;
-  padding: 20px 20px 35px 20px;
   background-color: #FFFFFF;
+}
+.about__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 .about__title {
   color: #0C0C0E;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -151,8 +168,8 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   text-align: center;
 }
 .about .slider {
@@ -191,18 +208,24 @@ a {
 
 .favorites {
   width: 100%;
+  background-color: #FFFFFF;
+}
+.favorites__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
-  padding: 20px 20px 0 20px;
 }
 .favorites__title {
   color: #0C0C0E;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -218,7 +241,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 20px;
   margin-top: 40px;
   height: 24px;
 }
@@ -239,7 +262,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2rem;
+  font-size: 20px;
   letter-spacing: 0.5px;
 }
 .favorites__buttons label:hover {
@@ -252,13 +275,13 @@ a {
   font-weight: 700;
 }
 .favorites__buttons input:not(:checked) + label:before {
-  content: url(assets/icons/icon-non-checked.svg);
+  content: url("assets/icons/icon-non-checked.svg");
   display: inline-block;
   margin-right: 20px;
   margin-top: 1px;
 }
 .favorites__buttons input:checked + label:before {
-  content: url(assets/icons/icon_checked.svg);
+  content: url("assets/icons/icon_checked.svg");
   display: inline-block;
   margin-right: 20px;
   margin-top: 1px;
@@ -308,8 +331,8 @@ a {
 }
 .favorites .books__box .book__header-text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   margin-top: 13px;
   font-family: "Forum", cursive;
@@ -326,8 +349,8 @@ a {
   font-weight: 700;
   font-style: normal;
   color: #000000;
-  font-size: 1.5rem;
-  line-height: 4rem;
+  font-size: 15px;
+  line-height: 40px;
   letter-spacing: 2px;
   margin-top: 20px;
 }
@@ -342,8 +365,8 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.5rem;
-  line-height: 4rem;
+  font-size: 15px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
 }
@@ -355,7 +378,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
@@ -376,19 +399,26 @@ a {
 }
 
 .coffeeshop {
-  padding: 20px 20px 40px 20px;
   width: 100%;
+  background-color: #FFFFFF;
+}
+.coffeeshop__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
 }
 .coffeeshop__title {
   color: #0C0C0E;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -401,8 +431,8 @@ a {
 }
 .coffeeshop__text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -426,8 +456,8 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -450,8 +480,8 @@ a {
 .coffeeshop__menu .menu__price .menu-item__name {
   width: 200px;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -479,25 +509,32 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
 }
 
 .contacts {
   width: 100%;
-  padding: 20px 20px 40px 20px;
+  background-color: #FFFFFF;
+}
+.contacts__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
 }
 .contacts__title {
   color: #0C0C0E;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -515,8 +552,8 @@ a {
 }
 .contacts__text {
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -552,16 +589,23 @@ a {
 }
 
 .librarycard {
-  padding: 20px 20px 41px 20px;
   background-color: #FFFFFF;
+}
+.librarycard__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 41px;
 }
 .librarycard__title {
   color: #0C0C0E;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-size: 40px;
+  line-height: 40px;
   letter-spacing: 2px;
   text-align: center;
   margin: 0 auto;
@@ -585,7 +629,7 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   text-align: center;
   letter-spacing: 0.6px;
   line-height: 36px;
@@ -612,9 +656,9 @@ a {
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
-  line-height: 5rem;
+  line-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
   outline: none;
@@ -627,7 +671,7 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   line-height: 50px;
   letter-spacing: 0.6px;
 }
@@ -649,13 +693,13 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
   width: 242px;
   height: 44px;
-  font-size: 2rem;
+  font-size: 20px;
 }
 .librarycard__content .cardfinder .card__btn:hover {
   cursor: pointer;
@@ -673,15 +717,15 @@ a {
   font-weight: 400;
   font-style: normal;
   color: #000000;
-  font-size: 3rem;
+  font-size: 30px;
   letter-spacing: 0.6px;
   line-height: 33px;
 }
 .librarycard__content .readercard__text {
   margin-top: 35px;
   color: #000000;
-  font-size: 2rem;
-  line-height: 4rem;
+  font-size: 20px;
+  line-height: 40px;
   letter-spacing: 2px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -704,7 +748,7 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 10px;
   letter-spacing: 1px;
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
@@ -718,7 +762,15 @@ a {
 .footer {
   background-color: #0C0C0E;
   height: 250px;
-  padding: 20px 20px 44px 20px;
+}
+.footer__wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 44px;
 }
 .footer__info {
   width: 100%;
@@ -732,8 +784,8 @@ a {
 .footer__location a {
   color: #FFFFFF;
   text-decoration: none;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 15px;
+  line-height: 20px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -764,8 +816,8 @@ a {
 .footer__schedule {
   width: 149px;
   color: #FFFFFF;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 15px;
+  line-height: 20px;
   text-align: right;
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -782,7 +834,7 @@ a {
 .footer__rss {
   color: #FFFFFF;
   margin-top: 44px;
-  font-size: 2rem;
+  font-size: 20px;
   letter-spacing: 2px;
   display: flex;
   justify-content: space-between;
@@ -800,5 +852,5 @@ a {
   color: #BB945F;
 }
 .footer__rss .rss {
-  margin-left: 50px;
+  margin-left: 123px;
 }/*# sourceMappingURL=style.css.map */
