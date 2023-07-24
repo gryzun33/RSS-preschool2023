@@ -6,8 +6,6 @@
     @include wrapper;
     padding-top: 20px;
     @include flex-column();
-    // display: flex;
-    // flex-direction: column;
   }
 
   &__title {
@@ -30,8 +28,6 @@
     margin-top: 35px;
     height: 34px;
     @include flex(flex-start);
-    // display: flex;
-    // justify-content: flex-start;
 
     input {
       position: absolute;
@@ -64,10 +60,8 @@
       content: url('../assets/icons/icon-non-checked.svg'); 
       display: inline-block;
       margin-right: 20px;
-      // margin-top: 1px;
       position: relative;
       top: 2px; 
-      // padding-top: 2px;
     }
 
     input:checked + label:before {
@@ -75,8 +69,7 @@
       display: inline-block;
       margin-right: 20px;
       position: relative;
-      top: 2px; 
-      // margin-top: 1px;    
+      top: 2px;  
     }
   }
 
@@ -104,9 +97,6 @@
     margin-top: 35px;
     
     &__box {
-      // display: flex;
-      // flex-wrap: wrap;
-      // justify-content: space-between;
       @include flex-wrap(wrap, space-between);
 
       .book {

@@ -7,8 +7,6 @@
     padding-top: 20px;
     padding-bottom: 40px;
     @include flex-column();
-    // display: flex;
-    // flex-direction: column;
   }
 
   &__title {
@@ -22,8 +20,6 @@
   &__content {
     margin-top: 40px;
     @include flex(space-between);
-    // display: flex;
-    // justify-content: space-between;
   }
 
   &__text {

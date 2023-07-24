@@ -31,8 +31,6 @@
 
     &__inner {
       width: 100%;
-      // display: flex;
-      // justify-content: space-between;
       @include flex(space-between);
     }
   }
@@ -40,8 +38,6 @@
   .pagination {
     margin: 35px auto 0 auto;
     width: 78px;
-    // display: flex;
-    // justify-content: space-between;
     @include flex(space-between);
     
 

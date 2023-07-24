@@ -1,15 +1,3 @@
-// @mixin flex-space($justify: space-between, $align: center) {
-//   display: flex;
-//   justify-content: $justify;
-//   align-items: $align;
-// }
-
-// @mixin flex-center($justify: center, $align: center) {
-//   display: flex;
-//   justify-content: $justify;
-//   align-items: $align;
-// }
-
 @mixin flex($justify: normal, $align: normal) {
   display: flex;
   justify-content: $justify;

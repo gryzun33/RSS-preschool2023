@@ -17,8 +17,6 @@
 
   &__content {
     @include flex(space-between);
-    // display: flex;
-    // justify-content: space-between;
     margin-top: 40px;
 
     .cardfinder {
@@ -45,8 +43,6 @@
           background-color: $color-secondary;
           height: 272px;
           @include flex-column;
-          // display: flex;
-          // flex-direction: column;
           padding: 20px 20px 0 20px;
 
           input {
@@ -63,6 +59,10 @@
 
             &:invalid {
               border: 3px solid red;
+            }
+
+            &::placeholder {
+              color: $color-additional;
             }
           }     
         }
@@ -99,9 +99,6 @@
     .readercard {
       width: 456px;
       @include flex-column(normal, flex-end);
-      // display: flex;
-      // flex-direction: column;
-      // align-items: flex-end;
 
       &__title {
         @include font-title;
@@ -123,8 +120,6 @@
         margin-top: 35px;
         width: 170px;
         @include flex(space-between);
-        // display: flex;
-        // justify-content: space-between;
       }
 
       &__btn {

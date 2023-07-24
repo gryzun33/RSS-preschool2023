@@ -1001,6 +1001,12 @@ a {
 .librarycard__content .cardfinder .card__content input:invalid {
   border: 3px solid red;
 }
+.librarycard__content .cardfinder .card__content input::-moz-placeholder {
+  color: #8E8E8E;
+}
+.librarycard__content .cardfinder .card__content input::placeholder {
+  color: #8E8E8E;
+}
 .librarycard__content .cardfinder .card__title {
   font-family: "Forum", cursive;
   font-weight: 400;
@@ -1098,7 +1104,6 @@ a {
 
 .footer {
   background-color: #0C0C0E;
-  height: 250px;
 }
 .footer__wrapper {
   width: 1440px;
@@ -1171,8 +1176,9 @@ a {
 }
 .footer__rss {
   color: #FFFFFF;
-  margin-top: 44px;
+  margin-top: 45px;
   font-size: 20px;
+  line-height: 20px;
   letter-spacing: 2px;
   display: flex;
   justify-content: space-between;

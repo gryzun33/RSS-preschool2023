@@ -6,8 +6,6 @@
     @include wrapper;
     padding-top: 20px;
     padding-bottom: 40px;
-    // display: flex;
-    // flex-direction: column;
     @include flex-column();
   }
 
@@ -27,8 +25,6 @@
 
   &__menu {
     @include flex(space-between);
-    // display: flex;
-    // justify-content: space-between;
     margin-top: 40px;
 
     .drinks {
@@ -56,9 +52,6 @@
     
         .menu-item {
           @include flex(space-between, center);
-          // display: flex;
-          // justify-content: space-between;
-          // align-items: center;
           margin-top: 40px;
 
           &__desserts {
