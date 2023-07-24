@@ -1,0 +1,182 @@
+.favorites {
+  width: 100%;
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    color: $color-dark;
+    @include text-bold;
+    font-size: 20px;
+    margin-top: 40px;
+    height: 24px;
+  }
+
+  &__buttons {
+    margin-top: 35px;
+    height: 34px;
+    display: flex;
+    justify-content: flex-start;
+
+    input {
+      position: absolute;
+      opacity: 0;  
+    }
+
+    label {
+      display: inline-block;
+      padding: 5px;
+      color: $color-dark;
+      @include text-regular;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    label:first-child {
+      padding-left: 0;
+    }
+
+    input:checked + label {
+      font-weight: 700;
+    }
+
+    input:not(:checked) + label:before {
+      content: url('../assets/icons/icon-non-checked.svg'); 
+      display: inline-block;
+      margin-right: 20px;
+      margin-top: 1px; 
+    }
+
+    input:checked + label:before {
+      content: url('../assets/icons/icon_checked.svg'); 
+      display: inline-block;
+      margin-right: 20px;
+      margin-top: 1px;    
+    }
+  }
+
+  &__button:first-child label {
+    padding-left: 0;
+  }
+
+  &__button:first-child {
+    width: 188px;
+  }
+
+  &__button:nth-child(2) {
+    width: 190px;
+  }
+
+  &__button:nth-child(3) {
+    width: 207px;
+  }
+
+  &__button:nth-child(4) {
+    width: 130px;
+  }
+
+  .books {
+    margin-top: 35px;
+    
+    &__box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .book {
+        width: 590px;
+        height: 555px;
+        position: relative;
+        margin-bottom: 40px;
+
+        &__image {
+          width: 200px;
+          height: 300px;
+          position: absolute;
+          right:0;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        &__text {
+          border: 1px solid $color-dark;
+          padding-left: 20px;
+          width: 550px;
+          height: 100%;
+        }
+
+        &__header-text {
+           color: $color-dark;
+           font-size: 20px;
+           line-height: 40px;
+           letter-spacing: 2px;
+           margin-top: 13px;
+           @include  font-title;
+        }
+
+        &__header-line {
+          width: 60px;
+          height: 1px;
+          background-color: $color-secondary;
+       }
+
+        &__title {
+          @include text-bold; 
+          color: $color-dark;
+          font-size: 15px;
+          line-height: 40px;
+          letter-spacing: 2px;
+          margin-top: 20px;
+
+          span {
+            text-transform: uppercase;
+          }
+        }
+        
+        &__description {
+          width: 357px;
+          height: 320px;
+          margin-top: 20px;
+          color: $color-dark;
+          @include text-regular;
+          font-size: 15px;    
+          line-height: 40px;
+          letter-spacing: 2px;
+          text-transform: capitalize;          
+        }
+
+        &__btn {
+          @include button-light;
+          margin-top: 15px;
+
+          &:disabled {
+            border-color: $color-secondary;
+            color: $color-secondary;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    .spring, .summer, .autumn {
+      display: none;
+    }
+  }  
+}

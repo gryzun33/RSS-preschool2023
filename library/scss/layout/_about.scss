@@ -1,0 +1,66 @@
+.about {
+  width: 100%;
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 35px;
+
+  }
+
+  &__title {
+    @include section-title;  
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    margin-top: 40px;
+    color: $color-dark;
+    @include text-regular;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .slider {
+    margin-top: 20px;
+
+    &__inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .pagination {
+    margin: 35px auto 0 auto;
+    width: 78px;
+    display: flex;
+    justify-content: space-between;
+
+    &__box {
+      width: 26px;
+      height: 26px;
+      @include flex-center;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__inner {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: $color-dark-l;
+
+      &__active {
+        background-color: $color-secondary;
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+.librarycard {
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper();
+    padding-top: 20px;
+    padding-bottom: 41px;
+  }
+
+  &__title {
+    @include section-title; 
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    .cardfinder {
+      width: 600px;
+
+      &__title {
+        @include text-regular;
+        color: $color-dark;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0.6px;
+        line-height: 36px;
+      }
+
+      .card {
+        width: 600px;
+        height: 386px;
+        border: 3px solid $color-secondary;
+        padding: 17px 17px 0 17px;
+        margin-top: 30px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+        &__content {
+          background-color: $color-secondary;
+          height: 272px;
+          display: flex;
+          flex-direction: column;
+          padding: 20px 20px 0 20px;
+
+          input {
+            height: 66px;
+            border: none;
+            border-radius: 10px;
+            @include font-title;
+            font-size: 30px;
+            letter-spacing: 0.6px;
+            line-height: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            outline: none;
+
+            &:invalid {
+              border: 3px solid red;
+            }
+          }     
+        }
+
+        &__title {
+          @include font-title;
+          color: $color-dark;
+          font-size: 30px;
+          line-height: 50px;
+          letter-spacing: 0.6px;
+        }
+
+        &__name {
+          margin-top: 20px;
+        }
+
+        &__number {
+          margin-top: 25px;      
+        }
+
+        &__btn {
+          display: block;
+          margin-top: 20px;
+          margin-right: auto;
+          margin-left: auto; 
+          @include button-light;
+          width: 242px;
+          height: 44px;
+          font-size: 20px;
+        }
+      }
+    }
+
+    .readercard {
+      width: 456px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      &__title {
+        @include font-title;
+        color: $color-dark;
+        font-size: 30px;
+        letter-spacing: 0.6px;
+        line-height: 33px;
+      }
+
+      &__text {
+        margin-top: 35px;
+        @include text-inter-20;
+        color: $color-dark;
+        text-align: right;
+        letter-spacing: 0.4px;
+      }
+
+      &__buttons {
+        margin-top: 35px;
+        width: 170px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__btn {
+        @include button-light;
+      }
+    }
+  }
+}
