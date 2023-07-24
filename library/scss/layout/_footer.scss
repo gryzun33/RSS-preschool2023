@@ -1,0 +1,97 @@
+.footer {
+  background-color: $color-dark-l;
+
+  &__wrapper {
+    @include wrapper;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 44px;
+  }
+
+  &__info {
+    width: 100%;
+    padding-bottom: 30px;
+    @include flex(space-between);
+  }
+
+  &__location {
+    width: 230px;
+
+    a {
+      color: $color-light;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 20px;
+      @include text-regular;
+      transition: color 0.3s ease-out; 
+
+      &:hover {
+        color: $color-secondary;
+      }
+    }
+  }
+
+  &__icons {
+    margin-top: 10px;
+    width: 102px;
+    height: 40px;
+    @include flex(space-between, center);    
+  }
+
+  &__icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    
+    & > svg > g > path {
+      transition: fill 0.3s ease-out;
+    }
+
+    &:hover > svg > g > path {
+      fill: $color-secondary;
+     }
+  }
+
+  &__schedule {
+    width: 149px;
+    color: $color-light;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: right;
+    @include text-regular; 
+
+    .weekends {
+      margin-top: 10px;
+    }
+  }
+
+  &__line {
+    width: 100%;
+    height: 1px;
+    background-color: $color-light;
+  }
+
+  &__rss {
+    color: $color-light;
+    margin-top: 45px;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    @include flex(space-between, center);
+    @include text-regular; 
+
+    a {
+      color: $color-light;
+      text-decoration: none;
+      transition: color 0.3s ease-out;
+
+      &:hover {
+        color: $color-secondary;
+      }
+    }
+
+    .rss {
+      margin-left: 123px;
+    }
+  }
+}

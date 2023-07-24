@@ -1,0 +1,98 @@
+.coffeeshop {
+  width: 100%;
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    @include flex-column();
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    @include text-inter-20;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  &__menu {
+    @include flex(space-between);
+    margin-top: 40px;
+
+    .drinks {
+      width: 438px;
+    }
+
+    .desserts {
+      width: 482px;
+    }
+
+    .menu {
+      
+      &__title {
+        @include section-title;
+        color: $color-secondary;
+        margin-top: 0;
+        text-align: left;
+
+        &__desserts {
+          text-align: right;
+        }
+      }
+
+      &__price {
+    
+        .menu-item {
+          @include flex(space-between, center);
+          margin-top: 40px;
+
+          &__desserts {
+            justify-content: flex-end;
+          }
+           
+          &__name {
+            width: 200px;
+            @include text-inter-20;
+
+            &__desserts {
+              width: 215px;
+              text-align: right;
+            }
+          }
+
+          &__box {
+            display: flex;
+            align-items: center;
+
+            &__desserts {
+              margin-left: 59px;
+            }
+          }
+
+          &__line {
+            width: 100px;
+            height: 1px;
+            background-color: $color-secondary;
+            margin-right: 60px;      
+          }
+
+          &__price {
+            @include font-title;             
+            color: $color-dark;           
+            font-size: 20px;   
+            line-height: 40px;
+            letter-spacing: 2px;
+          }
+        }
+      }
+    }
+  }
+}

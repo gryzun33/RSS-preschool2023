@@ -1,13 +1,21 @@
-@mixin flex-space($justify: space-between, $align: center) {
+@mixin flex($justify: normal, $align: normal) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
 }
 
-@mixin flex-center($justify: center, $align: center) {
+@mixin flex-column($justify: normal, $align: normal) {
   display: flex;
+  flex-direction: column;
   justify-content: $justify;
   align-items: $align;
+}
+
+@mixin flex-wrap($wrap: wrap, $justify: normal, $align: normal) {
+  display: flex;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-content: $align;
 }
 
 @mixin font-title {
@@ -29,7 +37,7 @@
 }
 
 @mixin section-title {
-  color: $color-black-light;
+  color: $color-dark-l;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
@@ -44,29 +52,29 @@
   margin: 20px auto 0 auto; 
   width: 50px;
   height: 1px;
-  background-color: $color-black-light;
+  background-color: $color-dark-l;
 }
 
 @mixin button-light {
   width: 75px;
   height: 30px;
   border-radius: 2px;
-  border: 1px solid $color-black-light;
+  border: 1px solid $color-dark-l;
   @include text-bold;
   font-size: 10px;
   letter-spacing: 1px;
-  background-color: $color-white;
+  background-color: $color-light;
   transition: all 0.3s ease-out;
 
   &:hover {
     cursor: pointer;
-    background-color: $color-brown-light;
-    border: 1px solid $color-brown-light;
+    background-color: $color-secondary;
+    border: 1px solid $color-secondary;
   } 
 }
 
 @mixin text-inter-20 {
-  color: $color-black;
+  color: $color-dark;
   font-size: 20px;
   line-height: 40px;
   letter-spacing: 2px;
