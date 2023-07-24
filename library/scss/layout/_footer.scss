@@ -3,7 +3,7 @@
   height: 250px;
 
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     height: 100%;
     padding-top: 20px;
     padding-bottom: 44px;
@@ -12,8 +12,9 @@
   &__info {
     width: 100%;
     padding-bottom: 30px;
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between);
+    // display: flex;
+    // justify-content: space-between;
   }
 
   &__location {
@@ -37,7 +38,7 @@
     margin-top: 10px;
     width: 102px;
     height: 40px;
-    @include flex-space;    
+    @include flex(space-between, center);    
   }
 
   &__icon {
@@ -78,7 +79,7 @@
     margin-top: 44px;
     font-size: 20px;
     letter-spacing: 2px;
-    @include flex-space;
+    @include flex(space-between, center);
     @include text-regular; 
 
     a {

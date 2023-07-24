@@ -3,10 +3,11 @@
   background-color: $color-light;
 
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     padding-top: 20px;
-    display: flex;
-    flex-direction: column;
+    @include flex-column();
+    // display: flex;
+    // flex-direction: column;
   }
 
   &__title {
@@ -28,8 +29,9 @@
   &__buttons {
     margin-top: 35px;
     height: 34px;
-    display: flex;
-    justify-content: flex-start;
+    @include flex(flex-start);
+    // display: flex;
+    // justify-content: flex-start;
 
     input {
       position: absolute;
@@ -43,6 +45,7 @@
       @include text-regular;
       font-size: 20px;
       letter-spacing: 0.5px;
+      margin-top: 1px;
 
       &:hover {
         cursor: pointer;
@@ -61,14 +64,19 @@
       content: url('../assets/icons/icon-non-checked.svg'); 
       display: inline-block;
       margin-right: 20px;
-      margin-top: 1px; 
+      // margin-top: 1px;
+      position: relative;
+      top: 2px; 
+      // padding-top: 2px;
     }
 
     input:checked + label:before {
       content: url('../assets/icons/icon_checked.svg'); 
       display: inline-block;
       margin-right: 20px;
-      margin-top: 1px;    
+      position: relative;
+      top: 2px; 
+      // margin-top: 1px;    
     }
   }
 
@@ -96,9 +104,10 @@
     margin-top: 35px;
     
     &__box {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      // display: flex;
+      // flex-wrap: wrap;
+      // justify-content: space-between;
+      @include flex-wrap(wrap, space-between);
 
       .book {
         width: 590px;

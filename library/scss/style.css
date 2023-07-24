@@ -403,6 +403,9 @@ a {
   cursor: pointer;
   border-bottom: 2px solid #FFFFFF;
 }
+.header__nav-profile .profile {
+  padding-top: 2px;
+}
 
 .welcome {
   width: 100%;
@@ -493,12 +496,14 @@ a {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: normal;
 }
 .about .pagination {
   margin: 35px auto 0 auto;
   width: 78px;
   display: flex;
   justify-content: space-between;
+  align-items: normal;
 }
 .about .pagination__box {
   width: 26px;
@@ -532,6 +537,8 @@ a {
   padding-top: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
 }
 .favorites__title {
   color: #0C0C0E;
@@ -564,6 +571,7 @@ a {
   height: 34px;
   display: flex;
   justify-content: flex-start;
+  align-items: normal;
 }
 .favorites__buttons input {
   position: absolute;
@@ -578,6 +586,7 @@ a {
   font-style: normal;
   font-size: 20px;
   letter-spacing: 0.5px;
+  margin-top: 1px;
 }
 .favorites__buttons label:hover {
   cursor: pointer;
@@ -592,13 +601,15 @@ a {
   content: url("../assets/icons/icon-non-checked.svg");
   display: inline-block;
   margin-right: 20px;
-  margin-top: 1px;
+  position: relative;
+  top: 2px;
 }
 .favorites__buttons input:checked + label:before {
   content: url("../assets/icons/icon_checked.svg");
   display: inline-block;
   margin-right: 20px;
-  margin-top: 1px;
+  position: relative;
+  top: 2px;
 }
 .favorites__button:first-child label {
   padding-left: 0;
@@ -622,6 +633,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: normal;
 }
 .favorites .books__box .book {
   width: 590px;
@@ -725,6 +737,8 @@ a {
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
 }
 .coffeeshop__title {
   color: #0C0C0E;
@@ -757,6 +771,7 @@ a {
 .coffeeshop__menu {
   display: flex;
   justify-content: space-between;
+  align-items: normal;
   margin-top: 40px;
 }
 .coffeeshop__menu .drinks {
@@ -841,6 +856,8 @@ a {
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
 }
 .contacts__title {
   color: #0C0C0E;
@@ -863,6 +880,7 @@ a {
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
+  align-items: normal;
 }
 .contacts__text {
   color: #000000;
@@ -933,6 +951,7 @@ a {
 .librarycard__content {
   display: flex;
   justify-content: space-between;
+  align-items: normal;
   margin-top: 40px;
 }
 .librarycard__content .cardfinder {
@@ -961,6 +980,8 @@ a {
   height: 272px;
   display: flex;
   flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
   padding: 20px 20px 0 20px;
 }
 .librarycard__content .cardfinder .card__content input {
@@ -1024,6 +1045,7 @@ a {
   width: 456px;
   display: flex;
   flex-direction: column;
+  justify-content: normal;
   align-items: flex-end;
 }
 .librarycard__content .readercard__title {
@@ -1053,6 +1075,7 @@ a {
   width: 170px;
   display: flex;
   justify-content: space-between;
+  align-items: normal;
 }
 .librarycard__content .readercard__btn {
   width: 75px;
@@ -1091,6 +1114,7 @@ a {
   padding-bottom: 30px;
   display: flex;
   justify-content: space-between;
+  align-items: normal;
 }
 .footer__location {
   width: 230px;

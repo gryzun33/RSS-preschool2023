@@ -4,7 +4,7 @@
   
   &__wrapper {
     @include wrapper();
-    @include flex-space;
+    @include flex(space-between, center);
     height: 100%;
   }
 
@@ -17,7 +17,7 @@
 
   &__nav-profile {
     width: 652px;
-    @include flex-space;
+    @include flex(space-between, center);
 
     .navigation {
       color: $color-light;
@@ -25,7 +25,7 @@
       height: 40px;
       font-size: 20px;
       list-style-type: none;
-      @include flex-space;
+      @include flex(space-between, center);
       @include text-regular; 
 
       li {
@@ -43,6 +43,11 @@
           border-bottom: 2px solid $color-light;
         }        
       }
+    }
+
+    .profile {
+      padding-top: 2px;
+
     }
   }
 }

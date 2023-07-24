@@ -3,11 +3,12 @@
   background-color: $color-light;
 
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     padding-top: 20px;
     padding-bottom: 40px;
-    display: flex;
-    flex-direction: column;
+    @include flex-column();
+    // display: flex;
+    // flex-direction: column;
   }
 
   &__title {
@@ -20,8 +21,9 @@
 
   &__content {
     margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between);
+    // display: flex;
+    // justify-content: space-between;
   }
 
   &__text {

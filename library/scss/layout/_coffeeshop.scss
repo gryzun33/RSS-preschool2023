@@ -3,11 +3,12 @@
   background-color: $color-light;
 
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     padding-top: 20px;
     padding-bottom: 40px;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    @include flex-column();
   }
 
   &__title {
@@ -25,8 +26,9 @@
   }
 
   &__menu {
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between);
+    // display: flex;
+    // justify-content: space-between;
     margin-top: 40px;
 
     .drinks {
@@ -53,9 +55,10 @@
       &__price {
     
         .menu-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          @include flex(space-between, center);
+          // display: flex;
+          // justify-content: space-between;
+          // align-items: center;
           margin-top: 40px;
 
           &__desserts {

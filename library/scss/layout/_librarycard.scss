@@ -2,7 +2,7 @@
   background-color: $color-light;
 
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     padding-top: 20px;
     padding-bottom: 41px;
   }
@@ -16,8 +16,9 @@
   }
 
   &__content {
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between);
+    // display: flex;
+    // justify-content: space-between;
     margin-top: 40px;
 
     .cardfinder {
@@ -43,8 +44,9 @@
         &__content {
           background-color: $color-secondary;
           height: 272px;
-          display: flex;
-          flex-direction: column;
+          @include flex-column;
+          // display: flex;
+          // flex-direction: column;
           padding: 20px 20px 0 20px;
 
           input {
@@ -96,9 +98,10 @@
 
     .readercard {
       width: 456px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      @include flex-column(normal, flex-end);
+      // display: flex;
+      // flex-direction: column;
+      // align-items: flex-end;
 
       &__title {
         @include font-title;
@@ -119,8 +122,9 @@
       &__buttons {
         margin-top: 35px;
         width: 170px;
-        display: flex;
-        justify-content: space-between;
+        @include flex(space-between);
+        // display: flex;
+        // justify-content: space-between;
       }
 
       &__btn {
