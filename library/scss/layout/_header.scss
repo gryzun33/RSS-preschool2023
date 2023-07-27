@@ -3,7 +3,7 @@
   background-color: $color-dark-l;
   
   &__wrapper {
-    @include wrapper();
+    @include wrapper;
     @include flex(space-between, center);
     height: 100%;
   }
@@ -48,6 +48,9 @@
     .profile {
       padding-top: 2px;
 
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
