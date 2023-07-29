@@ -405,8 +405,14 @@ a {
 .header__nav-profile .profile {
   padding-top: 2px;
 }
+.header__nav-profile .profile svg g path {
+  transition: all 0.3s ease-out;
+}
 .header__nav-profile .profile:hover {
   cursor: pointer;
+}
+.header__nav-profile .profile:hover svg g path {
+  fill: #BB945F;
 }
 
 .welcome {
