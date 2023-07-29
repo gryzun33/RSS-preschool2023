@@ -48,8 +48,16 @@
     .profile {
       padding-top: 2px;
 
+      & svg g path {
+        transition: all 0.3s ease-out;  
+      }
+
       &:hover {
         cursor: pointer;
+      }
+
+      &:hover svg g path {
+        fill: $color-secondary;        
       }
     }
   }
