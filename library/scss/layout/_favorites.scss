@@ -22,12 +22,33 @@
     font-size: 20px;
     margin-top: 40px;
     height: 24px;
+
+    @include desktop-1250 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include laptops {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   &__buttons {
     margin-top: 35px;
     height: 34px;
-    @include flex(flex-start);
+    width: 715px;
+    @include flex(space-between);
+
+    @include desktop-1250 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include laptops {
+      margin-left: 0;
+      margin-right: 0;
+    }
 
     input {
       position: absolute;
@@ -78,15 +99,15 @@
   }
 
   &__button:first-child {
-    width: 188px;
+    width: 138px;
   }
 
   &__button:nth-child(2) {
-    width: 190px;
+    width: 140px;
   }
 
   &__button:nth-child(3) {
-    width: 207px;
+    width: 157px;
   }
 
   &__button:nth-child(4) {
@@ -98,6 +119,11 @@
     
     &__box {
       @include flex-wrap(wrap, space-between);
+
+      @include desktop-1250 {
+        @include flex-column (normal, center);
+        flex-wrap: nowrap;
+      }
 
       .book {
         width: 590px;

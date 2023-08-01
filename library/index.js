@@ -32,3 +32,32 @@ console.log(`
 - плавное изменение внешнего вида элемента при наведении и клике не влияет на соседние элементы +2
 Итого: 100!
 `);
+
+let burger = document.querySelector('.burger');
+let burgerFirst = document.querySelector('.burger span:nth-child(1)');
+let burgerSecond = document.querySelector('.burger span:nth-child(2)');
+let burgerThird = document.querySelector('.burger span:nth-child(3)');
+let burgerMenu = document.querySelector('.burger-menu');
+const menuLinks = document.querySelectorAll('.burger-menu a')
+
+const transBackground = document.createElement('div');
+document.body.prepend(transBackground);
+
+const toggleBurger = () => {
+  burgerFirst.classList.toggle('burger-first');
+  burgerSecond.classList.toggle('burger-second');
+  burgerThird.classList.toggle('burger-third');
+  burgerMenu.classList.toggle('burger-menu__open');
+  transBackground.classList.toggle('background-visible');
+}
+
+
+// toggle burger
+burger.addEventListener('click', toggleBurger);
+transBackground.addEventListener('click', toggleBurger);
+menuLinks.forEach((link) => {
+  link.addEventListener('click', toggleBurger);
+});
+
+
+

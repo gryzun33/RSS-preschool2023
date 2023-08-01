@@ -28,17 +28,67 @@
 
   .slider {
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include laptops {
+      display: flex;
+      justify-content: space-between;
+      max-width: 614px;
+    }
+
+    &__arrow {
+      display: none;
+      margin-top: 288.5px;
+
+      @include laptops {
+        display: block;
+      }
+
+    }
+
+    &__outer {
+      width: 100%;
+      overflow: hidden; 
+
+      @include laptops {
+        width: 450px; 
+      }
+    }
 
     &__inner {
-      width: 100%;
-      @include flex(space-between);
+      display:flex;
+      column-gap: 25px;
+
+      img {
+        width: 32.14%;
+
+        @include laptops  {
+          width: 450px; 
+        }
+
+      }
     }
+
+
+
+    // &__inner {
+    //   width: 100%;
+    //   @include flex(space-between);
+    // }
   }
 
   .pagination {
     margin: 35px auto 0 auto;
+    display: flex;
+
     width: 78px;
-    @include flex(space-between);
+    // @include flex(space-between);
+
+    @include laptops {
+      width: 130px;
+      margin-top: 20px;
+    }
     
 
     &__box {
@@ -48,6 +98,14 @@
 
       &:hover {
         cursor: pointer;
+      }
+
+      &:nth-child(4), &:nth-child(5) {
+        display: none;
+
+        @include laptops {
+          display: flex;
+        }
       }
     }
 
