@@ -20,6 +20,10 @@
   &__content {
     margin-top: 40px;
     @include flex(space-between);
+
+    @include laptops {
+      flex-direction: column
+    }
   }
 
   &__text {
@@ -61,4 +65,13 @@
       }
     }
   }
+
+
+  &__map {
+    @include laptops {
+      margin-top: 80px;
+      align-self: center;
+    }
+  }
+
 }

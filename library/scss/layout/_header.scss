@@ -7,6 +7,7 @@
     @include wrapper;
     @include flex(space-between, center);
     height: 100%;
+    overflow-x: hidden;
   }
 
   &__title {
@@ -122,22 +123,27 @@
       display: block;
     }
 
-
-  
     height: 570px;
-    width: 0px;
-    position: absolute;
+    width: 332px;
+    position: fixed;
     top: 0px;
-    right: 0px;
+    right: -332px;
     background-color: $color-dark;
     z-index: 5;
-    transition: 0.4s ease-out;
-    // overflow-y: hidden;
+    
+ 
 
-
-    &__open {
-      width: 332px;
+    &__show {
+      right: 0px;
+      animation: burger-show 0.5s normal;
     }
+
+    &__hide {
+      right: -332px;
+      animation: burger-hide 0.5s normal;
+    }
+
+
 
     ul {
       padding-top: 90px;
@@ -147,6 +153,7 @@
 
 
     li {
+      list-style-type: none;
       text-align: center;
       line-height: 50px;
       margin-bottom: 30px;
@@ -176,4 +183,23 @@
     }
       
   }
+}
+
+
+@keyframes burger-show {
+	from {
+		right: -332px;
+	}
+	to {
+		right: 0px;
+	}
+}
+
+@keyframes burger-hide {
+	from {
+		right: 0px;
+	}
+	to {
+		right: -332px;
+	}
 }

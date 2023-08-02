@@ -92,6 +92,11 @@
 
     .rss {
       margin-left: 123px;
+
+      @include laptops {
+        margin-left: 68px;
+        margin-right: 0;
+      }
     }
   }
 }

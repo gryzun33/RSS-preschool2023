@@ -340,6 +340,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media screen and (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 a {
   text-decoration: none;
 }
@@ -365,6 +371,7 @@ a {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  overflow-x: hidden;
 }
 .header__title {
   color: #FFFFFF;
@@ -467,26 +474,31 @@ a {
 .header .burger-menu {
   display: none;
   height: 570px;
-  width: 0px;
-  position: absolute;
+  width: 332px;
+  position: fixed;
   top: 0px;
-  right: 0px;
+  right: -332px;
   background-color: #000000;
   z-index: 5;
-  transition: 0.4s ease-out;
 }
 @media screen and (max-width: 1024px) {
   .header .burger-menu {
     display: block;
   }
 }
-.header .burger-menu__open {
-  width: 332px;
+.header .burger-menu__show {
+  right: 0px;
+  animation: burger-show 0.5s normal;
+}
+.header .burger-menu__hide {
+  right: -332px;
+  animation: burger-hide 0.5s normal;
 }
 .header .burger-menu ul {
   padding-top: 90px;
 }
 .header .burger-menu li {
+  list-style-type: none;
   text-align: center;
   line-height: 50px;
   margin-bottom: 30px;
@@ -511,6 +523,22 @@ a {
   color: #BB945F;
 }
 
+@keyframes burger-show {
+  from {
+    right: -332px;
+  }
+  to {
+    right: 0px;
+  }
+}
+@keyframes burger-hide {
+  from {
+    right: 0px;
+  }
+  to {
+    right: -332px;
+  }
+}
 .welcome {
   width: 100%;
   height: 600px;
@@ -963,11 +991,22 @@ a {
   align-items: normal;
   margin-top: 40px;
 }
+@media screen and (max-width: 1024px) {
+  .coffeeshop__menu {
+    flex-direction: column;
+  }
+}
 .coffeeshop__menu .drinks {
   width: 438px;
 }
 .coffeeshop__menu .desserts {
   width: 482px;
+}
+@media screen and (max-width: 1024px) {
+  .coffeeshop__menu .desserts {
+    margin-top: 40px;
+    align-self: flex-end;
+  }
 }
 .coffeeshop__menu .menu__title {
   color: #0C0C0E;
@@ -1071,6 +1110,11 @@ a {
   justify-content: space-between;
   align-items: normal;
 }
+@media screen and (max-width: 1024px) {
+  .contacts__content {
+    flex-direction: column;
+  }
+}
 .contacts__text {
   color: #000000;
   font-size: 20px;
@@ -1108,6 +1152,12 @@ a {
 .contacts__list li a:hover {
   color: #BB945F;
 }
+@media screen and (max-width: 1024px) {
+  .contacts__map {
+    margin-top: 80px;
+    align-self: center;
+  }
+}
 
 .librarycard {
   background-color: #FFFFFF;
@@ -1142,6 +1192,12 @@ a {
   justify-content: space-between;
   align-items: normal;
   margin-top: 40px;
+}
+@media screen and (max-width: 1024px) {
+  .librarycard__content {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .librarycard__content .cardfinder {
   width: 600px;
@@ -1243,6 +1299,13 @@ a {
   justify-content: normal;
   align-items: flex-end;
 }
+@media screen and (max-width: 1024px) {
+  .librarycard__content .readercard {
+    margin-top: 20px;
+    align-items: center;
+    width: 600px;
+  }
+}
 .librarycard__content .readercard__title {
   font-family: "Forum", cursive;
   font-weight: 400;
@@ -1265,12 +1328,23 @@ a {
   text-align: right;
   letter-spacing: 0.4px;
 }
+@media screen and (max-width: 1024px) {
+  .librarycard__content .readercard__text {
+    text-align: center;
+    margin-top: 40px;
+  }
+}
 .librarycard__content .readercard__buttons {
   margin-top: 35px;
   width: 170px;
   display: flex;
   justify-content: space-between;
   align-items: normal;
+}
+@media screen and (max-width: 1024px) {
+  .librarycard__content .readercard__buttons {
+    margin-top: 40px;
+  }
 }
 .librarycard__content .readercard__btn {
   width: 75px;
@@ -1386,4 +1460,10 @@ a {
 }
 .footer__rss .rss {
   margin-left: 123px;
+}
+@media screen and (max-width: 1024px) {
+  .footer__rss .rss {
+    margin-left: 68px;
+    margin-right: 0;
+  }
 }/*# sourceMappingURL=style.css.map */

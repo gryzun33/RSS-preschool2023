@@ -31,12 +31,24 @@
     @include flex(space-between);
     margin-top: 40px;
 
+    @include laptops {
+      flex-direction: column;
+    }
+
     .drinks {
       width: 438px;
     }
 
     .desserts {
       width: 482px;
+
+      @include laptops {
+        margin-top: 40px;
+        align-self: flex-end;
+
+      }
+
+
     }
 
     .menu {

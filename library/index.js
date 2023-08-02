@@ -47,8 +47,14 @@ const toggleBurger = () => {
   burgerFirst.classList.toggle('burger-first');
   burgerSecond.classList.toggle('burger-second');
   burgerThird.classList.toggle('burger-third');
-  burgerMenu.classList.toggle('burger-menu__open');
   transBackground.classList.toggle('background-visible');
+  if (burgerMenu.classList.contains('burger-menu__show')) {
+    burgerMenu.classList.remove('burger-menu__show');
+    burgerMenu.classList.add('burger-menu__hide');
+  } else {
+    burgerMenu.classList.remove('burger-menu__hide');
+    burgerMenu.classList.add('burger-menu__show');
+  };
 }
 
 
@@ -59,5 +65,17 @@ menuLinks.forEach((link) => {
   link.addEventListener('click', toggleBurger);
 });
 
+
+let lastWindowWidth = window.innerWidth;
+let newWindowWidth;
+
+window.addEventListener('resize', function() {
+  newWindowWidth = window.innerWidth;
+  if (lastWindowWidth <= 1024 && newWindowWidth > 1024) {
+    burgerMenu.classList.remove('burger-menu__hide');
+    burgerMenu.classList.remove('burger-menu__show');
+  }
+  lastWindowWidth = newWindowWidth;
+});
 
 

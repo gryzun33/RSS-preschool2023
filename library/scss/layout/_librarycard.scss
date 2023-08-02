@@ -19,6 +19,11 @@
     @include flex(space-between);
     margin-top: 40px;
 
+    @include laptops {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .cardfinder {
       width: 600px;
 
@@ -100,6 +105,12 @@
       width: 456px;
       @include flex-column(normal, flex-end);
 
+      @include laptops {
+        margin-top: 20px;
+        align-items: center;
+        width: 600px;
+      }
+
       &__title {
         @include font-title;
         color: $color-dark;
@@ -114,12 +125,21 @@
         color: $color-dark;
         text-align: right;
         letter-spacing: 0.4px;
+
+        @include laptops {
+          text-align: center;
+          margin-top: 40px;
+        }
       }
 
       &__buttons {
         margin-top: 35px;
         width: 170px;
         @include flex(space-between);
+
+        @include laptops {
+          margin-top: 40px;
+        }
       }
 
       &__btn {
