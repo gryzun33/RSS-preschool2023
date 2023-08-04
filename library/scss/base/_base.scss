@@ -11,11 +11,18 @@ html {
 body {
   @include laptops {
     overflow-x: hidden;
+    // position: relative;
   } 
 }
 
 a {
   text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .background-visible {

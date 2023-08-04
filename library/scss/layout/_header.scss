@@ -1,12 +1,12 @@
 .header {
-  height: 90px;
   background-color: $color-dark-l;
-  // position:relative;
+  overflow-x: hidden;
   
   &__wrapper {
     @include wrapper;
     @include flex(space-between, center);
-    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     overflow-x: hidden;
   }
 
@@ -14,6 +14,8 @@
     color: $color-light;
     font-size: 30px;
     letter-spacing: 0.6px;
+    line-height: 50px;
+    margin: 0;
     @include font-title;
   }
 
@@ -72,7 +74,6 @@
     }
 
     .burger {
-
       display:none;
       width: 45px;
       height: 22px;
@@ -87,7 +88,6 @@
         height: 2px;
         background-color: $color-light;
         transition: all 0.3s;
-
       }
 
       &:hover {
@@ -118,40 +118,29 @@
 
   .burger-menu {
     display: none;
-
+  
     @include laptops {
       display: block;
     }
-
+  
     height: 570px;
     width: 332px;
-    position: fixed;
+    position: absolute;
     top: 0px;
     right: -332px;
     background-color: $color-dark;
     z-index: 5;
-    
- 
-
+    transition: 0.5s ease-in-out;
+  
+  
     &__show {
-      right: 0px;
-      animation: burger-show 0.5s normal;
+      transform: translateX(-100%);
     }
-
-    &__hide {
-      right: -332px;
-      animation: burger-hide 0.5s normal;
-    }
-
-
-
+  
     ul {
       padding-top: 90px;
     }
-
-
-
-
+  
     li {
       list-style-type: none;
       text-align: center;
@@ -159,8 +148,7 @@
       margin-bottom: 30px;
       font-size: 20px;
       @include text-regular;
- 
-
+  
       &:first-child {
         margin-top: 10px;
       }
@@ -171,35 +159,35 @@
         height: 100%;
         color: $color-light;
         transition: 0.3s ease-in-out;
-
-
+    
         &:hover {
           cursor: pointer;
           font-size:23px;
           color: $color-secondary;
         }
       }
-
-    }
-      
+    }    
   }
 }
 
 
-@keyframes burger-show {
-	from {
-		right: -332px;
-	}
-	to {
-		right: 0px;
-	}
-}
+// @keyframes burger-show {
+// 	from {
+// 		right: -100%;
+// 	}
+// 	to {
+// 		right: 0;
+// 	}
+// }
 
-@keyframes burger-hide {
-	from {
-		right: 0px;
-	}
-	to {
-		right: -332px;
-	}
-}
+// @keyframes burger-hide {
+// 	from {
+// 		right: 0;
+// 	}
+// 	to {
+// 		right: -100%;
+// 	}
+// }
+
+
+

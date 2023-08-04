@@ -350,6 +350,12 @@ a {
   text-decoration: none;
 }
 
+.container {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
 .background-visible {
   width: 100%;
   height: 100%;
@@ -359,8 +365,8 @@ a {
 }
 
 .header {
-  height: 90px;
   background-color: #0C0C0E;
+  overflow-x: hidden;
 }
 .header__wrapper {
   max-width: 1440px;
@@ -370,13 +376,16 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   overflow-x: hidden;
 }
 .header__title {
   color: #FFFFFF;
   font-size: 30px;
   letter-spacing: 0.6px;
+  line-height: 50px;
+  margin: 0;
   font-family: "Forum", cursive;
   font-weight: 400;
   font-style: normal;
@@ -475,11 +484,12 @@ a {
   display: none;
   height: 570px;
   width: 332px;
-  position: fixed;
+  position: absolute;
   top: 0px;
   right: -332px;
   background-color: #000000;
   z-index: 5;
+  transition: 0.5s ease-in-out;
 }
 @media screen and (max-width: 1024px) {
   .header .burger-menu {
@@ -487,12 +497,7 @@ a {
   }
 }
 .header .burger-menu__show {
-  right: 0px;
-  animation: burger-show 0.5s normal;
-}
-.header .burger-menu__hide {
-  right: -332px;
-  animation: burger-hide 0.5s normal;
+  transform: translateX(-100%);
 }
 .header .burger-menu ul {
   padding-top: 90px;
@@ -523,22 +528,6 @@ a {
   color: #BB945F;
 }
 
-@keyframes burger-show {
-  from {
-    right: -332px;
-  }
-  to {
-    right: 0px;
-  }
-}
-@keyframes burger-hide {
-  from {
-    right: 0px;
-  }
-  to {
-    right: -332px;
-  }
-}
 .welcome {
   width: 100%;
   height: 600px;
@@ -774,6 +763,8 @@ a {
   .favorites__buttons {
     margin-left: 0;
     margin-right: 0;
+    max-width: 715px;
+    width: auto;
   }
 }
 .favorites__buttons input {
@@ -1109,6 +1100,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: normal;
+  align-items: flex-start;
 }
 @media screen and (max-width: 1024px) {
   .contacts__content {
@@ -1125,6 +1117,16 @@ a {
   font-style: normal;
   text-transform: capitalize;
 }
+@media screen and (max-width: 1250px) {
+  .contacts__text {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .contacts__text {
+    font-size: 20px;
+  }
+}
 .contacts__subtitle {
   font-weight: 700;
 }
@@ -1140,9 +1142,29 @@ a {
 .contacts__list {
   margin-top: 40px;
 }
+@media screen and (max-width: 1250px) {
+  .contacts__list {
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .contacts__list {
+    margin-top: 40px;
+  }
+}
 .contacts__list li {
   margin-bottom: 20px;
   list-style-type: none;
+}
+@media screen and (max-width: 1250px) {
+  .contacts__list li {
+    margin-top: 15px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .contacts__list li {
+    margin-top: 20px;
+  }
 }
 .contacts__list li a {
   text-decoration: none;
@@ -1152,8 +1174,12 @@ a {
 .contacts__list li a:hover {
   color: #BB945F;
 }
+.contacts__map {
+  width: 49.71%;
+}
 @media screen and (max-width: 1024px) {
   .contacts__map {
+    width: 95.6%;
     margin-top: 80px;
     align-self: center;
   }
@@ -1450,6 +1476,12 @@ a {
   font-weight: 400;
   font-style: normal;
 }
+@media screen and (max-width: 767px) {
+  .footer__rss {
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+}
 .footer__rss a {
   color: #FFFFFF;
   text-decoration: none;
@@ -1464,6 +1496,12 @@ a {
 @media screen and (max-width: 1024px) {
   .footer__rss .rss {
     margin-left: 68px;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+  .footer__rss .rss {
+    margin-left: 0;
     margin-right: 0;
   }
 }/*# sourceMappingURL=style.css.map */
