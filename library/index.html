@@ -32,7 +32,21 @@
               </g>
             </svg>
           </div>
+          <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div> 
         </div>
+        <nav class="burger-menu">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#favorites">Favorites</a></li>
+            <li><a href="#coffeeshop">Coffee shop</a></li>
+            <li><a href="#contacts">Contacts</a></li>
+            <li><a href="#librarycard">Library Card</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
     <main>
@@ -49,15 +63,39 @@
           <p class="about__text">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop
             inside</p>
           <div class="slider">
-            <div class="slider__inner">
-              <img class="slider__image" src="assets/images/image_1.png" alt="image1">
-              <img class="slider__image" src="assets/images/image_2.png" alt="image2">
-              <img class="slider__image" src="assets/images/image_3.png" alt="image3">
-            </div>
+            <button class="slider__arrow slider__arrow_left">
+              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Carret_Left">
+                  <path id="Vector" d="M15 7.5L9 12.5L15 17.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </button>  
+            <div class="slider__outer">
+              <div class="slider__inner">
+                <img class="slider__image" src="assets/images/image_1.png" alt="image1">
+                <img class="slider__image" src="assets/images/image_2.png" alt="image2">
+                <img class="slider__image" src="assets/images/image_3.png" alt="image3">
+                <img class="slider__image" src="assets/images/image_4.png" alt="image4">
+                <img class="slider__image" src="assets/images/image_5.png" alt="image5"> 
+              </div>
+            </div>  
+            <button class="slider__arrow slider__arrow_right">
+              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="Carret_Right">
+                  <path id="Vector" d="M9 17.5L15 12.5L9 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </button>
           </div>
           <div class="pagination">
             <div class="pagination__box">
               <div class="pagination__inner  pagination__inner__active"></div>
+            </div>
+            <div class="pagination__box">
+              <div class="pagination__inner"></div>
+            </div>
+            <div class="pagination__box">
+              <div class="pagination__inner"></div>
             </div>
             <div class="pagination__box">
               <div class="pagination__inner"></div>
@@ -536,7 +574,7 @@
         </div>
       </div>      
     </footer>
-  </div>
+  </div>  
   <script src="index.js"></script>
 </body>
 </html>
