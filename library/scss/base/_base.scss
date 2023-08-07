@@ -8,12 +8,11 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  @include laptops {
-    overflow-x: hidden;
-    // position: relative;
-  } 
-}
+// body {
+//   @include laptops {
+//     overflow-x: hidden;
+//   } 
+// }
 
 a {
   text-decoration: none;

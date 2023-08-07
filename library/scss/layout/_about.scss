@@ -40,6 +40,10 @@
     &__arrow {
       display: none;
       margin-top: 288.5px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background-color: transparent;
 
       @include laptops {
         display: block;
@@ -66,24 +70,14 @@
         @include laptops  {
           width: 450px; 
         }
-
       }
     }
-
-
-
-    // &__inner {
-    //   width: 100%;
-    //   @include flex(space-between);
-    // }
   }
 
   .pagination {
     margin: 35px auto 0 auto;
     display: flex;
-
     width: 78px;
-    // @include flex(space-between);
 
     @include laptops {
       width: 130px;

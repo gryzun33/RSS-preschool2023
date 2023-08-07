@@ -26,6 +26,10 @@
 
     .cardfinder {
       width: 600px;
+      margin-right: 20px;
+      @include laptops {
+        margin-right: 0;
+      }
 
       &__title {
         @include text-regular;

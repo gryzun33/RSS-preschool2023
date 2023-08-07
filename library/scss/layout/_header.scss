@@ -126,7 +126,7 @@
     height: 570px;
     width: 332px;
     position: absolute;
-    top: 0px;
+    top: 0px;  
     right: -332px;
     background-color: $color-dark;
     z-index: 5;
@@ -169,25 +169,3 @@
     }    
   }
 }
-
-
-// @keyframes burger-show {
-// 	from {
-// 		right: -100%;
-// 	}
-// 	to {
-// 		right: 0;
-// 	}
-// }
-
-// @keyframes burger-hide {
-// 	from {
-// 		right: 0;
-// 	}
-// 	to {
-// 		right: -100%;
-// 	}
-// }
-
-
-
