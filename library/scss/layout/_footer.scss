@@ -78,7 +78,11 @@
     line-height: 20px;
     letter-spacing: 2px;
     @include flex(space-between, center);
-    @include text-regular; 
+    @include text-regular;
+    @include tablets {
+      font-size: 18px;
+      letter-spacing: 1.5px;
+    }
 
     a {
       color: $color-light;
@@ -92,6 +96,16 @@
 
     .rss {
       margin-left: 123px;
+
+      @include laptops {
+        margin-left: 68px;
+        margin-right: 0;
+      }
+
+      @include tablets {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
   }
 }
