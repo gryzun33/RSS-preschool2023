@@ -64,25 +64,18 @@
 
       & svg g path {
         transition: all 0.3s ease-out;
-        
-        
+                
       }
-
       @media (hover:hover) {
-        cursor: pointer;
 
+        &:hover {
+          cursor: pointer;
+        }
+        
         &:hover svg g path {
         fill: $color-secondary;        
         }
       }
-
-      // &:hover {
-      //   cursor: pointer;
-      // }
-
-      // &:hover svg g path {
-      //   fill: $color-secondary;        
-      // }
     }
 
     .burger {
@@ -107,7 +100,7 @@
       }
 
       .burger-first {
-        transform: translate(13px, -6px) rotate(45deg);
+        transform: translate(6px, -6px) rotate(45deg);
         transform-origin: 0 0;
       }
 
@@ -117,7 +110,7 @@
       }
 
       .burger-third {
-        transform: translate(13px, 6px) rotate(-45deg);
+        transform: translate(6px, 6px) rotate(-45deg);
         transform-origin: 0 0;    
       }
 

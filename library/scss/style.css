@@ -436,7 +436,7 @@ a {
   transition: all 0.3s ease-out;
 }
 @media (hover: hover) {
-  .header__nav-profile .profile {
+  .header__nav-profile .profile:hover {
     cursor: pointer;
   }
   .header__nav-profile .profile:hover svg g path {
@@ -463,14 +463,14 @@ a {
   cursor: pointer;
 }
 .header__nav-profile .burger .burger-first {
-  transform: translate(13px, -6px) rotate(45deg);
+  transform: translate(6px, -6px) rotate(45deg);
   transform-origin: 0 0;
 }
 .header__nav-profile .burger .burger-second {
   transform: scale(0);
 }
 .header__nav-profile .burger .burger-third {
-  transform: translate(13px, 6px) rotate(-45deg);
+  transform: translate(6px, 6px) rotate(-45deg);
   transform-origin: 0 0;
 }
 @media screen and (max-width: 1024px) {
