@@ -66,11 +66,15 @@
   background-color: $color-light;
   transition: all 0.3s ease-out;
 
-  &:hover {
-    cursor: pointer;
-    background-color: $color-secondary;
-    border: 1px solid $color-secondary;
-  } 
+  @media (hover:hover) {
+    &:hover {
+      cursor: pointer;
+      background-color: $color-secondary;
+      border: 1px solid $color-secondary;
+    } 
+  }
+
+ 
 }
 
 @mixin text-inter-20 {

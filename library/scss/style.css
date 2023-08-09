@@ -429,15 +429,19 @@ a {
 .header__nav-profile .profile {
   padding-top: 2px;
   z-index: 6;
+  border: none;
+  background-color: transparent;
 }
 .header__nav-profile .profile svg g path {
   transition: all 0.3s ease-out;
 }
-.header__nav-profile .profile:hover {
-  cursor: pointer;
-}
-.header__nav-profile .profile:hover svg g path {
-  fill: #BB945F;
+@media (hover: hover) {
+  .header__nav-profile .profile {
+    cursor: pointer;
+  }
+  .header__nav-profile .profile:hover svg g path {
+    fill: #BB945F;
+  }
 }
 .header__nav-profile .burger {
   display: none;
@@ -459,14 +463,14 @@ a {
   cursor: pointer;
 }
 .header__nav-profile .burger .burger-first {
-  transform: translateY(-6px) rotate(45deg);
+  transform: translate(13px, -6px) rotate(45deg);
   transform-origin: 0 0;
 }
 .header__nav-profile .burger .burger-second {
   transform: scale(0);
 }
 .header__nav-profile .burger .burger-third {
-  transform: translateY(6px) rotate(-45deg);
+  transform: translate(13px, 6px) rotate(-45deg);
   transform-origin: 0 0;
 }
 @media screen and (max-width: 1024px) {
@@ -476,12 +480,12 @@ a {
 }
 .header .burger-menu {
   display: none;
-  height: 570px;
+  height: 480px;
   width: 332px;
   position: absolute;
-  top: 0px;
+  top: 90px;
   right: -332px;
-  background-color: #000000;
+  background-color: #0C0C0E;
   z-index: 5;
   transition: 0.5s ease-in-out;
 }
@@ -492,9 +496,6 @@ a {
 }
 .header .burger-menu__show {
   transform: translateX(-100%);
-}
-.header .burger-menu ul {
-  padding-top: 90px;
 }
 .header .burger-menu li {
   list-style-type: none;
@@ -516,10 +517,12 @@ a {
   color: #FFFFFF;
   transition: 0.3s ease-in-out;
 }
-.header .burger-menu li a:hover {
-  cursor: pointer;
-  font-size: 23px;
-  color: #BB945F;
+@media (hover: hover) {
+  .header .burger-menu li a:hover {
+    cursor: pointer;
+    font-size: 23px;
+    color: #BB945F;
+  }
 }
 
 .welcome {
@@ -669,8 +672,10 @@ a {
   justify-content: center;
   align-items: center;
 }
-.about .pagination__box:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  .about .pagination__box:hover {
+    cursor: pointer;
+  }
 }
 .about .pagination__box:nth-child(4), .about .pagination__box:nth-child(5) {
   display: none;
@@ -780,8 +785,10 @@ a {
   letter-spacing: 0.5px;
   margin-top: 1px;
 }
-.favorites__buttons label:hover {
-  cursor: pointer;
+@media (hover: hover) {
+  .favorites__buttons label:hover {
+    cursor: pointer;
+  }
 }
 .favorites__buttons label:first-child {
   padding-left: 0;
@@ -911,10 +918,12 @@ a {
   transition: all 0.3s ease-out;
   margin-top: 15px;
 }
-.favorites .books__box .book__btn:hover {
-  cursor: pointer;
-  background-color: #BB945F;
-  border: 1px solid #BB945F;
+@media (hover: hover) {
+  .favorites .books__box .book__btn:hover {
+    cursor: pointer;
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+  }
 }
 .favorites .books__box .book__btn:disabled {
   border-color: #BB945F;
@@ -1177,7 +1186,8 @@ a {
 }
 @media screen and (max-width: 1024px) {
   .contacts__map {
-    width: 95.6%;
+    max-width: 696px;
+    width: 100%;
     margin-top: 80px;
     align-self: center;
   }
@@ -1317,10 +1327,12 @@ a {
   height: 44px;
   font-size: 20px;
 }
-.librarycard__content .cardfinder .card__btn:hover {
-  cursor: pointer;
-  background-color: #BB945F;
-  border: 1px solid #BB945F;
+@media (hover: hover) {
+  .librarycard__content .cardfinder .card__btn:hover {
+    cursor: pointer;
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+  }
 }
 .librarycard__content .readercard {
   width: 456px;
@@ -1389,10 +1401,12 @@ a {
   background-color: #FFFFFF;
   transition: all 0.3s ease-out;
 }
-.librarycard__content .readercard__btn:hover {
-  cursor: pointer;
-  background-color: #BB945F;
-  border: 1px solid #BB945F;
+@media (hover: hover) {
+  .librarycard__content .readercard__btn:hover {
+    cursor: pointer;
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+  }
 }
 
 .footer {
@@ -1427,8 +1441,10 @@ a {
   font-style: normal;
   transition: color 0.3s ease-out;
 }
-.footer__location a:hover {
-  color: #BB945F;
+@media (hover: hover) {
+  .footer__location a:hover {
+    color: #BB945F;
+  }
 }
 .footer__icons {
   margin-top: 10px;
@@ -1446,8 +1462,10 @@ a {
 .footer__icon > svg > g > path {
   transition: fill 0.3s ease-out;
 }
-.footer__icon:hover > svg > g > path {
-  fill: #BB945F;
+@media (hover: hover) {
+  .footer__icon:hover > svg > g > path {
+    fill: #BB945F;
+  }
 }
 .footer__schedule {
   width: 149px;
@@ -1491,8 +1509,10 @@ a {
   text-decoration: none;
   transition: color 0.3s ease-out;
 }
-.footer__rss a:hover {
-  color: #BB945F;
+@media (hover: hover) {
+  .footer__rss a:hover {
+    color: #BB945F;
+  }
 }
 .footer__rss .rss {
   margin-left: 123px;

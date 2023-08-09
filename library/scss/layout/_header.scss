@@ -59,18 +59,30 @@
     .profile {
       padding-top: 2px;
       z-index: 6;
+      border: none;
+      background-color: transparent;
 
       & svg g path {
-        transition: all 0.3s ease-out;  
+        transition: all 0.3s ease-out;
+        
+        
       }
 
-      &:hover {
+      @media (hover:hover) {
         cursor: pointer;
+
+        &:hover svg g path {
+        fill: $color-secondary;        
+        }
       }
 
-      &:hover svg g path {
-        fill: $color-secondary;        
-      }
+      // &:hover {
+      //   cursor: pointer;
+      // }
+
+      // &:hover svg g path {
+      //   fill: $color-secondary;        
+      // }
     }
 
     .burger {
@@ -95,7 +107,7 @@
       }
 
       .burger-first {
-        transform: translateY(-6px) rotate(45deg);
+        transform: translate(13px, -6px) rotate(45deg);
         transform-origin: 0 0;
       }
 
@@ -105,7 +117,7 @@
       }
 
       .burger-third {
-        transform: translateY(6px) rotate(-45deg);
+        transform: translate(13px, 6px) rotate(-45deg);
         transform-origin: 0 0;    
       }
 
@@ -123,12 +135,12 @@
       display: block;
     }
   
-    height: 570px;
+    height: 480px;
     width: 332px;
     position: absolute;
-    top: 0px;  
+    top: 90px;  
     right: -332px;
-    background-color: $color-dark;
+    background-color: $color-dark-l;
     z-index: 5;
     transition: 0.5s ease-in-out;
   
@@ -137,9 +149,9 @@
       transform: translateX(-100%);
     }
   
-    ul {
-      padding-top: 90px;
-    }
+    // ul {
+    //   padding-top: 90px;
+    // }
   
     li {
       list-style-type: none;
@@ -159,12 +171,18 @@
         height: 100%;
         color: $color-light;
         transition: 0.3s ease-in-out;
-    
-        &:hover {
-          cursor: pointer;
-          font-size:23px;
-          color: $color-secondary;
+
+        @media (hover:hover) {
+
+          &:hover {
+            cursor: pointer;
+            font-size:23px;
+            color: $color-secondary;
+          }
+          
         }
+    
+      
       }
     }    
   }
