@@ -497,6 +497,11 @@ a {
 .header .burger-menu__show {
   transform: translateX(-100%);
 }
+.header .burger-menu ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .header .burger-menu li {
   list-style-type: none;
   text-align: center;

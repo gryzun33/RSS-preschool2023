@@ -142,9 +142,12 @@
       transform: translateX(-100%);
     }
   
-    // ul {
-    //   padding-top: 90px;
-    // }
+    ul {
+      // padding-top: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   
     li {
       list-style-type: none;
