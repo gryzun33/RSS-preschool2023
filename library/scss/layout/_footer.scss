@@ -25,9 +25,11 @@
       @include text-regular;
       transition: color 0.3s ease-out; 
 
-      &:hover {
-        color: $color-secondary;
-      }
+      @media (hover:hover) {
+        &:hover {
+          color: $color-secondary;
+        }  
+      }     
     }
   }
 
@@ -47,9 +49,11 @@
       transition: fill 0.3s ease-out;
     }
 
-    &:hover > svg > g > path {
-      fill: $color-secondary;
-     }
+    @media (hover:hover) {
+      &:hover > svg > g > path {
+        fill: $color-secondary;
+       }
+    } 
   }
 
   &__schedule {
@@ -89,9 +93,11 @@
       text-decoration: none;
       transition: color 0.3s ease-out;
 
-      &:hover {
-        color: $color-secondary;
-      }
+      @media (hover:hover) {
+        &:hover {
+          color: $color-secondary;
+        }
+      }    
     }
 
     .rss {

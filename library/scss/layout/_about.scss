@@ -90,8 +90,10 @@
       height: 26px;
       @include flex(center, center);
 
-      &:hover {
-        cursor: pointer;
+      @media (hover:hover) {
+        &:hover {
+          cursor: pointer;
+        }  
       }
 
       &:nth-child(4), &:nth-child(5) {
