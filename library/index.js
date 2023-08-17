@@ -24,8 +24,6 @@ const removeBurger = () => {
   transBackground.classList.remove('background-visible');
 }
 
-
-// toggle burger
 burger.addEventListener('click', toggleBurger);
 transBackground.addEventListener('click', removeBurger);
 profileIcon.addEventListener('click', removeBurger);
@@ -39,7 +37,6 @@ let newWindowWidth;
 
 window.addEventListener('resize', function() {
   calculateSliderDim ();
- 
   newWindowWidth = window.innerWidth;
 
   if (newWindowWidth <= 1024 && lastWindowWidth > 1024) {
@@ -48,12 +45,10 @@ window.addEventListener('resize', function() {
   }  
   if (lastWindowWidth <= 1024 && newWindowWidth > 1024) {
     removeBurger();
-    initSlider();
-    
+    initSlider();    
   }
   lastWindowWidth = newWindowWidth;
 });
-
 
 // слайдер
 
@@ -65,23 +60,48 @@ const sliderOuter = document.querySelector('.slider__outer');
 const sliderImage = document.querySelector('.slider__image');
 const arrowLeft = document.querySelector('.slider__arrow_left');
 const arrowRight = document.querySelector('.slider__arrow_right');
+const paginationButtons = document.querySelectorAll('.pagination__box');
 
 calculateSliderDim();
 
+paginationButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    changePrevButton(numbOfSlide);
+    numbOfSlide = +btn.dataset.btn;
+    sliderInner.style.transform = `translateX(${-((numbOfSlide - 1) * sliderShift)}%)`;
+    btn.classList.add('pagination__box__active');
+    btn.setAttribute('disabled', 'disabled');
+    const currentBtnInner = btn.querySelector('.pagination__inner');
+    currentBtnInner.classList.add('pagination__inner__active');
+    if (window.innerWidth <= 1024) {
+      checkEnableArrows();
+    }
+  })
+})
 
-function calculateSliderDim () {
-  
+arrowRight.addEventListener('click', () => {
+  changePrevButton (numbOfSlide);
+  sliderInner.style.transform = `translateX(${-(numbOfSlide * sliderShift)}%)`;
+  numbOfSlide += 1;
+  changeCurrentButton (numbOfSlide);
+  checkEnableArrows();
+});
+
+arrowLeft.addEventListener('click', () => {
+  changePrevButton (numbOfSlide);
+  numbOfSlide = numbOfSlide - 1;
+  sliderInner.style.transform = `translateX(${-(numbOfSlide-1) * sliderShift}%)`;
+  changeCurrentButton (numbOfSlide);
+  checkEnableArrows();
+})
+
+function calculateSliderDim () {  
 const sliderOuterWidth = parseFloat(getComputedStyle(sliderOuter).width);
-
 const sliderInnerWidth = parseFloat(getComputedStyle(sliderInner).width);
-
 const sliderImageWidth = parseFloat(getComputedStyle(sliderImage).width);
 const gapWidth = window.innerWidth > 1024 ? parseFloat(getComputedStyle(sliderInner).columnGap) 
                 / 100 * sliderInnerWidth  : parseFloat(getComputedStyle(sliderInner).columnGap);
-
 sliderShift = (sliderImageWidth + gapWidth) * 100 / sliderOuterWidth ;
-
-
 }
 
 function initSlider() {
@@ -95,87 +115,11 @@ function initSlider() {
     btn.classList.remove('pagination__box__active');  
     btn.removeAttribute('disabled');
   })
-  const startBtn = document.querySelector('.pagination__box:first-child');
-  startBtn.classList.add('pagination__box__active');
-  startBtn.querySelector('.pagination__inner').classList.add('pagination__inner__active');
-  startBtn.setAttribute('disabled', 'disabled');
+  changeCurrentButton(numbOfSlide);
   sliderInner.style.transform = `translateX(0)`;
 }
 
-
-const paginationButtons = document.querySelectorAll('.pagination__box');
-
-
-paginationButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const prevBtn = document.querySelector('.pagination__box__active');
-    const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
-    // const currentBtnNumb = btn.dataset.btn;
-    const currentBtnInner = btn.querySelector('.pagination__inner');
-
-    numbOfSlide = +btn.dataset.btn;
-    // const diff = currentBtnNumb - 1;
-    // console.log('diff=', diff);
-    sliderInner.style.transform = `translateX(${-((numbOfSlide - 1) * sliderShift)}%)`;
-    prevBtn.classList.remove('pagination__box__active');
-    prevBtnInner.classList.remove('pagination__inner__active');
-    prevBtn.removeAttribute('disabled');
-    btn.classList.add('pagination__box__active');
-    btn.setAttribute('disabled', 'disabled');
-    currentBtnInner.classList.add('pagination__inner__active');
-
-    if (window.innerWidth <= 1024) {
-      checkEnableArrows();
-    }
-    
-
-  })
-})
-
-arrowRight.addEventListener('click', () => {
-  sliderInner.style.transform = `translateX(${-(numbOfSlide * sliderShift)}%)`;
-  const prevBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
-  console.log('prevBTN=', prevBtn);
-  const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
-  prevBtn.classList.remove('pagination__box__active');
-  prevBtn.removeAttribute('disabled');
-  prevBtnInner.classList.remove('pagination__inner__active');
-  numbOfSlide += 1;
-  const currentBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
-  const currentBtnInner = currentBtn.querySelector('.pagination__inner');
-  currentBtn.classList.add('pagination__box__active');
-  currentBtn.setAttribute('disabled', 'disabled');
-  currentBtnInner.classList.add('pagination__inner__active');
-
-  checkEnableArrows();
-
-});
-
-arrowLeft.addEventListener('click', () => {
-  const prevBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
-  const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
-  numbOfSlide = numbOfSlide - 1;
-  console.log('numbofslide=', numbOfSlide);
-  sliderInner.style.transform = `translateX(${-(numbOfSlide-1) * sliderShift}%)`;
-
-
-  prevBtn.classList.remove('pagination__box__active');
-  prevBtn.removeAttribute('disabled');
-  prevBtnInner.classList.remove('pagination__inner__active');
-
-  const currentBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
-  const currentBtnInner = currentBtn.querySelector('.pagination__inner');
-  currentBtn.classList.add('pagination__box__active');
-  currentBtn.setAttribute('disabled', 'disabled');
-  currentBtnInner.classList.add('pagination__inner__active');
-
-
-  checkEnableArrows();
-})
-
 function checkEnableArrows() {
-  console.log ('numbofslide = ', numbOfSlide);
-  console.log ('length=', slideLength);
   if (numbOfSlide === slideLength) {
     arrowRight.classList.add('slider__arrow__non-active');
     arrowRight.setAttribute('disabled', 'disabled');
@@ -194,6 +138,20 @@ function checkEnableArrows() {
   } 
 } 
 
+function changePrevButton (numb) {
+  const prevBtn = document.querySelector(`[data-btn='${numb}']`);
+  const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
+  prevBtn.classList.remove('pagination__box__active');
+  prevBtn.removeAttribute('disabled');
+  prevBtnInner.classList.remove('pagination__inner__active'); 
+}
 
+function changeCurrentButton (numb) {
+  const currentBtn = document.querySelector(`[data-btn='${numb}']`);
+  const currentBtnInner = currentBtn.querySelector('.pagination__inner');
+  currentBtn.classList.add('pagination__box__active');
+  currentBtn.setAttribute('disabled', 'disabled');
+  currentBtnInner.classList.add('pagination__inner__active');
+}
 
 
