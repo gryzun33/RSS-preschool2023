@@ -1,32 +1,3 @@
-console.log(`
-1.Вёрстка соответствует макету. Ширина экрана 768px +26
-
- - блок <header> +2
- - секция Welcome +2
- - секция About +2
- - в секции About под картинкой на разрешении 768px - 5 точек +2
- - секция Favorites +4
- - секция CoffeShop +4
- - секция Contacts +4
- - секция LibraryCard +4
- - блок <footer> + 2
-
-2. Ни на одном из разрешений до 640px включительно не появляется горизонтальная полоса прокрутки. Весь контент страницы при этом сохраняется: не обрезается и не удаляется +12
-
-- нет полосы прокрутки при ширине страницы от 1440рх до 640рх +4
-- элементы не выходят за пределы окна браузера при ширине страницы от 1440рх до 640рх +4
-- элементы не наезжают друг на друга при ширине страницы от 1440рх до 640рх +4
-
-3. На ширине экрана 768рх реализовано адаптивное меню +12 
-
- - при нажатии на бургер-иконку плавно появляется адаптивное меню +4
- - при нажатии на крестик, или на область вне меню, адаптивное меню плавно скрывается, уезжая за экран +4
- - ссылки в адаптивном меню работают, обеспечивая плавную прокрутку по якорям при нажатии, а само адаптивное меню при этом плавно скрывается +2
- - размеры открытого бургер-меню соответствуют макету, так же открытое бургер-меню проверяется на PixelPerfect +2
-
-Итого: 50!
-`);
-
 let burger = document.querySelector('.burger');
 let burgerFirst = document.querySelector('.burger span:nth-child(1)');
 let burgerSecond = document.querySelector('.burger span:nth-child(2)');
@@ -67,11 +38,162 @@ let lastWindowWidth = window.innerWidth;
 let newWindowWidth;
 
 window.addEventListener('resize', function() {
+  calculateSliderDim ();
+ 
   newWindowWidth = window.innerWidth;
+
+  if (newWindowWidth <= 1024 && lastWindowWidth > 1024) {
+    initSlider();
+    checkEnableArrows();
+  }  
   if (lastWindowWidth <= 1024 && newWindowWidth > 1024) {
     removeBurger();
+    initSlider();
+    
   }
   lastWindowWidth = newWindowWidth;
 });
+
+
+// слайдер
+
+let sliderShift = 0;
+let numbOfSlide = 1;
+const slideLength = document.querySelectorAll('.slider__image').length;
+const sliderInner = document.querySelector('.slider__inner');
+const sliderOuter = document.querySelector('.slider__outer');
+const sliderImage = document.querySelector('.slider__image');
+const arrowLeft = document.querySelector('.slider__arrow_left');
+const arrowRight = document.querySelector('.slider__arrow_right');
+
+calculateSliderDim();
+
+
+function calculateSliderDim () {
+  
+const sliderOuterWidth = parseFloat(getComputedStyle(sliderOuter).width);
+
+const sliderInnerWidth = parseFloat(getComputedStyle(sliderInner).width);
+
+const sliderImageWidth = parseFloat(getComputedStyle(sliderImage).width);
+const gapWidth = window.innerWidth > 1024 ? parseFloat(getComputedStyle(sliderInner).columnGap) 
+                / 100 * sliderInnerWidth  : parseFloat(getComputedStyle(sliderInner).columnGap);
+
+sliderShift = (sliderImageWidth + gapWidth) * 100 / sliderOuterWidth ;
+
+
+}
+
+function initSlider() {
+  numbOfSlide = 1;
+  arrowLeft.setAttribute('disabled', 'disabled');
+  arrowLeft.classList.add('slider__arrow__non-active');
+  arrowRight.removeAttribute('disabled');
+  arrowLeft.classList.remove('slider__arrow__non-active');
+  paginationButtons.forEach((btn) => {
+    btn.querySelector('.pagination__inner').classList.remove('pagination__inner__active');
+    btn.classList.remove('pagination__box__active');  
+    btn.removeAttribute('disabled');
+  })
+  const startBtn = document.querySelector('.pagination__box:first-child');
+  startBtn.classList.add('pagination__box__active');
+  startBtn.querySelector('.pagination__inner').classList.add('pagination__inner__active');
+  startBtn.setAttribute('disabled', 'disabled');
+  sliderInner.style.transform = `translateX(0)`;
+}
+
+
+const paginationButtons = document.querySelectorAll('.pagination__box');
+
+
+paginationButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const prevBtn = document.querySelector('.pagination__box__active');
+    const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
+    // const currentBtnNumb = btn.dataset.btn;
+    const currentBtnInner = btn.querySelector('.pagination__inner');
+
+    numbOfSlide = +btn.dataset.btn;
+    // const diff = currentBtnNumb - 1;
+    // console.log('diff=', diff);
+    sliderInner.style.transform = `translateX(${-((numbOfSlide - 1) * sliderShift)}%)`;
+    prevBtn.classList.remove('pagination__box__active');
+    prevBtnInner.classList.remove('pagination__inner__active');
+    prevBtn.removeAttribute('disabled');
+    btn.classList.add('pagination__box__active');
+    btn.setAttribute('disabled', 'disabled');
+    currentBtnInner.classList.add('pagination__inner__active');
+
+    if (window.innerWidth <= 1024) {
+      checkEnableArrows();
+    }
+    
+
+  })
+})
+
+arrowRight.addEventListener('click', () => {
+  sliderInner.style.transform = `translateX(${-(numbOfSlide * sliderShift)}%)`;
+  const prevBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
+  console.log('prevBTN=', prevBtn);
+  const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
+  prevBtn.classList.remove('pagination__box__active');
+  prevBtn.removeAttribute('disabled');
+  prevBtnInner.classList.remove('pagination__inner__active');
+  numbOfSlide += 1;
+  const currentBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
+  const currentBtnInner = currentBtn.querySelector('.pagination__inner');
+  currentBtn.classList.add('pagination__box__active');
+  currentBtn.setAttribute('disabled', 'disabled');
+  currentBtnInner.classList.add('pagination__inner__active');
+
+  checkEnableArrows();
+
+});
+
+arrowLeft.addEventListener('click', () => {
+  const prevBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
+  const prevBtnInner = prevBtn.querySelector('.pagination__inner__active');
+  numbOfSlide = numbOfSlide - 1;
+  console.log('numbofslide=', numbOfSlide);
+  sliderInner.style.transform = `translateX(${-(numbOfSlide-1) * sliderShift}%)`;
+
+
+  prevBtn.classList.remove('pagination__box__active');
+  prevBtn.removeAttribute('disabled');
+  prevBtnInner.classList.remove('pagination__inner__active');
+
+  const currentBtn = document.querySelector(`[data-btn='${numbOfSlide}']`);
+  const currentBtnInner = currentBtn.querySelector('.pagination__inner');
+  currentBtn.classList.add('pagination__box__active');
+  currentBtn.setAttribute('disabled', 'disabled');
+  currentBtnInner.classList.add('pagination__inner__active');
+
+
+  checkEnableArrows();
+})
+
+function checkEnableArrows() {
+  console.log ('numbofslide = ', numbOfSlide);
+  console.log ('length=', slideLength);
+  if (numbOfSlide === slideLength) {
+    arrowRight.classList.add('slider__arrow__non-active');
+    arrowRight.setAttribute('disabled', 'disabled');
+    arrowLeft.classList.remove('slider__arrow__non-active');
+    arrowLeft.removeAttribute('disabled');
+  } else if (numbOfSlide === 1) {
+    arrowLeft.classList.add('slider__arrow__non-active');
+    arrowLeft.setAttribute('disabled', 'disabled');
+    arrowRight.classList.remove('slider__arrow__non-active');
+    arrowRight.removeAttribute('disabled');
+  } else {
+    arrowRight.classList.remove('slider__arrow__non-active');
+    arrowRight.removeAttribute('disabled');
+    arrowLeft.classList.remove('slider__arrow__non-active');
+    arrowLeft.removeAttribute('disabled');
+  } 
+} 
+
+
 
 

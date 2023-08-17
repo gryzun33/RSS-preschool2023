@@ -632,6 +632,15 @@ a {
   border: none;
   background-color: transparent;
 }
+.about .slider__arrow:hover {
+  cursor: pointer;
+}
+.about .slider__arrow__non-active {
+  pointer-events: none;
+}
+.about .slider__arrow__non-active svg g path {
+  stroke: #8E8E8E;
+}
 @media screen and (max-width: 1024px) {
   .about .slider__arrow {
     display: block;
@@ -647,9 +656,19 @@ a {
   }
 }
 .about .slider__inner {
+  position: relative;
+  top: 0;
+  left: 0;
   display: flex;
-  -moz-column-gap: 25px;
-       column-gap: 25px;
+  -moz-column-gap: 1.79%;
+       column-gap: 1.79%;
+  transition: transform 0.5s ease-in-out;
+}
+@media screen and (max-width: 1024px) {
+  .about .slider__inner {
+    -moz-column-gap: 25px;
+         column-gap: 25px;
+  }
 }
 .about .slider__inner img {
   width: 32.14%;
@@ -677,6 +696,9 @@ a {
   justify-content: center;
   align-items: center;
 }
+.about .pagination__box__active {
+  pointer-events: none;
+}
 @media (hover: hover) {
   .about .pagination__box:hover {
     cursor: pointer;
@@ -693,8 +715,10 @@ a {
 .about .pagination__inner {
   width: 16px;
   height: 16px;
+  border: none;
   border-radius: 50%;
   background-color: #0C0C0E;
+  cursor: pointer;
 }
 .about .pagination__inner__active {
   background-color: #BB945F;

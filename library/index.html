@@ -63,10 +63,10 @@
           <p class="about__text">The Brooklyn Library is a free workspace, a large number of books and a cozy coffee shop
             inside</p>
           <div class="slider">
-            <button class="slider__arrow slider__arrow_left">
+            <button class="slider__arrow slider__arrow_left slider__arrow__non-active ">
               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Carret_Left">
-                  <path id="Vector" d="M15 7.5L9 12.5L15 17.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15 7.5L9 12.5L15 17.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
               </svg>
             </button>  
@@ -82,26 +82,26 @@
             <button class="slider__arrow slider__arrow_right">
               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Carret_Right">
-                  <path id="Vector" d="M9 17.5L15 12.5L9 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M9 17.5L15 12.5L9 7.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
                 </g>
               </svg>
             </button>
           </div>
           <div class="pagination">
-            <div class="pagination__box">
-              <div class="pagination__inner  pagination__inner__active"></div>
+            <div data-btn='1' class="pagination__box pagination__box__active" disabled>
+              <button class="pagination__inner  pagination__inner__active"></button>
             </div>
-            <div class="pagination__box">
-              <div class="pagination__inner"></div>
+            <div data-btn='2' class="pagination__box">
+              <button class="pagination__inner"></button>
             </div>
-            <div class="pagination__box">
-              <div class="pagination__inner"></div>
+            <div data-btn='3' class="pagination__box">
+              <button class="pagination__inner"></button>
             </div>
-            <div class="pagination__box">
-              <div class="pagination__inner"></div>
+            <div data-btn='4' class="pagination__box">
+              <button class="pagination__inner"></button>
             </div>
-            <div class="pagination__box">
-              <div class="pagination__inner"></div>
+            <div data-btn='5' class="pagination__box">
+              <button class="pagination__inner"></button>
             </div>
           </div>
         </div>        
@@ -575,6 +575,6 @@
       </div>      
     </footer>
   </div>  
-  <script src="index.js"></script>
+  <script defer src="index.js"></script>
 </body>
 </html>
