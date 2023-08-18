@@ -20,7 +20,7 @@ a {
 
 .container {
   width: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   position: relative;
 }
 
@@ -31,4 +31,9 @@ a {
   z-index: 1;
   background-color: transparent;
 }
+
+
+// .hidden {
+//   display: none;
+// }
 

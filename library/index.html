@@ -110,25 +110,29 @@
         <div class="favorites__wrapper">
           <h2 class="favorites__title">Favorites</h2>
           <div class="favorites__line"></div>
-          <p class="favorites__text">Pick favorites of season</p>
-          <div class="favorites__buttons">
-            <div class="favorites__button">
-              <input type="radio" id="winter" name="fav_button" value="Winter" checked>
-              <label for="winter">Winter</label>
-            </div>
-            <div class="favorites__button">
-              <input type="radio" id="spring" name="fav_button" value="Spring">
-              <label for="spring">Spring</label>
-            </div>
-            <div class="favorites__button">
-              <input type="radio" id="summer" name="fav_button" value="Summer">
-              <label for="summer">Summer</label>
-            </div>
-            <div class="favorites__button">
-              <input type="radio" id="autumn" name="fav_button" value="Autumn">
-              <label for="autumn">Autumn</label>
-            </div>
+          <div class="favorites__buttons-box">
+            <p class="favorites__text">Pick favorites of season</p>
+            <form class="favorites__buttons">
+              <div class="favorites__button">
+                <input type="radio" id="winter" name="fav_button" value="Winter">
+                <label for="winter">Winter</label>
+              </div>
+              <div class="favorites__button">
+                <input type="radio" id="spring" name="fav_button" value="Spring">
+                <label for="spring">Spring</label>
+              </div>
+              <div class="favorites__button">
+                <input type="radio" id="summer" name="fav_button" value="Summer">
+                <label for="summer">Summer</label>
+              </div>
+              <div class="favorites__button">
+                <input type="radio" id="autumn" name="fav_button" value="Autumn">
+                <label for="autumn">Autumn</label>
+              </div>
+            </form>
+
           </div>
+          
           <div class="books">
             <div class="books__box winter">
               <div class="book">
@@ -188,7 +192,7 @@
                 </div>
               </div>
             </div>
-            <div class="books__box spring">
+            <div class="books__box spring books__box__none">
               <div class="book">
                 <div class="book__text">
                   <div class="book__header-text">Staff Picks</div>
@@ -243,7 +247,7 @@
                 </div>
               </div>
             </div>
-            <div class="books__box summer">
+            <div class="books__box summer books__box__none">
               <div class="book">
                 <div class="book__text">
                   <div class="book__header-text">Staff Picks</div>
@@ -301,7 +305,7 @@
                 </div>
               </div>
             </div>
-            <div class="books__box autumn">
+            <div class="books__box autumn books__box__none">
               <div class="book">
                 <div class="book__text">
                   <div class="book__header-text">Staff Picks</div>

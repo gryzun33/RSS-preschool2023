@@ -130,7 +130,8 @@
   
     height: 480px;
     width: 332px;
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     top: 90px;  
     right: -332px;
     background-color: $color-dark-l;

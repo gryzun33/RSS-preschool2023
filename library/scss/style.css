@@ -346,7 +346,6 @@ a {
 
 .container {
   width: 100%;
-  overflow-x: hidden;
   position: relative;
 }
 
@@ -482,7 +481,7 @@ a {
   display: none;
   height: 480px;
   width: 332px;
-  position: absolute;
+  position: fixed;
   top: 90px;
   right: -332px;
   background-color: #0C0C0E;
@@ -727,6 +726,7 @@ a {
 .favorites {
   width: 100%;
   background-color: #FFFFFF;
+  position: relative;
 }
 .favorites__wrapper {
   max-width: 1440px;
@@ -756,23 +756,38 @@ a {
   height: 1px;
   background-color: #0C0C0E;
 }
+.favorites__buttons-box {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  background-color: #FFFFFF;
+  width: 100%;
+}
+@media screen and (max-width: 1024px) {
+  .favorites__buttons-box {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+}
 .favorites__text {
   color: #000000;
   font-family: "Inter", sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: 20px;
-  margin-top: 40px;
   height: 24px;
 }
 @media screen and (max-width: 1250px) {
   .favorites__text {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
 }
 @media screen and (max-width: 1024px) {
   .favorites__text {
+    text-align: left;
     margin-left: 0;
     margin-right: 0;
   }
@@ -797,6 +812,8 @@ a {
     margin-right: 0;
     max-width: 715px;
     width: auto;
+    position: sticky;
+    top: 0;
   }
 }
 .favorites__buttons input {
@@ -855,9 +872,14 @@ a {
   width: 130px;
 }
 .favorites .books {
-  margin-top: 35px;
+  margin-top: 20px;
+  position: relative;
+  height: 2380px;
 }
 .favorites .books__box {
+  position: absolute;
+  top: 0;
+  opacity: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -865,12 +887,29 @@ a {
 }
 @media screen and (max-width: 1250px) {
   .favorites .books__box {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: normal;
     align-items: center;
     flex-wrap: nowrap;
   }
+}
+.favorites .books__box__hide {
+  animation: hideBooks 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.favorites .books__box__show {
+  opacity: 0;
+  animation: showBooks 0.5s ease-in-out;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+.favorites .books__box__hidden {
+  opacity: 0;
+}
+.favorites .books__box__none {
+  display: none;
 }
 .favorites .books__box .book {
   width: 590px;
@@ -959,10 +998,23 @@ a {
   color: #BB945F;
   pointer-events: none;
 }
-.favorites .books .spring, .favorites .books .summer, .favorites .books .autumn {
-  display: none;
-}
 
+@keyframes hideBooks {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes showBooks {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .coffeeshop {
   width: 100%;
   background-color: #FFFFFF;

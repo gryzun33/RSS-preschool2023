@@ -14,6 +14,11 @@ const toggleBurger = () => {
   burgerThird.classList.toggle('burger-third');
   transBackground.classList.toggle('background-visible');
   burgerMenu.classList.toggle('burger-menu__show');
+  if(burgerMenu.classList.contains('burger-menu__show')) {
+    document.body.style.overflowY = 'hidden';
+  } else {
+    document.body.style.overflowY = '';
+  }
 }
 
 const removeBurger = () => {
@@ -22,6 +27,7 @@ const removeBurger = () => {
   burgerSecond.classList.remove('burger-second');
   burgerThird.classList.remove('burger-third');
   transBackground.classList.remove('background-visible');
+  document.body.style.overflowY = '';
 }
 
 burger.addEventListener('click', toggleBurger);
@@ -62,6 +68,7 @@ const arrowLeft = document.querySelector('.slider__arrow_left');
 const arrowRight = document.querySelector('.slider__arrow_right');
 const paginationButtons = document.querySelectorAll('.pagination__box');
 
+initSlider();
 calculateSliderDim();
 
 paginationButtons.forEach((btn) => {
@@ -105,11 +112,12 @@ sliderShift = (sliderImageWidth + gapWidth) * 100 / sliderOuterWidth ;
 }
 
 function initSlider() {
+  // console.log('initslider');
   numbOfSlide = 1;
   arrowLeft.setAttribute('disabled', 'disabled');
   arrowLeft.classList.add('slider__arrow__non-active');
   arrowRight.removeAttribute('disabled');
-  arrowLeft.classList.remove('slider__arrow__non-active');
+  arrowRight.classList.remove('slider__arrow__non-active');
   paginationButtons.forEach((btn) => {
     btn.querySelector('.pagination__inner').classList.remove('pagination__inner__active');
     btn.classList.remove('pagination__box__active');  
@@ -153,5 +161,65 @@ function changeCurrentButton (numb) {
   currentBtn.setAttribute('disabled', 'disabled');
   currentBtnInner.classList.add('pagination__inner__active');
 }
+
+
+// favorites
+
+const seasonInputs = document.querySelectorAll('[name="fav_button"]');
+seasonInputs[0].checked = true;
+let prevSeason = Array.from(seasonInputs).find((inp) => inp.checked === true).id;
+let currBookBox;
+let prevBookBox;
+
+seasonInputs.forEach((input) => {
+  input.addEventListener('click', () => {
+    
+    if (currBookBox) {
+      currBookBox.classList.remove('books__box__show');
+    }
+
+    if (prevBookBox) {
+      prevBookBox.classList.add('books__box__none');
+      prevBookBox.classList.remove('books__box__hide');
+    }
+
+    console.log('click on input');
+
+    const currSeason = input.id;
+
+    console.log(prevSeason);
+    console.log(currSeason);
+
+    prevBookBox = document.querySelector(`.${prevSeason}`);
+    currBookBox = document.querySelector(`.${currSeason}`);
+
+    console.log('prevbooks=', prevBookBox);
+    console.log('currbooks=', currBookBox);
+
+    prevBookBox.classList.add('books__box__hide');
+    currBookBox.classList.remove('books__box__none');
+    currBookBox.classList.add('books__box__show');
+
+    prevSeason = currSeason;
+    
+    // prevBookBox.addEventListener('animationend', () => {
+    //   console.log('PREVanimationend');
+    //   prevBookBox.classList.add('books__box__none');
+    //   prevBookBox.classList.remove('books__box__hide');
+    // });
+    
+
+    prevBookBox.addEventListener('animationend', removeStyles);
+
+    function removeStyles() {
+      console.log('PREVanimationend');
+      prevBookBox.classList.add('books__box__none');
+      prevBookBox.classList.remove('books__box__hide');
+      prevBookBox.removeEventListener('animationend', removeStyles);
+    }
+    
+   
+  })
+})
 
 
