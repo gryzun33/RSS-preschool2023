@@ -770,6 +770,12 @@ a {
     z-index: 5;
   }
 }
+.favorites .sticky {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #BB945F;
+  border-radius: 5px;
+}
 .favorites__text {
   color: #000000;
   font-family: "Inter", sans-serif;

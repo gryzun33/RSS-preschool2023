@@ -204,4 +204,20 @@ seasonInputs.forEach((input) => {
   })
 })
 
+const menuFavorites = document.querySelector('.favorites__buttons-box');
+// console.log(menuFavorites);
+// console.log('Y=', menuFavoritesY);
 
+
+window.addEventListener('scroll', function() {
+  const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
+  console.log('Y=', menuFavoritesY);
+  console.log(window.scrollY);
+  if (window.scrollY >= menuFavoritesY) {
+    console.log('yes');
+    menuFavorites.classList.add('sticky');
+    
+  } else {
+    menuFavorites.classList.remove('sticky');
+  }
+});

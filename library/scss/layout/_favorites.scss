@@ -31,17 +31,21 @@
       top: 0;
       z-index: 5;
     }
-   
+  }
+
+  .sticky {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: $color-secondary;
+    border-radius: 5px;
   }
 
   &__text {
     color: $color-dark;
     @include text-bold;
     font-size: 20px;
-    // margin-top: 40px;
     height: 24px;
-    // padding-top: 40px;
-
+  
     @include desktop-1250 {
       text-align: center;
       margin-left: auto;
@@ -52,8 +56,7 @@
       text-align: left;
       margin-left: 0;
       margin-right: 0;
-     
-      
+         
     }
   }
 
