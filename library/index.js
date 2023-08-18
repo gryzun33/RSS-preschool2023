@@ -183,18 +183,10 @@ seasonInputs.forEach((input) => {
       prevBookBox.classList.remove('books__box__hide');
     }
 
-    console.log('click on input');
-
     const currSeason = input.id;
-
-    console.log(prevSeason);
-    console.log(currSeason);
 
     prevBookBox = document.querySelector(`.${prevSeason}`);
     currBookBox = document.querySelector(`.${currSeason}`);
-
-    console.log('prevbooks=', prevBookBox);
-    console.log('currbooks=', currBookBox);
 
     prevBookBox.classList.add('books__box__hide');
     currBookBox.classList.remove('books__box__none');
@@ -202,23 +194,13 @@ seasonInputs.forEach((input) => {
 
     prevSeason = currSeason;
     
-    // prevBookBox.addEventListener('animationend', () => {
-    //   console.log('PREVanimationend');
-    //   prevBookBox.classList.add('books__box__none');
-    //   prevBookBox.classList.remove('books__box__hide');
-    // });
-    
-
     prevBookBox.addEventListener('animationend', removeStyles);
 
     function removeStyles() {
-      console.log('PREVanimationend');
       prevBookBox.classList.add('books__box__none');
       prevBookBox.classList.remove('books__box__hide');
       prevBookBox.removeEventListener('animationend', removeStyles);
     }
-    
-   
   })
 })
 

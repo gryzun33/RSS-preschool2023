@@ -163,35 +163,20 @@
       }
 
       &__hide {
-        // transition: opacity 1s ease-in-out;
-        // opacity: 0;
         animation: hideBooks 0.5s ease-in-out;
         animation-fill-mode: forwards;
       }
 
-      &__show {
-   
+      &__show {   
         opacity: 0;
         animation: showBooks 0.5s ease-in-out ;
         animation-delay: 0.5s;
-        animation-fill-mode: forwards;
-      
-     
-      }
-
-      &__hidden {
-        opacity: 0;
+        animation-fill-mode: forwards;     
       }
 
       &__none {
         display:none;
       }
-
-    
-
-  
-
-
 
       .book {
         width: 590px;
@@ -267,13 +252,6 @@
         }
       }
     }
-
-    
-
-    // .spring, .summer, .autumn {
-    //   display: none;
-     
-    // }
   }  
 }
 

@@ -905,9 +905,6 @@ a {
   animation-delay: 0.5s;
   animation-fill-mode: forwards;
 }
-.favorites .books__box__hidden {
-  opacity: 0;
-}
 .favorites .books__box__none {
   display: none;
 }
