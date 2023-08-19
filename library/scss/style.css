@@ -822,7 +822,7 @@ a {
   background-color: #FFFFFF;
   width: 100%;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1250px) {
   .favorites__buttons-box {
     position: sticky;
     top: 0;
@@ -942,7 +942,6 @@ a {
 @media screen and (max-width: 1250px) {
   .favorites .books {
     position: relative;
-    min-height: 2380px;
   }
 }
 .favorites .books__box {
@@ -953,8 +952,6 @@ a {
 }
 @media screen and (max-width: 1250px) {
   .favorites .books__box {
-    position: absolute;
-    top: 0;
     opacity: 1;
     width: 100%;
     display: flex;
@@ -965,13 +962,12 @@ a {
   }
 }
 .favorites .books__box__hide {
-  animation: hideBooks 1s ease-in-out;
+  animation: hideBooks 0.5s ease-in-out;
   animation-fill-mode: forwards;
 }
 .favorites .books__box__show {
   opacity: 0;
-  animation: showBooks 1s ease-in-out;
-  animation-delay: 1s;
+  animation: showBooks 0.5s ease-in-out;
   animation-fill-mode: forwards;
 }
 .favorites .books__box__none {
@@ -1727,6 +1723,9 @@ a {
   height: 20px;
   outline: none;
   padding: 0 3px;
+}
+.modal-auth__form .wrong {
+  border-color: red;
 }
 .modal-auth__btn {
   width: 75px;

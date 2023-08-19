@@ -194,9 +194,11 @@ let prevBookBox;
 
 seasonInputs.forEach((input) => {
   input.addEventListener('click', () => {
+    // console.log('click');
     
     if (currBookBox) {
       currBookBox.classList.remove('books__box__show');
+      currBookBox.classList.remove('books__box__none');
     }
 
     if (prevBookBox) {
@@ -210,19 +212,19 @@ seasonInputs.forEach((input) => {
     currBookBox = document.querySelector(`.${currSeason}`);
 
     prevBookBox.classList.add('books__box__hide');
-    currBookBox.classList.remove('books__box__none');
-    currBookBox.classList.add('books__box__show');
+    // currBookBox.classList.remove('books__box__none');
+    // currBookBox.classList.add('books__box__show');
 
     prevSeason = currSeason;
     
     prevBookBox.addEventListener('animationend', removeStyles);
 
     function removeStyles() {
-      console.log('animationend');
+      // console.log('animationend');
       prevBookBox.classList.add('books__box__none');
       prevBookBox.classList.remove('books__box__hide');
-      // currBookBox.classList.remove('books__box__none');
-      // currBookBox.classList.add('books__box__show');
+      currBookBox.classList.remove('books__box__none');
+      currBookBox.classList.add('books__box__show');
       prevBookBox.removeEventListener('animationend', removeStyles);
     }
   })
@@ -232,7 +234,7 @@ const menuFavorites = document.querySelector('.favorites__buttons-box');
 
 window.addEventListener('scroll', function() {
   const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
-  if (window.scrollY >= menuFavoritesY) {
+  if (window.scrollY >= menuFavoritesY && window.innerWidth <= 1250) {
     menuFavorites.classList.add('sticky');    
   } else {
     menuFavorites.classList.remove('sticky');
@@ -248,20 +250,28 @@ checkCardBtn.addEventListener('click', (event) => {
 
 
 // dropmenu
+const modalWrappers  = document.querySelectorAll('.modal-wrapper');
 
-const regBtn = document.querySelector('.reg-btn');
-const loginBtn = document.querySelector('.login-btn');
 const modalRegister = document.querySelector('.modal-register');
 const modalLogin = document.querySelector('.modal-login');
 
+const regBtn = document.querySelector('.reg-btn');
+const loginBtn = document.querySelector('.log-btn');
+
 const readerRegBtn = document.querySelector('.reader__reg__btn');
 const readerLogBtn = document.querySelector('.reader__login__btn');
+
+const addRegBtn = document.querySelector('.add-reg-btn');
+const addLogBtn = document.querySelector('.add-log-btn');
 
 const closeRegBtn = document.querySelector('.close-reg-btn');
 const closeLogBtn = document.querySelector('.close-log-btn');
 
 regBtn.addEventListener('click', openModalRegister);
 readerRegBtn.addEventListener('click', openModalRegister);
+
+loginBtn.addEventListener('click', openModalLogin);
+readerLogBtn.addEventListener('click', openModalLogin);
 
 closeRegBtn.addEventListener('click', () => {
   closeModal(modalRegister);
@@ -271,11 +281,22 @@ closeLogBtn.addEventListener('click', () => {
   closeModal(modalLogin);
 });
 
-const modalWrappers  = document.querySelectorAll('.modal-wrapper');
+addLogBtn.addEventListener('click', () => {
+  modalRegister.classList.add('hidden');
+  modalLogin.classList.remove('hidden');
+});
+
+addRegBtn.addEventListener('click', () => {
+  modalLogin.classList.add('hidden');
+  modalRegister.classList.remove('hidden');  
+})
+
+
 modalWrappers.forEach((wrapper) => {
   wrapper.addEventListener('click', (e) => {
     if (e.target === wrapper) {
       wrapper.classList.add('hidden');
+      document.body.style.overflowY = '';
     }
   })
 })
@@ -292,4 +313,46 @@ function openModalRegister() {
   modalRegister.classList.remove('hidden');
   document.body.style.overflowY = 'hidden';
 }
+
+function openModalLogin() {
+  if (dropMenu.classList.contains('dropmenu__show')) {
+    dropMenu.classList.remove('dropmenu__show');
+  }
+  modalLogin.classList.remove('hidden');
+  document.body.style.overflowY = 'hidden';
+}
+
+// validation email
+
+const email_regex = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
+const pass_regex = /^[a-zA-Z0-9]{8,}/;
+const emailInput = document.querySelector('#reg-email');
+const passInput = document.querySelector('#reg-password');
+
+function isEmailValid(value) {
+  return email_regex.test(value);
+}
+
+function isPassValid(value) {
+  return pass_regex.test(value);
+}
+
+function onEmailInput() {
+  if (isEmailValid(emailInput.value)) {
+    emailInput.classList.remove('wrong');
+  } else {
+    emailInput.classList.add('wrong');
+  }
+}
+
+function onPassInput() {
+  if (isPassValid(passInput.value)) {
+    passInput.classList.remove('wrong');
+  } else {
+    passInput.classList.add('wrong');
+  }
+}
+emailInput.addEventListener('input', onEmailInput);
+passInput.addEventListener('input', onPassInput);
+
 

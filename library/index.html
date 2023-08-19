@@ -598,9 +598,29 @@
       </div>      
     </footer>
 
+
+    <div class="modal-wrapper modal-register hidden">
+      <div class="modal-auth">
+        <div class="modal-auth__close-btn close-reg-btn"></div>
+        <h4 class="modal-auth__title">REGISTER</h4>
+        <form class="modal-auth__form" action="#">
+          <label for="reg-name">First name</label>
+          <input id="reg-name" type="text" autocomplete="off" required>
+          <label for="reg-lastname">Last name</label>
+          <input id="reg-lastname" type="text" autocomplete="off" required>
+          <label for="reg-email">E-mail</label>
+          <input id="reg-email" type="text" autocomplete="off" required>
+          <label for="reg-password">Password</label>
+          <input id="reg-password" type="password" autocomplete="off" required>
+          <button class="modal-auth__btn" type="submit">Sign Up</button>
+        </form>
+        <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span class="add-log-btn">Login</span></p>
+      </div>
+    </div>  
+
     <div class="modal-wrapper modal-login hidden">
       <div class="modal-auth">
-        <div class="modal-auth__close-btn close-btn-login"></div>
+        <div class="modal-auth__close-btn close-log-btn"></div>
         <h4 class="modal-auth__title">LOGIN</h4>
         <form class="modal-auth__form" action="#">
           <label for="log-email">E-mail or readers card</label>
@@ -609,29 +629,11 @@
           <input id="log-password" type="text" autocomplete="off">
           <button class="modal-auth__btn" type="submit">Log In</button>
         </form>
-        <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span>Register</span></p>
+        <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span class="add-reg-btn">Register</span></p>
       </div>    
     </div>
 
-
-    <div class="modal-wrapper modal-register hidden">
-      <div class="modal-auth">
-        <div class="modal-auth__close-btn close-btn-reg"></div>
-        <h4 class="modal-auth__title">REGISTER</h4>
-        <form class="modal-auth__form" action="#">
-          <label for="reg-name">First name</label>
-          <input id="reg-name" type="text" autocomplete="off">
-          <label for="reg-lastname">Last name</label>
-          <input id="reg-lastname" type="text" autocomplete="off">
-          <label for="reg-email">E-mail</label>
-          <input id="reg-email" type="text" autocomplete="off">
-          <label for="reg-password">Password</label>
-          <input id="reg-password" type="text" autocomplete="off">
-          <button class="modal-auth__btn" type="submit">Sign Up</button>
-        </form>
-        <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span>Login</span></p>
-      </div>
-    </div>    
+  
 
 
     

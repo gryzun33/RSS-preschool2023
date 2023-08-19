@@ -48,7 +48,11 @@
       height: 20px;
       outline: none;
       padding: 0 3px;
-    }  
+    }
+    
+    .wrong {
+      border-color: red;
+    }
   }
 
   &__btn {
