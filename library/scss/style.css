@@ -349,6 +349,23 @@ a {
   position: relative;
 }
 
+.modal-wrapper {
+  left: 0;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(41, 41, 41, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
 .header {
   background-color: #0C0C0E;
   min-height: 90px;
@@ -925,7 +942,7 @@ a {
 @media screen and (max-width: 1250px) {
   .favorites .books {
     position: relative;
-    height: 2380px;
+    min-height: 2380px;
   }
 }
 .favorites .books__box {
@@ -948,13 +965,13 @@ a {
   }
 }
 .favorites .books__box__hide {
-  animation: hideBooks 0.5s ease-in-out;
+  animation: hideBooks 1s ease-in-out;
   animation-fill-mode: forwards;
 }
 .favorites .books__box__show {
   opacity: 0;
-  animation: showBooks 0.5s ease-in-out;
-  animation-delay: 0.5s;
+  animation: showBooks 1s ease-in-out;
+  animation-delay: 1s;
   animation-fill-mode: forwards;
 }
 .favorites .books__box__none {
@@ -1658,4 +1675,94 @@ a {
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+.modal-auth {
+  width: 250px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  position: relative;
+}
+.modal-auth__close-btn {
+  background-image: url("../assets/icons/close_btn.svg");
+  background-size: cover;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 19px;
+  height: 19px;
+}
+.modal-auth__close-btn:hover {
+  cursor: pointer;
+}
+.modal-auth__title {
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  align-self: center;
+}
+.modal-auth__form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-auth__form label {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  color: #000000;
+}
+.modal-auth__form input {
+  border: 1px solid #BB945F;
+  height: 20px;
+  outline: none;
+  padding: 0 3px;
+}
+.modal-auth__btn {
+  width: 75px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background-color: #FFFFFF;
+  transition: all 0.3s ease-out;
+  margin-top: 10px;
+}
+@media (hover: hover) {
+  .modal-auth__btn:hover {
+    cursor: pointer;
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+  }
+}
+.modal-auth__text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 10px;
+  color: #000000;
+  text-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.16);
+  margin-top: 10px;
+}
+.modal-auth__text span {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+.modal-auth__text span:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

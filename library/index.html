@@ -38,13 +38,10 @@
               <h4 class="dropmenu__title">Profile</h4>
               <div class="dropmenu__line"></div>
               <ul class="dropmenu__items">
-                <li>Log In</li>
-                <li>Register</li>
+                <li class="log-btn">Log In</li>
+                <li class="reg-btn">Register</li>
               </ul> 
             </div>
-
-          
-            
 
 
           </div>
@@ -535,8 +532,8 @@
               <p class="readercard__text">You will be able to see a reader card after logging into account or you can
                 register a new account</p>
               <div class="readercard__buttons">
-                <button class="readercard__btn">Sign up</button>
-                <button class="readercard__btn">Log in</button>
+                <button class="readercard__btn reader__reg__btn">Sign up</button>
+                <button class="readercard__btn reader__login__btn">Log in</button>
               </div>
             </div>
           </div>
@@ -600,37 +597,54 @@
         </div>
       </div>      
     </footer>
-  </div>
 
-  <div class="modal-auth modal-auth__login">
-    <div class="modal-auth__close-btn"></div>
-    <h4 class="modal-auth__title">LOGIN</h4>
-    <form class="modal-auth__form" action="#">
-      <label for="log-email">E-mail or readers card</label>
-      <input id="log-email" type="text" autocomplete="off">
-      <label for="log-password">Password</label>
-      <input id="log-password" type="text" autocomplete="off">
-      <button class="modal-auth__btn" type="submit">Log In</button>
-    </form>
-    <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span>Register</span></p>
-  </div>
+    <div class="modal-wrapper modal-login hidden">
+      <div class="modal-auth">
+        <div class="modal-auth__close-btn close-btn-login"></div>
+        <h4 class="modal-auth__title">LOGIN</h4>
+        <form class="modal-auth__form" action="#">
+          <label for="log-email">E-mail or readers card</label>
+          <input id="log-email" type="text" autocomplete="off">
+          <label for="log-password">Password</label>
+          <input id="log-password" type="text" autocomplete="off">
+          <button class="modal-auth__btn" type="submit">Log In</button>
+        </form>
+        <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span>Register</span></p>
+      </div>    
+    </div>
 
-  <div class="modal-auth modal-auth__register">
-    <div class="modal-auth__close-btn"></div>
-    <h4 class="modal-auth__title">REGISTER</h4>
-    <form class="modal-auth__form" action="#">
-      <label for="reg-name">First name</label>
-      <input id="reg-name" type="text" autocomplete="off">
-      <label for="reg-lastname">Last name</label>
-      <input id="reg-lastname" type="text" autocomplete="off">
-      <label for="reg-email">E-mail</label>
-      <input id="reg-email" type="text" autocomplete="off">
-      <label for="reg-password">Password</label>
-      <input id="reg-password" type="text" autocomplete="off">
-      <button class="modal-auth__btn" type="submit">Sign Up</button>
-    </form>
-    <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span>Login</span></p>
+
+    <div class="modal-wrapper modal-register hidden">
+      <div class="modal-auth">
+        <div class="modal-auth__close-btn close-btn-reg"></div>
+        <h4 class="modal-auth__title">REGISTER</h4>
+        <form class="modal-auth__form" action="#">
+          <label for="reg-name">First name</label>
+          <input id="reg-name" type="text" autocomplete="off">
+          <label for="reg-lastname">Last name</label>
+          <input id="reg-lastname" type="text" autocomplete="off">
+          <label for="reg-email">E-mail</label>
+          <input id="reg-email" type="text" autocomplete="off">
+          <label for="reg-password">Password</label>
+          <input id="reg-password" type="text" autocomplete="off">
+          <button class="modal-auth__btn" type="submit">Sign Up</button>
+        </form>
+        <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span>Login</span></p>
+      </div>
+    </div>    
+
+
+    
+
+
   </div>
+  
+    
+
+  
+
+ 
+ 
   
   
 

@@ -148,12 +148,12 @@
 
   .books {
     margin-top: 20px;
-   
+  
     // height: 2380px;
 
     @include desktop-1250 {
       position: relative;
-      height: 2380px;
+      min-height: 2380px;
     }
 
     
@@ -176,14 +176,14 @@
       }
 
       &__hide {
-        animation: hideBooks 0.5s ease-in-out;
+        animation: hideBooks 1s ease-in-out;
         animation-fill-mode: forwards;
       }
 
       &__show {   
         opacity: 0;
-        animation: showBooks 0.5s ease-in-out ;
-        animation-delay: 0.5s;
+        animation: showBooks 1s ease-in-out ;
+        animation-delay: 1s;
         animation-fill-mode: forwards;     
       }
 

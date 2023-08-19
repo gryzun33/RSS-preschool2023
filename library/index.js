@@ -218,8 +218,11 @@ seasonInputs.forEach((input) => {
     prevBookBox.addEventListener('animationend', removeStyles);
 
     function removeStyles() {
+      console.log('animationend');
       prevBookBox.classList.add('books__box__none');
       prevBookBox.classList.remove('books__box__hide');
+      // currBookBox.classList.remove('books__box__none');
+      // currBookBox.classList.add('books__box__show');
       prevBookBox.removeEventListener('animationend', removeStyles);
     }
   })
@@ -244,5 +247,49 @@ checkCardBtn.addEventListener('click', (event) => {
 })
 
 
-// dropmenu 
+// dropmenu
+
+const regBtn = document.querySelector('.reg-btn');
+const loginBtn = document.querySelector('.login-btn');
+const modalRegister = document.querySelector('.modal-register');
+const modalLogin = document.querySelector('.modal-login');
+
+const readerRegBtn = document.querySelector('.reader__reg__btn');
+const readerLogBtn = document.querySelector('.reader__login__btn');
+
+const closeRegBtn = document.querySelector('.close-reg-btn');
+const closeLogBtn = document.querySelector('.close-log-btn');
+
+regBtn.addEventListener('click', openModalRegister);
+readerRegBtn.addEventListener('click', openModalRegister);
+
+closeRegBtn.addEventListener('click', () => {
+  closeModal(modalRegister);
+})
+
+closeLogBtn.addEventListener('click', () => {
+  closeModal(modalLogin);
+});
+
+const modalWrappers  = document.querySelectorAll('.modal-wrapper');
+modalWrappers.forEach((wrapper) => {
+  wrapper.addEventListener('click', (e) => {
+    if (e.target === wrapper) {
+      wrapper.classList.add('hidden');
+    }
+  })
+})
+
+function closeModal(elem) {
+  elem.classList.add('hidden');
+  document.body.style.overflowY = '';
+}
+
+function openModalRegister() {
+  if (dropMenu.classList.contains('dropmenu__show')) {
+    dropMenu.classList.remove('dropmenu__show');
+  }
+  modalRegister.classList.remove('hidden');
+  document.body.style.overflowY = 'hidden';
+}
 

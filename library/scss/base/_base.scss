@@ -8,32 +8,28 @@ html {
   scroll-behavior: smooth;
 }
 
-// body {
-//   @include laptops {
-//     overflow-x: hidden;
-//   } 
-// }
-
 a {
   text-decoration: none;
 }
 
 .container {
   width: 100%;
-  // overflow-x: hidden;
   position: relative;
 }
 
-// .background-visible {
-//   width: 100%;
-//   height: 100%;
-//   position: fixed;
-//   z-index: 1;
-//   background-color: transparent;
-// }
+.modal-wrapper {
+  left: 0;
+	top: 0;
+	position: fixed;
+	z-index: 1000;
+	background-color: rgba(41, 41, 41, 0.6);
+	width: 100%;
+	height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-
-// .hidden {
-//   display: none;
-// }
-
+.hidden {
+  display: none;
+}
