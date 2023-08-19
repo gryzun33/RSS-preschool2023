@@ -1,13 +1,15 @@
 .header {
   background-color: $color-dark-l;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  min-height: 90px;
+  position: relative;
   
   &__wrapper {
     @include wrapper;
     @include flex(space-between, center);
     padding-top: 20px;
     padding-bottom: 20px;
-    overflow-x: hidden;
+    // overflow-x: hidden;
   }
 
   &__title {
@@ -56,11 +58,18 @@
       }
     }
 
+    .profile-box {
+      position: relative;
+    }
+
+    
+
     .profile {
       padding-top: 2px;
       z-index: 6;
       border: none;
       background-color: transparent;
+      position: relative;
 
       & svg g path {
         transition: all 0.3s ease-out;
@@ -182,5 +191,57 @@
       
       }
     }    
+  }
+}
+
+
+.dropmenu {
+  width: 80px;
+  height: 0;
+  // height: 115px;
+  background-color: $color-light;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // padding-top: 5px;
+
+  position:absolute;
+  top: 50px;
+  right: -20px;
+  z-index: 8;
+  transition: height 0.3s ease-in-out;
+
+
+  &__title {
+    margin-top: 5px;
+    @include text-bold;
+    color: $color-dark;
+  }
+
+  &__line {
+    margin-top: 5px;
+    width: 40px;
+    height: 1px;
+    background-color: $color-secondary;
+  }
+
+  &__items {
+    margin-top: 15px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    li {
+      @include text-regular;
+      cursor: pointer;
+    }
+  }
+
+  &__show {
+    height: 115px;
   }
 }

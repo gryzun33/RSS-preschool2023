@@ -23,15 +23,34 @@
               <li><a href="#librarycard">Library Card</a></li>
             </ul>
           </nav>
-          <button class="profile">
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="icon_profile">
-                <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd"
-                  d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
-                  fill="white" />
-              </g>
-            </svg>
-          </button>
+          <div class="profile-box">
+            <button class="profile">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="icon_profile">
+                  <path id="Subtract" fill-rule="evenodd" clip-rule="evenodd"
+                    d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM18.6667 7.77778C18.6667 10.3551 16.5774 12.4444 14.0001 12.4444C11.4227 12.4444 9.33339 10.3551 9.33339 7.77778C9.33339 5.20045 11.4227 3.11111 14.0001 3.11111C16.5774 3.11111 18.6667 5.20045 18.6667 7.77778ZM19.4998 16.2781C20.9584 17.7367 21.7778 19.715 21.7778 21.7778H14L6.22225 21.7778C6.22225 19.715 7.0417 17.7367 8.50031 16.2781C9.95893 14.8194 11.9372 14 14 14C16.0628 14 18.0411 14.8194 19.4998 16.2781Z"
+                    fill="white" />
+                </g>
+              </svg>
+            </button>
+
+            <div class="dropmenu">
+              <h4 class="dropmenu__title">Profile</h4>
+              <div class="dropmenu__line"></div>
+              <ul class="dropmenu__items">
+                <li>Log In</li>
+                <li>Register</li>
+              </ul> 
+            </div>
+
+          
+            
+
+
+          </div>
+
+      
+         
           <div class="burger">
             <span></span>
             <span></span>
@@ -48,6 +67,9 @@
           </ul>
         </nav>
       </div>
+
+   
+    
     </header>
     <main>
       <section class="welcome">
@@ -185,7 +207,7 @@
                   <h4 class="book__title"><span>The Last Queen</span><br>By Clive Irving</h4>
                   <p class="book__description">A timely and revelatory new biography of Queen Elizabeth (and her family)
                     exploring how the Windsors have evolved and thrived as the modern world has changed around them.</p>
-                  <button class="book__btn" disabled>Own</button>
+                  <button class="book__btn">Buy</button>
                 </div>
                 <div class="book__image">
                   <img src="assets/images/book_4.png" alt="book_4">
@@ -505,7 +527,7 @@
                   <input type="text" placeholder="Reader's name" class="card__name" pattern="[a-zA-Z\-]+">
                   <input type="text" placeholder="Card number" class="card__number" pattern="[0-9]+">
                 </div>
-                <button class="card__btn">Check the card</button>
+                <button class="card__btn" type="submit">Check the card</button>
               </form>
             </div>
             <div class="readercard">
@@ -578,7 +600,40 @@
         </div>
       </div>      
     </footer>
-  </div>  
+  </div>
+
+  <div class="modal-auth modal-auth__login">
+    <div class="modal-auth__close-btn"></div>
+    <h4 class="modal-auth__title">LOGIN</h4>
+    <form class="modal-auth__form" action="#">
+      <label for="log-email">E-mail or readers card</label>
+      <input id="log-email" type="text" autocomplete="off">
+      <label for="log-password">Password</label>
+      <input id="log-password" type="text" autocomplete="off">
+      <button class="modal-auth__btn" type="submit">Log In</button>
+    </form>
+    <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span>Register</span></p>
+  </div>
+
+  <div class="modal-auth modal-auth__register">
+    <div class="modal-auth__close-btn"></div>
+    <h4 class="modal-auth__title">REGISTER</h4>
+    <form class="modal-auth__form" action="#">
+      <label for="reg-name">First name</label>
+      <input id="reg-name" type="text" autocomplete="off">
+      <label for="reg-lastname">Last name</label>
+      <input id="reg-lastname" type="text" autocomplete="off">
+      <label for="reg-email">E-mail</label>
+      <input id="reg-email" type="text" autocomplete="off">
+      <label for="reg-password">Password</label>
+      <input id="reg-password" type="text" autocomplete="off">
+      <button class="modal-auth__btn" type="submit">Sign Up</button>
+    </form>
+    <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span>Login</span></p>
+  </div>
+  
+  
+
   <script defer type="module" src="index.js"></script>
 </body>
 </html>

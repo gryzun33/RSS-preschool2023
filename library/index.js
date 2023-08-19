@@ -5,14 +5,14 @@ let burgerThird = document.querySelector('.burger span:nth-child(3)');
 let burgerMenu = document.querySelector('.burger-menu');
 const menuLinks = document.querySelectorAll('.burger-menu a');
 const profileIcon = document.querySelector('.profile');
-const transBackground = document.createElement('div');
-document.body.prepend(transBackground);
+
+const dropMenu = document.querySelector('.dropmenu');
 
 const toggleBurger = () => {
+  // console.log('toggleburger');
   burgerFirst.classList.toggle('burger-first');
   burgerSecond.classList.toggle('burger-second');
   burgerThird.classList.toggle('burger-third');
-  transBackground.classList.toggle('background-visible');
   burgerMenu.classList.toggle('burger-menu__show');
   if(burgerMenu.classList.contains('burger-menu__show')) {
     document.body.style.overflowY = 'hidden';
@@ -22,21 +22,42 @@ const toggleBurger = () => {
 }
 
 const removeBurger = () => {
+  // console.log('removeburger');
   burgerMenu.classList.remove('burger-menu__show');
   burgerFirst.classList.remove('burger-first');
   burgerSecond.classList.remove('burger-second');
   burgerThird.classList.remove('burger-third');
-  transBackground.classList.remove('background-visible');
   document.body.style.overflowY = '';
 }
 
-burger.addEventListener('click', toggleBurger);
-transBackground.addEventListener('click', removeBurger);
-profileIcon.addEventListener('click', removeBurger);
+burger.addEventListener('click', () => {
+  toggleBurger();
+  if (dropMenu.classList.contains('dropmenu__show')) {
+    dropMenu.classList.remove('dropmenu__show');  
+  } 
+});
+
 menuLinks.forEach((link) => {
   link.addEventListener('click', removeBurger);
 });
 
+profileIcon.addEventListener('click', () => {
+  if (burgerMenu.classList.contains('burger-menu__show')) {
+    removeBurger();
+  }
+  dropMenu.classList.toggle('dropmenu__show');
+});
+
+document.body.addEventListener('click', (e) => {
+  if (!e.target.closest('.burger') && !e.target.closest('.burger-menu') && burgerMenu.classList.contains('burger-menu__show')) {
+    removeBurger();  
+  }
+  if(!e.target.closest('.profile') && !e.target.closest('.dropmenu') && dropMenu.classList.contains('dropmenu__show')) {
+    dropMenu.classList.remove('dropmenu__show');
+  }  
+});
+
+// resize window
 
 let lastWindowWidth = window.innerWidth;
 let newWindowWidth;
@@ -205,19 +226,23 @@ seasonInputs.forEach((input) => {
 })
 
 const menuFavorites = document.querySelector('.favorites__buttons-box');
-// console.log(menuFavorites);
-// console.log('Y=', menuFavoritesY);
-
 
 window.addEventListener('scroll', function() {
   const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
-  console.log('Y=', menuFavoritesY);
-  console.log(window.scrollY);
   if (window.scrollY >= menuFavoritesY) {
-    console.log('yes');
-    menuFavorites.classList.add('sticky');
-    
+    menuFavorites.classList.add('sticky');    
   } else {
     menuFavorites.classList.remove('sticky');
   }
 });
+
+
+const checkCardBtn  = document.querySelector('.card__btn');
+
+checkCardBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+})
+
+
+// dropmenu 
+

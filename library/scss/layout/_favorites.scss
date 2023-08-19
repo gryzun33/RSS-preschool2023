@@ -148,18 +148,28 @@
 
   .books {
     margin-top: 20px;
-    position: relative;
-    height: 2380px;
+   
+    // height: 2380px;
+
+    @include desktop-1250 {
+      position: relative;
+      height: 2380px;
+    }
+
+    
     
     &__box {
-      position:absolute;
-      top: 0;
-      opacity: 1;
+      // position:absolute;
+      // top: 0;
+      // opacity: 1;
 
 
       @include flex-wrap(wrap, space-between);
 
       @include desktop-1250 {
+        position:absolute;
+        top: 0;
+        opacity: 1;
         width: 100%;
         @include flex-column (normal, center);
         flex-wrap: nowrap;
