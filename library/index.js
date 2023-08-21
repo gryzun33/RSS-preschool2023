@@ -5,8 +5,11 @@ let burgerThird = document.querySelector('.burger span:nth-child(3)');
 let burgerMenu = document.querySelector('.burger-menu');
 const menuLinks = document.querySelectorAll('.burger-menu a');
 const profileIcon = document.querySelector('.profile');
+const profileIconLog = document.querySelector('.profile-icon-log');
 
-const dropMenu = document.querySelector('.dropmenu');
+const dropMenu = document.querySelector('.dropmenu__noauth');
+const dropMenuAuth = document.querySelector('.dropmenu__auth');
+const dropMenuTitle = document.querySelector('.dropmenu__title-auth');
 
 const toggleBurger = () => {
   // console.log('toggleburger');
@@ -48,12 +51,23 @@ profileIcon.addEventListener('click', () => {
   dropMenu.classList.toggle('dropmenu__show');
 });
 
+
+profileIconLog.addEventListener('click', () => {
+  if (burgerMenu.classList.contains('burger-menu__show')) {
+    removeBurger();
+  }
+  dropMenuAuth.classList.toggle('dropmenu__show');
+});
+
+
+
 document.body.addEventListener('click', (e) => {
   if (!e.target.closest('.burger') && !e.target.closest('.burger-menu') && burgerMenu.classList.contains('burger-menu__show')) {
     removeBurger();  
   }
   if(!e.target.closest('.profile') && !e.target.closest('.dropmenu') && dropMenu.classList.contains('dropmenu__show')) {
     dropMenu.classList.remove('dropmenu__show');
+    dropMenuAuth.classList.remove('dropmenu__show');
   }  
 });
 
@@ -257,6 +271,9 @@ const modalLogin = document.querySelector('.modal-login');
 
 const regBtn = document.querySelector('.reg-btn');
 const loginBtn = document.querySelector('.log-btn');
+ 
+const myProfileBtn = document.querySelector('.profile-btn');
+const logoutBtn = document.querySelector('.logout-btn');
 
 const readerRegBtn = document.querySelector('.reader__reg__btn');
 const readerLogBtn = document.querySelector('.reader__login__btn');
@@ -273,6 +290,8 @@ readerRegBtn.addEventListener('click', openModalRegister);
 loginBtn.addEventListener('click', openModalLogin);
 readerLogBtn.addEventListener('click', openModalLogin);
 
+
+
 closeRegBtn.addEventListener('click', () => {
   closeModal(modalRegister);
 })
@@ -284,11 +303,15 @@ closeLogBtn.addEventListener('click', () => {
 addLogBtn.addEventListener('click', () => {
   modalRegister.classList.add('hidden');
   modalLogin.classList.remove('hidden');
+  passRegInput.classList.remove('wrong');
+  emailRegInput.classList.remove('wrong');
+  clearInputs(modalRegister);
 });
 
 addRegBtn.addEventListener('click', () => {
   modalLogin.classList.add('hidden');
-  modalRegister.classList.remove('hidden');  
+  modalRegister.classList.remove('hidden');
+  clearInputs(modalLogin);  
 })
 
 
@@ -315,8 +338,8 @@ function openModalRegister() {
 }
 
 function openModalLogin() {
-  if (dropMenu.classList.contains('dropmenu__show')) {
-    dropMenu.classList.remove('dropmenu__show');
+  if (dropMenuAuth.contains('dropmenu__show')) {
+    dropMenuAuth.classList.remove('dropmenu__show');
   }
   modalLogin.classList.remove('hidden');
   document.body.style.overflowY = 'hidden';
@@ -326,8 +349,13 @@ function openModalLogin() {
 
 const email_regex = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 const pass_regex = /^[a-zA-Z0-9]{8,}/;
-const emailInput = document.querySelector('#reg-email');
-const passInput = document.querySelector('#reg-password');
+const emailRegInput = document.querySelector('#reg-email');
+const passRegInput = document.querySelector('#reg-password');
+const nameInput = document.querySelector('#reg-name');
+const lastNameInput = document.querySelector('#reg-lastname');
+
+const modalRegBtn = document.querySelector('.modal-reg-btn');
+const modalLogBtn = document.querySelector('.modal-log-btn');
 
 function isEmailValid(value) {
   return email_regex.test(value);
@@ -338,21 +366,94 @@ function isPassValid(value) {
 }
 
 function onEmailInput() {
-  if (isEmailValid(emailInput.value)) {
-    emailInput.classList.remove('wrong');
+  if (isEmailValid(emailRegInput.value)) {
+    emailRegInput.classList.remove('wrong');
   } else {
-    emailInput.classList.add('wrong');
+    emailRegInput.classList.add('wrong');
   }
 }
 
 function onPassInput() {
-  if (isPassValid(passInput.value)) {
-    passInput.classList.remove('wrong');
+  if (isPassValid(passRegInput.value)) {
+    passRegInput.classList.remove('wrong');
   } else {
-    passInput.classList.add('wrong');
+    passRegInput.classList.add('wrong');
   }
 }
-emailInput.addEventListener('input', onEmailInput);
-passInput.addEventListener('input', onPassInput);
+ 
+emailRegInput.addEventListener('input', onEmailInput);
+passRegInput.addEventListener('input', onPassInput);
+
+const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
+const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
+
+
+modalRegBtn.addEventListener('click', (e) => {
+  // e.preventDefault();
+  if (modalRegInputsArr.some((el) => el.value === '') ||
+      emailRegInput.classList.contains('wrong') ||
+      passRegInput.classList.contains('wrong')) {
+ 
+    return;
+  } else {
+    const currUser = submitRegister();
+    clearInputs(modalRegister);
+    logIn(currUser);
+
+    setTimeout(() => {
+      closeModal(modalRegister);
+    }, 100);
+    
+
+  }
+
+  
+})
+
+
+
+
+// generateCardNumber
+function generateCardNumber() {
+  const numb = Math.floor(Math.random() * (10 ** 11));
+  const numbToHex = numb.toString(16).slice(0,10).toLowerCase();
+  return numbToHex;
+}
+
+function submitRegister() {
+  let key = generateCardNumber();
+  let user = {
+    key: key,
+    name: nameInput.value,
+    lastName: lastNameInput.value,
+    email: emailRegInput.value,
+    password: passRegInput.value
+  }
+  localStorage.setItem(key, JSON.stringify(user));
+  return user;
+}
+
+function clearInputs(elem) {
+  // console.log('clear inputs');
+  const inputs = elem.querySelectorAll('input');
+  inputs.forEach((inp) => {
+    inp.value = '';
+  })
+}
+
+function logIn(user) {
+  profileIcon.classList.add('hidden');
+  profileIconLog.classList.remove('hidden');
+  const iconName  = user.name[0].toUpperCase() + user.lastName[0].toUpperCase();
+  profileIconLog.innerText = iconName;
+  dropMenuTitle.innerText = user.key;
+  dropMenu.classList.add('hidden')
+  dropMenuAuth.classList.remove('hidden');
+
+}
+
+
+
+
 
 

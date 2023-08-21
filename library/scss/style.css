@@ -437,6 +437,26 @@ a {
 .header__nav-profile .profile-box {
   position: relative;
 }
+.header__nav-profile .profile-icon-log {
+  width: 28px;
+  height: 28px;
+  border-radius: 50px;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #BB945F;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 20px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2px;
+  z-index: 6;
+}
 .header__nav-profile .profile {
   padding-top: 2px;
   z-index: 6;
@@ -454,6 +474,9 @@ a {
   .header__nav-profile .profile:hover svg g path {
     fill: #BB945F;
   }
+}
+.header__nav-profile .hidden {
+  display: none;
 }
 .header__nav-profile .burger {
   display: none;
@@ -543,7 +566,7 @@ a {
 }
 
 .dropmenu {
-  width: 80px;
+  min-width: 80px;
   height: 0;
   background-color: #FFFFFF;
   font-size: 15px;
@@ -553,7 +576,7 @@ a {
   align-items: center;
   position: absolute;
   top: 50px;
-  right: -20px;
+  right: 0px;
   z-index: 8;
   transition: height 0.3s ease-in-out;
 }
@@ -586,6 +609,10 @@ a {
 }
 .dropmenu__show {
   height: 115px;
+}
+
+.hidden {
+  display: none;
 }
 
 .welcome {

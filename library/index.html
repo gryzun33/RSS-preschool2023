@@ -33,13 +33,23 @@
                 </g>
               </svg>
             </button>
+            <button class="profile-icon-log hidden"></button>
 
-            <div class="dropmenu">
+            <div class="dropmenu dropmenu__noauth">
               <h4 class="dropmenu__title">Profile</h4>
               <div class="dropmenu__line"></div>
               <ul class="dropmenu__items">
                 <li class="log-btn">Log In</li>
                 <li class="reg-btn">Register</li>
+              </ul> 
+            </div>
+
+            <div class="dropmenu dropmenu__auth hidden">
+              <h4 class="dropmenu__title dropmenu__title-auth"></h4>
+              <div class="dropmenu__line"></div>
+              <ul class="dropmenu__items">
+                <li class="profile-btn">My profile</li>
+                <li class="logout-btn">Log Out</li>
               </ul> 
             </div>
 
@@ -612,7 +622,7 @@
           <input id="reg-email" type="text" autocomplete="off" required>
           <label for="reg-password">Password</label>
           <input id="reg-password" type="password" autocomplete="off" required>
-          <button class="modal-auth__btn" type="submit">Sign Up</button>
+          <button class="modal-auth__btn modal-reg-btn" type="submit">Sign Up</button>
         </form>
         <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span class="add-log-btn">Login</span></p>
       </div>
@@ -627,7 +637,7 @@
           <input id="log-email" type="text" autocomplete="off">
           <label for="log-password">Password</label>
           <input id="log-password" type="text" autocomplete="off">
-          <button class="modal-auth__btn" type="submit">Log In</button>
+          <button class="modal-auth__btn modal-log-btn" type="submit">Log In</button>
         </form>
         <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span class="add-reg-btn">Register</span></p>
       </div>    
