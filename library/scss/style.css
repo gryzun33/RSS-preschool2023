@@ -436,6 +436,7 @@ a {
 }
 .header__nav-profile .profile-box {
   position: relative;
+  height: 28px;
 }
 .header__nav-profile .profile-icon-log {
   width: 28px;
@@ -454,11 +455,11 @@ a {
   border: none;
   cursor: pointer;
   position: relative;
-  margin-top: 2px;
   z-index: 6;
 }
 .header__nav-profile .profile {
-  padding-top: 2px;
+  width: 28px;
+  height: 28px;
   z-index: 6;
   border: none;
   background-color: transparent;

@@ -11,6 +11,10 @@ const dropMenu = document.querySelector('.dropmenu__noauth');
 const dropMenuAuth = document.querySelector('.dropmenu__auth');
 const dropMenuTitle = document.querySelector('.dropmenu__title-auth');
 
+let currUser = null;
+
+findCurrentUser();
+
 const toggleBurger = () => {
   // console.log('toggleburger');
   burgerFirst.classList.toggle('burger-first');
@@ -37,6 +41,9 @@ burger.addEventListener('click', () => {
   toggleBurger();
   if (dropMenu.classList.contains('dropmenu__show')) {
     dropMenu.classList.remove('dropmenu__show');  
+  }
+  if (dropMenuAuth.classList.contains('dropmenu__show')) {
+    dropMenuAuth.classList.remove('dropmenu__show');  
   } 
 });
 
@@ -44,20 +51,7 @@ menuLinks.forEach((link) => {
   link.addEventListener('click', removeBurger);
 });
 
-profileIcon.addEventListener('click', () => {
-  if (burgerMenu.classList.contains('burger-menu__show')) {
-    removeBurger();
-  }
-  dropMenu.classList.toggle('dropmenu__show');
-});
 
-
-profileIconLog.addEventListener('click', () => {
-  if (burgerMenu.classList.contains('burger-menu__show')) {
-    removeBurger();
-  }
-  dropMenuAuth.classList.toggle('dropmenu__show');
-});
 
 
 
@@ -226,20 +220,16 @@ seasonInputs.forEach((input) => {
     currBookBox = document.querySelector(`.${currSeason}`);
 
     prevBookBox.classList.add('books__box__hide');
-    // currBookBox.classList.remove('books__box__none');
-    // currBookBox.classList.add('books__box__show');
-
     prevSeason = currSeason;
     
-    prevBookBox.addEventListener('animationend', removeStyles);
+    prevBookBox.addEventListener('animationend', removeFavStyles);
 
-    function removeStyles() {
-      // console.log('animationend');
+    function removeFavStyles() {
       prevBookBox.classList.add('books__box__none');
       prevBookBox.classList.remove('books__box__hide');
       currBookBox.classList.remove('books__box__none');
       currBookBox.classList.add('books__box__show');
-      prevBookBox.removeEventListener('animationend', removeStyles);
+      prevBookBox.removeEventListener('animationend', removeFavStyles);
     }
   })
 })
@@ -269,6 +259,9 @@ const modalWrappers  = document.querySelectorAll('.modal-wrapper');
 const modalRegister = document.querySelector('.modal-register');
 const modalLogin = document.querySelector('.modal-login');
 
+const formRegister = document.querySelector('#register-form');
+const formLogin = document.querySelector('#login-form');
+
 const regBtn = document.querySelector('.reg-btn');
 const loginBtn = document.querySelector('.log-btn');
  
@@ -284,17 +277,29 @@ const addLogBtn = document.querySelector('.add-log-btn');
 const closeRegBtn = document.querySelector('.close-reg-btn');
 const closeLogBtn = document.querySelector('.close-log-btn');
 
+profileIcon.addEventListener('click', () => {
+  if (burgerMenu.classList.contains('burger-menu__show')) {
+    removeBurger();
+  }
+  dropMenu.classList.toggle('dropmenu__show');
+});
+
+profileIconLog.addEventListener('click', () => {
+  if (burgerMenu.classList.contains('burger-menu__show')) {
+    removeBurger();
+  }
+  dropMenuAuth.classList.toggle('dropmenu__show');
+});
+
 regBtn.addEventListener('click', openModalRegister);
 readerRegBtn.addEventListener('click', openModalRegister);
 
 loginBtn.addEventListener('click', openModalLogin);
 readerLogBtn.addEventListener('click', openModalLogin);
 
-
-
 closeRegBtn.addEventListener('click', () => {
   closeModal(modalRegister);
-})
+});
 
 closeLogBtn.addEventListener('click', () => {
   closeModal(modalLogin);
@@ -311,8 +316,21 @@ addLogBtn.addEventListener('click', () => {
 addRegBtn.addEventListener('click', () => {
   modalLogin.classList.add('hidden');
   modalRegister.classList.remove('hidden');
+  passLogInput.classList.remove('wrong');
   clearInputs(modalLogin);  
-})
+});
+
+myProfileBtn.addEventListener('click', () => {
+  console.log('click on myprofile');
+  dropMenuAuth.classList.remove('dropmenu__show');
+
+});
+
+logoutBtn.addEventListener('click', () => {
+  logOut();
+});
+
+
 
 
 modalWrappers.forEach((wrapper) => {
@@ -338,8 +356,8 @@ function openModalRegister() {
 }
 
 function openModalLogin() {
-  if (dropMenuAuth.contains('dropmenu__show')) {
-    dropMenuAuth.classList.remove('dropmenu__show');
+  if (dropMenu.classList.contains('dropmenu__show')) {
+    dropMenu.classList.remove('dropmenu__show');
   }
   modalLogin.classList.remove('hidden');
   document.body.style.overflowY = 'hidden';
@@ -353,6 +371,10 @@ const emailRegInput = document.querySelector('#reg-email');
 const passRegInput = document.querySelector('#reg-password');
 const nameInput = document.querySelector('#reg-name');
 const lastNameInput = document.querySelector('#reg-lastname');
+
+const emailLogInput = document.querySelector('#log-email');
+const passLogInput = document.querySelector('#log-password');
+
 
 const modalRegBtn = document.querySelector('.modal-reg-btn');
 const modalLogBtn = document.querySelector('.modal-log-btn');
@@ -373,42 +395,66 @@ function onEmailInput() {
   }
 }
 
-function onPassInput() {
-  if (isPassValid(passRegInput.value)) {
-    passRegInput.classList.remove('wrong');
+function onPassInput(input) {
+  if (isPassValid(input.value)) {
+    input.classList.remove('wrong');
   } else {
-    passRegInput.classList.add('wrong');
+    input.classList.add('wrong');
   }
 }
  
 emailRegInput.addEventListener('input', onEmailInput);
-passRegInput.addEventListener('input', onPassInput);
+passRegInput.addEventListener('input', () => {
+  onPassInput(passRegInput);
+});
+passLogInput.addEventListener('input', () => {
+  onPassInput(passLogInput);
+});
 
 const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
 const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
 
 
-modalRegBtn.addEventListener('click', (e) => {
-  // e.preventDefault();
+
+formRegister.addEventListener('submit', (e) => {
+  console.log('submitreg');
+  e.preventDefault();
+  
   if (modalRegInputsArr.some((el) => el.value === '') ||
       emailRegInput.classList.contains('wrong') ||
       passRegInput.classList.contains('wrong')) {
- 
     return;
   } else {
-    const currUser = submitRegister();
+    currUser = submitRegister();
     clearInputs(modalRegister);
     logIn(currUser);
-
     setTimeout(() => {
       closeModal(modalRegister);
     }, 100);
-    
-
   }
+});
 
+formLogin.addEventListener('submit', (e) => {
+  console.log('submitLogin');
+  e.preventDefault();
   
-})
+  if (modalLogInputsArr.some((el) => el.value === '') ||
+      passLogInput.classList.contains('wrong')) {
+    return;
+  } else {
+    currUser = submitLogin();
+    console.log ('currUser=', currUser);
+    if (currUser) {
+      clearInputs(modalLogin);
+      logIn(currUser);
+      setTimeout(() => {
+        closeModal(modalLogin);
+      }, 100);
+    } else {
+      return
+    }    
+  }
+});
 
 
 
@@ -416,7 +462,7 @@ modalRegBtn.addEventListener('click', (e) => {
 // generateCardNumber
 function generateCardNumber() {
   const numb = Math.floor(Math.random() * (10 ** 11));
-  const numbToHex = numb.toString(16).slice(0,10).toLowerCase();
+  const numbToHex = numb.toString(16).slice(0,9).toLowerCase();
   return numbToHex;
 }
 
@@ -427,10 +473,26 @@ function submitRegister() {
     name: nameInput.value,
     lastName: lastNameInput.value,
     email: emailRegInput.value,
-    password: passRegInput.value
+    password: passRegInput.value,
+    login: true,
   }
   localStorage.setItem(key, JSON.stringify(user));
   return user;
+}
+
+function submitLogin() {
+  for(let i=0; i<localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let user = JSON.parse(localStorage.getItem(key));
+    console.log ('user=', user);
+    if ((user.key === emailLogInput.value || user.email === emailLogInput.value) &&
+      user.password === String(passLogInput.value)) {
+      user.login = true;
+      localStorage.setItem(key, JSON.stringify(user));  
+      return user;
+    }
+  }
+  return null;
 }
 
 function clearInputs(elem) {
@@ -446,12 +508,40 @@ function logIn(user) {
   profileIconLog.classList.remove('hidden');
   const iconName  = user.name[0].toUpperCase() + user.lastName[0].toUpperCase();
   profileIconLog.innerText = iconName;
+  profileIconLog.setAttribute('title', `${user.name} ${user.lastName}`);
   dropMenuTitle.innerText = user.key;
   dropMenu.classList.add('hidden')
   dropMenuAuth.classList.remove('hidden');
-
 }
 
+function logOut() {
+  profileIcon.classList.remove('hidden');
+  profileIconLog.classList.add('hidden');
+  dropMenuAuth.classList.remove('dropmenu__show');
+  dropMenuAuth.addEventListener('transitionend',changeDisplayDropMenu);
+  let user = JSON.parse(localStorage.getItem(currUser.key));
+  user.login = false;
+  localStorage.setItem(currUser.key, JSON.stringify(user)); 
+  currUser = null;
+
+  function changeDisplayDropMenu() {
+    dropMenuAuth.classList.add('hidden');
+    dropMenu.classList.remove('hidden');
+    dropMenuAuth.removeEventListener('transitionend',changeDisplayDropMenu);
+  }
+}
+
+function findCurrentUser() {
+  for(let i=0; i<localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let user = JSON.parse(localStorage.getItem(key));
+    if (user.login === true) {
+      currUser = user;
+      logIn(user);
+    } 
+  }
+  return;
+}
 
 
 
