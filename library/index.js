@@ -11,6 +11,21 @@ const dropMenu = document.querySelector('.dropmenu__noauth');
 const dropMenuAuth = document.querySelector('.dropmenu__auth');
 const dropMenuTitle = document.querySelector('.dropmenu__title-auth');
 
+const readerCardTitle = document.querySelector('.readercard__title');
+const readerCardText = document.querySelector('.readercard__text');
+
+const readerRegBtn = document.querySelector('.reader__reg__btn');
+const readerLogBtn = document.querySelector('.reader__login__btn');
+const readerProfileBtn = document.querySelector('.reader__profile__btn');
+
+const cardFinderTitle = document.querySelector('.cardfinder__title');
+const checkCardBtn  = document.querySelector('.card__btn');
+const cardData  = document.querySelector('.card-data');
+const fullNameInput = document.querySelector('.card__name');
+const cardNumberInput = document.querySelector('.card__number');
+const cardVisitsCount = document.querySelector('.card-visits-count');
+const cardBooksCount = document.querySelector('.card-books-count');
+
 let currUser = null;
 
 findCurrentUser();
@@ -61,8 +76,10 @@ document.body.addEventListener('click', (e) => {
   }
   if(!e.target.closest('.profile') && !e.target.closest('.dropmenu') && dropMenu.classList.contains('dropmenu__show')) {
     dropMenu.classList.remove('dropmenu__show');
-    dropMenuAuth.classList.remove('dropmenu__show');
-  }  
+  }
+  if(!e.target.closest('.profile-icon-log') && !e.target.closest('.dropmenu__auth') && dropMenuAuth.classList.contains('dropmenu__show')) {
+    dropMenuAuth.classList.remove('dropmenu__show');  
+  }
 });
 
 // resize window
@@ -264,8 +281,7 @@ const loginBtn = document.querySelector('.log-btn');
 const myProfileBtn = document.querySelector('.profile-btn');
 const logoutBtn = document.querySelector('.logout-btn');
 
-const readerRegBtn = document.querySelector('.reader__reg__btn');
-const readerLogBtn = document.querySelector('.reader__login__btn');
+
 
 const addRegBtn = document.querySelector('.add-reg-btn');
 const addLogBtn = document.querySelector('.add-log-btn');
@@ -324,6 +340,7 @@ myProfileBtn.addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', () => {
   logOut();
+  changeLibraryCardContent();
 });
 
 
@@ -413,7 +430,7 @@ const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
 
 
 formRegister.addEventListener('submit', (e) => {
-  console.log('submitreg');
+  // console.log('submitreg');
   e.preventDefault();
   
   if (modalRegInputsArr.some((el) => el.value === '') ||
@@ -427,11 +444,14 @@ formRegister.addEventListener('submit', (e) => {
     setTimeout(() => {
       closeModal(modalRegister);
     }, 100);
+
+    changeLibraryCardContent();
+    setUserDataLibCardAuth(currUser);
   }
 });
 
 formLogin.addEventListener('submit', (e) => {
-  console.log('submitLogin');
+  // console.log('submitLogin');
   e.preventDefault();
   
   if (modalLogInputsArr.some((el) => el.value === '') ||
@@ -446,6 +466,8 @@ formLogin.addEventListener('submit', (e) => {
       setTimeout(() => {
         closeModal(modalLogin);
       }, 100);
+      changeLibraryCardContent();
+      setUserDataLibCardAuth(currUser);
     } else {
       return
     }    
@@ -482,7 +504,7 @@ function submitLogin() {
   for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     let user = JSON.parse(localStorage.getItem(key));
-    console.log ('user=', user);
+    // console.log ('user=', user);
     if ((user.key === emailLogInput.value || user.email === emailLogInput.value) &&
       user.password === String(passLogInput.value)) {
       user.login = true;
@@ -536,6 +558,8 @@ function findCurrentUser() {
     if (user.login === true) {
       currUser = user;
       logIn(user);
+      changeLibraryCardContent();
+      setUserDataLibCardAuth(currUser);
     } 
   }
   return;
@@ -543,16 +567,10 @@ function findCurrentUser() {
 
 // librarycard
 
-const checkCardBtn  = document.querySelector('.card__btn');
-const cardData  = document.querySelector('.card-data');
-const fullNameInput = document.querySelector('.card__name');
-const cardNumberInput = document.querySelector('.card__number');
-const cardVisitsCount = document.querySelector('.card-visits-count');
-const cardBooksCount = document.querySelector('.card-books-count');
 
 checkCardBtn.addEventListener('click', (event) => {
   event.preventDefault();
-  let isUser = setUserDataInLibraryCard();
+  let isUser = setUserDataLibraryCardNoAuth();
   if (isUser) {
     checkCardBtn.classList.add('hidden');
     cardData.classList.remove('hidden');
@@ -571,7 +589,7 @@ checkCardBtn.addEventListener('click', (event) => {
   }
 });
 
-function setUserDataInLibraryCard() {
+function setUserDataLibraryCardNoAuth() {
   for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     let user = JSON.parse(localStorage.getItem(key));
@@ -585,6 +603,63 @@ function setUserDataInLibraryCard() {
   return false;    
 }
 
+
+// buyBook
+
+const buyBookButtons = document.querySelectorAll('.book__btn');
+
+buyBookButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    console.log('click on btn-book');
+    console.log('currUser=', currUser);
+    if (!currUser) {
+      openModalLogin();
+    } else {
+      return;
+    }
+  })
+})
+
+
+
+
+
+function changeLibraryCardContent() {
+  if(currUser) {
+    cardFinderTitle.innerText = 'Your Library card';
+    readerCardTitle.innerText = 'Visit your profile';
+    readerCardText.innerText = 'With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.';
+    readerRegBtn.classList.add('hidden');
+    readerLogBtn.classList.add('hidden');
+    readerProfileBtn.classList.remove('hidden');
+
+    checkCardBtn.classList.add('hidden');
+    cardData.classList.remove('hidden');
+    cardNumberInput.setAttribute('disabled', 'disabled');
+    fullNameInput.setAttribute('disabled', 'disabled');
+  } else {
+    cardFinderTitle.innerText = 'Find your Library card';
+    readerCardTitle.innerText = 'Get a reader card';
+    readerCardText.innerText = 'You will be able to see a reader card after logging into account or you can register a new account';
+    readerRegBtn.classList.remove('hidden');
+    readerLogBtn.classList.remove('hidden');
+    readerProfileBtn.classList.add('hidden');
+
+    checkCardBtn.classList.remove('hidden');
+    cardData.classList.add('hidden');
+    cardNumberInput.removeAttribute('disabled');
+    fullNameInput.removeAttribute('disabled');
+    cardNumberInput.value = '';
+    fullNameInput.value = '';
+  }
+}
+
+function setUserDataLibCardAuth(user) {
+  cardVisitsCount.innerText = user.visits;
+  cardBooksCount.innerText = user.books;
+  fullNameInput.value = user.name + ' ' + user.lastName;
+  cardNumberInput.value = user.key; 
+}
 
 
 

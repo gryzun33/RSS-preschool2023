@@ -73,6 +73,10 @@
             &::placeholder {
               color: $color-additional;
             }
+
+            &:disabled {
+              background-color: $color-light;
+            }
           }     
         }
 
@@ -164,7 +168,8 @@
       &__buttons {
         margin-top: 35px;
         width: 170px;
-        @include flex(space-between);
+        @include flex(center);
+        column-gap: 20px;
 
         @include laptops {
           margin-top: 40px;

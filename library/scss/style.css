@@ -1463,6 +1463,9 @@ a {
 .librarycard__content .cardfinder .card__content input::placeholder {
   color: #8E8E8E;
 }
+.librarycard__content .cardfinder .card__content input:disabled {
+  background-color: #FFFFFF;
+}
 .librarycard__content .cardfinder .card__title {
   font-family: "Forum", cursive;
   font-weight: 400;
@@ -1579,8 +1582,10 @@ a {
   margin-top: 35px;
   width: 170px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: normal;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
 }
 @media screen and (max-width: 1024px) {
   .librarycard__content .readercard__buttons {
