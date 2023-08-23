@@ -1505,6 +1505,34 @@ a {
     border: 1px solid #BB945F;
   }
 }
+.librarycard__content .cardfinder .card .card-data {
+  width: 169px;
+  height: 63px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: normal;
+  margin-right: auto;
+  margin-left: auto;
+}
+.librarycard__content .cardfinder .card .card-data__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.librarycard__content .cardfinder .card .card-data__name, .librarycard__content .cardfinder .card .card-data__count {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #000000;
+}
+.librarycard__content .cardfinder .card .hidden {
+  display: none;
+}
 .librarycard__content .readercard {
   width: 456px;
   display: flex;

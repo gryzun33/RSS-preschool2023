@@ -246,11 +246,7 @@ window.addEventListener('scroll', function() {
 });
 
 
-const checkCardBtn  = document.querySelector('.card__btn');
 
-checkCardBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-})
 
 
 // dropmenu
@@ -475,6 +471,8 @@ function submitRegister() {
     email: emailRegInput.value,
     password: passRegInput.value,
     login: true,
+    visits: 1,
+    books: 0
   }
   localStorage.setItem(key, JSON.stringify(user));
   return user;
@@ -542,6 +540,52 @@ function findCurrentUser() {
   }
   return;
 }
+
+// librarycard
+
+const checkCardBtn  = document.querySelector('.card__btn');
+const cardData  = document.querySelector('.card-data');
+const fullNameInput = document.querySelector('.card__name');
+const cardNumberInput = document.querySelector('.card__number');
+const cardVisitsCount = document.querySelector('.card-visits-count');
+const cardBooksCount = document.querySelector('.card-books-count');
+
+checkCardBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  let isUser = setUserDataInLibraryCard();
+  if (isUser) {
+    checkCardBtn.classList.add('hidden');
+    cardData.classList.remove('hidden');
+    cardNumberInput.setAttribute('disabled', 'disabled');
+    fullNameInput.setAttribute('disabled', 'disabled');
+    setTimeout(() => {
+      checkCardBtn.classList.remove('hidden');
+      cardData.classList.add('hidden');
+      cardNumberInput.removeAttribute('disabled');
+      fullNameInput.removeAttribute('disabled');
+      cardNumberInput.value = '';
+      fullNameInput.value = '';
+    }, 10000)
+  } else {
+    return;
+  }
+});
+
+function setUserDataInLibraryCard() {
+  for(let i=0; i<localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let user = JSON.parse(localStorage.getItem(key));
+    if (user.key === cardNumberInput.value &&
+      ((user.name + ' ' + user.lastName).toLowerCase()) === fullNameInput.value.toLowerCase()) {
+      cardVisitsCount.innerText = user.visits;
+      cardBooksCount.innerText = user.books;
+      return true;
+    }
+  }
+  return false;    
+}
+
+
 
 
 
