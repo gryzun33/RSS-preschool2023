@@ -168,7 +168,7 @@
                 <div class="book__text">
                   <div class="book__header-text">Staff Picks</div>
                   <div class="book__header-line"></div>
-                  <h4 class="book__title"><span>The Book Eaters</span><br>By Sunyi Dean</h4>
+                  <h4 class="book__title"><span>The Book Eaters</span><br><span>By </span><span>Sunyi Dean</span></h4>
                   <p class="book__description">An unusual sci-fi story about a book eater woman who tries desperately to
                     save her dangerous mind-eater son from tradition and certain death. Complete with dysfunctional family
                     values, light Sapphic romance, and a strong, complex protagonist. Not for the faint of heart.</p>
@@ -226,7 +226,7 @@
                 <div class="book__text">
                   <div class="book__header-text">Staff Picks</div>
                   <div class="book__header-line"></div>
-                  <h4 class="book__title"><span>The Body</span><br>By Stephen King</h4>
+                  <h4 class="book__title"><span>The Body</span><br><span>By </span><span>Stephen King</span></h4>
                   <p class="book__description">Powerful novel that takes you back to a nostalgic time, exploring both the
                     beauty and danger and loss of innocence that is youth.</p>
                   <button class="book__btn">Buy</button>
@@ -662,11 +662,104 @@
       </div>    
     </div>
 
+
+    <div class="modal-wrapper modal-profile-wrapper hidden">
+      <div class="modal-profile">
+        <button class="modal-profile__btn">
+          <img src="assets/icons/close_btn.svg" alt="close-btn">
+        </button>
+        <div class="modal-profile__user">
+          <div class="modal-profile__photo">JD</div>
+          <p class="modal-profile__name">John Doe</p>
+        </div>
+        <div class="modal-profile__content">
+          <h4 class="modal-profile__title">My profile</h4>
+          <div class="modal-profile__stat">
+            <div class="stat visits-box">
+              <p class="stat__name">Visits</p>
+              <img class="stat__icon" src="assets/icons/visits.svg" alt="icon-visits">
+              <p class="stat__count stat__visits">23</p>
+            </div>
+            <div class="stat bonuses-box">
+              <p class="stat__name">Bonuses</p>
+              <img class="stat__icon" src="assets/icons/stars.svg" alt="icon-bonuses">
+              <p class="stat__count stat__bonuses">1240</p>
+            </div>
+            <div class="stat books-box">
+              <p class="stat__name">Books</p>
+              <img class="stat__icon" src="assets/icons/books.svg" alt="icon-books">
+              <p class="stat__count stat__books">2</p>
+            </div>
+          </div>
+          <p class="modal-profile__subtitle">Rented books</p>
+          <ul class="modal-profile__booklist">
+            <!-- <li>The Last Queen, Clive Irving</li>
+            <li>Dominicana, Angie Cruz</li> -->
+          </ul>
+          <div class="modal-profile__card-box">
+            <span>Card number</span>
+            <span class="modal-profile__card-number">F00234030</span>
+            <button class="modal-profile__copy-number-btn">
+              <!-- <img src="assets/icons/icon_copy.svg" alt="copy-icon"> -->
+              <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="icon copy">
+                <rect id="Rectangle 7" x="2.46826" y="0.25" width="10.5917" height="9.5" rx="0.75" stroke="black" stroke-width="0.5"/>
+                <rect id="Rectangle 8" x="0.25" y="2.25" width="10.5917" height="9.5" rx="0.75" fill="white" stroke="black" stroke-width="0.5"/>
+                </g>
+                </svg>
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-wrapper modal-buyacard-wrapper hidden">
+      <div class="modal-buyacard">
+        <button class="modal-buyacard__btn">
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="close_btn">
+              <path id="Line 5" d="M2 16.8507L17 2.00003" stroke="#0C0C0E" stroke-width="3"/>
+              <path id="Line 6" d="M2 2.14926L17 17" stroke="#0C0C0E" stroke-width="3"/>
+            </g>
+          </svg>
+        </button>
+        <h4 class="modal-buyacard__title">Buy a library card</h4>
+        <div class="modal-buyacard__content">
+          <form class="modal-buyacard__form">
+            <label>Bank card number
+              <input type="text">
+            </label>
+            <label>Expiration code
+              <div class="exp-code">
+                <input type="text">
+                <input type="text">
+              </div>        
+            </label> 
+            <label>CVC
+              <input type="text">
+            </label> 
+            <label>Cardholder name
+              <input type="text">
+            </label>
+            <label>Postal code
+              <input type="text">
+            </label> 
+            <label>City / Town
+              <input type="text">
+            </label>
+            <div class="price-box">
+              <button class="price-box__btn" type="submit">Buy</button>
+              <p class="price-box__price">$ 25.00</p>
+            </div>          
+          </form>
+          <p class="modal-buyacard__text">If you are live, work, attend school, or pay property taxes in New York State, you can get a $25 digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.</p>
+        </div>
+      </div>    
+    </div>
+
+
   
-
-
-    
-
 
   </div>
   

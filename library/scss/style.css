@@ -575,6 +575,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   position: absolute;
   top: 50px;
   right: 0px;
@@ -587,6 +588,9 @@ a {
   font-weight: 700;
   font-style: normal;
   color: #000000;
+}
+.dropmenu__title-auth {
+  font-size: 13px;
 }
 .dropmenu__line {
   margin-top: 5px;
@@ -1046,7 +1050,7 @@ a {
   letter-spacing: 2px;
   margin-top: 20px;
 }
-.favorites .books__box .book__title span {
+.favorites .books__box .book__title span:first-child {
   text-transform: uppercase;
 }
 .favorites .books__box .book__description {
@@ -1825,4 +1829,280 @@ a {
 }
 .modal-auth__text span:hover {
   cursor: pointer;
+}
+
+.modal-profile {
+  position: relative;
+  display: flex;
+  width: 600px;
+  background-color: #FFFFFF;
+}
+.modal-profile__btn {
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  top: 23px;
+  right: 23px;
+  background-color: #FFFFFF;
+  border: none;
+}
+.modal-profile__btn:hover {
+  cursor: pointer;
+}
+.modal-profile__user {
+  width: 170px;
+  background-color: #0C0C0E;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-profile__photo {
+  width: 80px;
+  height: 80px;
+  background-color: #FFFFFF;
+  color: #BB945F;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-profile__name {
+  width: 120px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #000000;
+  font-size: 20px;
+  line-height: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #FFFFFF;
+  margin-top: 15px;
+  text-transform: capitalize;
+}
+.modal-profile__content {
+  padding: 40px 20px 39px 20px;
+}
+.modal-profile__title {
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  color: #000000;
+  text-transform: uppercase;
+}
+.modal-profile__stat {
+  margin-top: 40px;
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.modal-profile__stat .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+.modal-profile__stat .stat__name {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: #000000;
+}
+.modal-profile__stat .stat__icon {
+  width: 20px;
+  height: 21px;
+}
+.modal-profile__stat .stat__count {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #000000;
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+}
+.modal-profile__subtitle {
+  margin-top: 20px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+  line-height: 20px;
+}
+.modal-profile__booklist {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding-left: 29px;
+  width: 400px;
+  height: 60px;
+  overflow: auto;
+}
+.modal-profile__booklist-item {
+  color: #000000;
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: 2px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.modal-profile__card-box {
+  margin-top: 30px;
+  display: flex;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  color: #0C0C0E;
+}
+.modal-profile__copy-number-btn {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal-profile__card-number {
+  color: #8E8E8E;
+}
+
+.modal-buyacard {
+  position: relative;
+  width: 640px;
+}
+.modal-buyacard__btn {
+  background-color: #0C0C0E;
+  border: none;
+  position: absolute;
+  top: 24px;
+  right: 20px;
+}
+.modal-buyacard__btn svg g path {
+  stroke: #FFFFFF;
+}
+.modal-buyacard__btn:hover {
+  cursor: pointer;
+}
+.modal-buyacard__title {
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #0C0C0E;
+  padding: 20px 0;
+}
+.modal-buyacard__content {
+  display: flex;
+  padding: 30px 35px 40px 35px;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+}
+.modal-buyacard__form {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.modal-buyacard__form label {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  color: #000000;
+}
+.modal-buyacard__form label input {
+  height: 20px;
+  margin-top: 10px;
+  border: 1px solid #8E8E8E;
+  outline: none;
+  padding-left: 3px;
+}
+.modal-buyacard__form label:nth-child(3) > input {
+  width: 45px;
+}
+.modal-buyacard__form label:nth-child(4) {
+  margin-top: 10px;
+}
+.modal-buyacard__form .exp-code {
+  display: flex;
+  gap: 10px;
+}
+.modal-buyacard__form .exp-code input {
+  width: 45px;
+}
+.modal-buyacard__form .price-box {
+  display: flex;
+  margin-top: 10px;
+}
+.modal-buyacard__form .price-box__btn {
+  width: 75px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background-color: #FFFFFF;
+  transition: all 0.3s ease-out;
+}
+@media (hover: hover) {
+  .modal-buyacard__form .price-box__btn:hover {
+    cursor: pointer;
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+  }
+}
+.modal-buyacard__form .price-box__price {
+  margin-left: 25px;
+  color: #0C0C0E;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  align-self: flex-end;
+}
+.modal-buyacard__text {
+  width: 330px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  color: #8E8E8E;
 }/*# sourceMappingURL=style.css.map */
