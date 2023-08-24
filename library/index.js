@@ -33,6 +33,12 @@ const profileBooksCount = document.querySelector('.stat__books');
 const rentedBooks = document.querySelector('.modal-profile__booklist');
 const profieCardNumber = document.querySelector('.modal-profile__card-number');
 
+const books = document.querySelectorAll('.book');
+
+const buyBookButtons = document.querySelectorAll('.book__btn');
+let rentedBook = null;
+let currentBookBtn = null;
+
 let currUser = null;
 
 findCurrentUser();
@@ -293,6 +299,7 @@ const logoutBtn = document.querySelector('.logout-btn');
 const addRegBtn = document.querySelector('.add-reg-btn');
 const addLogBtn = document.querySelector('.add-log-btn');
 
+
 const closeRegBtn = document.querySelector('.close-reg-btn');
 const closeLogBtn = document.querySelector('.close-log-btn');
 
@@ -323,6 +330,9 @@ readerRegBtn.addEventListener('click', openModalRegister);
 
 loginBtn.addEventListener('click', openModalLogin);
 readerLogBtn.addEventListener('click', openModalLogin);
+
+myProfileBtn.addEventListener('click', openModalProfile);
+readerProfileBtn.addEventListener('click', openModalProfile);
 
 closeRegBtn.addEventListener('click', () => {
   closeModal(modalRegister);
@@ -357,14 +367,9 @@ addRegBtn.addEventListener('click', () => {
   clearInputs(modalLogin);  
 });
 
-myProfileBtn.addEventListener('click', () => {
-  console.log('click on myprofile');
-  dropMenuAuth.classList.remove('dropmenu__show');
-  modalProfile.classList.remove('hidden');
 
-  
 
-});
+
 
 logoutBtn.addEventListener('click', () => {
   logOut();
@@ -401,8 +406,15 @@ function openModalLogin() {
   document.body.style.overflowY = 'hidden';
 }
 
+function openModalProfile() {
+  dropMenuAuth.classList.remove('dropmenu__show');
+  modalProfile.classList.remove('hidden');
+  document.body.style.overflowY = 'hidden';
+}
+
 function openModalBuyCard() {
   modalBuyCard.classList.remove('hidden');
+  document.body.style.overflowY = 'hidden';
 }
 
 // validation email
@@ -499,6 +511,7 @@ formLogin.addEventListener('submit', (e) => {
       changeLibraryCardContent();
       setUserDataLibCardAuth(currUser);
       setDataModalProfile(currUser);
+      changeBooksButtons(currUser);
     } else {
       return
     }    
@@ -581,6 +594,11 @@ function logOut() {
     dropMenu.classList.remove('hidden');
     dropMenuAuth.removeEventListener('transitionend',changeDisplayDropMenu);
   }
+
+  buyBookButtons.forEach((btn) => {
+    btn.removeAttribute('disabled');
+    btn.innerHTML = 'Buy';
+  });
 }
 
 function findCurrentUser() {
@@ -593,6 +611,7 @@ function findCurrentUser() {
       changeLibraryCardContent();
       setUserDataLibCardAuth(currUser);
       setDataModalProfile(currUser);
+      changeBooksButtons(currUser);
     } 
   }
   return;
@@ -641,11 +660,11 @@ function setUserDataLibraryCardNoAuth() {
 
 // buyBook
 
-const buyBookButtons = document.querySelectorAll('.book__btn');
-let rentedBook = null;
+
 
 buyBookButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
+    currentBookBtn = btn;
     if (!currUser) {
       openModalLogin();
     } else {
@@ -731,6 +750,7 @@ buyCardForm.addEventListener('submit' , (e) => {
   e.preventDefault();
   console.log ('submitbuycard');
   addRentedBookToUser(rentedBook);
+
   
 });
 
@@ -745,6 +765,28 @@ function addRentedBookToUser(book) {
   cardBooksCount.innerText = +cardBooksCount.innerText + 1;
   currUser.books.push(book);
   localStorage.setItem(currUser.key, JSON.stringify(currUser));
+  currentBookBtn.setAttribute('disabled', 'disabled');
+  currentBookBtn.innerHTML = 'Own';
+}
+
+
+// function findRentedBooks() {
+  
+// }
+
+function changeBooksButtons(currUser) {
+  let ownBooks = currUser.books;
+  books.forEach((book) => {
+    const bookNameCap = book.querySelector('.book__title > span').innerText;
+    const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
+    const bookAuthor = book.querySelector('.book__title span:last-child').innerText;
+    const bookTitle = `${bookName}, ${bookAuthor}`;
+    if (ownBooks.find((el) => el === bookTitle)) {
+      const btn = book.querySelector('.book__btn');
+      btn.setAttribute('disabled', 'disabled');
+      btn.innerHTML = 'Own';
+    }
+  });
 }
 
 
