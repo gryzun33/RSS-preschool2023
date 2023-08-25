@@ -1,3 +1,5 @@
+import { submitBankCard } from './modules/modalBuyCard.js';
+
 let burger = document.querySelector('.burger');
 let burgerFirst = document.querySelector('.burger span:nth-child(1)');
 let burgerSecond = document.querySelector('.burger span:nth-child(2)');
@@ -42,6 +44,7 @@ let currentBookBtn = null;
 let currUser = null;
 
 findCurrentUser();
+submitBankCard();
 
 const toggleBurger = () => {
   // console.log('toggleburger');
@@ -539,6 +542,7 @@ function submitRegister() {
     login: true,
     visits: 1,
     books: [],
+    buyCard: false,
   }
   localStorage.setItem(key, JSON.stringify(user));
   return user;
@@ -667,13 +671,22 @@ buyBookButtons.forEach((btn) => {
     currentBookBtn = btn;
     if (!currUser) {
       openModalLogin();
-    } else {
+
+
+    } else if (currUser.buyCard === false){
       openModalBuyCard();
       const bookText = btn.closest('.book__text');
       const bookNameCap = bookText.querySelector('.book__title > span').innerText;
       const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
       const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
       rentedBook = `${bookName}, ${bookAuthor}`;
+    } else if (currUser.buyCard === true){
+      const bookText = btn.closest('.book__text');
+      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
+      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
+      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
+      rentedBook = `${bookName}, ${bookAuthor}`;
+      addRentedBookToUser(rentedBook);
     }
   })
 })
@@ -728,6 +741,7 @@ function setDataModalProfile(user) {
   profileVisitsCount.innerText = user.visits;
   profileBooksCount.innerText = user.books.length;
   profieCardNumber.innerText = user.key;
+  rentedBooks.innerHTML = '';
   user.books.forEach((book) => {
     const bookItem = document.createElement('li');
     bookItem.classList.add('modal-profile__booklist-item');
@@ -747,11 +761,12 @@ copyNumberBtn.addEventListener('click', () => {
 
 
 buyCardForm.addEventListener('submit' , (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   console.log ('submitbuycard');
-  addRentedBookToUser(rentedBook);
-
-  
+  if (!currUser.buyCard) {
+    currUser.buyCard = true;
+    addRentedBookToUser(rentedBook);
+  }  
 });
 
 function addRentedBookToUser(book) {
