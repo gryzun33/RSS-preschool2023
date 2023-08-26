@@ -632,16 +632,32 @@
       <div class="modal-auth">
         <div class="modal-auth__close-btn close-reg-btn"></div>
         <h4 class="modal-auth__title">REGISTER</h4>
-        <form id ='register-form' class="modal-auth__form" action="#">
+        <form id ='register-form' class="modal-auth__form" action="#" novalidate>
           <label for="reg-name">First name</label>
           <input id="reg-name" type="text" autocomplete="off" required>
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
           <label for="reg-lastname">Last name</label>
           <input id="reg-lastname" type="text" autocomplete="off" required>
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
           <label for="reg-email">E-mail</label>
-          <input id="reg-email" type="text" autocomplete="off" required>
+          <input id="reg-email" type="email" autocomplete="off" required pattern="^[A-Za-z0-9_\-]+@([A-Za-z0-9_\-])+\.([A-Za-z]{2,4})$">
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
           <label for="reg-password">Password</label>
-          <input id="reg-password" type="password" autocomplete="off" required>
-          <button class="modal-auth__btn modal-reg-btn" type="submit">Sign Up</button>
+          <input id="reg-password" type="password" autocomplete="off" required minlength="8">
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
+          <div class="modal-auth__btn-box">
+            <button class="modal-auth__btn modal-reg-btn" type="submit">Sign Up</button>
+            <p class="modal-auth__error hidden">A user with such an email already exists</p>
+          </div>
+         
         </form>
         <p class="modal-auth__text">Already have an account?&nbsp;&nbsp;&nbsp;<span class="add-log-btn">Login</span></p>
       </div>
@@ -651,12 +667,21 @@
       <div class="modal-auth">
         <div class="modal-auth__close-btn close-log-btn"></div>
         <h4 class="modal-auth__title">LOGIN</h4>
-        <form id ="login-form" class="modal-auth__form" action="#">
+        <form id ="login-form" class="modal-auth__form" action="#" novalidate>
           <label for="log-email">E-mail or readers card</label>
           <input id="log-email" type="text" autocomplete="off" required>
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
           <label for="log-password">Password</label>
-          <input id="log-password" type="password" autocomplete="off" required>
-          <button class="modal-auth__btn modal-log-btn" type="submit">Log In</button>
+          <input id="log-password" type="password" autocomplete="off" required minlength="8">
+          <div class="tooltip hidden">
+            <span class="tooltip-inner"></span>
+          </div>
+          <div class="modal-auth__btn-box">
+            <button class="modal-auth__btn modal-log-btn" type="submit">Log In</button>
+            <p class="modal-auth__error hidden">User not found</p>
+          </div>  
         </form>
         <p class="modal-auth__text">Don't have an account?&nbsp;&nbsp;&nbsp;<span class="add-reg-btn">Register</span></p>
       </div>    

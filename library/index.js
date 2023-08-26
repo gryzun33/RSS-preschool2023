@@ -1,5 +1,6 @@
 import { validateBankCard } from './modules/validateBankCard.js';
 import { generateCardNumber } from './modules/generateCardNumber.js';
+import { showError } from './modules/showError.js';
 
 let burger = document.querySelector('.burger');
 let burgerFirst = document.querySelector('.burger span:nth-child(1)');
@@ -35,6 +36,24 @@ const profileVisitsCount = document.querySelector('.stat__visits');
 const profileBooksCount = document.querySelector('.stat__books');
 const rentedBooks = document.querySelector('.modal-profile__booklist');
 const profieCardNumber = document.querySelector('.modal-profile__card-number');
+
+const emailRegInput = document.querySelector('#reg-email');
+const passRegInput = document.querySelector('#reg-password');
+const nameInput = document.querySelector('#reg-name');
+const lastNameInput = document.querySelector('#reg-lastname');
+const emailLogInput = document.querySelector('#log-email');
+const passLogInput = document.querySelector('#log-password');
+
+const modalWrappers  = document.querySelectorAll('.modal-wrapper');
+
+const modalRegister = document.querySelector('.modal-register');
+const modalLogin = document.querySelector('.modal-login');
+const modalProfile = document.querySelector('.modal-profile-wrapper');
+const modalBuyCard = document.querySelector('.modal-buyacard-wrapper');
+
+const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
+const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
+const modalAuthInputs = [...modalRegInputsArr, ...modalLogInputsArr];
 
 const books = document.querySelectorAll('.book');
 
@@ -83,10 +102,6 @@ menuLinks.forEach((link) => {
   link.addEventListener('click', removeBurger);
 });
 
-
-
-
-
 document.body.addEventListener('click', (e) => {
   if (!e.target.closest('.burger') && !e.target.closest('.burger-menu') && burgerMenu.classList.contains('burger-menu__show')) {
     removeBurger();  
@@ -117,6 +132,18 @@ window.addEventListener('resize', function() {
     initSlider();    
   }
   lastWindowWidth = newWindowWidth;
+});
+
+// scroll window 
+const menuFavorites = document.querySelector('.favorites__buttons-box');
+
+window.addEventListener('scroll', function() {
+  const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
+  if (window.scrollY >= menuFavoritesY && window.innerWidth <= 1250) {
+    menuFavorites.classList.add('sticky');    
+  } else {
+    menuFavorites.classList.remove('sticky');
+  }
 });
 
 // слайдер
@@ -268,28 +295,14 @@ seasonInputs.forEach((input) => {
   })
 })
 
-const menuFavorites = document.querySelector('.favorites__buttons-box');
 
-window.addEventListener('scroll', function() {
-  const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
-  if (window.scrollY >= menuFavoritesY && window.innerWidth <= 1250) {
-    menuFavorites.classList.add('sticky');    
-  } else {
-    menuFavorites.classList.remove('sticky');
-  }
-});
 
 
 
 
 
 // dropmenu
-const modalWrappers  = document.querySelectorAll('.modal-wrapper');
 
-const modalRegister = document.querySelector('.modal-register');
-const modalLogin = document.querySelector('.modal-login');
-const modalProfile = document.querySelector('.modal-profile-wrapper');
-const modalBuyCard = document.querySelector('.modal-buyacard-wrapper');
 
 const formRegister = document.querySelector('#register-form');
 const formLogin = document.querySelector('#login-form');
@@ -359,15 +372,22 @@ closeBuyCardBtn.addEventListener('click', () => {
 addLogBtn.addEventListener('click', () => {
   modalRegister.classList.add('hidden');
   modalLogin.classList.remove('hidden');
-  passRegInput.classList.remove('wrong');
-  emailRegInput.classList.remove('wrong');
   clearInputs(modalRegister);
+  modalRegInputsArr.forEach((inp) => {
+    inp.classList.remove('wrong');
+    const tooltip = inp.nextElementSibling;
+    tooltip.classList.add('hidden');
+  })
 });
 
 addRegBtn.addEventListener('click', () => {
   modalLogin.classList.add('hidden');
   modalRegister.classList.remove('hidden');
-  passLogInput.classList.remove('wrong');
+  modalLogInputsArr.forEach((inp) => {
+    inp.classList.remove('wrong');
+    const tooltip = inp.nextElementSibling;
+    tooltip.classList.add('hidden');
+  })
   clearInputs(modalLogin);  
 });
 
@@ -423,86 +443,66 @@ function openModalBuyCard() {
 
 // validation email
 
-const email_regex = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-const pass_regex = /^[a-zA-Z0-9]{8,}/;
-const emailRegInput = document.querySelector('#reg-email');
-const passRegInput = document.querySelector('#reg-password');
-const nameInput = document.querySelector('#reg-name');
-const lastNameInput = document.querySelector('#reg-lastname');
-
-const emailLogInput = document.querySelector('#log-email');
-const passLogInput = document.querySelector('#log-password');
 
 
-// const modalRegBtn = document.querySelector('.modal-reg-btn');
-// const modalLogBtn = document.querySelector('.modal-log-btn');
-
-function isEmailValid(value) {
-  return email_regex.test(value);
-}
-
-function isPassValid(value) {
-  return pass_regex.test(value);
-}
-
-function onEmailInput() {
-  if (isEmailValid(emailRegInput.value)) {
-    emailRegInput.classList.remove('wrong');
-   
-  } else {
-    emailRegInput.classList.add('wrong');
-  }
-}
-
-function onPassInput(input) {
-  if (isPassValid(input.value)) {
-    input.classList.remove('wrong');
-  } else {
-    input.classList.add('wrong');
-  }
-}
- 
-emailRegInput.addEventListener('input', onEmailInput);
-passRegInput.addEventListener('input', () => {
-  onPassInput(passRegInput);
-});
-passLogInput.addEventListener('input', () => {
-  onPassInput(passLogInput);
+modalAuthInputs.forEach((inp) => {
+  inp.addEventListener('input', () => {
+    if (inp.validity.valid) {
+      inp.classList.remove('wrong');
+      const tooltip = inp.nextElementSibling;
+      tooltip.classList.add('hidden');
+    } else {
+      showError(inp);
+    }
+  })
 });
 
-const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
-const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
-
-
+const errorLogin = modalLogin.querySelector('.modal-auth__error');
+const errorReg = modalRegister.querySelector('.modal-auth__error');
 
 formRegister.addEventListener('submit', (e) => {
-  // console.log('submitreg');
   e.preventDefault();
-  
-  if (modalRegInputsArr.some((el) => el.value === '') ||
-      emailRegInput.classList.contains('wrong') ||
-      passRegInput.classList.contains('wrong')) {
+  const errElement = modalRegInputsArr.find((el) => !el.validity.valid);
+  if(errElement) {
+    showError(errElement);
     return;
   } else {
-    currUser = submitRegister();
-    clearInputs(modalRegister);
-    logIn(currUser);
-    setTimeout(() => {
-      closeModal(modalRegister);
-    }, 100);
-
-    changeLibraryCardContent();
-    setUserDataLibCardAuth(currUser);
-    setDataModalProfile(currUser);
-  }
+    for(let i=0; i<localStorage.length; i++) {
+      let key = localStorage.key(i);
+      let user = JSON.parse(localStorage.getItem(key));
+      // console.log(emailRegInput.value);
+      // console.log(user.email);
+      if (emailRegInput.value === user.email) {
+        errorReg.classList.remove('hidden');
+      setTimeout(() => {
+        errorReg.classList.add('hidden');
+      }, 3000);
+      return;
+      } else {
+        currUser = submitRegister();
+        clearInputs(modalRegister);
+        logIn(currUser);
+        setTimeout(() => {
+          closeModal(modalRegister);
+        }, 100); 
+        changeLibraryCardContent();
+        setUserDataLibCardAuth(currUser);
+        setDataModalProfile(currUser);
+      }
+    }
+  }  
 });
+
+
+
 
 formLogin.addEventListener('submit', (e) => {
   // console.log('submitLogin');
   e.preventDefault();
   
-  if (modalLogInputsArr.some((el) => el.value === '') ||
-      passLogInput.classList.contains('wrong')) {
+  const errElement = modalLogInputsArr.find((el) => !el.validity.valid);
+  if(errElement) {
+    showError(errElement);
     return;
   } else {
     currUser = submitLogin();
@@ -517,8 +517,13 @@ formLogin.addEventListener('submit', (e) => {
       setUserDataLibCardAuth(currUser);
       setDataModalProfile(currUser);
       changeBooksButtons(currUser);
+      // errorLogin.classList.remove('hidden');
     } else {
-      return
+      errorLogin.classList.remove('hidden');
+      setTimeout(() => {
+        errorLogin.classList.add('hidden');
+      }, 3000)
+      return;
     }    
   }
 });
@@ -527,10 +532,13 @@ formLogin.addEventListener('submit', (e) => {
 
 function submitRegister() {
   let key = generateCardNumber();
+
+  
+
   let user = {
     key: key,
-    name: nameInput.value.toLowerCase(),
-    lastName: lastNameInput.value.toLowerCase(),
+    name: nameInput.value[0].toUpperCase() + nameInput.value.slice(1),
+    lastName: lastNameInput.value[0].toUpperCase() + lastNameInput.value.slice(1),
     email: emailRegInput.value,
     password: passRegInput.value,
     login: true,
@@ -569,7 +577,7 @@ function clearInputs(elem) {
 function logIn(user) {
   profileIcon.classList.add('hidden');
   profileIconLog.classList.remove('hidden');
-  const iconName  = user.name[0].toUpperCase() + user.lastName[0].toUpperCase();
+  const iconName  = user.name[0] + user.lastName[0];
   profileIconLog.innerText = iconName;
   profileIconLog.setAttribute('title', `${user.name} ${user.lastName}`);
   dropMenuTitle.innerText = user.key;
@@ -647,11 +655,13 @@ function setUserDataLibraryCardNoAuth() {
     let user = JSON.parse(localStorage.getItem(key));
     if (user.key === cardNumberInput.value &&
       ((user.name + ' ' + user.lastName).toLowerCase()) === fullNameInput.value.toLowerCase()) {
+      fullNameInput.value = user.name + ' ' + user.lastName;
       cardVisitsCount.innerText = user.visits;
-      cardBooksCount.innerText = user.books;
+      cardBooksCount.innerText = user.books.length;
       return true;
     }
   }
+
   return false;    
 }
 
@@ -730,7 +740,7 @@ function setUserDataLibCardAuth(user) {
 
 
 function setDataModalProfile(user) {
-  profilePhoto.innerText = user.name[0].toUpperCase() + user.lastName[0].toUpperCase();
+  profilePhoto.innerText = user.name[0] + user.lastName[0];
   profileName.innerText = user.name + ' ' + user.lastName;
   profileVisitsCount.innerText = user.visits;
   profileBooksCount.innerText = user.books.length;
@@ -753,6 +763,8 @@ copyNumberBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(profieCardNumber.innerText);
 });
 
+
+
 buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();
   if (!currUser.buyCard) {
@@ -762,11 +774,11 @@ buyCardForm.addEventListener('submit' , (e) => {
 });
 
 function addRentedBookToUser(book) {
-  console.log ('book=', book);
+  // console.log ('book=', book);
   const bookItem = document.createElement('li');
   bookItem.classList.add('modal-profile__booklist-item');
   bookItem.innerHTML = book;
-  console.log('bookItem=', bookItem);
+  // console.log('bookItem=', bookItem);
   rentedBooks.append(bookItem);
   profileBooksCount.innerText = +profileBooksCount.innerText + 1;
   cardBooksCount.innerText = +cardBooksCount.innerText + 1;
