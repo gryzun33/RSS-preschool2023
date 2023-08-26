@@ -2,9 +2,8 @@ const inputBankCardNumb = document.querySelector('#bank-card-numb');
 const inputBankCardCvc = document.querySelector('#bank-card-cvc');
 const inputExpCodes = document.querySelectorAll('.exp-code input');
 
-export function submitBankCard() {
+export function validateBankCard() {
   // console.log('проверка валидности');
-
   inputBankCardNumb.addEventListener('input', () => {
     if (inputBankCardNumb.validity.patternMismatch) {
     inputBankCardNumb.setCustomValidity("card number must contain 16 digits");
@@ -26,7 +25,7 @@ export function submitBankCard() {
       if (inp.validity.patternMismatch) {
         inp.setCustomValidity("exp.code number must contain 2 digits");
         } else {
-          inp.setCustomValidity('');
+        inp.setCustomValidity('');
         }
     })
   })

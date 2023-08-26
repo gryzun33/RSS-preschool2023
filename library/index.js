@@ -1,4 +1,5 @@
-import { submitBankCard } from './modules/modalBuyCard.js';
+import { validateBankCard } from './modules/validateBankCard.js';
+import { generateCardNumber } from './modules/generateCardNumber.js';
 
 let burger = document.querySelector('.burger');
 let burgerFirst = document.querySelector('.burger span:nth-child(1)');
@@ -43,8 +44,8 @@ let currentBookBtn = null;
 
 let currUser = null;
 
-findCurrentUser();
-submitBankCard();
+findCurrentUser ();
+validateBankCard ();
 
 const toggleBurger = () => {
   // console.log('toggleburger');
@@ -433,8 +434,8 @@ const emailLogInput = document.querySelector('#log-email');
 const passLogInput = document.querySelector('#log-password');
 
 
-const modalRegBtn = document.querySelector('.modal-reg-btn');
-const modalLogBtn = document.querySelector('.modal-log-btn');
+// const modalRegBtn = document.querySelector('.modal-reg-btn');
+// const modalLogBtn = document.querySelector('.modal-log-btn');
 
 function isEmailValid(value) {
   return email_regex.test(value);
@@ -447,6 +448,7 @@ function isPassValid(value) {
 function onEmailInput() {
   if (isEmailValid(emailRegInput.value)) {
     emailRegInput.classList.remove('wrong');
+   
   } else {
     emailRegInput.classList.add('wrong');
   }
@@ -522,14 +524,6 @@ formLogin.addEventListener('submit', (e) => {
 });
 
 
-// generateCardNumber
-function generateCardNumber() {
-  const minDec = parseInt('000000000', 16);
-  const maxDec = parseInt('fffffffff', 16);
-  const numb = Math.floor(Math.random() * (maxDec - minDec + 1)) + minDec;
-  const numbToHex = numb.toString(16).toUpperCase();
-  return numbToHex;
-}
 
 function submitRegister() {
   let key = generateCardNumber();
@@ -759,14 +753,12 @@ copyNumberBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(profieCardNumber.innerText);
 });
 
-
 buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();
-  console.log ('submitbuycard');
   if (!currUser.buyCard) {
     currUser.buyCard = true;
     addRentedBookToUser(rentedBook);
-  }  
+  }
 });
 
 function addRentedBookToUser(book) {
@@ -785,9 +777,6 @@ function addRentedBookToUser(book) {
 }
 
 
-// function findRentedBooks() {
-  
-// }
 
 function changeBooksButtons(currUser) {
   let ownBooks = currUser.books;
