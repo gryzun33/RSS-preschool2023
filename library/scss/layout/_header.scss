@@ -1,13 +1,15 @@
 .header {
   background-color: $color-dark-l;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  min-height: 90px;
+  position: relative;
   
   &__wrapper {
     @include wrapper;
     @include flex(space-between, center);
     padding-top: 20px;
     padding-bottom: 20px;
-    overflow-x: hidden;
+    // overflow-x: hidden;
   }
 
   &__title {
@@ -56,11 +58,44 @@
       }
     }
 
+    .profile-box {
+      position: relative;
+      height: 28px;
+    }
+
+    .profile-icon-log {
+      width: 28px;
+      height: 28px;
+      border-radius: 50px;
+      background-color: $color-light;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $color-secondary;
+      @include text-regular;
+      font-size: 15px;
+      line-height: 20px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      // margin-top: 2px;
+      z-index: 6;
+    }
+
+    
+
+    
+
     .profile {
-      padding-top: 2px;
+      width: 28px;
+      height: 28px;
+
+      // padding-top: 2px;
       z-index: 6;
       border: none;
       background-color: transparent;
+      position: relative;
+      // overflow: hidden;
 
       & svg g path {
         transition: all 0.3s ease-out;
@@ -76,6 +111,10 @@
         fill: $color-secondary;        
         }
       }
+    }
+
+    .hidden {
+      display: none;
     }
 
     .burger {
@@ -130,7 +169,8 @@
   
     height: 480px;
     width: 332px;
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     top: 90px;  
     right: -332px;
     background-color: $color-dark-l;
@@ -183,3 +223,75 @@
     }    
   }
 }
+
+
+.dropmenu {
+  min-width: 80px;
+  height: 0;
+  // height: 115px;
+  background-color: $color-light;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  // padding-top: 5px;
+
+  position:absolute;
+  top: 28px;
+  right: 0px;
+  z-index: 8;
+  transition: height 0.3s ease-in-out;
+
+
+  &__title {
+    margin-top: 5px;
+    @include text-bold;
+    color: $color-dark;
+
+    
+  }
+
+  &__title-auth {
+    font-size: 13px;   
+  }
+
+  &__line {
+    margin-top: 5px;
+    width: 40px;
+    height: 1px;
+    background-color: $color-secondary;
+  }
+
+  &__items {
+    margin-top: 15px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    
+
+    li {
+      @include text-regular;
+      transition: all 0.3s ease-in-out;
+      @media (hover:hover) {
+        &:hover {
+          cursor: pointer;
+          color: $color-secondary;
+        }
+      }     
+    }
+  }
+
+  &__show {
+    height: 115px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+
