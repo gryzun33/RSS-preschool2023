@@ -1,0 +1,115 @@
+.modal-buyacard {
+  position: relative;
+  width: 640px;
+
+
+  &__btn {
+    background-color: $color-dark-l;
+    border: none;
+    position: absolute;
+    top: 24px;
+    right: 20px;
+
+    svg g path {
+      stroke: $color-light;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    @include font-title;
+    font-size: 40px;
+    line-height: 20px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-light;
+    background-color: $color-dark-l;
+    padding: 20px 0;
+  }
+
+  &__content {
+    display: flex;
+    padding: 30px 35px 40px 35px;
+    justify-content: space-between;
+    background-color: $color-light;
+  }
+
+  &__form {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      @include text-regular;
+      font-size: 15px;
+      line-height: 20px;
+      letter-spacing: 0.3px;
+      color: $color-dark;
+
+      input {
+        height: 20px;
+        margin-top: 10px;
+        border: 1px solid $color-additional;
+        outline: none;
+        padding-left: 3px;
+      }
+    }
+
+    label:nth-child(3) > input {
+      width: 45px;  
+    }
+
+    label:nth-child(4) {
+      margin-top: 10px;
+    }
+
+    .exp-code {
+      display: flex;
+      gap: 10px;
+
+      input {
+        width: 45px;
+
+        // &:invalid {
+        //   border-color: red;
+        // }
+      }
+    }
+
+    .price-box {
+      display: flex;
+      margin-top: 10px;
+
+      &__btn {
+        @include button-light;
+      }
+
+      &__price {
+        margin-left: 25px;
+        color: $color-dark-l;
+        @include text-bold;
+        font-size: 20px;
+        line-height: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &__text {
+    width: 330px;
+    @include text-regular;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    color: $color-additional;
+  }
+}

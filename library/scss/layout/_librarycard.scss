@@ -73,6 +73,10 @@
             &::placeholder {
               color: $color-additional;
             }
+
+            &:disabled {
+              background-color: $color-light;
+            }
           }     
         }
 
@@ -101,6 +105,31 @@
           width: 242px;
           height: 44px;
           font-size: 20px;
+        }
+
+        .card-data {
+          width: 169px;
+          height: 63px;
+          margin-top: 15px;
+          @include flex(space-between);
+          margin-right: auto;
+          margin-left: auto; 
+
+          &__item {
+            @include flex-column(space-between, center);
+          }
+
+          &__name, &__count {
+            @include text-regular;
+            font-size: 10px;
+            line-height: 20px;
+            letter-spacing: 0.2px;
+            color: $color-dark;
+          }          
+        }
+
+        .hidden {
+          display: none;
         }
       }
     }
@@ -139,7 +168,8 @@
       &__buttons {
         margin-top: 35px;
         width: 170px;
-        @include flex(space-between);
+        @include flex(flex-end);
+        column-gap: 20px;
 
         @include laptops {
           margin-top: 40px;

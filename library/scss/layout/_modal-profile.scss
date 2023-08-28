@@ -1,0 +1,159 @@
+.modal-profile {
+  position: relative;
+  display: flex;
+  width: 600px;
+  background-color: $color-light;
+
+  &__btn {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    top: 23px;
+    right: 23px;
+    background-color: $color-light;
+    border: none;
+
+      &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__user {
+    width: 170px;
+    background-color: $color-dark-l;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__photo {
+    width: 80px;
+    height: 80px;
+    background-color: $color-light;
+    color: $color-secondary;
+    @include text-regular;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__name {
+    width: 120px;
+    text-align: center;
+    @include text-regular;
+    color: $color-dark;
+    font-size: 20px;
+    line-height: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: $color-light;
+    margin-top: 15px;
+    text-transform: capitalize;
+  }
+
+  &__content {
+    padding: 40px 20px 39px 20px;
+  }
+
+  &__title {
+    @include font-title;
+    font-size: 40px;
+    line-height: 20px;
+    letter-spacing: 0.8px;
+    color: $color-dark;
+    text-transform: uppercase;
+  }
+
+  &__stat {
+    margin-top: 40px;
+    display: flex;
+    column-gap: 20px;
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 10px;
+
+      &__name {
+        @include text-regular;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0.4px;
+        color: $color-dark;
+      }
+
+      &__icon {
+        width: 20px;
+        height: 21px;
+      }
+
+      &__count {
+        @include text-regular;
+        color: $color-dark;
+        font-size: 10px;
+        line-height: 20px;
+        letter-spacing: 0.2px;
+      }
+    }
+  }
+
+  &__subtitle {
+    margin-top: 20px;
+    @include text-regular;
+    font-size: 25px;
+    line-height: 20px;
+  }
+
+  &__booklist {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-left: 29px;
+    width: 400px;
+    height: 70px;
+    overflow: auto;
+    position: relative;
+
+   
+  }
+
+  &__booklist-item {
+    @include text-inter-20;
+    line-height: 20px;
+    text-transform: capitalize;
+    // display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__card-box {
+    margin-top: 20px;
+    display: flex;
+    column-gap: 15px;
+    @include text-regular;
+    font-size: 20px;
+    line-height: 20px;
+    color: $color-dark-l;
+
+  
+  }
+
+  &__copy-number-btn {
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+  } 
+
+  &__card-number {
+    color: $color-additional;
+  }
+}
