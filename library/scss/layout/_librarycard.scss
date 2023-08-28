@@ -168,7 +168,7 @@
       &__buttons {
         margin-top: 35px;
         width: 170px;
-        @include flex(center);
+        @include flex(flex-end);
         column-gap: 20px;
 
         @include laptops {

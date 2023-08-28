@@ -577,7 +577,7 @@ a {
   align-items: center;
   overflow: hidden;
   position: absolute;
-  top: 50px;
+  top: 28px;
   right: 0px;
   z-index: 8;
   transition: height 0.3s ease-in-out;
@@ -1600,7 +1600,7 @@ a {
   margin-top: 35px;
   width: 170px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: normal;
   -moz-column-gap: 20px;
        column-gap: 20px;
@@ -2019,6 +2019,7 @@ a {
   width: 400px;
   height: 70px;
   overflow: auto;
+  position: relative;
 }
 .modal-profile__booklist-item {
   color: #000000;

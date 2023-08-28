@@ -449,20 +449,14 @@ modalAuthInputs.forEach((inp) => {
 
 formRegister.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log('submit');
   const errElement = modalRegInputsArr.find((el) => !el.validity.valid);
   if(errElement) {
     showError(errElement);
-    console.log('error');
     return;
   } else {
-    console.log('else');
-    console.log(localStorage.length);
     for(let i=0; i<localStorage.length; i++) {
       let key = localStorage.key(i);
       let user = JSON.parse(localStorage.getItem(key));
-      // console.log(emailRegInput.value);
-      // console.log(user.email);
       if (emailRegInput.value === user.email) {
         errorReg.classList.remove('hidden');
       setTimeout(() => {errorReg.classList.add('hidden')}, 3000);
@@ -470,7 +464,6 @@ formRegister.addEventListener('submit', (e) => {
       } 
     }     
   } 
-  console.log('nameInput', nameInput.value);
   currUser = createNewUser(nameInput.value, lastNameInput.value, emailRegInput.value, passRegInput.value);
   clearInputs(modalRegister);
   logIn(currUser);     
@@ -516,8 +509,6 @@ function submitLogin() {
   for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     let user = JSON.parse(localStorage.getItem(key));
-    // console.log ('user=', user);
- 
     if ((user.key === emailLogInput.value || user.email === emailLogInput.value) &&
       user.password === String(passLogInput.value)) {
       user.login = true;
@@ -721,11 +712,9 @@ buyCardForm.addEventListener('submit' , (e) => {
 });
 
 function addRentedBookToUser(book) {
-  // console.log ('book=', book);
   const bookItem = document.createElement('li');
   bookItem.classList.add('modal-profile__booklist-item');
   bookItem.innerHTML = book;
-  // console.log('bookItem=', bookItem);
   rentedBooks.append(bookItem);
   profileBooksCount.innerText = +profileBooksCount.innerText + 1;
   cardBooksCount.innerText = +cardBooksCount.innerText + 1;
