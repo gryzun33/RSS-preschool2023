@@ -1,41 +1,52 @@
 import { validateBankCard } from './modules/validateBankCard.js';
-import { generateCardNumber } from './modules/generateCardNumber.js';
+import { createNewUser } from './modules/createNewUser.js';
 import { showError } from './modules/showError.js';
+// import { generateCardNumber } from './modules/generateCardNumber.js';
 
-let burger = document.querySelector('.burger');
-let burgerFirst = document.querySelector('.burger span:nth-child(1)');
-let burgerSecond = document.querySelector('.burger span:nth-child(2)');
-let burgerThird = document.querySelector('.burger span:nth-child(3)');
-let burgerMenu = document.querySelector('.burger-menu');
+// burger-menu
+const burger = document.querySelector('.burger');
+const burgerFirst = document.querySelector('.burger span:nth-child(1)');
+const burgerSecond = document.querySelector('.burger span:nth-child(2)');
+const burgerThird = document.querySelector('.burger span:nth-child(3)');
+const burgerMenu = document.querySelector('.burger-menu');
 const menuLinks = document.querySelectorAll('.burger-menu a');
+
+// profile icon 
 const profileIcon = document.querySelector('.profile');
 const profileIconLog = document.querySelector('.profile-icon-log');
 
+// dropmenu
 const dropMenu = document.querySelector('.dropmenu__noauth');
 const dropMenuAuth = document.querySelector('.dropmenu__auth');
 const dropMenuTitle = document.querySelector('.dropmenu__title-auth');
+const regBtn = document.querySelector('.reg-btn');
+const loginBtn = document.querySelector('.log-btn'); 
+const myProfileBtn = document.querySelector('.profile-btn');
+const logoutBtn = document.querySelector('.logout-btn');
 
-const readerCardTitle = document.querySelector('.readercard__title');
-const readerCardText = document.querySelector('.readercard__text');
+// modal 
+const modalWrappers  = document.querySelectorAll('.modal-wrapper');
+const modalRegister = document.querySelector('.modal-register');
+const modalLogin = document.querySelector('.modal-login');
+const modalProfile = document.querySelector('.modal-profile-wrapper');
+const modalBuyCard = document.querySelector('.modal-buyacard-wrapper');
+const closeRegBtn = document.querySelector('.close-reg-btn');
+const closeLogBtn = document.querySelector('.close-log-btn');
+const closeProfileBtn = document.querySelector('.modal-profile__btn');
+const closeBuyCardBtn = document.querySelector('.modal-buyacard__btn');
 
-const readerRegBtn = document.querySelector('.reader__reg__btn');
-const readerLogBtn = document.querySelector('.reader__login__btn');
-const readerProfileBtn = document.querySelector('.reader__profile__btn');
+// modal register and login
 
-const cardFinderTitle = document.querySelector('.cardfinder__title');
-const checkCardBtn  = document.querySelector('.card__btn');
-const cardData  = document.querySelector('.card-data');
-const fullNameInput = document.querySelector('.card__name');
-const cardNumberInput = document.querySelector('.card__number');
-const cardVisitsCount = document.querySelector('.card-visits-count');
-const cardBooksCount = document.querySelector('.card-books-count');
+const formRegister = document.querySelector('#register-form');
+const formLogin = document.querySelector('#login-form');
+const addRegBtn = document.querySelector('.add-reg-btn');
+const addLogBtn = document.querySelector('.add-log-btn');
+const errorLogin = modalLogin.querySelector('.modal-auth__error');
+const errorReg = modalRegister.querySelector('.modal-auth__error');
 
-const profilePhoto = document.querySelector('.modal-profile__photo');
-const profileName = document.querySelector('.modal-profile__name');
-const profileVisitsCount = document.querySelector('.stat__visits');
-const profileBooksCount = document.querySelector('.stat__books');
-const rentedBooks = document.querySelector('.modal-profile__booklist');
-const profieCardNumber = document.querySelector('.modal-profile__card-number');
+const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
+const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
+const modalAuthInputs = [...modalRegInputsArr, ...modalLogInputsArr];
 
 const emailRegInput = document.querySelector('#reg-email');
 const passRegInput = document.querySelector('#reg-password');
@@ -44,50 +55,79 @@ const lastNameInput = document.querySelector('#reg-lastname');
 const emailLogInput = document.querySelector('#log-email');
 const passLogInput = document.querySelector('#log-password');
 
-const modalWrappers  = document.querySelectorAll('.modal-wrapper');
+// modal profile
+const profilePhoto = document.querySelector('.modal-profile__photo');
+const profileName = document.querySelector('.modal-profile__name');
+const profileVisitsCount = document.querySelector('.stat__visits');
+const profileBooksCount = document.querySelector('.stat__books');
+const rentedBooks = document.querySelector('.modal-profile__booklist');
+const profieCardNumber = document.querySelector('.modal-profile__card-number');
 
-const modalRegister = document.querySelector('.modal-register');
-const modalLogin = document.querySelector('.modal-login');
-const modalProfile = document.querySelector('.modal-profile-wrapper');
-const modalBuyCard = document.querySelector('.modal-buyacard-wrapper');
 
-const modalRegInputsArr = Array.from(modalRegister.querySelectorAll('input'));
-const modalLogInputsArr = Array.from(modalLogin.querySelectorAll('input'));
-const modalAuthInputs = [...modalRegInputsArr, ...modalLogInputsArr];
+// modal buy card
+const buyCardForm = document.querySelector('.modal-buyacard__form');
 
+// library card
+const cardFinderTitle = document.querySelector('.cardfinder__title');
+const checkCardBtn  = document.querySelector('.card__btn');
+const cardData  = document.querySelector('.card-data');
+const fullNameInput = document.querySelector('.card__name');
+const cardNumberInput = document.querySelector('.card__number');
+const cardVisitsCount = document.querySelector('.card-visits-count');
+const cardBooksCount = document.querySelector('.card-books-count');
+
+const readerCardTitle = document.querySelector('.readercard__title');
+const readerCardText = document.querySelector('.readercard__text');
+
+const readerRegBtn = document.querySelector('.reader__reg__btn');
+const readerLogBtn = document.querySelector('.reader__login__btn');
+const readerProfileBtn = document.querySelector('.reader__profile__btn');
+
+// favorites
 const books = document.querySelectorAll('.book');
-
 const buyBookButtons = document.querySelectorAll('.book__btn');
+const menuFavorites = document.querySelector('.favorites__buttons-box');
+
+// other
+let currUser = null;
 let rentedBook = null;
 let currentBookBtn = null;
 
-let currUser = null;
+let lastWindowWidth = window.innerWidth;
+let newWindowWidth;
 
 findCurrentUser ();
 validateBankCard ();
 
-const toggleBurger = () => {
-  // console.log('toggleburger');
-  burgerFirst.classList.toggle('burger-first');
-  burgerSecond.classList.toggle('burger-second');
-  burgerThird.classList.toggle('burger-third');
-  burgerMenu.classList.toggle('burger-menu__show');
-  if(burgerMenu.classList.contains('burger-menu__show')) {
-    document.body.style.overflowY = 'hidden';
-  } else {
-    document.body.style.overflowY = '';
+// resize window
+window.addEventListener('resize', function() {
+  calculateSliderDim ();
+  newWindowWidth = window.innerWidth;
+
+  if (newWindowWidth <= 1024 && lastWindowWidth > 1024) {
+    initSlider();
+    checkEnableArrows();
+  }  
+  if (lastWindowWidth <= 1024 && newWindowWidth > 1024) {
+    removeBurger();
+    initSlider();    
   }
-}
+  lastWindowWidth = newWindowWidth;
+});
 
-const removeBurger = () => {
-  // console.log('removeburger');
-  burgerMenu.classList.remove('burger-menu__show');
-  burgerFirst.classList.remove('burger-first');
-  burgerSecond.classList.remove('burger-second');
-  burgerThird.classList.remove('burger-third');
-  document.body.style.overflowY = '';
-}
+// scroll window 
+window.addEventListener('scroll', function() {
+  const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
+  if (window.scrollY >= menuFavoritesY && window.innerWidth <= 1250) {
+    menuFavorites.classList.add('sticky');
+    document.querySelector('.favorites__sticky-line').classList.remove('hidden');
+  } else {
+    menuFavorites.classList.remove('sticky');
+    document.querySelector('.favorites__sticky-line').classList.add('hidden');  
+  }
+});
 
+// burger-menu
 burger.addEventListener('click', () => {
   toggleBurger();
   if (dropMenu.classList.contains('dropmenu__show')) {
@@ -114,42 +154,27 @@ document.body.addEventListener('click', (e) => {
   }
 });
 
-// resize window
-
-let lastWindowWidth = window.innerWidth;
-let newWindowWidth;
-
-window.addEventListener('resize', function() {
-  calculateSliderDim ();
-  newWindowWidth = window.innerWidth;
-
-  if (newWindowWidth <= 1024 && lastWindowWidth > 1024) {
-    initSlider();
-    checkEnableArrows();
-  }  
-  if (lastWindowWidth <= 1024 && newWindowWidth > 1024) {
-    removeBurger();
-    initSlider();    
-  }
-  lastWindowWidth = newWindowWidth;
-});
-
-// scroll window 
-const menuFavorites = document.querySelector('.favorites__buttons-box');
-
-window.addEventListener('scroll', function() {
-  const menuFavoritesY = menuFavorites.getBoundingClientRect().top + window.scrollY;
-  if (window.scrollY >= menuFavoritesY && window.innerWidth <= 1250) {
-    menuFavorites.classList.add('sticky');    
+function toggleBurger() {
+  burgerFirst.classList.toggle('burger-first');
+  burgerSecond.classList.toggle('burger-second');
+  burgerThird.classList.toggle('burger-third');
+  burgerMenu.classList.toggle('burger-menu__show');
+  if(burgerMenu.classList.contains('burger-menu__show')) {
+    document.body.style.overflowY = 'hidden';
   } else {
-    menuFavorites.classList.remove('sticky');
+    document.body.style.overflowY = '';
   }
-});
+}
 
-// слайдер
+function removeBurger() {
+  burgerMenu.classList.remove('burger-menu__show');
+  burgerFirst.classList.remove('burger-first');
+  burgerSecond.classList.remove('burger-second');
+  burgerThird.classList.remove('burger-third');
+  document.body.style.overflowY = '';
+}
 
-let sliderShift = 0;
-let numbOfSlide = 1;
+// slider
 const slideLength = document.querySelectorAll('.slider__image').length;
 const sliderInner = document.querySelector('.slider__inner');
 const sliderOuter = document.querySelector('.slider__outer');
@@ -157,6 +182,9 @@ const sliderImage = document.querySelector('.slider__image');
 const arrowLeft = document.querySelector('.slider__arrow_left');
 const arrowRight = document.querySelector('.slider__arrow_right');
 const paginationButtons = document.querySelectorAll('.pagination__box');
+
+let sliderShift = 0;
+let numbOfSlide = 1;
 
 initSlider();
 calculateSliderDim();
@@ -202,7 +230,6 @@ sliderShift = (sliderImageWidth + gapWidth) * 100 / sliderOuterWidth ;
 }
 
 function initSlider() {
-  // console.log('initslider');
   numbOfSlide = 1;
   arrowLeft.setAttribute('disabled', 'disabled');
   arrowLeft.classList.add('slider__arrow__non-active');
@@ -252,9 +279,7 @@ function changeCurrentButton (numb) {
   currentBtnInner.classList.add('pagination__inner__active');
 }
 
-
 // favorites
-
 const seasonInputs = document.querySelectorAll('[name="fav_button"]');
 seasonInputs[0].checked = true;
 let prevSeason = Array.from(seasonInputs).find((inp) => inp.checked === true).id;
@@ -263,7 +288,10 @@ let prevBookBox;
 
 seasonInputs.forEach((input) => {
   input.addEventListener('click', () => {
-    // console.log('click');
+
+    if(prevSeason === input.id) {
+      return;
+    }
     
     if (currBookBox) {
       currBookBox.classList.remove('books__box__show');
@@ -296,37 +324,7 @@ seasonInputs.forEach((input) => {
 })
 
 
-
-
-
-
-
 // dropmenu
-
-
-const formRegister = document.querySelector('#register-form');
-const formLogin = document.querySelector('#login-form');
-
-const regBtn = document.querySelector('.reg-btn');
-const loginBtn = document.querySelector('.log-btn');
- 
-const myProfileBtn = document.querySelector('.profile-btn');
-const logoutBtn = document.querySelector('.logout-btn');
-
-const addRegBtn = document.querySelector('.add-reg-btn');
-const addLogBtn = document.querySelector('.add-log-btn');
-
-
-const closeRegBtn = document.querySelector('.close-reg-btn');
-const closeLogBtn = document.querySelector('.close-log-btn');
-
-const closeProfileBtn = document.querySelector('.modal-profile__btn');
-const closeBuyCardBtn = document.querySelector('.modal-buyacard__btn');
-
-const buyCardForm = document.querySelector('.modal-buyacard__form');
-
-
-// const buyCardBtn = document.querySelector('.price-box__btn');
 
 profileIcon.addEventListener('click', () => {
   if (burgerMenu.classList.contains('burger-menu__show')) {
@@ -351,6 +349,21 @@ readerLogBtn.addEventListener('click', openModalLogin);
 myProfileBtn.addEventListener('click', openModalProfile);
 readerProfileBtn.addEventListener('click', openModalProfile);
 
+logoutBtn.addEventListener('click', () => {
+  logOut();
+  changeLibraryCardContent();
+});
+
+
+// modal 
+modalWrappers.forEach((wrapper) => {
+  wrapper.addEventListener('click', (e) => {
+    if (e.target === wrapper) {
+      closeModal(wrapper);
+    }
+  })
+});
+
 closeRegBtn.addEventListener('click', () => {
   closeModal(modalRegister);
 });
@@ -366,53 +379,6 @@ closeProfileBtn.addEventListener('click', () => {
 closeBuyCardBtn.addEventListener('click', () => {
   closeModal(modalBuyCard);
 });
-
-
-
-addLogBtn.addEventListener('click', () => {
-  modalRegister.classList.add('hidden');
-  modalLogin.classList.remove('hidden');
-  clearInputs(modalRegister);
-  modalRegInputsArr.forEach((inp) => {
-    inp.classList.remove('wrong');
-    const tooltip = inp.nextElementSibling;
-    tooltip.classList.add('hidden');
-  })
-});
-
-addRegBtn.addEventListener('click', () => {
-  modalLogin.classList.add('hidden');
-  modalRegister.classList.remove('hidden');
-  modalLogInputsArr.forEach((inp) => {
-    inp.classList.remove('wrong');
-    const tooltip = inp.nextElementSibling;
-    tooltip.classList.add('hidden');
-  })
-  clearInputs(modalLogin);  
-});
-
-
-
-
-
-logoutBtn.addEventListener('click', () => {
-  logOut();
-  changeLibraryCardContent();
-});
-
-modalWrappers.forEach((wrapper) => {
-  wrapper.addEventListener('click', (e) => {
-    if (e.target === wrapper) {
-      wrapper.classList.add('hidden');
-      document.body.style.overflowY = '';
-    }
-  })
-})
-
-function closeModal(elem) {
-  elem.classList.add('hidden');
-  document.body.style.overflowY = '';
-}
 
 function openModalRegister() {
   if (dropMenu.classList.contains('dropmenu__show')) {
@@ -441,9 +407,33 @@ function openModalBuyCard() {
   document.body.style.overflowY = 'hidden';
 }
 
-// validation email
+function closeModal(elem) {
+  elem.classList.add('hidden');
+  document.body.style.overflowY = '';
+}
 
+// modal register and login
+addLogBtn.addEventListener('click', () => {
+  modalRegister.classList.add('hidden');
+  modalLogin.classList.remove('hidden');
+  modalRegInputsArr.forEach((inp) => {
+    inp.classList.remove('wrong');
+    const tooltip = inp.nextElementSibling;
+    tooltip.classList.add('hidden');
+  })
+  clearInputs(modalRegister);
+});
 
+addRegBtn.addEventListener('click', () => {
+  modalLogin.classList.add('hidden');
+  modalRegister.classList.remove('hidden');
+  modalLogInputsArr.forEach((inp) => {
+    inp.classList.remove('wrong');
+    const tooltip = inp.nextElementSibling;
+    tooltip.classList.add('hidden');
+  })
+  clearInputs(modalLogin);  
+});
 
 modalAuthInputs.forEach((inp) => {
   inp.addEventListener('input', () => {
@@ -457,16 +447,17 @@ modalAuthInputs.forEach((inp) => {
   })
 });
 
-const errorLogin = modalLogin.querySelector('.modal-auth__error');
-const errorReg = modalRegister.querySelector('.modal-auth__error');
-
 formRegister.addEventListener('submit', (e) => {
   e.preventDefault();
+  console.log('submit');
   const errElement = modalRegInputsArr.find((el) => !el.validity.valid);
   if(errElement) {
     showError(errElement);
+    console.log('error');
     return;
   } else {
+    console.log('else');
+    console.log(localStorage.length);
     for(let i=0; i<localStorage.length; i++) {
       let key = localStorage.key(i);
       let user = JSON.parse(localStorage.getItem(key));
@@ -474,39 +465,33 @@ formRegister.addEventListener('submit', (e) => {
       // console.log(user.email);
       if (emailRegInput.value === user.email) {
         errorReg.classList.remove('hidden');
-      setTimeout(() => {
-        errorReg.classList.add('hidden');
-      }, 3000);
+      setTimeout(() => {errorReg.classList.add('hidden')}, 3000);
       return;
-      } else {
-        currUser = submitRegister();
-        clearInputs(modalRegister);
-        logIn(currUser);
-        setTimeout(() => {
-          closeModal(modalRegister);
-        }, 100); 
-        changeLibraryCardContent();
-        setUserDataLibCardAuth(currUser);
-        setDataModalProfile(currUser);
-      }
-    }
-  }  
+      } 
+    }     
+  } 
+  console.log('nameInput', nameInput.value);
+  currUser = createNewUser(nameInput.value, lastNameInput.value, emailRegInput.value, passRegInput.value);
+  clearInputs(modalRegister);
+  logIn(currUser);     
+  changeLibraryCardContent();
+  setUserDataLibCardAuth(currUser);
+  setDataModalProfile(currUser);
+  setTimeout(() => {
+    closeModal(modalRegister);
+  }, 100);   
 });
 
 
 
-
 formLogin.addEventListener('submit', (e) => {
-  // console.log('submitLogin');
   e.preventDefault();
-  
   const errElement = modalLogInputsArr.find((el) => !el.validity.valid);
   if(errElement) {
     showError(errElement);
     return;
   } else {
     currUser = submitLogin();
-    // console.log ('currUser=', currUser);
     if (currUser) {
       clearInputs(modalLogin);
       logIn(currUser);
@@ -517,7 +502,6 @@ formLogin.addEventListener('submit', (e) => {
       setUserDataLibCardAuth(currUser);
       setDataModalProfile(currUser);
       changeBooksButtons(currUser);
-      // errorLogin.classList.remove('hidden');
     } else {
       errorLogin.classList.remove('hidden');
       setTimeout(() => {
@@ -528,46 +512,29 @@ formLogin.addEventListener('submit', (e) => {
   }
 });
 
-
-
-function submitRegister() {
-  let key = generateCardNumber();
-
-  
-
-  let user = {
-    key: key,
-    name: nameInput.value[0].toUpperCase() + nameInput.value.slice(1),
-    lastName: lastNameInput.value[0].toUpperCase() + lastNameInput.value.slice(1),
-    email: emailRegInput.value,
-    password: passRegInput.value,
-    login: true,
-    visits: 1,
-    books: [],
-    buyCard: false,
-  }
-  localStorage.setItem(key, JSON.stringify(user));
-  return user;
-}
-
 function submitLogin() {
   for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     let user = JSON.parse(localStorage.getItem(key));
     // console.log ('user=', user);
+ 
     if ((user.key === emailLogInput.value || user.email === emailLogInput.value) &&
       user.password === String(passLogInput.value)) {
       user.login = true;
       user.visits = Number(user.visits) + 1;
       localStorage.setItem(key, JSON.stringify(user));  
       return user;
-    }
+    } else if ((user.key === emailLogInput.value || user.email === emailLogInput.value) &&
+      user.password !== String(passLogInput.value)) {
+      errorLogin.innerText = 'Incorrect password';
+      return null;
+    } 
   }
+  errorLogin.innerText = 'User not found';
   return null;
 }
 
 function clearInputs(elem) {
-  // console.log('clear inputs');
   const inputs = elem.querySelectorAll('input');
   inputs.forEach((inp) => {
     inp.value = '';
@@ -623,9 +590,28 @@ function findCurrentUser() {
   return;
 }
 
+// modalProfile
+function setDataModalProfile(user) {
+  profilePhoto.innerText = user.name[0] + user.lastName[0];
+  profileName.innerText = user.name + ' ' + user.lastName;
+  profileVisitsCount.innerText = user.visits;
+  profileBooksCount.innerText = user.books.length;
+  profieCardNumber.innerText = user.key;
+  rentedBooks.innerHTML = '';
+  user.books.forEach((book) => {
+    const bookItem = document.createElement('li');
+    bookItem.classList.add('modal-profile__booklist-item');
+    bookItem.innerHTML = book;
+    rentedBooks.append(bookItem);
+  })  
+}
+
+const copyNumberBtn = document.body.querySelector('.modal-profile__copy-number-btn');
+copyNumberBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(profieCardNumber.innerText);
+});
+
 // librarycard
-
-
 checkCardBtn.addEventListener('click', (event) => {
   event.preventDefault();
   let isUser = setUserDataLibraryCardNoAuth();
@@ -661,43 +647,15 @@ function setUserDataLibraryCardNoAuth() {
       return true;
     }
   }
-
   return false;    
 }
 
-
-// buyBook
-
-
-
-buyBookButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    currentBookBtn = btn;
-    if (!currUser) {
-      openModalLogin();
-
-
-    } else if (currUser.buyCard === false){
-      openModalBuyCard();
-      const bookText = btn.closest('.book__text');
-      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
-      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
-      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
-      rentedBook = `${bookName}, ${bookAuthor}`;
-    } else if (currUser.buyCard === true){
-      const bookText = btn.closest('.book__text');
-      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
-      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
-      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
-      rentedBook = `${bookName}, ${bookAuthor}`;
-      addRentedBookToUser(rentedBook);
-    }
-  })
-})
-
-
-
-
+function setUserDataLibCardAuth(user) {
+  cardVisitsCount.innerText = user.visits;
+  cardBooksCount.innerText = user.books.length;
+  fullNameInput.value = user.name + ' ' + user.lastName;
+  cardNumberInput.value = user.key; 
+}
 
 function changeLibraryCardContent() {
   if(currUser) {
@@ -729,41 +687,30 @@ function changeLibraryCardContent() {
   }
 }
 
-function setUserDataLibCardAuth(user) {
-  cardVisitsCount.innerText = user.visits;
-  cardBooksCount.innerText = user.books.length;
-  fullNameInput.value = user.name + ' ' + user.lastName;
-  cardNumberInput.value = user.key; 
-}
 
-
-
-
-function setDataModalProfile(user) {
-  profilePhoto.innerText = user.name[0] + user.lastName[0];
-  profileName.innerText = user.name + ' ' + user.lastName;
-  profileVisitsCount.innerText = user.visits;
-  profileBooksCount.innerText = user.books.length;
-  profieCardNumber.innerText = user.key;
-  rentedBooks.innerHTML = '';
-  user.books.forEach((book) => {
-    const bookItem = document.createElement('li');
-    bookItem.classList.add('modal-profile__booklist-item');
-    bookItem.innerHTML = book;
-    rentedBooks.append(bookItem);
-
+// buyBook
+buyBookButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    currentBookBtn = btn;
+    if (!currUser) {
+      openModalLogin();
+    } else if (currUser.buyCard === false){
+      openModalBuyCard();
+      const bookText = btn.closest('.book__text');
+      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
+      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
+      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
+      rentedBook = `${bookName}, ${bookAuthor}`;
+    } else if (currUser.buyCard === true){
+      const bookText = btn.closest('.book__text');
+      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
+      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
+      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
+      rentedBook = `${bookName}, ${bookAuthor}`;
+      addRentedBookToUser(rentedBook);
+    }
   })
-  
-}
-
-
-const copyNumberBtn = document.body.querySelector('.modal-profile__copy-number-btn');
-
-copyNumberBtn.addEventListener('click', () => {
-  navigator.clipboard.writeText(profieCardNumber.innerText);
-});
-
-
+})
 
 buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();
@@ -788,8 +735,6 @@ function addRentedBookToUser(book) {
   currentBookBtn.innerHTML = 'Own';
 }
 
-
-
 function changeBooksButtons(currUser) {
   let ownBooks = currUser.books;
   books.forEach((book) => {
@@ -804,7 +749,3 @@ function changeBooksButtons(currUser) {
     }
   });
 }
-
-
-
-

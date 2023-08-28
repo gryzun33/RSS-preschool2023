@@ -1,4 +1,3 @@
-
 // generateCardNumber
 export function generateCardNumber() {
   const minDec = parseInt('100000000', 16);

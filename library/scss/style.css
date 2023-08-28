@@ -610,7 +610,13 @@ a {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
-  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+@media (hover: hover) {
+  .dropmenu__items li:hover {
+    cursor: pointer;
+    color: #BB945F;
+  }
 }
 .dropmenu__show {
   height: 115px;
@@ -819,6 +825,17 @@ a {
   background-color: #FFFFFF;
   position: relative;
 }
+.favorites__sticky-line {
+  position: sticky;
+  top: 128px;
+  width: 100%;
+  height: 1px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.favorites .hidden {
+  display: none;
+}
 .favorites__wrapper {
   max-width: 1440px;
   margin: 0 auto;
@@ -862,10 +879,7 @@ a {
   }
 }
 .favorites .sticky {
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: #BB945F;
-  border-radius: 5px;
+  background-color: #FFFFFF;
 }
 .favorites__text {
   color: #000000;
