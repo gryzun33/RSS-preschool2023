@@ -97,7 +97,7 @@ let lastWindowWidth = window.innerWidth;
 let newWindowWidth;
 
 findCurrentUser ();
-validateBankCard ();
+validateBankCard (buyCardForm);
 
 // resize window
 window.addEventListener('resize', function() {
@@ -702,6 +702,14 @@ buyBookButtons.forEach((btn) => {
     }
   })
 })
+
+// const btn = buyCardForm.querySelector('.price-box__btn');
+// const inputBankCardNumb = document.querySelector('#bank-card-numb');
+// btn.addEventListener('click', () => {
+//   if (inputBankCardNumb.validity.valueMissing) {
+//     inputBankCardNumb.setCustomValidity("gggg");
+//   }
+// });
 
 buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();

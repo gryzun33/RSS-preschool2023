@@ -1608,6 +1608,7 @@ a {
 @media screen and (max-width: 1024px) {
   .librarycard__content .readercard__buttons {
     margin-top: 40px;
+    justify-content: center;
   }
 }
 .librarycard__content .readercard__btn {
