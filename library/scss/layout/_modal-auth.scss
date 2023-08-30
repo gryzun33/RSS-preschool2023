@@ -53,6 +53,8 @@
       height: 20px;
       outline: none;
       padding: 0 3px;
+      @include text-regular;
+      font-size: 13px;
     }
     
     .wrong {

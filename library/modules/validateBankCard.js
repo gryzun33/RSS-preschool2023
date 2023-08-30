@@ -9,7 +9,7 @@ export function validateBankCard(buyCardForm) {
   
   buyCardInputs.forEach((inp) => {
     inp.addEventListener('input', () => {
-      console.log('input');
+      // console.log('input');
       validInput(inp);
     })
   })

@@ -437,7 +437,7 @@ addRegBtn.addEventListener('click', () => {
 
 modalAuthInputs.forEach((inp) => {
   inp.addEventListener('input', () => {
-    if (inp.validity.valid) {
+    if (inp.validity.valid && inp.value.trim() !== '') {
       inp.classList.remove('wrong');
       const tooltip = inp.nextElementSibling;
       tooltip.classList.add('hidden');
@@ -449,7 +449,7 @@ modalAuthInputs.forEach((inp) => {
 
 formRegister.addEventListener('submit', (e) => {
   e.preventDefault();
-  const errElement = modalRegInputsArr.find((el) => !el.validity.valid);
+  const errElement = modalRegInputsArr.find((el) => !el.validity.valid || el.value.trim() === '');
   if(errElement) {
     showError(errElement);
     return;
@@ -479,7 +479,7 @@ formRegister.addEventListener('submit', (e) => {
 
 formLogin.addEventListener('submit', (e) => {
   e.preventDefault();
-  const errElement = modalLogInputsArr.find((el) => !el.validity.valid);
+  const errElement = modalLogInputsArr.find((el) => !el.validity.valid || el.value.trim() === '');
   if(errElement) {
     showError(errElement);
     return;
@@ -702,14 +702,6 @@ buyBookButtons.forEach((btn) => {
     }
   })
 })
-
-// const btn = buyCardForm.querySelector('.price-box__btn');
-// const inputBankCardNumb = document.querySelector('#bank-card-numb');
-// btn.addEventListener('click', () => {
-//   if (inputBankCardNumb.validity.valueMissing) {
-//     inputBankCardNumb.setCustomValidity("gggg");
-//   }
-// });
 
 buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();

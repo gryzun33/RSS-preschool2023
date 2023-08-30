@@ -1804,6 +1804,10 @@ a {
   height: 20px;
   outline: none;
   padding: 0 3px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
 }
 .modal-auth__form .wrong {
   border-color: red;
