@@ -97,7 +97,7 @@ let lastWindowWidth = window.innerWidth;
 let newWindowWidth;
 
 findCurrentUser ();
-validateBankCard ();
+validateBankCard (buyCardForm);
 
 // resize window
 window.addEventListener('resize', function() {
@@ -437,7 +437,7 @@ addRegBtn.addEventListener('click', () => {
 
 modalAuthInputs.forEach((inp) => {
   inp.addEventListener('input', () => {
-    if (inp.validity.valid) {
+    if (inp.validity.valid && inp.value.trim() !== '') {
       inp.classList.remove('wrong');
       const tooltip = inp.nextElementSibling;
       tooltip.classList.add('hidden');
@@ -449,7 +449,7 @@ modalAuthInputs.forEach((inp) => {
 
 formRegister.addEventListener('submit', (e) => {
   e.preventDefault();
-  const errElement = modalRegInputsArr.find((el) => !el.validity.valid);
+  const errElement = modalRegInputsArr.find((el) => !el.validity.valid || el.value.trim() === '');
   if(errElement) {
     showError(errElement);
     return;
@@ -479,7 +479,7 @@ formRegister.addEventListener('submit', (e) => {
 
 formLogin.addEventListener('submit', (e) => {
   e.preventDefault();
-  const errElement = modalLogInputsArr.find((el) => !el.validity.valid);
+  const errElement = modalLogInputsArr.find((el) => !el.validity.valid || el.value.trim() === '');
   if(errElement) {
     showError(errElement);
     return;
