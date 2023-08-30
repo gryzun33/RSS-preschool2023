@@ -1608,6 +1608,7 @@ a {
 @media screen and (max-width: 1024px) {
   .librarycard__content .readercard__buttons {
     margin-top: 40px;
+    justify-content: center;
   }
 }
 .librarycard__content .readercard__btn {
@@ -1803,6 +1804,10 @@ a {
   height: 20px;
   outline: none;
   padding: 0 3px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
 }
 .modal-auth__form .wrong {
   border-color: red;
@@ -1923,7 +1928,7 @@ a {
   background-color: #0C0C0E;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 139px;
   align-items: center;
 }
 .modal-profile__photo {
@@ -1956,6 +1961,7 @@ a {
   text-transform: capitalize;
 }
 .modal-profile__content {
+  width: 430px;
   padding: 40px 20px 39px 20px;
 }
 .modal-profile__title {
@@ -2016,7 +2022,7 @@ a {
   flex-direction: column;
   row-gap: 10px;
   padding-left: 29px;
-  width: 400px;
+  width: 380px;
   height: 70px;
   overflow: auto;
   position: relative;
@@ -2054,7 +2060,7 @@ a {
   cursor: pointer;
 }
 .modal-profile__card-number {
-  color: #8E8E8E;
+  color: #BB945F;
 }
 
 .modal-buyacard {
@@ -2113,7 +2119,7 @@ a {
 .modal-buyacard__form label input {
   height: 20px;
   margin-top: 10px;
-  border: 1px solid #8E8E8E;
+  border: 1px solid #BB945F;
   outline: none;
   padding-left: 3px;
 }

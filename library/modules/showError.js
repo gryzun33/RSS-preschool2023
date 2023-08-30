@@ -8,7 +8,7 @@ export function showError(inp) {
   const tooltip = inp.nextElementSibling;
 
   tooltip.classList.remove('hidden');
-  if(inp.validity.valueMissing) {
+  if(inp.validity.valueMissing || inp.value.trim() === '') {
     tooltip.firstElementChild.innerText = 'Please fill the field';
   } else if (inp === emailRegInput && inp.validity.patternMismatch) {
     tooltip.firstElementChild.innerText = 'You need to enter an e-mail address';

@@ -731,7 +731,7 @@
         <div class="modal-buyacard__content">
           <form class="modal-buyacard__form" >
             <label>Bank card number
-              <input id="bank-card-numb" type="text" required pattern = '([\d]{4} ?){4}'>
+              <input id="bank-card-numb" type="text" required pattern = '^( *\d *){16}$'>
             </label>
             <label>Expiration code
               <div class="exp-code">
@@ -743,13 +743,13 @@
               <input id="bank-card-cvc" type="text" required pattern = '[\d]{3}'>
             </label> 
             <label>Cardholder name
-              <input type="text" required>
+              <input class="bank-card-data" type="text" required>
             </label>
             <label>Postal code
-              <input type="text" required>
+              <input class="bank-card-data" type="text" required>
             </label> 
             <label>City / Town
-              <input type="text" required>
+              <input class="bank-card-data" type="text" required>
             </label>
             <div class="price-box">
               <button class="price-box__btn" type="submit">Buy</button>

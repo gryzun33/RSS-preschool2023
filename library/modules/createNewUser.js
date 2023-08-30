@@ -2,11 +2,13 @@ import { generateCardNumber } from './generateCardNumber.js';
 
 export function createNewUser(nameInputValue, lastNameInputValue, emailRegInputValue, passRegInputValue) {
   let key = generateCardNumber();
+  let name = nameInputValue.trim();
+  let lastName = lastNameInputValue.trim();
   let user = {
     key: key,
-    name: nameInputValue[0].toUpperCase() + nameInputValue.slice(1),
-    lastName: lastNameInputValue[0].toUpperCase() + lastNameInputValue.slice(1),
-    email: emailRegInputValue,
+    name: name[0].toUpperCase() + name.slice(1),
+    lastName: lastName[0].toUpperCase() + lastName.slice(1),
+    email: emailRegInputValue.trim(),
     password: passRegInputValue,
     login: true,
     visits: 1,
