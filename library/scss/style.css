@@ -2026,9 +2026,19 @@ a {
   row-gap: 10px;
   padding-left: 29px;
   width: 380px;
-  height: 70px;
+  height: 60px;
   overflow: auto;
   position: relative;
+}
+.modal-profile__booklist::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #F5F5F5;
+}
+.modal-profile__booklist::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 5px;
+  background-color: #DCDCDC;
 }
 .modal-profile__booklist-item {
   color: #000000;
@@ -2043,7 +2053,7 @@ a {
   white-space: nowrap;
 }
 .modal-profile__card-box {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
