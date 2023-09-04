@@ -1471,6 +1471,7 @@ a {
   padding-left: 20px;
   padding-right: 20px;
   outline: none;
+  color: #BB945F;
 }
 .librarycard__content .cardfinder .card__content input:invalid {
   border: 3px solid red;
@@ -1910,6 +1911,8 @@ a {
   display: flex;
   width: 600px;
   background-color: #FFFFFF;
+  max-height: 100vh;
+  overflow: auto;
 }
 .modal-profile__btn {
   width: 19px;
@@ -2023,9 +2026,19 @@ a {
   row-gap: 10px;
   padding-left: 29px;
   width: 380px;
-  height: 70px;
+  height: 60px;
   overflow: auto;
   position: relative;
+}
+.modal-profile__booklist::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #F5F5F5;
+}
+.modal-profile__booklist::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 5px;
+  background-color: #DCDCDC;
 }
 .modal-profile__booklist-item {
   color: #000000;
@@ -2040,7 +2053,7 @@ a {
   white-space: nowrap;
 }
 .modal-profile__card-box {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
@@ -2062,10 +2075,24 @@ a {
 .modal-profile__card-number {
   color: #BB945F;
 }
+.modal-profile .copy-tooltip {
+  color: #8E8E8E;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.modal-profile .show {
+  opacity: 1;
+}
 
 .modal-buyacard {
   position: relative;
   width: 640px;
+  max-height: 100vh;
+  overflow: auto;
 }
 .modal-buyacard__btn {
   background-color: #0C0C0E;

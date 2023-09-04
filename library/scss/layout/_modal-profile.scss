@@ -3,6 +3,8 @@
   display: flex;
   width: 600px;
   background-color: $color-light;
+  max-height: 100vh;
+  overflow: auto;
 
   &__btn {
     width: 19px;
@@ -117,11 +119,21 @@
     row-gap: 10px;
     padding-left: 29px;
     width: 380px;
-    height: 70px;
+    height: 60px;
     overflow: auto;
     position: relative;
 
-   
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      background-color: 	#F5F5F5
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: 5px;
+      height: 5px;
+      background-color: #DCDCDC;
+    }
   }
 
   &__booklist-item {
@@ -133,7 +145,7 @@
   }
 
   &__card-box {
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     column-gap: 15px;
     @include text-regular;
@@ -157,5 +169,17 @@
 
   &__card-number {
     color: $color-secondary;
+  }
+
+  .copy-tooltip {
+    color: $color-additional;
+    @include text-regular;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .show {
+    opacity: 1;
   }
 }
