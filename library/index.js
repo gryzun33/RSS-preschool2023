@@ -1,7 +1,8 @@
 import { validateBankCard } from './modules/validateBankCard.js';
 import { createNewUser } from './modules/createNewUser.js';
 import { showError } from './modules/showError.js';
-// import { generateCardNumber } from './modules/generateCardNumber.js';
+
+console.log('Пожалуйста перед проверкой очистите localStorage');
 
 // burger-menu
 const burger = document.querySelector('.burger');
@@ -466,7 +467,7 @@ formRegister.addEventListener('submit', (e) => {
   } 
   currUser = createNewUser(nameInput.value, lastNameInput.value, emailRegInput.value, passRegInput.value);
   clearInputs(modalRegister);
-  logIn(currUser);     
+  changeViewAfterLogIn(currUser);     
   changeLibraryCardContent();
   setUserDataLibCardAuth(currUser);
   setDataModalProfile(currUser);
@@ -474,8 +475,6 @@ formRegister.addEventListener('submit', (e) => {
     closeModal(modalRegister);
   }, 100);   
 });
-
-
 
 formLogin.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -487,7 +486,7 @@ formLogin.addEventListener('submit', (e) => {
     currUser = submitLogin();
     if (currUser) {
       clearInputs(modalLogin);
-      logIn(currUser);
+      changeViewAfterLogIn(currUser);
       setTimeout(() => {
         closeModal(modalLogin);
       }, 100);
@@ -532,7 +531,7 @@ function clearInputs(elem) {
   })
 }
 
-function logIn(user) {
+function changeViewAfterLogIn(user) {
   profileIcon.classList.add('hidden');
   profileIconLog.classList.remove('hidden');
   const iconName  = user.name[0] + user.lastName[0];
@@ -571,7 +570,7 @@ function findCurrentUser() {
     let user = JSON.parse(localStorage.getItem(key));
     if (user.login === true) {
       currUser = user;
-      logIn(user);
+      changeViewAfterLogIn(user);
       changeLibraryCardContent();
       setUserDataLibCardAuth(currUser);
       setDataModalProfile(currUser);
@@ -600,6 +599,10 @@ function setDataModalProfile(user) {
 const copyNumberBtn = document.body.querySelector('.modal-profile__copy-number-btn');
 copyNumberBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(profieCardNumber.innerText);
+  document.querySelector('.copy-tooltip').classList.add('show');
+  setTimeout(() => {
+    document.querySelector('.copy-tooltip').classList.remove('show');
+  }, 2000);
 });
 
 // librarycard
@@ -607,19 +610,22 @@ checkCardBtn.addEventListener('click', (event) => {
   event.preventDefault();
   let isUser = setUserDataLibraryCardNoAuth();
   if (isUser) {
-    cardFinderTitle.innerText = 'Your Library card';
+    // cardFinderTitle.innerText = 'Your Library card';
     checkCardBtn.classList.add('hidden');
     cardData.classList.remove('hidden');
-    cardNumberInput.setAttribute('disabled', 'disabled');
-    fullNameInput.setAttribute('disabled', 'disabled');
+    cardNumberInput.disabled = true;
+    fullNameInput.disabled = true;
     setTimeout(() => {
-      cardFinderTitle.innerText = 'Find your Library card';
-      checkCardBtn.classList.remove('hidden');
-      cardData.classList.add('hidden');
-      cardNumberInput.removeAttribute('disabled');
-      fullNameInput.removeAttribute('disabled');
-      cardNumberInput.value = '';
-      fullNameInput.value = '';
+      if (!currUser) {
+        checkCardBtn.classList.remove('hidden');
+        cardData.classList.add('hidden');
+        cardNumberInput.disabled = false;
+        fullNameInput.disabled = false;
+        cardNumberInput.value = '';
+        fullNameInput.value = '';
+      }
+      // cardFinderTitle.innerText = 'Find your Library card';
+  
     }, 10000)
   } else {
     return;
@@ -630,8 +636,9 @@ function setUserDataLibraryCardNoAuth() {
   for(let i=0; i<localStorage.length; i++) {
     let key = localStorage.key(i);
     let user = JSON.parse(localStorage.getItem(key));
-    if (user.key === cardNumberInput.value &&
-      ((user.name + ' ' + user.lastName).toLowerCase()) === fullNameInput.value.toLowerCase()) {
+    if (user.key === cardNumberInput.value && 
+      ((user.name + ' ' + user.lastName).toLowerCase() === fullNameInput.value.toLowerCase() 
+      || user.name.toLowerCase() === fullNameInput.value.toLowerCase())) {
       fullNameInput.value = user.name + ' ' + user.lastName;
       cardVisitsCount.innerText = user.visits;
       cardBooksCount.innerText = user.books.length;
