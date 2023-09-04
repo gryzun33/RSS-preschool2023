@@ -3,6 +3,8 @@
   display: flex;
   width: 600px;
   background-color: $color-light;
+  max-height: 100vh;
+  overflow: auto;
 
   &__btn {
     width: 19px;
@@ -157,5 +159,17 @@
 
   &__card-number {
     color: $color-secondary;
+  }
+
+  .copy-tooltip {
+    color: $color-additional;
+    @include text-regular;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .show {
+    opacity: 1;
   }
 }
