@@ -2055,8 +2055,6 @@ a {
 .modal-profile__card-box {
   margin-top: 30px;
   display: flex;
-  -moz-column-gap: 15px;
-       column-gap: 15px;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -2074,6 +2072,8 @@ a {
 }
 .modal-profile__card-number {
   color: #BB945F;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .modal-profile .copy-tooltip {
   color: #8E8E8E;
@@ -2083,6 +2083,7 @@ a {
   font-size: 10px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+  margin-left: 5px;
 }
 .modal-profile .show {
   opacity: 1;
