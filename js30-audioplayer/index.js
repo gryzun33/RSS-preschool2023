@@ -1,5 +1,10 @@
 import {tracksData} from './data.js';
 
+// const inp = document.querySelector('input');
+// inp.addEventListener('pointermove' , () => {
+//   console.log('FFFFFFFFFFFF');
+// })
+
 let currIndex = 0;
 let prevIndex = 0;
 let isPlaying = false;
@@ -10,9 +15,18 @@ const prevBtn = document.querySelector('.prev-track');
 const nextBtn = document.querySelector('.next-track');
 const pauseBtn = document.querySelector('.pause-track');
 
-const progressCurrent = document.querySelector('.progress-current');
-const progressToggler = document.querySelector('.progress-toggler');
+const progressLine = document.querySelector('.progress');
+// const progressCurrent = document.querySelector('.progress-current');
+// const progressToggler = document.querySelector('.progress-toggler');
 const currTimeHTML = document.querySelector('.current-time');
+const progressInput = document.querySelector('.progress-range');
+const progressLineWidth = parseInt(getComputedStyle(progressLine).width);
+// progressInput.addEventListener('pointermove', () => {
+
+// })
+
+
+// console.log('line =',progressLineWidth );
 
 const audios = [];
 tracksData.forEach((item) => {
@@ -24,17 +38,19 @@ tracksData.forEach((item) => {
     audio.volume = 0.5;
     console.log(audio.paused);
   });
-  audio.addEventListener("timeupdate", () => {
-    const progressWidth = (audio.currentTime * 100) / audio.duration;
-    currTimeHTML.innerHTML = convertTime(audio.currentTime)
-    progressCurrent.style.width = `${progressWidth}%`;
-    progressToggler.style.left = `${progressWidth}%`;
-  });
+  // audio.addEventListener("timeupdate", () => {
+  //   const progressWidth = (audio.currentTime * 100) / audio.duration;
+  //   currTimeHTML.innerHTML = convertTime(audio.currentTime)
+  //   progressCurrent.style.width = `${progressWidth}%`;
+  //   progressToggler.style.left = `${progressWidth}%`;
+  // });
+
+  // audio.addEventListener("timeupdate", changeProgress)
 
   audio.addEventListener("ended", () => {
     audio.currentTime = 0;
-    progressCurrent.style.width = `0%`;
-    progressToggler.style.left = `0%`;
+    // progressCurrent.style.width = `0%`;
+    // progressToggler.style.left = `0%`;
     playNext();
     // audios[currIndex+1].play();
   });
@@ -46,13 +62,30 @@ setTimeout(() => {
 }, 100);
 
 
+
+progressInput.addEventListener('change', (e) => {
+  e.preventDefault();
+  audios[currIndex].currentTime = progressInput.value;
+  currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime);
+})
+
+
+
+
+
+setInterval(() => {
+  currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime)
+  progressInput.value = audios[currIndex].currentTime;
+}, 500); 
+
 playBtn.addEventListener('click', () => {
+ 
   console.log('play');
   isPlaying = true;
   audios[currIndex].play();
   playBtn.classList.add('hidden');
   pauseBtn.classList.remove('hidden');
-  // renderFullDuration(audios[currIndex]);
+  
 });
 
 pauseBtn.addEventListener('click', () => {
@@ -66,7 +99,7 @@ pauseBtn.addEventListener('click', () => {
 prevBtn.addEventListener('click', () => {
   console.log('prev');
   playPrev();
-  // renderFullDuration(audios[currIndex]);
+  
 });
 
 nextBtn.addEventListener('click', () => {
@@ -116,9 +149,11 @@ function playPrev() {
 }
 
 function renderCurrentAudio(audio) {
+  progressInput.value = 0;
+  progressInput.setAttribute('max', `${audio.duration}`);
   console.log ('render audio');
   renderFullDuration(audio);
-  // renderName();
+  
 }
 
 function renderFullDuration(audio) {
@@ -127,7 +162,4 @@ function renderFullDuration(audio) {
   fullTime.innerHTML = convertTime(audio.duration);
 }
 
-// function renderName() {
-//   const curr
-// }
 
