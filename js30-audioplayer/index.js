@@ -22,6 +22,9 @@ const volumeInput = document.querySelector('.volume-range');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNoneBtn = document.querySelector('.volume-none-btn');
 
+const trackName = document.querySelector('.track-name');
+const author = document.querySelector('.author');
+
 
 const audios = [];
 tracksData.forEach((item) => {
@@ -43,7 +46,7 @@ tracksData.forEach((item) => {
 
 setTimeout(() => {
   // volumeInput.value = '0.5';
-  renderCurrentAudio(audios[0]);
+  renderCurrentAudio(audios[0],currIndex);
 }, 100);
 
 
@@ -126,7 +129,7 @@ function playNext() {
   } else {
     audios[currIndex].pause(); 
   }
-  renderCurrentAudio(audios[currIndex]);
+  renderCurrentAudio(audios[currIndex], currIndex);
 }
 
 function playPrev() {
@@ -142,14 +145,16 @@ function playPrev() {
   } else {
     audios[currIndex].pause(); 
   }
-  renderCurrentAudio(audios[currIndex]);
+  renderCurrentAudio(audios[currIndex], currIndex);
 }
 
-function renderCurrentAudio(audio) {
+function renderCurrentAudio(audio, currIndex) {
   progressInput.value = 0;
-  
   progressInput.setAttribute('max', `${audio.duration}`);
-  console.log ('render audio');
+  // console.log ('render audio');
+
+  trackName.innerHTML = `${tracksData[currIndex].trackName}`;
+  author.innerHTML = `${tracksData[currIndex].author}`;
   renderFullDuration(audio);
   
 }
