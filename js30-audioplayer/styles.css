@@ -119,7 +119,7 @@ h1 {
   align-items: center;
   width: 70%;
 }
-.volume-box .volume-btn {
+.volume-box button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -129,17 +129,34 @@ h1 {
   background-color: yellow;
   border: none;
 }
+.volume-box .hidden {
+  display: none;
+}
 .volume-box .volume-progress {
   width: 70%;
-  height: 2px;
+  height: 3px;
   background-color: white;
   position: relative;
 }
-.volume-box .volume-progress .volume-current {
+.volume-box .volume-progress .volume-range {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  height: 3px;
   position: absolute;
   top: 0;
   left: 0;
-  height: 2px;
-  background-color: yellow;
-  width: 20px;
+  background-color: white;
+  cursor: pointer;
+}
+.volume-box .volume-progress .volume-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  z-index: 3;
+  cursor: pointer;
 }/*# sourceMappingURL=styles.css.map */
