@@ -36,7 +36,7 @@ function validInput(inp) {
   } else if (inp === inputBankCardCvc && inp.validity.patternMismatch) {
     inp.setCustomValidity("CVC must contain 3 digits");
   } else if (inp.closest('.exp-code') && inp.validity.patternMismatch) {
-    inp.setCustomValidity("exp.code number must contain 2 digits");
+    inp.setCustomValidity("exp.code number must contain up to 2 digits");
   } else {
     inp.setCustomValidity("");
   }

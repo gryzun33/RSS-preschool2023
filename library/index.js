@@ -624,8 +624,7 @@ checkCardBtn.addEventListener('click', (event) => {
         cardNumberInput.value = '';
         fullNameInput.value = '';
       }
-      // cardFinderTitle.innerText = 'Find your Library card';
-  
+      // cardFinderTitle.innerText = 'Find your Library card';  
     }, 10000)
   } else {
     return;
@@ -685,7 +684,6 @@ function changeLibraryCardContent() {
   }
 }
 
-
 // buyBook
 buyBookButtons.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -694,11 +692,11 @@ buyBookButtons.forEach((btn) => {
       openModalLogin();
     } else if (currUser.buyCard === false){
       openModalBuyCard();
-      const bookText = btn.closest('.book__text');
-      const bookNameCap = bookText.querySelector('.book__title > span').innerText;
-      const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
-      const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
-      rentedBook = `${bookName}, ${bookAuthor}`;
+      // const bookText = btn.closest('.book__text');
+      // const bookNameCap = bookText.querySelector('.book__title > span').innerText;
+      // const bookName = bookNameCap.split(' ').map((el) => el[0] + el.slice(1).toLowerCase()).join(' ');
+      // const bookAuthor = bookText.querySelector('.book__title span:last-child').innerText;
+      // rentedBook = `${bookName}, ${bookAuthor}`;
     } else if (currUser.buyCard === true){
       const bookText = btn.closest('.book__text');
       const bookNameCap = bookText.querySelector('.book__title > span').innerText;
@@ -714,7 +712,8 @@ buyCardForm.addEventListener('submit' , (e) => {
   // e.preventDefault();
   if (!currUser.buyCard) {
     currUser.buyCard = true;
-    addRentedBookToUser(rentedBook);
+    localStorage.setItem(currUser.key, JSON.stringify(currUser));
+    // addRentedBookToUser(rentedBook);
   }
 });
 
@@ -739,6 +738,7 @@ function changeBooksButtons(currUser) {
     const bookAuthor = book.querySelector('.book__title span:last-child').innerText;
     const bookTitle = `${bookName}, ${bookAuthor}`;
     if (ownBooks.find((el) => el === bookTitle)) {
+      // console.log(bookTitle);
       const btn = book.querySelector('.book__btn');
       btn.setAttribute('disabled', 'disabled');
       btn.innerHTML = 'Own';
