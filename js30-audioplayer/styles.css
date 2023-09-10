@@ -1,7 +1,44 @@
+@font-face {
+  font-style: normal;
+  font-family: "Lato";
+  font-weight: 300;
+  src: url(./assets/fonts/Lato/Lato-Thin.ttf);
+}
+@font-face {
+  font-style: normal;
+  font-family: "Lato";
+  font-weight: 400;
+  src: url(./assets/fonts/Lato/Lato-Regular.ttf);
+}
+@font-face {
+  font-style: normal;
+  font-family: "Changa";
+  font-weight: 300;
+  src: url(./assets/fonts/Changa/Changa-Light.ttf);
+}
+@font-face {
+  font-style: normal;
+  font-family: "Changa";
+  font-weight: 400;
+  src: url(./assets/fonts/Changa/Changa-Regular.ttf);
+}
+@font-face {
+  font-style: normal;
+  font-family: "Manrope";
+  font-weight: 300;
+  src: url(./assets/fonts/Manrope/Manrope-Light.ttf);
+}
+@font-face {
+  font-style: normal;
+  font-family: "Manrope";
+  font-weight: 400;
+  src: url(./assets/fonts/Manrope/Manrope-Medium.ttf);
+}
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Manrope";
 }
 
 body {
@@ -9,26 +46,36 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #1e3050;
+}
+
+svg {
+  fill: #16253c;
 }
 
 .container {
   padding: 10px;
-  background-color: gray;
+  padding-top: 15px;
+  background: linear-gradient(to right, #788396, #d2d6dc);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0px 0px 7px 2px #d2d6dc;
 }
 
 h1 {
   font-size: 20px;
+  font-weight: 500;
+  color: #16253c;
 }
 
 .image {
   width: 300px;
   height: 300px;
-  margin-top: 20px;
-  background-color: blue;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 .title {
@@ -38,31 +85,40 @@ h1 {
   margin-top: 20px;
 }
 .title .track-name {
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 500;
+  color: #16253c;
 }
 .title .author {
   font-size: 15px;
-  font-weight: 400;
-  margin-top: 10px;
+  font-weight: 300;
+  margin-top: 5px;
+  color: #16253c;
 }
 
 .controls {
   display: flex;
-  width: 60%;
+  width: 50%;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 15px;
+  position: relative;
 }
 .controls button {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: #626e85;
   border: none;
   cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  top: 0;
+}
+.controls button:active {
+  transform: translateY(-2px);
 }
 .controls .play-track {
   padding-left: 3px;
@@ -72,7 +128,7 @@ h1 {
 }
 
 .progress-box {
-  margin-top: 20px;
+  margin-top: 15px;
   width: 100%;
 }
 .progress-box .progress {
@@ -81,6 +137,7 @@ h1 {
   background-color: white;
   position: relative;
   cursor: pointer;
+  border-radius: 2px;
 }
 .progress-box .progress input {
   -webkit-appearance: none;
@@ -93,6 +150,7 @@ h1 {
   left: 0;
   background-color: white;
   cursor: pointer;
+  border-radius: 2px;
 }
 .progress-box .progress input::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -106,28 +164,30 @@ h1 {
 }
 .progress-box .time-box {
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 12px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  color: #16253c;
 }
 
 .volume-box {
-  margin-top: 20px;
+  margin-top: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 50%;
 }
 .volume-box button {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: yellow;
+  background-color: #626e85;
   border: none;
+  cursor: pointer;
 }
 .volume-box .hidden {
   display: none;
@@ -137,6 +197,7 @@ h1 {
   height: 3px;
   background-color: white;
   position: relative;
+  border-radius: 2px;
 }
 .volume-box .volume-progress .volume-range {
   -webkit-appearance: none;
@@ -148,6 +209,7 @@ h1 {
   top: 0;
   left: 0;
   background-color: white;
+  border-radius: 2px;
   cursor: pointer;
 }
 .volume-box .volume-progress .volume-range::-webkit-slider-thumb {
@@ -155,7 +217,7 @@ h1 {
   appearance: none;
   width: 10px;
   height: 10px;
-  background-color: green;
+  background-color: #16253c;
   border-radius: 50%;
   z-index: 3;
   cursor: pointer;
