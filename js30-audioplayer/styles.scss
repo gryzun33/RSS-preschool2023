@@ -1,11 +1,22 @@
 // blue theme
-$color-main-dark: #1e3050;
-$color-range: red;
-$color-text: #16253c;
-$color-gradient-start: #788396;
-$color-gradient-end: #d2d6dc;
-$color-buttons: #626e85;
-$color-progress: white;
+// $color-main-dark: #1e3050;
+// $color-range: red;
+// $color-text: #16253c;
+// $color-gradient-start: #788396;
+// $color-gradient-end: #d2d6dc;
+// $color-buttons: #626e85;
+// $color-progress: white;
+// $color-svg: #16253c;
+
+// black-yellow theme
+$color-main-dark: #1f1d0f;
+$color-range: #e3ce2d;
+$color-text:  #e3ce2d;
+$color-gradient-start: #4c4a3f;
+$color-gradient-end: #79776f;
+$color-buttons:  #e3ce2d;
+$color-progress: #1f1d0f;
+$color-svg:#1f1d0f;
 
 @font-face {
   font-style: normal;
@@ -66,7 +77,7 @@ body {
 }
 
 svg {
-  fill: $color-text;
+  fill: $color-svg;
 }
 
 .container {
@@ -84,6 +95,7 @@ h1 {
   font-size: 20px;
   font-weight: 500;
   color: $color-text;
+  text-shadow: 0px 0px 3px $color-main-dark;
 }
 
 .image {
@@ -103,14 +115,16 @@ h1 {
   .track-name {
     font-size: 20px;
     font-weight: 500;
-    color: #16253c;
+    color: $color-text;
+    text-shadow: 0px 0px 3px $color-main-dark;
   }
 
   .author {
     font-size: 15px;
     font-weight: 300;
     margin-top: 5px;
-    color: #16253c;
+    color: $color-text;
+    text-shadow: 0px 0px 3px $color-main-dark;
   }
 }
 
@@ -134,6 +148,7 @@ h1 {
     position: relative;
     transition: all 0.3s ease;
     top: 0;
+    box-shadow: 0px 0px 8px 1px $color-main-dark;
   }
 
   button:active {
@@ -194,6 +209,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     color: $color-text;
+    text-shadow: 0px 0px 3px $color-main-dark;
   }
 
 }
@@ -219,6 +235,12 @@ h1 {
     background-color: $color-buttons;
     border: none;
     cursor: pointer;
+    box-shadow: 0px 0px 8px 1px $color-main-dark;
+    transition: all 0.3s ease;
+  }
+
+  button:active {
+    transform: translateY(-2px);
   }
 
   .hidden {

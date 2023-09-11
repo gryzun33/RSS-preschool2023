@@ -46,28 +46,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1e3050;
+  background-color: #1f1d0f;
 }
 
 svg {
-  fill: #16253c;
+  fill: #1f1d0f;
 }
 
 .container {
   padding: 10px;
   padding-top: 15px;
-  background: linear-gradient(to right, #788396, #d2d6dc);
+  background: linear-gradient(to right, #4c4a3f, #79776f);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 7px 2px #d2d6dc;
+  box-shadow: 0px 0px 7px 2px #79776f;
 }
 
 h1 {
   font-size: 20px;
   font-weight: 500;
-  color: #16253c;
+  color: #e3ce2d;
+  text-shadow: 0px 0px 3px #1f1d0f;
 }
 
 .image {
@@ -87,13 +88,15 @@ h1 {
 .title .track-name {
   font-size: 20px;
   font-weight: 500;
-  color: #16253c;
+  color: #e3ce2d;
+  text-shadow: 0px 0px 3px #1f1d0f;
 }
 .title .author {
   font-size: 15px;
   font-weight: 300;
   margin-top: 5px;
-  color: #16253c;
+  color: #e3ce2d;
+  text-shadow: 0px 0px 3px #1f1d0f;
 }
 
 .controls {
@@ -110,12 +113,13 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #626e85;
+  background-color: #e3ce2d;
   border: none;
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
   top: 0;
+  box-shadow: 0px 0px 8px 1px #1f1d0f;
 }
 .controls button:active {
   transform: translateY(-2px);
@@ -134,7 +138,7 @@ h1 {
 .progress-box .progress {
   width: 100%;
   height: 5px;
-  background-color: white;
+  background-color: #1f1d0f;
   position: relative;
   cursor: pointer;
   border-radius: 2px;
@@ -148,7 +152,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: #1f1d0f;
   cursor: pointer;
   border-radius: 2px;
 }
@@ -157,7 +161,7 @@ h1 {
   appearance: none;
   width: 12px;
   height: 12px;
-  background-color: red;
+  background-color: #e3ce2d;
   border-radius: 50%;
   z-index: 3;
   cursor: pointer;
@@ -168,7 +172,8 @@ h1 {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  color: #16253c;
+  color: #e3ce2d;
+  text-shadow: 0px 0px 3px #1f1d0f;
 }
 
 .volume-box {
@@ -185,9 +190,14 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #626e85;
+  background-color: #e3ce2d;
   border: none;
   cursor: pointer;
+  box-shadow: 0px 0px 8px 1px #1f1d0f;
+  transition: all 0.3s ease;
+}
+.volume-box button:active {
+  transform: translateY(-2px);
 }
 .volume-box .hidden {
   display: none;
@@ -195,7 +205,7 @@ h1 {
 .volume-box .volume-progress {
   width: 70%;
   height: 3px;
-  background-color: white;
+  background-color: #1f1d0f;
   position: relative;
   border-radius: 2px;
 }
@@ -208,7 +218,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: white;
+  background-color: #1f1d0f;
   border-radius: 2px;
   cursor: pointer;
 }
@@ -217,7 +227,7 @@ h1 {
   appearance: none;
   width: 10px;
   height: 10px;
-  background-color: #16253c;
+  background-color: #e3ce2d;
   border-radius: 50%;
   z-index: 3;
   cursor: pointer;

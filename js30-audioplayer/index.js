@@ -164,5 +164,3 @@ function renderFullDuration(audio) {
   const fullTime = document.querySelector('.full-time');
   fullTime.innerHTML = convertTime(audio.duration);
 }
-
-
