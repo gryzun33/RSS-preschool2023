@@ -24,6 +24,7 @@ const volumeNoneBtn = document.querySelector('.volume-none-btn');
 
 const trackName = document.querySelector('.track-name');
 const author = document.querySelector('.author');
+const authorImage = document.querySelector('.image');
 
 
 const audios = [];
@@ -155,6 +156,7 @@ function renderCurrentAudio(audio, currIndex) {
 
   trackName.innerHTML = `${tracksData[currIndex].trackName}`;
   author.innerHTML = `${tracksData[currIndex].author}`;
+  authorImage.innerHTML = `<img src=${tracksData[currIndex].image} alt=${tracksData[currIndex].author} width='300' height='300'>`
   renderFullDuration(audio);
   
 }
