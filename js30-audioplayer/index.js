@@ -8,6 +8,7 @@ import {tracksData} from './data.js';
 let currIndex = 0;
 let prevIndex = 0;
 let isPlaying = false;
+let currVolume = 0.5;
 
 
 const playBtn = document.querySelector('.play-track');
@@ -34,7 +35,7 @@ tracksData.forEach((item) => {
   audio.addEventListener('loadeddata', () => {
     // console.log(audio.duration);
 
-    audio.volume = 0.5;
+    audio.volume = currVolume;
     // console.log(audio.paused);
   });
 
@@ -60,7 +61,9 @@ progressInput.addEventListener('change', (e) => {
 
 volumeInput.addEventListener('change', (e) => {
   // e.preventDefault();
+  audios[currIndex].muted = false;
   audios[currIndex].volume = +volumeInput.value;
+  // currVolume = +volumeInput.value;
   if(volumeInput.value === '0') {
     volumeBtn.classList.add('hidden');
     volumeNoneBtn.classList.remove('hidden');
@@ -69,6 +72,26 @@ volumeInput.addEventListener('change', (e) => {
     volumeNoneBtn.classList.add('hidden');
   }
 });
+
+volumeBtn.addEventListener('click', () => {
+  currVolume = +volumeInput.value;
+  volumeInput.value = 0;
+  audios[currIndex].muted = true;
+  volumeBtn.classList.add('hidden');
+  volumeNoneBtn.classList.remove('hidden');
+});
+
+volumeNoneBtn.addEventListener('click', () => {
+  if (currVolume > 0) {
+    volumeInput.value = currVolume;
+    // audios[currIndex].volume = 
+    audios[currIndex].muted = false;
+    volumeBtn.classList.remove('hidden');
+    volumeNoneBtn.classList.add('hidden');
+  }
+});
+
+
 
 
 
@@ -108,6 +131,8 @@ nextBtn.addEventListener('click', () => {
   playNext();
   
 });
+
+
 
 function convertTime(duration) {
   let min = Math.floor(duration / 60);
