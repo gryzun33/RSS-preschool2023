@@ -81,13 +81,8 @@ svg {
 }
 
 .container {
-  // padding: 10px;
-  // padding-top: 15px;
   background: linear-gradient(to right,$color-gradient-start, $color-gradient-end );
   border-radius: 5px;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
   box-shadow: 0px 0px 7px 2px $color-gradient-end;
   width: auto;
   height: auto;
@@ -106,12 +101,9 @@ svg {
 .audio-player {
   padding: 10px;
   padding-top: 15px;
-  // background: linear-gradient(to right,$color-gradient-start, $color-gradient-end );
-  // border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  // box-shadow: 0px 0px 7px 2px $color-gradient-end;
 
 }
 
@@ -126,14 +118,13 @@ h1 {
   width: 300px;
   height: 300px;
   margin-top: 15px;
-  // background-color: white;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
+  
 
   .overlay {
-    background-color: $color-range;
-    opacity: 0.3;
+    box-shadow: inset 0px 0px 5px 12px $color-main-dark;
     position: absolute;
     top: 0;
     left: 0;
@@ -196,6 +187,7 @@ h1 {
     transition: all 0.3s ease;
     top: 0;
     box-shadow: 0px 0px 8px 1px $color-main-dark;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   button:active {
@@ -284,6 +276,7 @@ h1 {
     cursor: pointer;
     box-shadow: 0px 0px 8px 1px $color-main-dark;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
   button:active {

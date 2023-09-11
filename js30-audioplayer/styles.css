@@ -96,8 +96,7 @@ h1 {
   position: relative;
 }
 .image-box .overlay {
-  background-color: #e3ce2d;
-  opacity: 0.3;
+  box-shadow: inset 0px 0px 5px 12px #1f1d0f;
   position: absolute;
   top: 0;
   left: 0;
@@ -154,6 +153,7 @@ h1 {
   transition: all 0.3s ease;
   top: 0;
   box-shadow: 0px 0px 8px 1px #1f1d0f;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .controls button:active {
   transform: translateY(-2px);
@@ -229,6 +229,7 @@ h1 {
   cursor: pointer;
   box-shadow: 0px 0px 8px 1px #1f1d0f;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .volume-box button:active {
   transform: translateY(-2px);
