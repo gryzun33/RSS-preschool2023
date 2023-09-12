@@ -1,10 +1,5 @@
 import {tracksData} from './data.js';
 
-// const inp = document.querySelector('input');
-// inp.addEventListener('pointermove' , () => {
-//   console.log('FFFFFFFFFFFF');
-// })
-
 let currIndex = 0;
 let prevIndex = 0;
 let isPlaying = false;
@@ -52,12 +47,6 @@ tracksData.forEach((item, i) => {
 
 });
 
-// setTimeout(() => {
-  // renderCurrentAudio(audios[0],currIndex);
-// }, 100);
-
-
-
 progressInput.addEventListener('change', (e) => {
   e.preventDefault();
   audios[currIndex].currentTime = progressInput.value;
@@ -65,11 +54,12 @@ progressInput.addEventListener('change', (e) => {
 })
 
 volumeInput.addEventListener('change', (e) => {
-  // e.preventDefault();
+
   audios[currIndex].muted = false;
   audios[currIndex].volume = +volumeInput.value;
-  // currVolume = +volumeInput.value;
+
   if(volumeInput.value === '0') {
+    currVolume = 0;
     volumeBtn.classList.add('hidden');
     volumeNoneBtn.classList.remove('hidden');
   } else {
@@ -89,7 +79,6 @@ volumeBtn.addEventListener('click', () => {
 volumeNoneBtn.addEventListener('click', () => {
   if (currVolume > 0) {
     volumeInput.value = currVolume;
-    // audios[currIndex].volume = 
     audios[currIndex].muted = false;
     volumeBtn.classList.remove('hidden');
     volumeNoneBtn.classList.add('hidden');
@@ -103,7 +92,6 @@ repeatBtn.addEventListener('click', () => {
   if(isRepeat) {
     isShuffle = false;
     shuffleBtn.classList.remove('active');
-    // shuffleBtn.disabled = true;
   } 
 });
 
@@ -115,11 +103,8 @@ shuffleBtn.addEventListener('click', () => {
     isRepeat = false;
     repeatBtn.classList.remove('active');
   }
-  // repeatBtn.classList.toggle('active');
+ 
 });
-
-
-
 
 setInterval(() => {
   currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime)
@@ -127,8 +112,6 @@ setInterval(() => {
 }, 500); 
 
 playBtn.addEventListener('click', () => {
- 
-  // console.log('play');
   isPlaying = true;
   audios[currIndex].play();
   playBtn.classList.add('hidden');
@@ -137,7 +120,6 @@ playBtn.addEventListener('click', () => {
 });
 
 pauseBtn.addEventListener('click', () => {
-  console.log('pause');
   isPlaying = false;
   audios[currIndex].pause();
   pauseBtn.classList.add('hidden');
@@ -145,20 +127,12 @@ pauseBtn.addEventListener('click', () => {
 });
 
 prevBtn.addEventListener('click', () => {
-  console.log('prev');
-  playPrev();
-  
+  playPrev(); 
 });
 
-nextBtn.addEventListener('click', () => {
-  console.log('next');
-  playNext();
-  
+nextBtn.addEventListener('click', () => { 
+  playNext(); 
 });
-
-
-
-
 
 function convertTime(duration) {
   let min = Math.floor(duration / 60);
@@ -184,7 +158,6 @@ function playNext() {
     }
   }
 
-  
   if (isPlaying) {
     audios[currIndex].play(); 
   } else {
@@ -197,8 +170,6 @@ function playPrev() {
   prevIndex = currIndex;
   audios[prevIndex].pause();
   audios[prevIndex].currentTime = 0;
-
-
   if (isRepeat) {
     currIndex = prevIndex;
   } else if (isShuffle) {
@@ -209,7 +180,6 @@ function playPrev() {
       currIndex = tracksData.length - 1;
     }
   }
-
 
   if (isPlaying) {
     audios[currIndex].play(); 
@@ -222,21 +192,16 @@ function playPrev() {
 function renderCurrentAudio(audio, currIndex) {
   progressInput.value = 0;
   progressInput.setAttribute('max', `${audio.duration}`);
-  // console.log ('render audio');
-
   trackName.innerHTML = `${tracksData[currIndex].trackName}`;
   author.innerHTML = `${tracksData[currIndex].author}`;
   authorImage.innerHTML = `<img src=${tracksData[currIndex].image} alt=${tracksData[currIndex].author} width='300' height='300'>`
   renderFullDuration(audio);
-  
 }
 
 function renderFullDuration(audio) {
-  console.log('audio', audio); 
   const fullTime = document.querySelector('.full-time');
   fullTime.innerHTML = convertTime(audio.duration);
 }
-
 
 function getRandomIndex(currInd) {
   const l = tracksData.length;
@@ -245,7 +210,5 @@ function getRandomIndex(currInd) {
     randomInd = Math.floor(Math.random() * l);
     console.log ('randomind', randomInd);
   } while (randomInd === currInd)
-  
   return randomInd;
-  
 }

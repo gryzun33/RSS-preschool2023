@@ -1,13 +1,3 @@
-// blue theme
-// $color-main-dark: #1e3050;
-// $color-range: red;
-// $color-text: #16253c;
-// $color-gradient-start: #788396;
-// $color-gradient-end: #d2d6dc;
-// $color-buttons: #626e85;
-// $color-progress: white;
-// $color-svg: #16253c;
-
 // black-yellow theme
 $color-main-dark: #1f1d0f;
 $color-range: #e3ce2d;
@@ -18,33 +8,6 @@ $color-buttons:  #e3ce2d;
 $color-progress: #1f1d0f;
 $color-svg:#1f1d0f;
 
-@font-face {
-  font-style: normal;
-  font-family: "Lato";
-  font-weight: 300;
-  src: url(./assets/fonts/Lato/Lato-Thin.ttf);
-}
-
-@font-face {
-  font-style: normal;
-  font-family: "Lato";
-  font-weight: 400;
-  src: url(./assets/fonts/Lato/Lato-Regular.ttf);
-}
-
-@font-face {
-  font-style: normal;
-  font-family: "Changa";
-  font-weight: 300;
-  src: url(./assets/fonts/Changa/Changa-Light.ttf);
-}
-
-@font-face {
-  font-style: normal;
-  font-family: "Changa";
-  font-weight: 400;
-  src: url(./assets/fonts/Changa/Changa-Regular.ttf);
-}
 
 @font-face {
   font-style: normal;
@@ -60,6 +23,21 @@ $color-svg:#1f1d0f;
   src: url(./assets/fonts/Manrope/Manrope-Medium.ttf);
 }
 
+@mixin flex($justify: normal, $align: normal) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin btn {
+  @include flex(center,center); 
+  border-radius: 50%;
+  background-color: $color-buttons;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: all 0.3s ease;
+}
 
 * {
   box-sizing: border-box;
@@ -90,9 +68,7 @@ svg {
   @media screen and (max-width: 500px) {
     width: 100vw;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex(center, center);
     border-radius: none;
     box-shadow: none;
   }
@@ -141,7 +117,6 @@ h1 {
   img {
     filter: grayscale(100%);
   }
-
 }
 
 .title {
@@ -176,18 +151,10 @@ h1 {
   button {
     width: 40px;
     height: 40px ;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color-buttons;
-    border: none;
-    cursor: pointer;
     position: relative;
-    transition: all 0.3s ease;
     top: 0;
     box-shadow: 0px 0px 8px 1px $color-main-dark;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    @include btn;
   }
 
   button:active {
@@ -201,7 +168,6 @@ h1 {
   .hidden {
     display: none;
   }
-
 }
 
 .progress-box {
@@ -250,7 +216,6 @@ h1 {
     color: $color-text;
     text-shadow: 0px 0px 3px $color-main-dark;
   }
-
 }
 
 .add-box {
@@ -260,31 +225,22 @@ h1 {
   justify-content: space-between;
 
   .repeat, .shuffle {
+    @include btn;
     background-color: transparent;
-    border-radius: 50%;
     width: 30px;
     height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s ease;
-
-
   }
 
   .repeat {
     position: relative;
+
     .repeat-one {
       position: absolute;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      @include flex(center, center);
       z-index: 1;
       font-size: 8px;
       font-weight: 700;
@@ -316,32 +272,16 @@ h1 {
     cursor: auto;
   }
 
-
-
- 
   .volume-box {
   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex(space-between, center);
     width: 50%;
-    
-    
-    
       
     button {
       width: 30px;
       height: 30px ;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $color-buttons;
-      border: none;
-      cursor: pointer;
       box-shadow: 0px 0px 8px 1px $color-main-dark;
-      transition: all 0.3s ease;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      @include btn;
     }
   
     button:active {
@@ -368,8 +308,7 @@ h1 {
         top: 0;
         left: 0;
         background-color: $color-progress;
-        border-radius: 2px;
-  
+        border-radius: 2px; 
         cursor: pointer;
       }
   
@@ -384,11 +323,5 @@ h1 {
         cursor: pointer;
       } 
     }
-  
-  
   }
-
-
 }
-
-
