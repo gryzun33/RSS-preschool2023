@@ -1,29 +1,5 @@
 @font-face {
   font-style: normal;
-  font-family: "Lato";
-  font-weight: 300;
-  src: url(./assets/fonts/Lato/Lato-Thin.ttf);
-}
-@font-face {
-  font-style: normal;
-  font-family: "Lato";
-  font-weight: 400;
-  src: url(./assets/fonts/Lato/Lato-Regular.ttf);
-}
-@font-face {
-  font-style: normal;
-  font-family: "Changa";
-  font-weight: 300;
-  src: url(./assets/fonts/Changa/Changa-Light.ttf);
-}
-@font-face {
-  font-style: normal;
-  font-family: "Changa";
-  font-weight: 400;
-  src: url(./assets/fonts/Changa/Changa-Regular.ttf);
-}
-@font-face {
-  font-style: normal;
   font-family: "Manrope";
   font-weight: 300;
   src: url(./assets/fonts/Manrope/Manrope-Light.ttf);
@@ -142,18 +118,18 @@ h1 {
 .controls button {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  position: relative;
+  top: 0;
+  box-shadow: 0px 0px 8px 1px #1f1d0f;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
   background-color: #e3ce2d;
   border: none;
   cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  top: 0;
-  box-shadow: 0px 0px 8px 1px #1f1d0f;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: all 0.3s ease;
 }
 .controls button:active {
   transform: translateY(-2px);
@@ -217,16 +193,18 @@ h1 {
   justify-content: space-between;
 }
 .add-box .repeat, .add-box .shuffle {
-  background-color: transparent;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  border-radius: 50%;
+  background-color: #e3ce2d;
   border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   transition: all 0.3s ease;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
 }
 .add-box .repeat {
   position: relative;
@@ -272,16 +250,16 @@ h1 {
 .add-box .volume-box button {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  box-shadow: 0px 0px 8px 1px #1f1d0f;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
   background-color: #e3ce2d;
   border: none;
   cursor: pointer;
-  box-shadow: 0px 0px 8px 1px #1f1d0f;
-  transition: all 0.3s ease;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: all 0.3s ease;
 }
 .add-box .volume-box button:active {
   transform: translateY(-2px);
