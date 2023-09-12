@@ -69,8 +69,11 @@ svg {
     width: 100vw;
     height: 100vh;
     @include flex(center, center);
+    flex-direction: column;
     border-radius: none;
-    box-shadow: none;
+    box-shadow: 0px;
+    position: relative;
+    border:none;
   }
 }
 
@@ -251,14 +254,6 @@ h1 {
     transition: all 0.3s ease;
   }
 
-  .repeat:hover svg, .shuffle:hover svg {
-     fill: $color-text;
-  }
-
-  .repeat:hover .repeat-one {
-     color: $color-text;
-  }
-
   .active svg {
     fill: $color-text;
   }
@@ -325,3 +320,41 @@ h1 {
     }
   }
 }
+
+footer {
+  width: 320px;
+  height: 50px;
+  @include flex(space-between,center);
+  padding-right: 10px;
+  padding-left: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width:500px) {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .year {
+    font-size: 14px;
+  }
+
+  svg {
+    transition: all 0.3s ease;
+  }
+}
+
+@media (hover:hover) {
+
+  .repeat:hover svg, .shuffle:hover svg {
+    fill: $color-text;
+ }
+
+ .repeat:hover .repeat-one {
+    color: $color-text;
+ }
+ 
+  a:hover svg {
+    fill: $color-buttons;
+  }
+}
+
