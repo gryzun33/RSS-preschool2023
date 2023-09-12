@@ -9,6 +9,8 @@ let currIndex = 0;
 let prevIndex = 0;
 let isPlaying = false;
 let currVolume = 0.5;
+let isRepeat = false;
+let isShuffle = false;
 
 
 const playBtn = document.querySelector('.play-track');
@@ -23,20 +25,24 @@ const volumeInput = document.querySelector('.volume-range');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNoneBtn = document.querySelector('.volume-none-btn');
 
+const repeatBtn = document.querySelector('.repeat');
+const shuffleBtn = document.querySelector('.shuffle');
+
 const trackName = document.querySelector('.track-name');
 const author = document.querySelector('.author');
 const authorImage = document.querySelector('.image');
 
 
 const audios = [];
-tracksData.forEach((item) => {
+tracksData.forEach((item, i) => {
   const audio = new Audio (item.link);
   audios.push(audio);
   audio.addEventListener('loadeddata', () => {
-    // console.log(audio.duration);
 
     audio.volume = currVolume;
-    // console.log(audio.paused);
+    if (i === 0) {
+      renderCurrentAudio(audios[0],0);
+    }
   });
 
   audio.addEventListener("ended", () => {
@@ -46,10 +52,9 @@ tracksData.forEach((item) => {
 
 });
 
-setTimeout(() => {
-  // volumeInput.value = '0.5';
-  renderCurrentAudio(audios[0],currIndex);
-}, 100);
+// setTimeout(() => {
+  // renderCurrentAudio(audios[0],currIndex);
+// }, 100);
 
 
 
@@ -92,7 +97,26 @@ volumeNoneBtn.addEventListener('click', () => {
 });
 
 
+repeatBtn.addEventListener('click', () => {
+  isRepeat = !isRepeat;
+  repeatBtn.classList.toggle('active');
+  if(isRepeat) {
+    isShuffle = false;
+    shuffleBtn.classList.remove('active');
+    // shuffleBtn.disabled = true;
+  } 
+});
 
+shuffleBtn.addEventListener('click', () => {
+  isShuffle = !isShuffle;
+  shuffleBtn.classList.toggle('active');
+
+  if (isShuffle) {
+    isRepeat = false;
+    repeatBtn.classList.remove('active');
+  }
+  // repeatBtn.classList.toggle('active');
+});
 
 
 
@@ -134,6 +158,8 @@ nextBtn.addEventListener('click', () => {
 
 
 
+
+
 function convertTime(duration) {
   let min = Math.floor(duration / 60);
   let sec = Math.floor(duration - min * 60);
@@ -146,10 +172,19 @@ function playNext() {
   prevIndex = currIndex;
   audios[prevIndex].pause();
   audios[prevIndex].currentTime = 0;
-  currIndex = currIndex + 1;
-  if (currIndex === tracksData.length) {
-    currIndex = 0;
+
+  if (isRepeat) {
+    currIndex = prevIndex;
+  } else if (isShuffle) {
+    currIndex = getRandomIndex(prevIndex);
+  } else {
+      currIndex = currIndex + 1;
+    if (currIndex === tracksData.length) {
+      currIndex = 0;
+    }
   }
+
+  
   if (isPlaying) {
     audios[currIndex].play(); 
   } else {
@@ -162,10 +197,20 @@ function playPrev() {
   prevIndex = currIndex;
   audios[prevIndex].pause();
   audios[prevIndex].currentTime = 0;
-  currIndex = currIndex - 1;
-  if (currIndex < 0) {
-    currIndex = tracksData.length - 1;
+
+
+  if (isRepeat) {
+    currIndex = prevIndex;
+  } else if (isShuffle) {
+    currIndex = getRandomIndex(currInd);
+  } else {
+    currIndex = currIndex - 1;
+    if (currIndex < 0) {
+      currIndex = tracksData.length - 1;
+    }
   }
+
+
   if (isPlaying) {
     audios[currIndex].play(); 
   } else {
@@ -190,4 +235,17 @@ function renderFullDuration(audio) {
   console.log('audio', audio); 
   const fullTime = document.querySelector('.full-time');
   fullTime.innerHTML = convertTime(audio.duration);
+}
+
+
+function getRandomIndex(currInd) {
+  const l = tracksData.length;
+  let randomInd;
+  do {
+    randomInd = Math.floor(Math.random() * l);
+    console.log ('randomind', randomInd);
+  } while (randomInd === currInd)
+  
+  return randomInd;
+  
 }
