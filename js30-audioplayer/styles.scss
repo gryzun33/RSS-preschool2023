@@ -67,13 +67,14 @@ svg {
 
   @media screen and (max-width: 500px) {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     @include flex(center, center);
     flex-direction: column;
     border-radius: none;
     box-shadow: 0px;
     position: relative;
     border:none;
+    
   }
 }
 
@@ -83,7 +84,10 @@ svg {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+ 
+  @media screen and (max-width: 500px) {
+    padding-bottom: 60px;
+  }
 }
 
 h1 {
@@ -244,7 +248,7 @@ h1 {
       top: 0;
       left: 0;
       @include flex(center, center);
-      z-index: 1;
+      z-index: 3;
       font-size: 8px;
       font-weight: 700;
     }  

@@ -39,7 +39,7 @@ svg {
 @media screen and (max-width: 500px) {
   .container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,6 +57,11 @@ svg {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (max-width: 500px) {
+  .audio-player {
+    padding-bottom: 60px;
+  }
 }
 
 h1 {
@@ -221,7 +226,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 3;
   font-size: 8px;
   font-weight: 700;
 }
