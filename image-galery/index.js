@@ -1,5 +1,6 @@
 const inputSearch = document.querySelector('.input-search');
-const iconClearSearch = document.querySelector('.icon-search');
+const iconSearch = document.querySelector('.icon-search');
+const iconClearInput = document.querySelector('.icon-clear');
 const container = document.querySelector('.container');
 inputSearch.focus();
 let orientation = 'portrait';
@@ -33,6 +34,11 @@ inputSearch.addEventListener('keydown', (e) => {
   if (e.code === 'Enter') {
     getData(inputSearch.value)
   }
+})
+
+iconClearInput.addEventListener('click', () => {
+  inputSearch.value = '';
+  inputSearch.focus();
 })
 
 
