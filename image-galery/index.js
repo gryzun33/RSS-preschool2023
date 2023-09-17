@@ -1,3 +1,4 @@
+
 const inputSearch = document.querySelector('.input-search');
 const iconSearch = document.querySelector('.icon-search');
 const iconClearInput = document.querySelector('.icon-clear');
@@ -94,3 +95,4 @@ inputRandom.addEventListener('click', () => {
   getRandomData(defOrientation);
   inputSearch.value = '';
 });
+

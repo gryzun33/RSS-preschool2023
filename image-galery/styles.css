@@ -205,4 +205,26 @@ footer {
   padding-left: 20px;
   padding-right: 20px;
   min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer .footer-inner {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .footer-inner p {
+  font-family: "ADLaM Display";
+  color: #2f5353;
+}
+footer .footer-inner svg {
+  fill: #2f5353;
+  transition: fill 0.3s ease-in-out;
+}
+@media (hover: hover) {
+  footer .footer-inner a:hover svg {
+    fill: #ffad4f;
+  }
 }/*# sourceMappingURL=styles.css.map */

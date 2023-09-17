@@ -225,6 +225,8 @@ header {
   }
 }
 
+
+
 main {
   @include wrapper;
 
@@ -293,4 +295,30 @@ main {
 footer {
   @include wrapper;
   min-height: 80px;
+  @include flex(center, center);
+
+  .footer-inner {
+    width: 450px;
+    @include flex(space-between, center);
+
+    p {
+      font-family: 'ADLaM Display';
+      color: $color-dark;
+    }
+
+    // a {
+
+    // }
+
+    svg {
+      fill: $color-dark;
+      transition: fill 0.3s ease-in-out;
+    }
+
+    @media (hover:hover) {
+      a:hover svg {
+        fill: $color-text;
+      }
+    } 
+  }
 }
