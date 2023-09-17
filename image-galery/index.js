@@ -2,37 +2,68 @@ const inputSearch = document.querySelector('.input-search');
 const iconSearch = document.querySelector('.icon-search');
 const iconClearInput = document.querySelector('.icon-clear');
 const container = document.querySelector('.container');
+const inputRandom = document.querySelector('#random');
+let defOrientation = 'landscape';
+
+inputRandom.checked = true;
+// let defValue = 'summer';
+
 inputSearch.focus();
-let orientation = 'portrait';
+getRandomData(defOrientation);
+// getData(defValue, defOrientation);
 
-
-async function getData(value) {
-  // const orientation = 'landscape';
-  const orientation = 'portrait';
-  // const orientation = 'squarish';
-  const url = `https://api.unsplash.com/search/photos?query=${value}&per_page=30&orientation=${orientation}&client_id=qEz_nf64rJGRFlCwzOJb9obVgcbDiu_EiE1d4tiCwaU`;
+async function getData(value, orient) {
+  const url = `https://api.unsplash.com/search/photos?query=${value}&per_page=30&orientation=${orient}&client_id=6ISY71tnuAX-TcjYFSg7uddHNK8J0WoPkia3PKjz2T8`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data.results);
-  showData(data.results);
+  console.log('data=', data);
+  showData(data.results, orient);
 }
-getData('summer');
 
-function showData(data) {
+async function getRandomData(orient) {
+  const url = `https://api.unsplash.com/photos/random?count=30&orientation=${orient}&client_id=6ISY71tnuAX-TcjYFSg7uddHNK8J0WoPkia3PKjz2T8`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data);
+  console.log(typeof data);
+  showData(Array.from(data), orient);
+}
+
+
+function showData(data, or) {
   container.innerHTML = '';
   data.forEach((image) => {
     const imgBox = document.createElement('div');
-    imgBox.classList.add('image-box');
+    imgBox.classList.add('image-box', or);
     container.append(imgBox);
-    // imgBox.style.height = (+window.getComputedStyle(imgBox).width) * 1.48 + 'px';
-    imgBox.style.backgroundImage = `url(${image.urls.regular})`;
-    
+    imgBox.style.backgroundImage = `url(${image.urls.regular})`;    
   });
 }
 
 inputSearch.addEventListener('keydown', (e) => {
   if (e.code === 'Enter') {
-    getData(inputSearch.value)
+    // defValue = inputSearch.value;
+    if (inputSearch.value.trim()) {
+      getData(inputSearch.value, defOrientation);
+      inputRandom.checked = false;
+      inputSearch.blur();
+    } else {
+      getRandomData(defOrientation);
+      inputRandom.checked = true;
+      inputSearch.blur();
+    }
+  }
+})
+
+iconSearch.addEventListener('click', () => {
+  if (inputSearch.value.trim()) {
+    getData(inputSearch.value, defOrientation);
+    inputRandom.checked = false;
+    inputSearch.blur();
+  } else {
+    getRandomData(defOrientation);
+    inputRandom.checked = true;
+    inputSearch.blur();
   }
 })
 
@@ -41,4 +72,25 @@ iconClearInput.addEventListener('click', () => {
   inputSearch.focus();
 })
 
+const inputs = document.querySelectorAll('.buttons-box-left input');
+// console.log(inputs);
+inputs.forEach((inp) => {
+  inp.addEventListener('click', () => {
+    defOrientation = inp.id;
+    // console.log(orient);
+    if (inputSearch.value.trim()) {
+      getData(inputSearch.value, defOrientation);
+    } else {
+      getRandomData(defOrientation);
+      inputRandom.checked = true;
+    }   
+  })
+})
 
+inputRandom.addEventListener('click', () => {
+  // if (!inputRandom.checked) {
+  //   getRandomData(defOrientation);
+  // }
+  getRandomData(defOrientation);
+  inputSearch.value = '';
+});

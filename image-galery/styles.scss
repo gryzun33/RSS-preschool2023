@@ -91,8 +91,14 @@ header {
   align-items: center;
   min-height: 100px;
   position: sticky;
-  top: 0;
+  top: 0px;
   background-color: $color-bg;
+
+  @include tablets {
+    flex-direction: column;
+    top: -70px;
+    // position: relative;
+  }
 
   .title-box {
     display: flex;
@@ -121,6 +127,13 @@ header {
     display: flex;
     flex-direction: column;
 
+    @include tablets {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      // position: sticky;
+      // top: 0;
+    }
+
     .input-box {
       position: relative;
 
@@ -135,9 +148,15 @@ header {
         font-weight: 300;
         color: $color-dark;
 
+        @include laptops {
+          width: 450px;
+        }
+
         &::placeholder {
           color: $color-placeholder;
         }
+
+        
       }
 
       .icon-search, .icon-clear {
@@ -223,8 +242,7 @@ main {
  
 
     .image-box {
-      width: 236px;
-      height: 350px;
+      
       border: 2px solid $color-text;
       border-radius: 6px;
       background-position: 50% 50%;
@@ -232,15 +250,37 @@ main {
       overflow: hidden;
       margin-top: 10px;
 
+    
+    }
+
+    .landscape {
+      width: 298.75px;
+      height: 220px;
+
+      @include laptops {
+        width: 250px;
+        height: 180px;
+      }
+    }
+
+    .portrait {
+      width: 236px;
+      height: 350px;
+
       @include laptops {
         width: 180px;
         height: 250px;
       }
+    }
 
-      // @include laptops {
-      //   width: 23%;
-      //   height: 250px;
-      // }
+    .squarish {
+      width: 236px;
+      height: 236px;
+
+      @include laptops {
+        width: 180px;
+        height: 180px;
+      }
     }
 
 

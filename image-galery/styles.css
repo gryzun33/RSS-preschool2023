@@ -36,8 +36,14 @@ header {
   align-items: center;
   min-height: 100px;
   position: sticky;
-  top: 0;
+  top: 0px;
   background-color: #cbe8e5;
+}
+@media screen and (max-width: 767px) {
+  header {
+    flex-direction: column;
+    top: -70px;
+  }
 }
 header .title-box {
   display: flex;
@@ -61,6 +67,12 @@ header .search-box {
   display: flex;
   flex-direction: column;
 }
+@media screen and (max-width: 767px) {
+  header .search-box {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
 header .search-box .input-box {
   position: relative;
 }
@@ -74,6 +86,11 @@ header .search-box .input-box .input-search {
   font-family: "ADLaM Display";
   font-weight: 300;
   color: #2f5353;
+}
+@media screen and (max-width: 1023px) {
+  header .search-box .input-box .input-search {
+    width: 450px;
+  }
 }
 header .search-box .input-box .input-search::-moz-placeholder {
   color: #C0C0C0;
@@ -144,8 +161,6 @@ main .container {
   justify-content: center;
 }
 main .container .image-box {
-  width: 236px;
-  height: 350px;
   border: 2px solid #ffad4f;
   border-radius: 6px;
   background-position: 50% 50%;
@@ -153,10 +168,34 @@ main .container .image-box {
   overflow: hidden;
   margin-top: 10px;
 }
+main .container .landscape {
+  width: 298.75px;
+  height: 220px;
+}
 @media screen and (max-width: 1023px) {
-  main .container .image-box {
+  main .container .landscape {
+    width: 250px;
+    height: 180px;
+  }
+}
+main .container .portrait {
+  width: 236px;
+  height: 350px;
+}
+@media screen and (max-width: 1023px) {
+  main .container .portrait {
     width: 180px;
     height: 250px;
+  }
+}
+main .container .squarish {
+  width: 236px;
+  height: 236px;
+}
+@media screen and (max-width: 1023px) {
+  main .container .squarish {
+    width: 180px;
+    height: 180px;
   }
 }
 
