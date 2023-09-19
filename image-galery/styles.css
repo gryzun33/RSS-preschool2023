@@ -4,18 +4,6 @@
   font-weight: 400;
   src: url(./assets/fonts/ADLaM_Display/ADLaMDisplay-Regular.ttf);
 }
-@font-face {
-  font-style: normal;
-  font-family: "Rowdies";
-  font-weight: 300;
-  src: url(./assets/fonts/Rowdies/Rowdies-Light.ttf);
-}
-@font-face {
-  font-style: normal;
-  font-family: "Space Mono";
-  font-weight: 700;
-  src: url(./assets/fonts/Space_Mono/SpaceMono-Bold.ttf);
-}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -77,8 +65,18 @@ header .search-box {
     padding-bottom: 10px;
   }
 }
+@media screen and (max-width: 499px) {
+  header .search-box {
+    width: 100%;
+  }
+}
 header .search-box .input-box {
   position: relative;
+}
+@media screen and (max-width: 499px) {
+  header .search-box .input-box {
+    width: 100%;
+  }
 }
 header .search-box .input-box .input-search {
   width: 500px;
@@ -93,7 +91,12 @@ header .search-box .input-box .input-search {
 }
 @media screen and (max-width: 1023px) {
   header .search-box .input-box .input-search {
-    width: 450px;
+    max-width: 450px;
+  }
+}
+@media screen and (max-width: 499px) {
+  header .search-box .input-box .input-search {
+    width: 100%;
   }
 }
 header .search-box .input-box .input-search::-moz-placeholder {
@@ -147,6 +150,12 @@ header .buttons-box .buttons-box-left {
   justify-content: space-between;
   width: 250px;
 }
+@media screen and (max-width: 499px) {
+  header .buttons-box .buttons-box-left {
+    flex-direction: column;
+    width: auto;
+  }
+}
 
 main {
   max-width: 1280px;
@@ -171,7 +180,7 @@ main .no-results {
   color: #2f5353;
 }
 main .hidden {
-  display: block;
+  display: none;
 }
 main .container {
   width: 100%;
@@ -319,7 +328,7 @@ footer .footer-inner svg {
   color: #2f5353;
   padding: 10px 10px 0 10px;
   width: 60%;
-  height: 80px;
+  min-height: 80px;
   background-color: white;
   margin-top: 10px;
   border: 2px solid #ffad4f;

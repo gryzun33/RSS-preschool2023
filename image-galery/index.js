@@ -8,38 +8,30 @@ const modal = document.querySelector('.modal');
 const body = document.querySelector('body');
 const noResults = document.querySelector('.no-results');
 let defOrientation = 'landscape';
-// let currImage = null;
-// let modalBox = null;
 
 inputRandom.checked = true;
 inputSearch.focus();
-
-getRandomData(defOrientation);
 
 async function getData(value, orient) {
   const url = `https://api.unsplash.com/search/photos?query=${value}&per_page=30&orientation=${orient}&client_id=qEz_nf64rJGRFlCwzOJb9obVgcbDiu_EiE1d4tiCwaU`;
   const res = await fetch(url);
   const data = await res.json();
-  // console.log('data=', data);
   if (data.results.length === 0) {
     container.innerHTML = '';
     noResults.classList.remove('hidden');
   } else {
     noResults.classList.add('hidden');
     showData(data.results, orient);
-  }
-  
+  }  
 }
 
 async function getRandomData(orient) {
+  noResults.classList.add('hidden');
   const url = `https://api.unsplash.com/photos/random?count=30&orientation=${orient}&client_id=qEz_nf64rJGRFlCwzOJb9obVgcbDiu_EiE1d4tiCwaU`;
   const res = await fetch(url);
   const data = await res.json();
-  // console.log(data);
-  // console.log(typeof data);
   showData(Array.from(data), orient);
 }
-
 
 function showData(data, or) {
   container.innerHTML = '';
@@ -48,10 +40,8 @@ function showData(data, or) {
     imgBox.classList.add('image-box', or);
     container.append(imgBox);
     imgBox.style.backgroundImage = `url(${image.urls.regular})`;
-    
     imgBox.addEventListener('click', () => {
       showImage(image);
-      // currImage = image;
     });
   });
 }
@@ -59,7 +49,6 @@ function showData(data, or) {
 function showImage(image) {
   modal.classList.remove('hidden');
   body.style.overflowY = 'hidden';
-  // const modalClass = (defOrientation === ('portrait' || 'squarish')) ? 'modal-portrait' : 'modal-landscape';
   let imageDescr = 'no description';
   if (image.alt_description) {
     imageDescr = image.alt_description[0].toUpperCase() + image.alt_description.slice(1);
@@ -71,7 +60,6 @@ function showImage(image) {
     <div class="modal-box">
       <div class="image-wrapper">
         <img class="modal-image" src="${image.urls.regular}" alt="${image.alt_description}">
-
         <div class="modal-content">
           <div class="modal-text">
             <p class="image-descr">${imageDescr}</p>
@@ -84,24 +72,13 @@ function showImage(image) {
         </div>
       </div>   
     </div>`;
-  setTimeout(() => {
-    // calcWidthModal(image);
-    const closeBtn = modal.querySelector('.close-btn');
-    closeBtn.addEventListener('click', closeModal);
-  }, 0);
 }
 
 function  closeModal() {
   modal.classList.add('hidden');
   body.style.overflowY = '';
   modal.innerHTML = '';
-  // modalBox = null;
 }
-
-
-
-
-
 
 modal.addEventListener('click', (e) => {
   if (!e.target.closest('.modal-image')) {
@@ -111,7 +88,6 @@ modal.addEventListener('click', (e) => {
 
 inputSearch.addEventListener('keydown', (e) => {
   if (e.code === 'Enter') {
-    // defValue = inputSearch.value;
     if (inputSearch.value.trim()) {
       getData(inputSearch.value, defOrientation);
       inputRandom.checked = false;
@@ -141,8 +117,6 @@ iconClearInput.addEventListener('click', () => {
   inputSearch.focus();
 })
 
-
-// console.log(inputs);
 inputs.forEach((inp) => {
   inp.addEventListener('click', () => {
     defOrientation = inp.id;
@@ -160,41 +134,4 @@ inputRandom.addEventListener('click', () => {
   inputSearch.value = '';
 });
 
-
-// function calcWidthModal(image) {
-//   modalBox = modal.querySelector('.modal-box');
-//   modalBox.style.maxHeight = '';
-//   modalBox.style.overflowY = '';
-
-//   console.log ('imagewidth=',image.width );
-//   console.log ('imageheight=',image.height );
-//   console.log('windowwidth', window.innerWidth);
-//   console.log('windowheight', window.innerHeight);
-
-//   const ratioWindow = window.innerHeight /  window.innerWidth;
-//   const ratioImage = image.height / image.width; 
-//   const k = ratioWindow / ratioImage - 0.1;
-//   const kk = ratioWindow / ratioImage - 0.15;
-  
-//   console.log('ratioindow', ratioWindow);
-//   console.log('ratioimage', ratioImage);
-//   console.log ('k=', k);
-//   console.log ('kk=', kk);
-
-//   if (ratioWindow > ratioImage) {
-//     modalBox.style.width = '80vw';
-//   } else if ((ratioWindow <= ratioImage) && (ratioWindow > 0.7)) {
-//     modalBox.style.width = kk * window.innerWidth + 'px';
-//   } else if ((ratioWindow <= ratioImage) && (ratioImage >=1) && (ratioWindow > 0.5)) {
-//     modalBox.style.width = k * window.innerWidth + 'px';
-//   } else if ((ratioWindow <= ratioImage) && (ratioImage < 1) && (ratioWindow > 0.5)) {
-//     modalBox.style.width = kk * window.innerWidth + 'px';
-//   } else {
-//     const kkk = 0.5 / ratioImage - 0.1;
-//     modalBox.style.width = kkk * window.innerWidth;
-//     modalBox.style.maxHeight = '100vh';
-//     modalBox.style.overflowY = 'auto';
-//   }
-//   console.log('modalwidth', window.getComputedStyle(modalBox).width);
-// }
-
+getRandomData(defOrientation);

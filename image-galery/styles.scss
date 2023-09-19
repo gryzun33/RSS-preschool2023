@@ -5,7 +5,6 @@ $color-bg: #cbe8e5;
 $color-btn: #a8cece;
 $color-btn-active: #89bcbc;
 $color-text:#ffad4f; 
-// $colot-text-light: #e7f1f1;
 $color-placeholder: #C0C0C0;
 
 @mixin wrapper {
@@ -21,40 +20,11 @@ $color-placeholder: #C0C0C0;
   align-items: $align;
 }
 
-// @mixin btn {
-//   background-color: $color-bg;
-//   height: 30px;
-//   width: 80px;
-//   // border: 1px solid $color-dark;
-//   border-radius: 3px;
-//   @include flex(normal,center);
-//   font-family: 'ADLaM Display';
-//   font-weight: 300;
-//   font-size: 14px;
-//   color: $color-dark;
-// }
-
-
-
 @font-face {
   font-style: normal;
   font-family: 'ADLaM Display';
   font-weight: 400;
   src: url(./assets/fonts/ADLaM_Display/ADLaMDisplay-Regular.ttf);
-}
-
-@font-face {
-  font-style: normal;
-  font-family: 'Rowdies';
-  font-weight: 300;
-  src: url(./assets/fonts/Rowdies/Rowdies-Light.ttf);
-}
-
-@font-face {
-  font-style: normal;
-  font-family: 'Space Mono';
-  font-weight: 700;
-  src: url(./assets/fonts/Space_Mono/SpaceMono-Bold.ttf);
 }
 
 @mixin desktop-1280 {
@@ -71,6 +41,12 @@ $color-placeholder: #C0C0C0;
 
 @mixin tablets {
   @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 499px) {
     @content;
   }
 }
@@ -102,7 +78,6 @@ header {
   @include tablets {
     flex-direction: column;
     top: -70px;
-    // position: relative;
   }
 
   .title-box {
@@ -115,8 +90,7 @@ header {
       margin-right: 10px;
 
       svg {
-        fill: $color-btn-active;
-  
+        fill: $color-btn-active; 
       }
     }
   }
@@ -135,12 +109,19 @@ header {
     @include tablets {
       padding-top: 10px;
       padding-bottom: 10px;
-      // position: sticky;
-      // top: 0;
+
+    }
+
+    @include mobile {
+      width: 100%;
     }
 
     .input-box {
       position: relative;
+
+      @include mobile {
+        width: 100%;
+      }
 
       .input-search {
         width: 500px;
@@ -154,14 +135,18 @@ header {
         color: $color-dark;
 
         @include laptops {
-          width: 450px;
+          max-width: 450px;
         }
+
+        @include mobile {
+          width: 100%;
+        }
+
+
 
         &::placeholder {
           color: $color-placeholder;
-        }
-
-        
+        }       
       }
 
       .icon-search, .icon-clear {
@@ -192,8 +177,6 @@ header {
       display: none;
     }
 
-
-
     label {
       font-family: 'ADLaM Display';
       font-weight: 300;
@@ -213,20 +196,18 @@ header {
       color: $color-dark; 
     }
 
-    
-
     .buttons-box-left {
       display: flex;
       justify-content: space-between;
-      width: 250px;
- 
+      width: 250px; 
+
+      @include mobile {
+        flex-direction: column;
+        width: auto;
+      }
     }
-
-
   }
 }
-
-
 
 main {
   @include wrapper;
@@ -247,7 +228,7 @@ main {
   }
 
   .hidden {
-    display: block;
+    display: none;
   }
 
   .container {
@@ -255,16 +236,11 @@ main {
     height: 100%;
     display: flex;
     column-gap: 15px;
-    // flex-direction: column;
     flex-wrap: wrap;
     overflow: hidden;
     justify-content: center;
 
-    // align-content: space-between;
- 
-
-    .image-box {
-      
+    .image-box {     
       border: 2px solid $color-text;
       border-radius: 6px;
       background-position: 50% 50%;
@@ -310,20 +286,13 @@ main {
         height: 180px;
       }
     }
-
-
-
-
   }
-
 }
 
 footer {
   @include wrapper;
   min-height: 80px;
   @include flex(center, center);
-  // position: relative;
-  // bottom: 0;
 
   .footer-inner {
     width: 450px;
@@ -333,10 +302,6 @@ footer {
       font-family: 'ADLaM Display';
       color: $color-dark;
     }
-
-    // a {
-
-    // }
 
     svg {
       fill: $color-dark;
@@ -376,7 +341,6 @@ footer {
     cursor: pointer;
 
     @include flex(center,center);
-    // display: none;
 
   }
 
@@ -400,46 +364,33 @@ footer {
         .modal-image {
         max-width: 100%;
         max-height: calc(100% - 90px);
-        // object-fit: contain;
         display: block;
         border: 2px solid $color-text;
         border-radius: 7px;
-        position:relative;
-
-        
+        position:relative;       
         }
 
-    
-
-
       .modal-content {
-        // position: absolute;
         display: flex;
         font-family: 'ADLaM Display', cursive;
         color: $color-dark;
         padding: 10px 10px 0 10px;
         width: 60%;
-        // bottom: 0;
-        height: 80px;
+        min-height: 80px;
         background-color: white;
         margin-top: 10px;
         border: 2px solid $color-text;
         border-radius: 7px;
         font-size: 16px;
-        // display: none;
+
         @include tablets {
           width: 100%;
           font-size: 14px;
         }
 
-
         .modal-text {
           width: 70%;
-          // font-size: 16px;
-
-         
-
-
+   
           p {
             margin-bottom: 10px;
           }
@@ -461,17 +412,9 @@ footer {
             margin-top: 5px;
           }
         }
-      }
-      
+      }      
     }
-
-  
-
   }
-
-
-
-
 }
 
 .hidden {
