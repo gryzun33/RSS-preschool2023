@@ -8,8 +8,8 @@ const modal = document.querySelector('.modal');
 const body = document.querySelector('body');
 const noResults = document.querySelector('.no-results');
 let defOrientation = 'landscape';
-let currImage = null;
-let modalBox = null;
+// let currImage = null;
+// let modalBox = null;
 
 inputRandom.checked = true;
 inputSearch.focus();
@@ -51,13 +51,8 @@ function showData(data, or) {
     
     imgBox.addEventListener('click', () => {
       showImage(image);
-      currImage = image;
-    })
-    // console.log(image.width);
-    // console.log(image.height);
-    // console.log(image.alt_description);
-    // console.log(image.user.name);
-    // console.log(image.likes);
+      // currImage = image;
+    });
   });
 }
 
@@ -70,88 +65,47 @@ function showImage(image) {
     imageDescr = image.alt_description[0].toUpperCase() + image.alt_description.slice(1);
   }
   modal.innerHTML = `
+    <button class="close-btn">
+      <img src="./assets/icons/xmark-solid-modal.svg" alt="close-btn">
+    </button>
     <div class="modal-box">
-      <button class="close-btn">
-        <img src="./assets/icons/xmark-solid-modal.svg" alt="close-btn">
-      </button>
       <div class="image-wrapper">
         <img class="modal-image" src="${image.urls.regular}" alt="${image.alt_description}">
-      </div>
-      <div class="modal-content">
-  <div class="modal-text">
-    <p class="image-descr">${imageDescr}</p>
-    <p class="image-author">Author: ${image.user.name}</p>
-  </div>
-  <div class="modal-likes">
-    <img src="./assets/icons/heart-solid.svg" alt="like">
-    <p class="like-count">${image.likes}</p>
-  </div>
 
-    </div>
-  `;
+        <div class="modal-content">
+          <div class="modal-text">
+            <p class="image-descr">${imageDescr}</p>
+            <p class="image-author">Author: ${image.user.name}</p>
+          </div>
+          <div class="modal-likes">
+            <img src="./assets/icons/heart-solid.svg" alt="like">
+            <p class="like-count">${image.likes}</p>
+          </div>
+        </div>
+      </div>   
+    </div>`;
   setTimeout(() => {
-
     // calcWidthModal(image);
     const closeBtn = modal.querySelector('.close-btn');
-    closeBtn.addEventListener('click', () => {
-      modal.classList.add('hidden');
-      body.style.overflowY = '';
-      modal.innerHTML = '';
-      modalBox = null;
-    });
+    closeBtn.addEventListener('click', closeModal);
   }, 0);
 }
 
-function calcWidthModal(image) {
-  modalBox = modal.querySelector('.modal-box');
-  modalBox.style.maxHeight = '';
-  modalBox.style.overflowY = '';
-
-  console.log ('imagewidth=',image.width );
-  console.log ('imageheight=',image.height );
-  console.log('windowwidth', window.innerWidth);
-  console.log('windowheight', window.innerHeight);
-
-  const ratioWindow = window.innerHeight /  window.innerWidth;
-  const ratioImage = image.height / image.width; 
-  const k = ratioWindow / ratioImage - 0.1;
-  const kk = ratioWindow / ratioImage - 0.15;
-  
-  console.log('ratioindow', ratioWindow);
-  console.log('ratioimage', ratioImage);
-  console.log ('k=', k);
-  console.log ('kk=', kk);
-
-  if (ratioWindow > ratioImage) {
-    modalBox.style.width = '80vw';
-  } else if ((ratioWindow <= ratioImage) && (ratioWindow > 0.7)) {
-    modalBox.style.width = kk * window.innerWidth + 'px';
-  } else if ((ratioWindow <= ratioImage) && (ratioImage >=1) && (ratioWindow > 0.5)) {
-    modalBox.style.width = k * window.innerWidth + 'px';
-  } else if ((ratioWindow <= ratioImage) && (ratioImage < 1) && (ratioWindow > 0.5)) {
-    modalBox.style.width = kk * window.innerWidth + 'px';
-  } else {
-    const kkk = 0.5 / ratioImage - 0.1;
-    modalBox.style.width = kkk * window.innerWidth;
-    modalBox.style.maxHeight = '100vh';
-    modalBox.style.overflowY = 'auto';
-  }
-  console.log('modalwidth', window.getComputedStyle(modalBox).width);
+function  closeModal() {
+  modal.classList.add('hidden');
+  body.style.overflowY = '';
+  modal.innerHTML = '';
+  // modalBox = null;
 }
 
-// window.addEventListener('resize', () => {
-//   if (modalBox) {
-//     calcWidthModal(currImage);
-//   }
-// })
+
+
+
 
 
 modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.classList.add('hidden');
-    body.style.overflowY = '';
-    modal.innerHTML = '';
-    modalBox = null;
+  if (!e.target.closest('.modal-image')) {
+    closeModal();
   }
 });
 
@@ -205,4 +159,42 @@ inputRandom.addEventListener('click', () => {
   getRandomData(defOrientation);
   inputSearch.value = '';
 });
+
+
+// function calcWidthModal(image) {
+//   modalBox = modal.querySelector('.modal-box');
+//   modalBox.style.maxHeight = '';
+//   modalBox.style.overflowY = '';
+
+//   console.log ('imagewidth=',image.width );
+//   console.log ('imageheight=',image.height );
+//   console.log('windowwidth', window.innerWidth);
+//   console.log('windowheight', window.innerHeight);
+
+//   const ratioWindow = window.innerHeight /  window.innerWidth;
+//   const ratioImage = image.height / image.width; 
+//   const k = ratioWindow / ratioImage - 0.1;
+//   const kk = ratioWindow / ratioImage - 0.15;
+  
+//   console.log('ratioindow', ratioWindow);
+//   console.log('ratioimage', ratioImage);
+//   console.log ('k=', k);
+//   console.log ('kk=', kk);
+
+//   if (ratioWindow > ratioImage) {
+//     modalBox.style.width = '80vw';
+//   } else if ((ratioWindow <= ratioImage) && (ratioWindow > 0.7)) {
+//     modalBox.style.width = kk * window.innerWidth + 'px';
+//   } else if ((ratioWindow <= ratioImage) && (ratioImage >=1) && (ratioWindow > 0.5)) {
+//     modalBox.style.width = k * window.innerWidth + 'px';
+//   } else if ((ratioWindow <= ratioImage) && (ratioImage < 1) && (ratioWindow > 0.5)) {
+//     modalBox.style.width = kk * window.innerWidth + 'px';
+//   } else {
+//     const kkk = 0.5 / ratioImage - 0.1;
+//     modalBox.style.width = kkk * window.innerWidth;
+//     modalBox.style.maxHeight = '100vh';
+//     modalBox.style.overflowY = 'auto';
+//   }
+//   console.log('modalwidth', window.getComputedStyle(modalBox).width);
+// }
 

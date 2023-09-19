@@ -266,65 +266,82 @@ footer .footer-inner svg {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  padding: 30px;
+  background-color: rgba(47, 83, 83, 0.7);
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 30px;
-  padding-right: 30px;
-  background-color: rgba(47, 83, 83, 0.5);
-  z-index: 2;
 }
-.modal .modal-box {
-  position: relative;
-  border: 2px solid #ffad4f;
-  border-radius: 7px;
-  background-color: white;
-}
-.modal .modal-box .close-btn {
+.modal .close-btn {
   position: absolute;
-  top: -30px;
-  right: -30px;
+  top: 0px;
+  right: 0px;
   width: 30px;
   height: 30px;
   background-color: #ffad4f;
+  border: none;
+  z-index: 5;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
 }
-.modal .modal-box .image-wrapper {
-  border-radius: 7px 7px 0 0;
-  overflow: hidden;
-  width: 100%;
-}
-.modal .modal-box .image-wrapper .modal-image {
+.modal .modal-box {
+  position: relative;
+  border-radius: 7px;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.modal .modal-box .modal-content {
+.modal .modal-box .image-wrapper {
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.modal .modal-box .image-wrapper .modal-image {
+  max-width: 100%;
+  max-height: calc(100% - 90px);
+  display: block;
+  border: 2px solid #ffad4f;
+  border-radius: 7px;
+  position: relative;
+}
+.modal .modal-box .image-wrapper .modal-content {
   display: flex;
   font-family: "ADLaM Display", cursive;
   color: #2f5353;
+  padding: 10px 10px 0 10px;
+  width: 60%;
+  height: 80px;
+  background-color: white;
   margin-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;
+  border: 2px solid #ffad4f;
+  border-radius: 7px;
+  font-size: 16px;
 }
-.modal .modal-box .modal-content .modal-text {
+@media screen and (max-width: 767px) {
+  .modal .modal-box .image-wrapper .modal-content {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+.modal .modal-box .image-wrapper .modal-content .modal-text {
   width: 70%;
 }
-.modal .modal-box .modal-content .modal-text p {
+.modal .modal-box .image-wrapper .modal-content .modal-text p {
   margin-bottom: 10px;
 }
-.modal .modal-box .modal-content .modal-text .image-author {
+.modal .modal-box .image-wrapper .modal-content .modal-text .image-author {
   text-transform: capitalize;
 }
-.modal .modal-box .modal-content .modal-likes {
+.modal .modal-box .image-wrapper .modal-content .modal-likes {
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -332,7 +349,7 @@ footer .footer-inner svg {
   align-items: center;
   flex-grow: 1;
 }
-.modal .modal-box .modal-content .modal-likes .like-count {
+.modal .modal-box .image-wrapper .modal-content .modal-likes .like-count {
   margin-top: 5px;
 }
 
