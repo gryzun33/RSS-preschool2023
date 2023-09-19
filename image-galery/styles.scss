@@ -85,6 +85,7 @@ body {
   background-color: $color-bg;
   position: relative;
   scrollbar-gutter: stable;
+  min-height: 100vh;
 }
 
 header {
@@ -229,6 +230,25 @@ header {
 
 main {
   @include wrapper;
+  min-height: calc(100vh - 180px);
+  position: relative;
+
+  @include tablets {
+    min-height: calc(100vh - 235px);
+  }
+  .no-results {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    font-family: 'ADLaM Display';
+    color: $color-dark;
+  }
+
+  .hidden {
+    display: block;
+  }
 
   .container {
     width: 100%;
@@ -302,6 +322,8 @@ footer {
   @include wrapper;
   min-height: 80px;
   @include flex(center, center);
+  // position: relative;
+  // bottom: 0;
 
   .footer-inner {
     width: 450px;
@@ -349,14 +371,7 @@ footer {
     border: 2px solid $color-text;
     border-radius: 7px;
     background-color: white;
-    width: 80vw;
-    // height: 80vh;
-    // max-width:100%;
-    // max-height: 100%;
-    // overflow-y: auto;
-    // max-height: 100vh;
-    // overflow: auto;
-    // overflow: hidden;
+   
     
 
     .close-btn {

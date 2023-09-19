@@ -6,6 +6,7 @@ const container = document.querySelector('.container');
 const inputRandom = document.querySelector('#random');
 const modal = document.querySelector('.modal');
 const body = document.querySelector('body');
+const noResults = document.querySelector('.no-results');
 let defOrientation = 'landscape';
 let currImage = null;
 let modalBox = null;
@@ -19,8 +20,15 @@ async function getData(value, orient) {
   const url = `https://api.unsplash.com/search/photos?query=${value}&per_page=30&orientation=${orient}&client_id=qEz_nf64rJGRFlCwzOJb9obVgcbDiu_EiE1d4tiCwaU`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log('data=', data);
-  showData(data.results, orient);
+  // console.log('data=', data);
+  if (data.results.length === 0) {
+    container.innerHTML = '';
+    noResults.classList.remove('hidden');
+  } else {
+    noResults.classList.add('hidden');
+    showData(data.results, orient);
+  }
+  
 }
 
 async function getRandomData(orient) {
@@ -83,7 +91,7 @@ function showImage(image) {
   `;
   setTimeout(() => {
 
-    calcWidthModal(image);
+    // calcWidthModal(image);
     const closeBtn = modal.querySelector('.close-btn');
     closeBtn.addEventListener('click', () => {
       modal.classList.add('hidden');
@@ -131,11 +139,11 @@ function calcWidthModal(image) {
   console.log('modalwidth', window.getComputedStyle(modalBox).width);
 }
 
-window.addEventListener('resize', () => {
-  if (modalBox) {
-    calcWidthModal(currImage);
-  }
-})
+// window.addEventListener('resize', () => {
+//   if (modalBox) {
+//     calcWidthModal(currImage);
+//   }
+// })
 
 
 modal.addEventListener('click', (e) => {
@@ -143,6 +151,7 @@ modal.addEventListener('click', (e) => {
     modal.classList.add('hidden');
     body.style.overflowY = '';
     modal.innerHTML = '';
+    modalBox = null;
   }
 });
 
