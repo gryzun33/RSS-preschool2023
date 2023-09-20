@@ -40,11 +40,30 @@ tracksData.forEach((item, i) => {
     }
   });
 
+
+  audio.addEventListener("timeupdate", updateCurrentTime);
+  audio.addEventListener("timeupdate", updateProgressInput);
+
   audio.addEventListener("ended", () => {
     audio.currentTime = 0;
     playNext();
   });
+});
 
+function updateCurrentTime() {
+  currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime);
+}
+
+function updateProgressInput() {
+  progressInput.value = audios[currIndex].currentTime;
+}
+
+progressInput.addEventListener('mousedown', () => {
+  audios[currIndex].removeEventListener("timeupdate", updateProgressInput)
+});
+
+progressInput.addEventListener('mouseup', () => {
+  audios[currIndex].addEventListener("timeupdate", updateProgressInput)
 });
 
 progressInput.addEventListener('change', (e) => {
@@ -106,10 +125,10 @@ shuffleBtn.addEventListener('click', () => {
  
 });
 
-setInterval(() => {
-  currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime)
-  progressInput.value = audios[currIndex].currentTime;
-}, 500); 
+// setInterval(() => {
+//   currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime)
+//   progressInput.value = audios[currIndex].currentTime;
+// }, 500); 
 
 playBtn.addEventListener('click', () => {
   isPlaying = true;
