@@ -350,11 +350,11 @@ footer {
 @media (hover:hover) {
 
   .repeat:hover svg, .shuffle:hover svg {
-    fill: $color-text;
+    transform: scale(1.1);
  }
 
  .repeat:hover .repeat-one {
-    color: $color-text;
+    transform: scale(1.1);
  }
  
   a:hover svg {

@@ -6,6 +6,7 @@ let isPlaying = false;
 let currVolume = 0.5;
 let isRepeat = false;
 let isShuffle = false;
+let mouseDown = false;
 
 
 const playBtn = document.querySelector('.play-track');
@@ -40,7 +41,6 @@ tracksData.forEach((item, i) => {
     }
   });
 
-
   audio.addEventListener("timeupdate", updateCurrentTime);
   audio.addEventListener("timeupdate", updateProgressInput);
 
@@ -55,25 +55,29 @@ function updateCurrentTime() {
 }
 
 function updateProgressInput() {
-  progressInput.value = audios[currIndex].currentTime;
+    if (mouseDown) {
+      return;
+    }
+  progressInput.value = audios[currIndex].currentTime * 100 / audios[currIndex].duration ; 
 }
-
+  
 progressInput.addEventListener('mousedown', () => {
-  audios[currIndex].removeEventListener("timeupdate", updateProgressInput)
+  mouseDown = true;
+  audios[currIndex].removeEventListener("timeupdate", updateProgressInput);
 });
 
 progressInput.addEventListener('mouseup', () => {
+  mouseDown = false;
   audios[currIndex].addEventListener("timeupdate", updateProgressInput)
 });
 
 progressInput.addEventListener('change', (e) => {
   e.preventDefault();
-  audios[currIndex].currentTime = progressInput.value;
+  audios[currIndex].currentTime = progressInput.value * audios[currIndex].duration / 100;
   currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime);
-})
+});
 
 volumeInput.addEventListener('change', (e) => {
-
   audios[currIndex].muted = false;
   audios[currIndex].volume = +volumeInput.value;
 
@@ -104,7 +108,6 @@ volumeNoneBtn.addEventListener('click', () => {
   }
 });
 
-
 repeatBtn.addEventListener('click', () => {
   isRepeat = !isRepeat;
   repeatBtn.classList.toggle('active');
@@ -122,20 +125,13 @@ shuffleBtn.addEventListener('click', () => {
     isRepeat = false;
     repeatBtn.classList.remove('active');
   }
- 
 });
-
-// setInterval(() => {
-//   currTimeHTML.innerHTML = convertTime(audios[currIndex].currentTime)
-//   progressInput.value = audios[currIndex].currentTime;
-// }, 500); 
 
 playBtn.addEventListener('click', () => {
   isPlaying = true;
   audios[currIndex].play();
   playBtn.classList.add('hidden');
   pauseBtn.classList.remove('hidden');
-  
 });
 
 pauseBtn.addEventListener('click', () => {
@@ -163,6 +159,7 @@ function convertTime(duration) {
 
 function playNext() {
   prevIndex = currIndex;
+
   audios[prevIndex].pause();
   audios[prevIndex].currentTime = 0;
 
@@ -182,6 +179,12 @@ function playNext() {
   } else {
     audios[currIndex].pause(); 
   }
+
+  if (mouseDown) {
+    audios[currIndex].removeEventListener("timeupdate", updateProgressInput);
+    audios[prevIndex].addEventListener("timeupdate", updateProgressInput);
+  }
+
   renderCurrentAudio(audios[currIndex], currIndex);
 }
 
@@ -205,12 +208,20 @@ function playPrev() {
   } else {
     audios[currIndex].pause(); 
   }
+
+  if (mouseDown) {
+    audios[currIndex].removeEventListener("timeupdate", updateProgressInput);
+    audios[prevIndex].addEventListener("timeupdate", updateProgressInput);
+  }
+
   renderCurrentAudio(audios[currIndex], currIndex);
 }
 
 function renderCurrentAudio(audio, currIndex) {
-  progressInput.value = 0;
-  progressInput.setAttribute('max', `${audio.duration}`);
+  if (!mouseDown) {
+    progressInput.value = 0;
+  }
+
   trackName.innerHTML = `${tracksData[currIndex].trackName}`;
   author.innerHTML = `${tracksData[currIndex].author}`;
   authorImage.innerHTML = `<img src=${tracksData[currIndex].image} alt=${tracksData[currIndex].author} width='300' height='300'>`
@@ -227,7 +238,6 @@ function getRandomIndex(currInd) {
   let randomInd;
   do {
     randomInd = Math.floor(Math.random() * l);
-    console.log ('randomind', randomInd);
   } while (randomInd === currInd)
   return randomInd;
 }
