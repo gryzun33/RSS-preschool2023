@@ -23,10 +23,9 @@
 }
 
 .ball {
-  width: 80px;
-  height: 80px;
+  width: 80%;
+  height: 80%;
   border-radius: 50%;
-  background-color: red;
   position: absolute;
   z-index: 1;
   cursor: pointer;
