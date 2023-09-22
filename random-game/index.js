@@ -1,102 +1,137 @@
+import { renderBox } from "./modules/renderBox.js";
+import { renderBall } from "./modules/renderBall.js";
+import { getNewColors } from "./modules/getNewColors.js";
+import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
 
-let boxArray = [];
-const ballColours = ['red', 'green', 'yellow', 'blue', 'indigo', 'aqua', 'maroon'];
-// let transitionArray = [['move-right', '01'],  ['move-right','02'],[ 'move-bottom', '12'], ['move-bottom', '22'],['move-right', '23'], ['move-right', '24'] ];
-let transitionArray2 = ['84', '64', '68'];
-let transitionArray = ['01', '02', '03', '04', '14', '24', '34', '44', '45', '46', '47'];
+const ballColors = ['red', 'green', 'yellow', 'blue', 'indigo', 'aqua', 'maroon'];
+let boxes = null;
+let numbOfCells = 9;
+let transArray = [];
+let nextPosition = null;
+let ballPosition = null;
+
+
 // создание контейнера 
 function renderField() {
   const container = document.createElement('div');
   container.classList.add('container');
   document.body.append(container);
-  for (let i = 0; i <= 8; i++) {
+  for (let i = 0; i < numbOfCells; i++) {
     const lineArray = [];
-    for (let j = 0; j <=8; j++) {
+    for (let j = 0; j < numbOfCells; j++) {
       const idBlock = `${i}` + `${j}`;
       const box = {
         isBall: false,
-        color: null
+        color: null,
+        // id: idBlock
       }
       lineArray.push(box);
-
       renderBox(container, idBlock);
     }
-    boxArray.push(lineArray);
+    // boxArray.push(lineArray);
   }
-  
-  renderBall('green', '00');
-  // renderBall('red', '80');
+  boxes = container.querySelectorAll('.box')
+  renderNewBalls();
+  addHandlerToContainer(container);
 } 
 
+function addHandlerToContainer(container) {
+  container.addEventListener('click', (e) => {
+    if(e.target.closest('.ball')) {
+      const activeBall = e.target;
+      activeBall.classList.add('active');
+      ballPosition = activeBall.getAttribute('data-position');
+      console.log('ballposition=',ballPosition );
+    }
+   
+    const currentBox = e.target.closest('.box');
+    if(!currentBox.lastElementChild.matches('.ball')) {
+      nextPosition = currentBox.id;
+      console.log('nextposition', nextPosition);
+    }
+  })
+}
+
+
+
+
 renderField();
-// console.log('boxArray', boxArray);
 
 
 
-function renderBox(container, id) {
-  const boxElement = document.createElement('div');
-  boxElement.classList.add('box');
-  boxElement.id = id;
-  boxElement.innerHTML = '<div class="small-ball"></div>';
- 
-  container.append(boxElement);
+function renderNewBalls () {
+   const newColors = getNewColors(ballColors);
+   const numbsNewBoxes = getNumbsNewBoxes(numbOfCells);
+   for(let i = 0; i < 3; i++) {
+    renderBall(newColors[i], numbsNewBoxes[i]);
+   }   
 }
 
 
-function renderBall(color, position) {
-  const ballElem = document.createElement('div');
-  ballElem.classList.add('ball');
- 
-  // ballElem.outerHTML = `<div class="ball" data-color="${color}" data-pos="${position}"></div>`;
-  ballElem.style.backgroundColor = color;
-  ballElem.dataset.position = position;
-  ballElem.dataset.color = color;
-  const boxElement = document.getElementById(position); 
-  boxElement.append(ballElem);
-}
 
-const ballRed = document.querySelector('[data-color="red"]');
-const ballGreen = document.querySelector('[data-color="green"]');
-
-
-ballGreen.addEventListener('click', () => {
-
-  ballGreen.hidden = true;
-  const arrBoxes = [];
-  const lastBox = document.getElementById(transitionArray[transitionArray.length - 1]);
-  const color = ballGreen.getAttribute('data-color');
-  console.log('color=', color);
-  for (let i = 0; i < transitionArray.length - 1; i++) {
-    let k = i;
-
-    setTimeout(() => {
-      
-      
-      const nextBox = document.getElementById(transitionArray[k]);
-   
-      nextBox.firstChild.style.backgroundColor = color;
-      arrBoxes.push(nextBox);
-      
-    },i*50)
- 
-  }
-
-  setTimeout(() => {
-    arrBoxes.forEach((box) => {
-          box.firstChild.style.backgroundColor = '';
-        });
-   
-    lastBox.append(ballGreen);
-    ballGreen.hidden = false;
-    ballGreen.classList.add('endScale');
-    // ballGreen.addEventListener('animationend', () => {
-    //  
-    // });
-    
-  }, 50 * (transitionArray.length - 1));
-
-
+const btn = document.querySelector('button');
+btn.addEventListener('click', () => {
+  let endOfGame = checkAvailableGame();
+  if (endOfGame) {
+     return;
+  } else {
+    renderNewBalls(); 
+  }  
 });
+
+
+function checkAvailableGame() {
+  let arrayBoxes = Array.from(boxes);
+  let numbOfEpmtyBoxes = arrayBoxes.filter((box) => !box.lastElementChild.matches('.ball'));
+  console.log('emptys',numbOfEpmtyBoxes);
+  if(numbOfEpmtyBoxes < 2) {
+    return true;
+  }
+  return false;
+}
+
+
+
+
+// const ballRed = document.querySelector('[data-color="red"]');
+// const ballGreen = document.querySelector('[data-color="green"]');
+
+
+// ballGreen.addEventListener('click', () => {
+
+//   ballGreen.hidden = true;
+//   const arrBoxes = [];
+//   const lastBox = document.getElementById(transitionArray[transitionArray.length - 1]);
+//   const color = ballGreen.getAttribute('data-color');
+//   // console.log('color=', color);
+//   for (let i = 0; i < transitionArray.length - 1; i++) {
+//     let k = i;
+
+//     setTimeout(() => {
+      
+      
+//       const nextBox = document.getElementById(transitionArray[k]);
+   
+//       nextBox.firstChild.style.backgroundColor = color;
+//       arrBoxes.push(nextBox);
+      
+//     },i*50)
+ 
+//   }
+
+//   setTimeout(() => {
+//     arrBoxes.forEach((box) => {
+//           box.firstChild.style.backgroundColor = '';
+//         });
+   
+//     lastBox.append(ballGreen);
+//     ballGreen.hidden = false;
+//     ballGreen.classList.add('endScale');
+    
+//   }, 50 * (transitionArray.length - 1));
+
+
+// });
 
 // ballGreen.addEventListener('click', () => {
 //   for (let i = 0; i< transitionArray.length; i ++) {
