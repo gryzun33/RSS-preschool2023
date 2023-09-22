@@ -21,6 +21,12 @@
   align-items: center;
   position: relative;
 }
+.container .box .small-ball {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  position: absolute;
+}
 
 .ball {
   width: 80%;
@@ -29,34 +35,74 @@
   position: absolute;
   z-index: 1;
   cursor: pointer;
+  transition: transform 0.5s ease-in-out;
 }
 
 .move-right {
-  animation: toRight 1s ease-in-out;
+  animation: toRight 0.4s ease-in-out;
   animation-fill-mode: forwards;
 }
 
 .move-left {
-  animation: toLeft 1s ease-in-out;
+  animation: toLeft 0.4s ease-in-out;
   animation-fill-mode: forwards;
 }
 
 .move-top {
-  animation: toTop 1s ease-in-out;
+  animation: toTop 0.4s ease-in-out;
   animation-fill-mode: forwards;
 }
 
 .move-bottom {
-  animation: toBottom 1s ease-in-out;
+  animation: toBottom 0.4s ease-in-out;
   animation-fill-mode: forwards;
 }
 
-@keyframes toRight {
+.endScale {
+  animation: toBig 0.3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes toBig {
   from {
-    left: 10%;
+    width: 50%;
+    height: 50%;
   }
   to {
+    width: 80%;
+    height: 80%;
+  }
+}
+@keyframes toRight {
+  0% {
+    left: 10%;
+    bottom: 10%;
+    height: 80%;
+  }
+  20% {
+    left: 35%;
+    bottom: 20%;
+    height: 80%;
+  }
+  40% {
+    left: 60%;
+    bottom: 30%;
+    height: 80%;
+  }
+  60% {
+    left: 85%;
+    bottom: 20%;
+    height: 80%;
+  }
+  80% {
     left: 110%;
+    bottom: 10%;
+    height: 60%;
+  }
+  100% {
+    left: 110%;
+    bottom: 10%;
+    height: 80%;
   }
 }
 @keyframes toLeft {
@@ -76,10 +122,19 @@
   }
 }
 @keyframes toBottom {
-  from {
-    top: 10%;
+  0% {
+    left: 10%;
+    bottom: 10%;
+    height: 80%;
   }
-  to {
-    top: 110%;
+  80% {
+    left: 10%;
+    bottom: -90%;
+    height: 60%;
+  }
+  100% {
+    left: 10%;
+    bottom: -90%;
+    height: 80%;
   }
 }/*# sourceMappingURL=style.css.map */
