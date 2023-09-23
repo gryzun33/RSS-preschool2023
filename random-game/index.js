@@ -2,13 +2,46 @@ import { renderBox } from "./modules/renderBox.js";
 import { renderBall } from "./modules/renderBall.js";
 import { getNewColors } from "./modules/getNewColors.js";
 import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
+import { getDirection } from "./modules/getDirection.js";
+import { renderNewBalls } from "./modules/renderNewBalls.js";
+
+
 
 const ballColors = ['red', 'green', 'yellow', 'blue', 'indigo', 'aqua', 'maroon'];
-let boxes = null;
-let numbOfCells = 9;
+const numbOfCells = 9;
 let transArray = [];
-let nextPosition = null;
-let ballPosition = null;
+let boxes = null;
+let endPosition = null;
+let startPosition = null;
+
+const directions = {
+   toLeftTop: [[-1,0],[0,-1],[1,0],[0,1]],
+   toTopRight: [[0,-1],[1,0],[0,1],[-1,0]],
+   toRightBottom: [[1,0],[0,1],[-1,0],[0,-1]],
+   toBottomLeft: [[0,1],[-1,0],[0,-1],[1,0]],
+}
+
+function move(direction) {
+  let start = startPosition.split('').map((el) => +el);
+  let next;
+  console.log('start', start);
+  for (let i = 0; i < direction.length; i++ ) {
+    next = [start[0] + direction[i][0], start[1] + direction[i][1]].join('');
+    console.log('next', next);
+    const nextBox = document.getElementById(next);
+    console.log('nextBox', nextBox);
+    if (!nextBox.lastElementChild.matches('.ball')) {
+      transArray.push(next);
+      break;
+    }
+  }
+  if(next !== endPosition) {
+    startPosition = next;
+    let direction = getDirection(startPosition, endPosition);
+    move(directions[direction]);
+  }
+  console.log('transArray', transArray);
+}
 
 
 // создание контейнера 
@@ -19,35 +52,40 @@ function renderField() {
   for (let i = 0; i < numbOfCells; i++) {
     const lineArray = [];
     for (let j = 0; j < numbOfCells; j++) {
-      const idBlock = `${i}` + `${j}`;
+      const idBox = `${i}` + `${j}`;
       const box = {
         isBall: false,
         color: null,
-        // id: idBlock
       }
       lineArray.push(box);
-      renderBox(container, idBlock);
+      renderBox(container, idBox);
     }
-    // boxArray.push(lineArray);
   }
   boxes = container.querySelectorAll('.box')
-  renderNewBalls();
+  renderNewBalls(ballColors, numbOfCells);
   addHandlerToContainer(container);
 } 
+
+
 
 function addHandlerToContainer(container) {
   container.addEventListener('click', (e) => {
     if(e.target.closest('.ball')) {
       const activeBall = e.target;
       activeBall.classList.add('active');
-      ballPosition = activeBall.getAttribute('data-position');
-      console.log('ballposition=',ballPosition );
+      startPosition = activeBall.getAttribute('data-position');
+      console.log('startposition=',startPosition);
     }
    
-    const currentBox = e.target.closest('.box');
-    if(!currentBox.lastElementChild.matches('.ball')) {
-      nextPosition = currentBox.id;
-      console.log('nextposition', nextPosition);
+    const endBox = e.target.closest('.box');
+    if(!endBox.lastElementChild.matches('.ball')) {
+      endPosition = endBox.id;
+      console.log('endposition', endPosition);
+      if (startPosition && endPosition) {
+        let direction = getDirection(startPosition, endPosition);
+        console.log('direction', direction);
+        move(directions[direction]);
+      }
     }
   })
 }
@@ -59,13 +97,7 @@ renderField();
 
 
 
-function renderNewBalls () {
-   const newColors = getNewColors(ballColors);
-   const numbsNewBoxes = getNumbsNewBoxes(numbOfCells);
-   for(let i = 0; i < 3; i++) {
-    renderBall(newColors[i], numbsNewBoxes[i]);
-   }   
-}
+
 
 
 
@@ -89,6 +121,11 @@ function checkAvailableGame() {
   }
   return false;
 }
+
+
+
+
+
 
 
 
@@ -154,40 +191,10 @@ function checkAvailableGame() {
 
 // });
 
-// ballRed.addEventListener('click', () => {
-//   for (let i=0;i< transitionArray2.length; i++ ) {
-//     let k = i;
-//      setTimeout(() => {
-      
-//       const position = ballRed.getAttribute('data-position');
-//       console.log('position', position);
-//       const difY = +transitionArray2[k][0] - (+position[0]);
-//       const difX = +transitionArray2[k][1] - (+position[1]); 
-      
-//       if(difY !== 0) {
-//         ballRed.style.transform = `translateY(${difY*130}%)`;
-//         console.log( 'Y', k);
-//       } else
-      
-//       if(difX !== 0) {
-//         ballRed.style.transform = `translateX(${difX*130}%)`;
-//         console.log( 'X', k);
-//       }
+
       
       
     
-//       ballRed.ontransitionend = function() {
-//         const nextBox = document.getElementById(transitionArray2[k]);
-//         console.log(nextBox);
-//         nextBox.append(ballRed);
-//         ballRed.dataset.position = transitionArray2[k];
-//         ballRed.style.transform = '';
-//         ballRed.ontransitionend = null;
-//       }
-
-//      }, i * 600); 
-//   }
-// })
 
 
 
