@@ -13,6 +13,7 @@ let transArray = [];
 let boxes = null;
 let endPosition = null;
 let startPosition = null;
+let activeBall = null;
 
 const directions = {
    toLeftTop: [[-1,0],[0,-1],[1,0],[0,1]],
@@ -39,8 +40,11 @@ function move(direction) {
     startPosition = next;
     let direction = getDirection(startPosition, endPosition);
     move(directions[direction]);
+    console.log('transArray', transArray);
+  } else {
+    moveAnimation(activeBall);
   }
-  console.log('transArray', transArray);
+  
 }
 
 
@@ -71,7 +75,7 @@ function renderField() {
 function addHandlerToContainer(container) {
   container.addEventListener('click', (e) => {
     if(e.target.closest('.ball')) {
-      const activeBall = e.target;
+      activeBall = e.target;
       activeBall.classList.add('active');
       startPosition = activeBall.getAttribute('data-position');
       console.log('startposition=',startPosition);
@@ -126,12 +130,40 @@ function checkAvailableGame() {
 
 
 
+function moveAnimation(ball) {
+  ball.hidden = true;
+  ball.classList.remove('active');
+  let arrBoxes = [];
+  const lastBox = document.getElementById(transArray[transArray.length - 1]);
+  const color = ball.getAttribute('data-color');
+
+  for (let i = 0; i < transArray.length - 1; i++) {
+    let k = i;
+    setTimeout(() => {
+      const nextBox = document.getElementById(transArray[k]);   
+      nextBox.firstChild.style.backgroundColor = color;
+      arrBoxes.push(nextBox);     
+    },i*40)
+  }
+
+  setTimeout(() => {
+    arrBoxes.forEach((box) => {
+      box.firstChild.style.backgroundColor = '';
+    });
+    lastBox.append(ball);
+    ball.hidden = false;
+    ball.classList.add('endScale');
+    ball.addEventListener('animationend', () => {
+      ball.classList.remove('endScale');
+      transArray = [];
+      ball.dataset.position = endPosition;
+    })
+    
+  }, 40 * (transArray.length - 1));
+}
 
 
 
-
-// const ballRed = document.querySelector('[data-color="red"]');
-// const ballGreen = document.querySelector('[data-color="green"]');
 
 
 // ballGreen.addEventListener('click', () => {

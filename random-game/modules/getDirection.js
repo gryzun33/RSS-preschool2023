@@ -11,5 +11,6 @@ export function getDirection(startPosition, endPosition) {
   } else if (difX <= 0 && difY >= 0) {
     direction = 'toBottomLeft';
   }
+
   return direction;
 }
