@@ -75,6 +75,9 @@ function renderField() {
 function addHandlerToContainer(container) {
   container.addEventListener('click', (e) => {
     if(e.target.closest('.ball')) {
+      if(activeBall) {
+        activeBall.classList.remove('active');
+      }
       activeBall = e.target;
       activeBall.classList.add('active');
       startPosition = activeBall.getAttribute('data-position');
@@ -82,7 +85,7 @@ function addHandlerToContainer(container) {
     }
    
     const endBox = e.target.closest('.box');
-    if(!endBox.lastElementChild.matches('.ball')) {
+    if(!endBox.lastElementChild.matches('.ball') && activeBall) {
       endPosition = endBox.id;
       console.log('endposition', endPosition);
       if (startPosition && endPosition) {
@@ -157,73 +160,13 @@ function moveAnimation(ball) {
       ball.classList.remove('endScale');
       transArray = [];
       ball.dataset.position = endPosition;
+      activeBall = null;
     })
     
   }, 40 * (transArray.length - 1));
 }
 
 
-
-
-
-// ballGreen.addEventListener('click', () => {
-
-//   ballGreen.hidden = true;
-//   const arrBoxes = [];
-//   const lastBox = document.getElementById(transitionArray[transitionArray.length - 1]);
-//   const color = ballGreen.getAttribute('data-color');
-//   // console.log('color=', color);
-//   for (let i = 0; i < transitionArray.length - 1; i++) {
-//     let k = i;
-
-//     setTimeout(() => {
-      
-      
-//       const nextBox = document.getElementById(transitionArray[k]);
-   
-//       nextBox.firstChild.style.backgroundColor = color;
-//       arrBoxes.push(nextBox);
-      
-//     },i*50)
- 
-//   }
-
-//   setTimeout(() => {
-//     arrBoxes.forEach((box) => {
-//           box.firstChild.style.backgroundColor = '';
-//         });
-   
-//     lastBox.append(ballGreen);
-//     ballGreen.hidden = false;
-//     ballGreen.classList.add('endScale');
-    
-//   }, 50 * (transitionArray.length - 1));
-
-
-// });
-
-// ballGreen.addEventListener('click', () => {
-//   for (let i = 0; i< transitionArray.length; i ++) {
-//     let k = i;
-//      setTimeout(() => {
-
-//       ballGreen.classList.add(transitionArray[k][0]);
-      
-      
-    
-//       ballGreen.onanimationend = function() {
-//         const nextBox = document.getElementById(transitionArray[k][1]);
-//         nextBox.append(ballGreen);
-//         ballGreen.classList.remove(transitionArray[k][0]);
-//         ballGreen.onanimationend = null;
-//       }
-
-//      }, i * 500); 
-//   }
-
-// });
-
-
       
       
     
@@ -248,24 +191,6 @@ function moveAnimation(ball) {
 
 
 
-
-
-
-
-
-
-// const box51 = document.getElementById('51');
-// const box61 = document.getElementById('61');
-// const box71 = document.getElementById('71');
-// const box81 = document.getElementById('81');
-// const box91 = document.getElementById('91');
-
-// const ball = document.createElement('div');
-// ball.classList.add('ball');
-// box51.append(ball);
-
-// ball.style.left = '10px';
-// ball.style.bottom = '10px';
 
 
 
