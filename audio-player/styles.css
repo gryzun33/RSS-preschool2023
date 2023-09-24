@@ -139,6 +139,11 @@ h1 {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   transition: all 0.3s ease;
 }
+@media (hover: hover) {
+  .controls button:hover {
+    background-color: #c3b01a;
+  }
+}
 .controls button:active {
   transform: translateY(-2px);
 }
@@ -262,6 +267,11 @@ h1 {
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   transition: all 0.3s ease;
+}
+@media (hover: hover) {
+  .add-box .volume-box button:hover {
+    background-color: #c3b01a;
+  }
 }
 .add-box .volume-box button:active {
   transform: translateY(-2px);
