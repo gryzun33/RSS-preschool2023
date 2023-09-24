@@ -127,19 +127,8 @@ shuffleBtn.addEventListener('click', () => {
   }
 });
 
-playBtn.addEventListener('click', () => {
-  isPlaying = true;
-  audios[currIndex].play();
-  playBtn.classList.add('hidden');
-  pauseBtn.classList.remove('hidden');
-});
-
-pauseBtn.addEventListener('click', () => {
-  isPlaying = false;
-  audios[currIndex].pause();
-  pauseBtn.classList.add('hidden');
-  playBtn.classList.remove('hidden');
-});
+playBtn.addEventListener('click', playTrack);
+pauseBtn.addEventListener('click', pauseTrack);
 
 prevBtn.addEventListener('click', () => {
   playPrev(); 
@@ -148,6 +137,20 @@ prevBtn.addEventListener('click', () => {
 nextBtn.addEventListener('click', () => { 
   playNext(); 
 });
+
+function playTrack() {
+  isPlaying = true;
+  audios[currIndex].play();
+  playBtn.classList.add('hidden');
+  pauseBtn.classList.remove('hidden');
+}
+
+function pauseTrack() {
+  isPlaying = false;
+  audios[currIndex].pause();
+  pauseBtn.classList.add('hidden');
+  playBtn.classList.remove('hidden');
+}
 
 function convertTime(duration) {
   let min = Math.floor(duration / 60);
@@ -174,11 +177,13 @@ function playNext() {
     }
   }
 
-  if (isPlaying) {
-    audios[currIndex].play(); 
-  } else {
-    audios[currIndex].pause(); 
-  }
+  playTrack();
+
+  // if (isPlaying) {
+  //   
+  // } else {
+  //   audios[currIndex].pause(); 
+  // }
 
   if (mouseDown) {
     audios[currIndex].removeEventListener("timeupdate", updateProgressInput);
@@ -202,12 +207,14 @@ function playPrev() {
       currIndex = tracksData.length - 1;
     }
   }
-
-  if (isPlaying) {
-    audios[currIndex].play(); 
-  } else {
-    audios[currIndex].pause(); 
-  }
+  
+  playTrack();
+ 
+  // if (isPlaying) {
+  //   
+  // } else {
+  //   audios[currIndex].pause(); 
+  // }
 
   if (mouseDown) {
     audios[currIndex].removeEventListener("timeupdate", updateProgressInput);
