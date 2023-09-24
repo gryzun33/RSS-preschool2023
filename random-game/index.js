@@ -14,37 +14,77 @@ let boxes = null;
 let endPosition = null;
 let startPosition = null;
 let activeBall = null;
+let badBoxes = [];
 
 const directions = {
-   toLeftTop: [[-1,0],[0,-1],[1,0],[0,1]],
+   toTop: [[0,-1],[-1,0],[1,0],[0,1]],
+   toRight: [[1,0],[0,-1],[0,1],[-1,0]],
+   toBottom: [[0,1],[-1,0],[1,0],[0,-1]],
+   toLeft: [[-1,0],[0,-1],[0,1],[1,0]],
+   toTopLeft:  [[-1,0],[0,-1],[1,0],[0,1]],
    toTopRight: [[0,-1],[1,0],[0,1],[-1,0]],
-   toRightBottom: [[1,0],[0,1],[-1,0],[0,-1]],
+   toBottomRight: [[1,0],[0,1],[-1,0],[0,-1]],
    toBottomLeft: [[0,1],[-1,0],[0,-1],[1,0]],
 }
 
 function move(direction) {
   let start = startPosition.split('').map((el) => +el);
   let next;
-  console.log('start', start);
+  let prev;
+  let startLength = transArray.length;
+  // console.log('start', start);
   for (let i = 0; i < direction.length; i++ ) {
-    next = [start[0] + direction[i][0], start[1] + direction[i][1]].join('');
-    console.log('next', next);
+    let nextNumb = [start[0] + direction[i][0], start[1] + direction[i][1]];
+    next = nextNumb.join('');
+    // console.log ('direction=',);
+    console.log ('i=', i);
+    console.log('next=', next);
+     
+    const isNextInField = nextNumb.map((el) => +el).some((el) => el < 0 || el >= numbOfCells);
+    
+    prev = (transArray.length === 1) ? startPosition : transArray[transArray.length - 2];
+    console.log('prev=', prev);
+    if(next === prev || isNextInField || badBoxes.includes(next)) {
+      continue;
+    }
+    // console.log('next', next);
     const nextBox = document.getElementById(next);
-    console.log('nextBox', nextBox);
     if (!nextBox.lastElementChild.matches('.ball')) {
       transArray.push(next);
+      console.log('transArray', transArray);
       break;
     }
   }
+  // if (transArray.length === 0) {
+  //   console.log ('null');
+  //   return;
+  // }
+
+  if (startLength === transArray.length) {
+    badBoxes.push(transArray[transArray.length - 1]);
+    transArray.pop();
+    if (transArray.length > 0) {
+      next = transArray[transArray.length - 1];
+    }
+    
+  }
+   
+  if (transArray.length === 0) {
+    console.log ('null');
+    return;
+  }
+  
+  
   if(next !== endPosition) {
     startPosition = next;
     let direction = getDirection(startPosition, endPosition);
+    console.log('direction2=', direction);
     move(directions[direction]);
-    console.log('transArray', transArray);
+    
   } else {
     moveAnimation(activeBall);
   }
-  
+
 }
 
 
@@ -90,7 +130,8 @@ function addHandlerToContainer(container) {
       console.log('endposition', endPosition);
       if (startPosition && endPosition) {
         let direction = getDirection(startPosition, endPosition);
-        console.log('direction', direction);
+        // console.log('direction2=', direction);
+        console.log('direction1=', direction);
         move(directions[direction]);
       }
     }
@@ -114,7 +155,7 @@ btn.addEventListener('click', () => {
   if (endOfGame) {
      return;
   } else {
-    renderNewBalls(); 
+    renderNewBalls(ballColors, numbOfCells); 
   }  
 });
 
@@ -122,7 +163,7 @@ btn.addEventListener('click', () => {
 function checkAvailableGame() {
   let arrayBoxes = Array.from(boxes);
   let numbOfEpmtyBoxes = arrayBoxes.filter((box) => !box.lastElementChild.matches('.ball'));
-  console.log('emptys',numbOfEpmtyBoxes);
+  // console.log('emptys',numbOfEpmtyBoxes);
   if(numbOfEpmtyBoxes < 2) {
     return true;
   }
