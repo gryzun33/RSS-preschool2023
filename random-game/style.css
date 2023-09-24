@@ -39,26 +39,6 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.move-right {
-  animation: toRight 0.4s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.move-left {
-  animation: toLeft 0.4s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.move-top {
-  animation: toTop 0.4s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.move-bottom {
-  animation: toBottom 0.4s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
 .endScale {
   animation: toBig 0.3s ease-in-out;
   animation-fill-mode: forwards;
@@ -93,71 +73,6 @@
   }
   to {
     width: 80%;
-    height: 80%;
-  }
-}
-@keyframes toRight {
-  0% {
-    left: 10%;
-    bottom: 10%;
-    height: 80%;
-  }
-  20% {
-    left: 35%;
-    bottom: 20%;
-    height: 80%;
-  }
-  40% {
-    left: 60%;
-    bottom: 30%;
-    height: 80%;
-  }
-  60% {
-    left: 85%;
-    bottom: 20%;
-    height: 80%;
-  }
-  80% {
-    left: 110%;
-    bottom: 10%;
-    height: 60%;
-  }
-  100% {
-    left: 110%;
-    bottom: 10%;
-    height: 80%;
-  }
-}
-@keyframes toLeft {
-  from {
-    right: 10%;
-  }
-  to {
-    right: 110%;
-  }
-}
-@keyframes toTop {
-  from {
-    bottom: 10%;
-  }
-  to {
-    bottom: 110%;
-  }
-}
-@keyframes toBottom {
-  0% {
-    left: 10%;
-    bottom: 10%;
-    height: 80%;
-  }
-  80% {
-    left: 10%;
-    bottom: -90%;
-    height: 60%;
-  }
-  100% {
-    left: 10%;
-    bottom: -90%;
     height: 80%;
   }
 }/*# sourceMappingURL=style.css.map */
