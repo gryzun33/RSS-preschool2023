@@ -4,6 +4,7 @@ import { getNewColors } from "./modules/getNewColors.js";
 import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
 import { getDirection } from "./modules/getDirection.js";
 import { renderNewBalls } from "./modules/renderNewBalls.js";
+import { getLinesToRemove } from "./modules/getLinesToRemove.js";
 
 
 
@@ -85,94 +86,8 @@ function move(direction) {
 
 }
 
-
-function checkField(ball) {
-  
-  const posBall = ball.getAttribute('data-position');
-  const color = ball.getAttribute('data-color');
-  let diagonal1 = [];
-  let diagonal2 = [];
-  let horizontal = [];
-  let vertical = [];
-
-  // diagonal1
-  if((posBall[0] <= 3 && posBall[1] >=5) || (posBall[0] >=5 && posBall[1] <=3)) {
-    diagonal1 = [];
-  } else {
-    let currPos = posBall;
-    let activeBox = document.getElementById(currPos);
-    diagonal1.push(activeBox);
-    while(+currPos[0] >= 0 && +currPos[1] >=0) {
-      currPos = `${+posBall[0] - 1}` + `${+posBall[1] - 1}`;
-      let box = document.getElementById(currPos);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal1.unshift(box);
-      } else {
-        break;
-      }
-    }
-    while(+currPos[0] < numbOfCells && +currPos[1] < numbOfCells) {
-      currPos = `${+posBall[0] + 1}` + `${+posBall[1] + 1}`;
-      let box = document.getElementById(currPos);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal1.push(box);
-      } else {
-        break;
-      }
-    }
-  }
-  
-  // diagonal2
-  if((posBall[0] <= 3 && posBall[1] <= 3) || (posBall[0] >=5 && posBall[1] >= 5)) {
-    diagonal2 = [];
-  } else {
-    let currPos = posBall;
-    let activeBox = document.getElementById(currPos);
-    diagonal2.push(activeBox);
-    while(+currPos[0] >= 0 && +currPos[1] <=numbOfCells) {
-      currPos = `${+posBall[0] - 1}` + `${+posBall[1] + 1}`;
-      let box = document.getElementById(currPos);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal2.unshift(box);
-      } else {
-        break;
-      }
-    }
-    while(+currPos[0] < numbOfCells && +currPos[1] >=0 ) {
-      currPos = `${+posBall[0] + 1}` + `${+posBall[1] - 1}`;
-      let box = document.getElementById(currPos);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal2.push(box);
-      } else {
-        break;
-      }
-    }
-  }
-
-  // horizontal
-  for (let x = 0; x < numbOfCells; x++) {
-    let currPos = x + `${posBall[1]}`;
-    let box = document.getElementById(currPos);
-    if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-      horizontal.push(box);
-    } else if (horizontal.length < 5) {
-      horizontal = [];
-    }
-  }
-
-  // vertical
-  for (let y = 0; y < numbOfCells; y++) {
-    let currPos = `${posBall[0]}` + y;
-    let box = document.getElementById(currPos);
-    if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-      vertical.push(box);
-    } else if (horizontal.length < 5) {
-      vertical = [];
-    }
-  }
-
-  let arrOfActiveBoxes = [horizontal, vertical, diagonal1, diagonal2];
-  arrOfActiveBoxes.forEach((arr) => {
+function removeLines(lines) {
+  lines.forEach((arr) => {
     if (arr.length >= 5) {
       count = count + arr.length;
       arr.forEach((box) => {
@@ -185,7 +100,8 @@ function checkField(ball) {
     }
   }) 
 }
- 
+  
+
 
  
 
@@ -303,7 +219,8 @@ function moveAnimation(ball) {
       ball.classList.remove('endScale');
       transArray = [];
       ball.dataset.position = endPosition;
-      checkField(activeBall);
+      const lines = getLinesToRemove(ball, numbOfCells);
+      removeLines(lines); 
       activeBall = null;
     })
     
