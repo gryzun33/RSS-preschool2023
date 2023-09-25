@@ -44,7 +44,7 @@ export function getLinesToRemove(ball, numbOfCells) {
   }
 
   // diagonal2
-  if(posBall[0] + posBall[1] < numbOfCells) {
+  if((+posBall[0]) + (+posBall[1]) < numbOfCells) {
     let currPos;
     let y = 0;
     let x = (+posBall[0]) + (+posBall[1]);
