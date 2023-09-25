@@ -50,6 +50,7 @@
   position: absolute;
   z-index: 1;
   cursor: pointer;
+  opacity: 1;
   transition: transform 0.5s ease-in-out;
 }
 
@@ -80,6 +81,10 @@
 
 .active {
   animation: jump 0.5s infinite;
+}
+
+.hide {
+  opacity: 0; 
 }
 
 

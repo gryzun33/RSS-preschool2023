@@ -220,6 +220,7 @@ function moveAnimation(ball) {
 
 function removeLines(lines, endPosition) {
   let countActiveBall = 0;
+  console.log('lines', lines);
   lines.forEach((arr) => {
     if (arr.length >= 5) {
       count = count + arr.length;

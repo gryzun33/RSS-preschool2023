@@ -95,7 +95,7 @@ export function getLinesToRemove(ball, numbOfCells) {
     let box = document.getElementById(currPos);
     if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
       vertical.push(box);
-    } else if (horizontal.length < 5) {
+    } else if (vertical.length < 5) {
       vertical = [];
     }
   }
