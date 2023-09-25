@@ -7,5 +7,7 @@ export function renderBall(color, position) {
   ballElem.dataset.color = color;
   const boxElement = document.getElementById(position); 
   boxElement.append(ballElem);
+
+  return ballElem;
 }
 

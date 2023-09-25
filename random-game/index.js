@@ -86,24 +86,7 @@ function move(direction) {
 
 }
 
-function removeLines(lines) {
-  lines.forEach((arr) => {
-    if (arr.length >= 5) {
-      count = count + arr.length;
-      arr.forEach((box) => {
-        let ball = box.lastElementChild;
-        ball.classList.add('hide');
-        ball.addEventListener('transitionend', () => {
-          ball.remove();
-        })
-      })
-    }
-  }) 
-}
-  
 
-
- 
 
 
 // создание контейнера 
@@ -124,7 +107,10 @@ function renderField() {
     }
   }
   boxes = container.querySelectorAll('.box')
-  renderNewBalls(ballColors, numbOfCells);
+  const newBalls = renderNewBalls(ballColors, numbOfCells);
+  
+
+
   addHandlerToContainer(container);
 } 
 
@@ -173,7 +159,11 @@ btn.addEventListener('click', () => {
   if (endOfGame) {
      return;
   } else {
-    renderNewBalls(ballColors, numbOfCells); 
+    const newBalls = renderNewBalls(ballColors, numbOfCells); 
+    newBalls.forEach((ball) => {
+      const lines = getLinesToRemove(ball, numbOfCells);
+      removeLines(lines); 
+    })
   }  
 });
 
@@ -227,6 +217,28 @@ function moveAnimation(ball) {
   }, 40 * (transArray.length - 1));
 }
 
+
+function removeLines(lines, endPosition) {
+  let countActiveBall = 0;
+  lines.forEach((arr) => {
+    if (arr.length >= 5) {
+      count = count + arr.length;
+      arr.forEach((box) => {
+        if(box.id === endPosition ) {
+          countActiveBall += 1;
+        }
+        if (box.lastElementChild.matches('.ball')) {
+          let ball = box.lastElementChild;
+          ball.classList.add('hide');
+          ball.addEventListener('transitionend', () => {
+            ball.remove();
+          })
+        }
+      })
+    }
+  }) 
+  count = count - countActiveBall + 1;
+}
 
 
 
