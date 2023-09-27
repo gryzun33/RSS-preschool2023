@@ -19,70 +19,114 @@ let badBoxes = [];
 
 let count = 0;
 
-const directions = {
-   toTop: [[0,-1],[-1,0],[1,0],[0,1]],
-   toRight: [[1,0],[0,-1],[0,1],[-1,0]],
-   toBottom: [[0,1],[-1,0],[1,0],[0,-1]],
-   toLeft: [[-1,0],[0,-1],[0,1],[1,0]],
-   toTopLeft:  [[-1,0],[0,-1],[1,0],[0,1]],
-   toTopRight: [[0,-1],[1,0],[0,1],[-1,0]],
-   toBottomRight: [[1,0],[0,1],[-1,0],[0,-1]],
-   toBottomLeft: [[0,1],[-1,0],[0,-1],[1,0]],
-}
+// const directions = {
+//    toTop: [[0,-1],[-1,0],[1,0],[0,1]],
+//    toRight: [[1,0],[0,-1],[0,1],[-1,0]],
+//    toBottom: [[0,1],[-1,0],[1,0],[0,-1]],
+//    toLeft: [[-1,0],[0,-1],[0,1],[1,0]],
+//    toTopLeft:  [[-1,0],[0,-1],[1,0],[0,1]],
+//    toTopRight: [[0,-1],[1,0],[0,1],[-1,0]],
+//    toBottomRight: [[1,0],[0,1],[-1,0],[0,-1]],
+//    toBottomLeft: [[0,1],[-1,0],[0,-1],[1,0]],
+// }
+const directions = [[0,-1],[-1,0],[1,0],[0,1]];
 
-function move(direction) {
-  let start = startPosition.split('').map((el) => +el);
-  let next;
-  let prev;
-  let startLength = transArray.length;
-  // console.log('start', start);
-  for (let i = 0; i < direction.length; i++ ) {
-    let nextNumb = [start[0] + direction[i][0], start[1] + direction[i][1]];
-    next = nextNumb.join('');
-    // console.log ('direction=',);
-    console.log ('i=', i);
-    console.log('next=', next);
-     
-    const isNextInField = nextNumb.map((el) => +el).some((el) => el < 0 || el >= numbOfCells);
-    
-    prev = (transArray.length === 1) ? startPosition : transArray[transArray.length - 2];
-    console.log('prev=', prev);
-    if(next === prev || isNextInField || badBoxes.includes(next)) {
+
+function move(startID) {
+  console.log('startID', startID);
+  console.log ('transArray', transArray);
+  console.log ('array length 2 = ' , transArray.length);
+  let startXY = startID.split('').map((el) => +el);
+  let endXY = endPosition.split('').map((el) => +el);
+  let prevID = (transArray.length === 1) ? null : transArray[transArray.length - 2];
+  let prevXY = (prevID === null) ? null : prevID.split('').map((el) => +el);
+  let nextID;
+  let distanсes = [];
+  
+  for (let i = 0; i < directions.length; i++ ) {
+    let nextXY = [startXY[0] + directions[i][0], startXY[1] + directions[i][1]];
+    let next = nextXY.join('');
+    console.log('startXY=', startXY);
+    console.log('nextXY=', nextXY); 
+    console.log('prevXY=', prevXY); 
+
+    const isNextNotOnField = nextXY.some((el) => el < 0 || el >= numbOfCells);
+    if(isNextNotOnField) {
+      console.log('true1');
       continue;
     }
-    // console.log('next', next);
-    const nextBox = document.getElementById(next);
-    if (!nextBox.lastElementChild.matches('.ball')) {
-      transArray.push(next);
-      console.log('transArray', transArray);
-      break;
+
+    const isBallInBox = ((document.getElementById(next).lastElementChild.matches('.ball')) && (next !== prevID));
+    console.log('isballinbox',isBallInBox );
+    const arrSlice = (transArray.length > 2) ? transArray.slice(0,-2) : null;
+    console.log ('arrSlice', arrSlice );
+    const isInBadBoxes = badBoxes.includes(next);
+    const isInArray = arrSlice ? arrSlice.includes(next) : false;
+    console.log('isInBadBoxes',isInBadBoxes );
+    if (isBallInBox || isInBadBoxes || isInArray) {
+      console.log('true2');
+      continue;
+    } 
+
+    let dist = Math.abs(nextXY[0] - endXY[0]) + Math.abs(nextXY[1] - endXY[1]); 
+    const objDist = {
+      nextXY : nextXY,
+      dist: dist
+    }
+    // console.log('dist', dist);
+    
+    distanсes.push(objDist);
+  }
+  console.log('distanсes', distanсes);
+  // if(distanсes.length === 0) {
+  //   console.log('bad');
+  //   badBoxes.push(startXY);
+  //   move(prevID);
+  //   transArray.pop();
+  //   return;
+  // }
+
+  
+  if (distanсes.length === 1 && prevID) {
+    console.log('тупик');
+    badBoxes.push(startID);
+    transArray.pop();
+    move(prevID);
+    return;
+  } else {
+    distanсes.sort((a,b) => a.dist - b.dist); 
+    console.log ('distancessort',distanсes );
+    for(let i = 0; i < distanсes.length; i++) {
+      console.log('1= ', distanсes[i].nextXY.join('')) 
+      console.log('2= ', prevID); 
+      if (+distanсes[i].nextXY.join('') !== +prevID) {
+        console.log('1= ', distanсes[i].nextXY.join('')) 
+        console.log('2= ', prevID); 
+        console.log('1= ', typeof distanсes[i].nextXY.join('')) 
+        console.log('2= ', typeof prevID); 
+        nextID = distanсes[i].nextXY.join('');
+        transArray.push(nextID);
+
+        console.log('nextID=', nextID);
+        if(nextID === endPosition) {
+          moveAnimation(activeBall);
+        } else {
+          move(nextID);
+        }
+        
+        break;
+      }
     }
   }
 
-  if (startLength === transArray.length) {
-    badBoxes.push(transArray[transArray.length - 1]);
-    transArray.pop();
-    if (transArray.length > 0) {
-      next = transArray[transArray.length - 1];
-    }
-    
-  }
-   
-  if (transArray.length === 0) {
-    console.log ('null');
-    return;
-  }
-  
-  
-  if(next !== endPosition) {
-    startPosition = next;
-    let direction = getDirection(startPosition, endPosition);
-    console.log('direction2=', direction);
-    move(directions[direction]);
-    
-  } else {
-    moveAnimation(activeBall);
-  }
+  // console.log('nextID=', nextID);
+
+  // if(prevID === nextID) {
+  //   badBoxes.push(startXY);
+  //   // transArray.pop();
+  //   move(prevID);
+  //   return;
+  // }
 
 }
 
@@ -106,11 +150,13 @@ function renderField() {
       renderBox(container, idBox);
     }
   }
-  boxes = container.querySelectorAll('.box')
+  boxes = container.querySelectorAll('.box');
+  // console.log(boxes);
+  // ??????????
   const newBalls = renderNewBalls(ballColors, numbOfCells);
   
 
-
+  
   addHandlerToContainer(container);
 } 
 
@@ -118,7 +164,7 @@ function renderField() {
 
 function addHandlerToContainer(container) {
   container.addEventListener('click', (e) => {
-    if(e.target.closest('.ball')) {
+    if(e.target.matches('.ball')) {
       if(activeBall) {
         activeBall.classList.remove('active');
       }
@@ -129,14 +175,16 @@ function addHandlerToContainer(container) {
     }
    
     const endBox = e.target.closest('.box');
+    console.log ('endbox=', endBox);
     if(!endBox.lastElementChild.matches('.ball') && activeBall) {
       endPosition = endBox.id;
       console.log('endposition', endPosition);
       if (startPosition && endPosition) {
-        let direction = getDirection(startPosition, endPosition);
+        // let direction = getDirection(startPosition, endPosition);
         // console.log('direction2=', direction);
-        console.log('direction1=', direction);
-        move(directions[direction]);
+        // console.log('direction1=', direction);
+        transArray.push(startPosition);
+        move(startPosition);
       }
     }
   })
@@ -187,6 +235,7 @@ function moveAnimation(ball) {
   ball.classList.remove('active');
   let arrBoxes = [];
   const lastBox = document.getElementById(transArray[transArray.length - 1]);
+  console.log('lastbox=', lastBox);
   const color = ball.getAttribute('data-color');
 
   for (let i = 0; i < transArray.length - 1; i++) {
@@ -205,22 +254,26 @@ function moveAnimation(ball) {
     lastBox.append(ball);
     ball.hidden = false;
     ball.classList.add('endScale');
-    ball.addEventListener('animationend', () => {
-      ball.classList.remove('endScale');
-      transArray = [];
-      ball.dataset.position = endPosition;
-      const lines = getLinesToRemove(ball, numbOfCells);
-      removeLines(lines); 
-      activeBall = null;
-    })
+    ball.addEventListener('animationend',updateAfterAnimation) 
     
   }, 40 * (transArray.length - 1));
+
+  function updateAfterAnimation() {
+    ball.classList.remove('endScale');
+    ball.dataset.position = endPosition;
+    const lines = getLinesToRemove(ball, numbOfCells);
+    removeLines(lines); 
+    activeBall = null;
+    transArray = [];
+    console.log ('array length' , transArray.length);
+    ball.removeEventListener('animationend',updateAfterAnimation);   
+  }
 }
 
 
 function removeLines(lines, endPosition) {
   let countActiveBall = 0;
-  console.log('lines', lines);
+  // console.log('lines', lines);
   lines.forEach((arr) => {
     if (arr.length >= 5) {
       count = count + arr.length;

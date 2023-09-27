@@ -51,7 +51,7 @@
   z-index: 1;
   cursor: pointer;
   opacity: 1;
-  transition: transform 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 // .move-right {
@@ -84,7 +84,9 @@
 }
 
 .hide {
-  opacity: 0; 
+  opacity: 0;
+  transform: scaleX(1.5);
+  transform: scaleX(1.5); 
 }
 
 

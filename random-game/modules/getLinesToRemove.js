@@ -1,7 +1,7 @@
 export function getLinesToRemove(ball, numbOfCells) {
   
   const posBall = ball.getAttribute('data-position');
-  console.log('posBall=', posBall);
+  // console.log('posBall=', posBall);
   const color = ball.getAttribute('data-color');
   let diagonal1 = [];
   let diagonal2 = [];
@@ -16,7 +16,7 @@ export function getLinesToRemove(ball, numbOfCells) {
     while(x < numbOfCells && y < numbOfCells) {
       currPos = `${x}` + `${y}`;
       let box = document.getElementById(currPos);
-      console.log('box1=', box);
+      // console.log('box1=', box);
       if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
         diagonal1.push(box);
       } else if (diagonal1.length < 5) {
@@ -32,7 +32,7 @@ export function getLinesToRemove(ball, numbOfCells) {
     while(x < numbOfCells && y < numbOfCells) {
       currPos = `${x}` + `${y}`;
       let box = document.getElementById(currPos);
-      console.log('box2=', box);
+      // console.log('box2=', box);
       if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
         diagonal1.push(box);
       } else if (diagonal1.length < 5) {
@@ -51,7 +51,7 @@ export function getLinesToRemove(ball, numbOfCells) {
     while(x >= 0 && y < numbOfCells) {
       currPos = `${x}` + `${y}`;
       let box = document.getElementById(currPos);
-      console.log('box3=', box);
+      // console.log('box3=', box);
       if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
         diagonal2.push(box);
       } else if (diagonal2.length < 5) {
@@ -67,7 +67,7 @@ export function getLinesToRemove(ball, numbOfCells) {
     while(x > 0 && y < numbOfCells) {
       currPos = `${x}` + `${y}`;
       let box = document.getElementById(currPos);
-      console.log('box4=', box);
+      // console.log('box4=', box);
       if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
         diagonal2.push(box);
       } else if (diagonal2.length < 5) {
