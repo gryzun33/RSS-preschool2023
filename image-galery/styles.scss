@@ -1,0 +1,422 @@
+$color-light: #e7f1f1;
+$color-dark: #2f5353;
+$color-bg-modal: rgba(47, 83, 83, 0.7);
+$color-bg: #cbe8e5;
+$color-btn: #a8cece;
+$color-btn-active: #89bcbc;
+$color-text:#ffad4f; 
+$color-placeholder: #C0C0C0;
+
+@mixin wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@mixin flex($justify: normal, $align: normal) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@font-face {
+  font-style: normal;
+  font-family: 'ADLaM Display';
+  font-weight: 400;
+  src: url(./assets/fonts/ADLaM_Display/ADLaMDisplay-Regular.ttf);
+}
+
+@mixin desktop-1280 {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin laptops {
+  @media screen and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin tablets {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 499px) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-bg;
+  position: relative;
+  scrollbar-gutter: stable;
+  min-height: 100vh;
+}
+
+header {
+  @include wrapper;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100px;
+  position: sticky;
+  z-index: 1;
+  top: 0px;
+  background-color: $color-bg;
+
+  @include tablets {
+    flex-direction: column;
+    top: -70px;
+  }
+
+  .title-box {
+    display: flex;
+    align-items: center;
+
+    .title-icon {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+
+      svg {
+        fill: $color-btn-active; 
+      }
+    }
+  }
+
+  h1 {
+    color: $color-text;
+    font-family: 'ADLaM Display', cursive;
+    font-weight: 400;
+    text-shadow: 1px 1px 2px $color-dark;
+  }
+
+  .search-box {
+    display: flex;
+    flex-direction: column;
+
+    @include tablets {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+    }
+
+    @include mobile {
+      width: 100%;
+    }
+
+    .input-box {
+      position: relative;
+
+      @include mobile {
+        width: 100%;
+      }
+
+      .input-search {
+        width: 500px;
+        height: 30px;
+        border: 2px solid $color-text;
+        border-radius: 5px;
+        outline: none;
+        padding-left: 30px;
+        font-family: 'ADLaM Display';
+        font-weight: 300;
+        color: $color-dark;
+
+        @include laptops {
+          max-width: 450px;
+        }
+
+        @include mobile {
+          width: 100%;
+        }
+
+
+
+        &::placeholder {
+          color: $color-placeholder;
+        }       
+      }
+
+      .icon-search, .icon-clear {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        fill: $color-text;
+        cursor: pointer;
+      }
+
+      .icon-search {
+        left: 7px;
+        top: 5px;       
+      }
+
+      .icon-clear {
+        right: 7px;
+        top: 2px;       
+      }
+    }
+  }
+
+  .buttons-box {
+    margin-top: 10px;
+    @include flex(space-between);
+
+    input {
+      display: none;
+    }
+
+    label {
+      font-family: 'ADLaM Display';
+      font-weight: 300;
+      font-size: 14px;
+      color: $color-btn-active; 
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+
+      @media (hover:hover) {
+        &:hover {
+          color: $color-dark;
+        }
+      }     
+    }
+
+    input:checked + label {
+      color: $color-dark; 
+    }
+
+    .buttons-box-left {
+      display: flex;
+      justify-content: space-between;
+      width: 250px; 
+
+      @include mobile {
+        flex-direction: column;
+        width: auto;
+      }
+    }
+  }
+}
+
+main {
+  @include wrapper;
+  min-height: calc(100vh - 180px);
+  position: relative;
+
+  @include tablets {
+    min-height: calc(100vh - 235px);
+  }
+  .no-results {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    font-family: 'ADLaM Display';
+    color: $color-dark;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    column-gap: 15px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    justify-content: center;
+
+    .image-box {     
+      border: 2px solid $color-text;
+      border-radius: 6px;
+      background-position: 50% 50%;
+      background-size: cover;
+      overflow: hidden;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      @media (hover:hover) {
+        &:hover {
+          transform:translateY(-3px);
+        }
+      } 
+    }
+
+    .landscape {
+      width: 298.75px;
+      height: 220px;
+
+      @include laptops {
+        width: 250px;
+        height: 180px;
+      }
+    }
+
+    .portrait {
+      width: 236px;
+      height: 350px;
+
+      @include laptops {
+        width: 180px;
+        height: 250px;
+      }
+    }
+
+    .squarish {
+      width: 236px;
+      height: 236px;
+
+      @include laptops {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  }
+}
+
+footer {
+  @include wrapper;
+  min-height: 80px;
+  @include flex(center, center);
+
+  .footer-inner {
+    width: 450px;
+    @include flex(space-between, center);
+
+    p {
+      font-family: 'ADLaM Display';
+      color: $color-dark;
+    }
+
+    svg {
+      fill: $color-dark;
+      transition: fill 0.3s ease-in-out;
+    }
+
+    @media (hover:hover) {
+      a:hover svg {
+        fill: $color-text;
+      }
+    } 
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding: 30px;
+  background-color: $color-bg-modal;
+  z-index: 2;
+  @include flex(center, center);
+
+  .close-btn {
+    position: absolute;
+    
+    top: 0px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    background-color: $color-text;
+    border: none;
+    z-index: 5;
+    cursor: pointer;
+
+    @include flex(center,center);
+
+  }
+
+  .modal-box {
+    position: relative;
+    border-radius: 7px;
+
+    width: 100%;
+    height: 100%;
+    @include flex(center, center);
+   
+    .image-wrapper {
+      border-radius: 7px;
+
+      width: 100%;
+      height: 100%;
+      @include flex(center, center);
+      flex-direction: column;
+   
+
+        .modal-image {
+        max-width: 100%;
+        max-height: calc(100% - 90px);
+        display: block;
+        border: 2px solid $color-text;
+        border-radius: 7px;
+        position:relative;       
+        }
+
+      .modal-content {
+        display: flex;
+        font-family: 'ADLaM Display', cursive;
+        color: $color-dark;
+        padding: 10px 10px 0 10px;
+        width: 60%;
+        min-height: 80px;
+        background-color: white;
+        margin-top: 10px;
+        border: 2px solid $color-text;
+        border-radius: 7px;
+        font-size: 16px;
+
+        @include tablets {
+          width: 100%;
+          font-size: 14px;
+        }
+
+        .modal-text {
+          width: 70%;
+   
+          p {
+            margin-bottom: 10px;
+          }
+
+          .image-author {
+            text-transform: capitalize;
+          }
+        }
+
+        .modal-likes {
+          align-self: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          flex-grow: 1;
+
+          .like-count {
+            margin-top: 5px;
+          }
+        }
+      }      
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
