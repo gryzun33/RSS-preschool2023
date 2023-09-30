@@ -4,29 +4,118 @@
   padding: 0;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 500px;
-  height: 500px;
-  padding: 5%;
+body {
+  background-color: #CE5A57;
+  width: 100%;
 }
-.container .box {
-  width: 11.11%;
-  height: 11.11%;
-  background-color: gray;
-  border: 1px solid black;
+
+.container {
+  width: 100%;
+  background-color: #CE5A57;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
 }
-.container .box .small-ball {
+
+main {
+  width: 520px;
+  padding: 0 10px 10px 10px;
+  background-color: #415B89;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px 5px #152D59;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+h1 {
+  text-align: center;
+  color: #CEA457;
+  text-shadow: 2px 2px 3px #152D59;
+}
+
+.controls {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.controls .burger-menu {
+  background-color: #E78583;
+  width: 50px;
+  height: 50px;
+}
+.controls .start-btn {
+  background-color: #E78583;
+  width: 100px;
+  height: 50px;
+}
+.controls .balls-time-box {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: center;
+}
+.controls .score {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: center;
+}
+.controls .volume-btn {
+  background-color: #E78583;
+  width: 50px;
+  height: 50px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+}
+.field .box {
+  width: 11.11%;
+  height: 11.11%;
+  background-color: #E78583;
+  border: 2px solid white;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.field .box .small-ball {
   width: 30%;
   height: 30%;
   border-radius: 50%;
   position: absolute;
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  background-color: #CEA457;
+  position: absolute;
+  bottom: 0;
+}
+footer .footer-wrapper {
+  margin: 0 auto;
+  max-width: 520px;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .ball {

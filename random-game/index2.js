@@ -10,8 +10,6 @@ const ballColors = ['red', 'green', 'yellow', 'blue', 'indigo', 'aqua', 'maroon'
 const numbOfCells = 9;
 let isWay = false;
 
-
-
 const state = {
   startPosition: null,
   endPosition: null,
@@ -45,13 +43,14 @@ function createMatrix() {
 }
 
 function renderField() {
-  const container = document.createElement('div');
-  container.classList.add('container');
-  document.body.append(container);
+  // const container = document.createElement('div');
+  // container.classList.add('container');
+  // document.body.append(container);
+  let field = document.querySelector('.field');
   for(let i = 0; i < numbOfCells; i++) {
     for (let j = 0; j < numbOfCells; j++) {
       const idBox = `${i}` + `${j}`;
-      const box = renderBox(container, idBox, matrix, i, j);
+      const box = renderBox(field, idBox, matrix, i, j);
       matrix[i][j].box = box;
       matrix[i][j].smallBall = box.firstChild;
       box.addEventListener('click', () => {

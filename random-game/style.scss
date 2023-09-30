@@ -1,28 +1,114 @@
+$color-bg-body: #CE5A57; 
+$color-cell:#E78583;
+$color-bg-main: #415B89;
+$color-text-shadow: #152D59;
+$color-title: #CEA457;
+
+@mixin flex($justify: normal, $align: normal) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-column($justify: normal, $align: normal) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+body {
+  background-color: $color-bg-body;
+  width: 100%;
+  
+  // position: relative;
+
+}
+
+
 .container {
-  display: flex;
+  width: 100%;
+  background-color: $color-bg-body;
+  min-height: 100vh;
+  @include flex-column(center, center);
+  position: relative;
+}
+
+main {
+  width: 520px;
+  padding: 0 10px 10px 10px;
+  background-color: $color-bg-main;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px 5px $color-text-shadow;
+  margin-top: 20px;
+  margin-bottom: 100px;
+
+}
+
+h1 {
+  text-align: center;
+  color: $color-title;
+  text-shadow: 2px 2px 3px $color-text-shadow;
+}
+
+.controls {
+  width: 100%;
+  height: 70px;
+  // margin-top: 20px;
+  @include flex(space-between, center);
+
+  .burger-menu {
+    background-color: $color-cell;
+    width: 50px;
+    height: 50px;
+  }
+
+  .start-btn {
+    background-color: $color-cell;
+    width: 100px;
+    height: 50px;
+  }
+
+  .balls-time-box {
+    width: 150px;
+    @include flex-column(normal, center);
+  }
+
+  .score {
+    width: 100px;
+    @include flex-column(normal, center);
+  }
+
+  .volume-btn {
+    background-color: $color-cell;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.field {
+  @include flex-column();
   flex-wrap: wrap;
-  flex-direction: column;
   width: 500px;
   height: 500px;
-  padding: 5%;
-
 
   .box {
     
     width: 11.11%;
     height: 11.11%;
-    background-color: gray;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: $color-cell;
+    border: 2px solid white;
+    border-radius: 5px;
     position: relative;
+    @include flex(center, center);
+   
 
     .small-ball {
       width:30%;
@@ -31,16 +117,36 @@
       // background-color: red;
       position: absolute;
     }
-
-    // .hidden {
-    //   display: none;
-    // }
   }
 
 
 
 
 }
+
+
+
+footer {
+  width: 100%;
+  height: 100px;
+  background-color: $color-title;
+  position: absolute;
+  bottom: 0;
+  
+
+  .footer-wrapper {
+    margin: 0 auto;
+    
+    max-width: 520px;
+    height: 100%;
+    padding: 10px;
+    
+    @include flex(space-between, center );
+  }
+  
+}
+
+
 
 .ball {
   width: 80%;
