@@ -1,24 +1,22 @@
-export function getLinesToRemove(ball, numbOfCells) {
+export function getLinesToRemove(xBall, yBall, color, matrix) {
+  console.log('getlinestoremove');
+  console.log('x=', xBall);
+  console.log('у=', yBall);
+  console.log('color=', color);
   
-  const posBall = ball.getAttribute('data-position');
-  // console.log('posBall=', posBall);
-  const color = ball.getAttribute('data-color');
   let diagonal1 = [];
   let diagonal2 = [];
   let horizontal = [];
   let vertical = [];
 
   // diagonal1
-  if(posBall[0] >= posBall[1]) {
+  if(xBall >= yBall) {
     let currPos;
     let y = 0;
-    let x = (+posBall[0]) - (+posBall[1]);
-    while(x < numbOfCells && y < numbOfCells) {
-      currPos = `${x}` + `${y}`;
-      let box = document.getElementById(currPos);
-      // console.log('box1=', box);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal1.push(box);
+    let x = xBall - yBall;
+    while(x < matrix.length && y < matrix.length) {
+      if(matrix[x][y].isBall && matrix[x][y].color === color) {
+        diagonal1.push( {x:x, y:y});
       } else if (diagonal1.length < 5) {
         diagonal1 = [];
       }
@@ -26,15 +24,11 @@ export function getLinesToRemove(ball, numbOfCells) {
       y += 1;
     } 
   } else {
-    let currPos;
     let x = 0;
-    let y = (+posBall[1]) - (+posBall[0]);
-    while(x < numbOfCells && y < numbOfCells) {
-      currPos = `${x}` + `${y}`;
-      let box = document.getElementById(currPos);
-      // console.log('box2=', box);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal1.push(box);
+    let y = yBall - xBall
+    while(x < matrix.length && y < matrix.length) { 
+      if(matrix[x][y].isBall && matrix[x][y].color === color) {
+        diagonal1.push({x:x, y:y});
       } else if (diagonal1.length < 5) {
         diagonal1 = [];
       }
@@ -42,18 +36,15 @@ export function getLinesToRemove(ball, numbOfCells) {
       y += 1;
     } 
   }
+  console.log('diagonal1', diagonal1);
 
   // diagonal2
-  if((+posBall[0]) + (+posBall[1]) < numbOfCells) {
-    let currPos;
+  if((xBall + yBall) < matrix.length) {
     let y = 0;
-    let x = (+posBall[0]) + (+posBall[1]);
-    while(x >= 0 && y < numbOfCells) {
-      currPos = `${x}` + `${y}`;
-      let box = document.getElementById(currPos);
-      // console.log('box3=', box);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal2.push(box);
+    let x = xBall + yBall;
+    while(x >= 0 && y < matrix.length) {
+      if((matrix[x][y].isBall && matrix[x][y].color === color)) {
+        diagonal2.push({x:x, y:y});
       } else if (diagonal2.length < 5) {
         diagonal2 = [];
       }
@@ -61,15 +52,14 @@ export function getLinesToRemove(ball, numbOfCells) {
       y += 1;
     } 
   } else {
-    let currPos;
-    let x = numbOfCells - 1;
-    let y = +posBall[1] - (numbOfCells - 1 - (+posBall[0]));
-    while(x > 0 && y < numbOfCells) {
-      currPos = `${x}` + `${y}`;
-      let box = document.getElementById(currPos);
-      // console.log('box4=', box);
-      if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-        diagonal2.push(box);
+
+    let x = matrix.length - 1;
+    let y = yBall - (matrix.length - 1 - xBall);
+    while(x > 0 && y < matrix.length) {
+
+  
+      if(matrix[x][y].isBall && matrix[x][y].color === color) {
+        diagonal2.push({x:x, y:y});
       } else if (diagonal2.length < 5) {
         diagonal2 = [];
       }
@@ -77,24 +67,24 @@ export function getLinesToRemove(ball, numbOfCells) {
       y += 1;
     } 
   }
+  console.log('diagonal1', diagonal2);
 
   // horizontal
-  for (let x = 0; x < numbOfCells; x++) {
-    let currPos = x + `${posBall[1]}`;
-    let box = document.getElementById(currPos);
-    if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-      horizontal.push(box);
+  for (let x = 0; x < matrix.length; x++) {
+
+
+    if(matrix[x][yBall].isBall && matrix[x][yBall].color === color) {
+      horizontal.push({x:x, y:yBall});
     } else if (horizontal.length < 5) {
       horizontal = [];
     }
   }
 
   // vertical
-  for (let y = 0; y < numbOfCells; y++) {
-    let currPos = `${posBall[0]}` + y;
-    let box = document.getElementById(currPos);
-    if(box.lastElementChild.matches('.ball') && (box.lastElementChild.dataset.color === color)) {
-      vertical.push(box);
+  for (let y = 0; y < matrix.length; y++) {
+    
+    if(matrix[xBall][y].isBall && matrix[xBall][y].color === color) {
+      vertical.push({x:xBall, y:y});
     } else if (vertical.length < 5) {
       vertical = [];
     }

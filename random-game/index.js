@@ -16,7 +16,6 @@ let endPosition = null;
 let startPosition = null;
 let activeBall = null;
 let badBoxes = [];
-
 let count = 0;
 
 // const directions = {
@@ -145,6 +144,8 @@ function renderField() {
       const box = {
         isBall: false,
         color: null,
+        isStart: false,
+        isEnd: false
       }
       lineArray.push(box);
       renderBox(container, idBox);
@@ -171,7 +172,7 @@ function addHandlerToContainer(container) {
       activeBall = e.target;
       activeBall.classList.add('active');
       startPosition = activeBall.getAttribute('data-position');
-      console.log('startposition=',startPosition);
+
     }
    
     const endBox = e.target.closest('.box');
@@ -180,9 +181,6 @@ function addHandlerToContainer(container) {
       endPosition = endBox.id;
       console.log('endposition', endPosition);
       if (startPosition && endPosition) {
-        // let direction = getDirection(startPosition, endPosition);
-        // console.log('direction2=', direction);
-        // console.log('direction1=', direction);
         transArray.push(startPosition);
         move(startPosition);
       }
