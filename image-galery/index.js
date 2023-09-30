@@ -80,27 +80,7 @@ function  closeModal() {
   modal.innerHTML = '';
 }
 
-modal.addEventListener('click', (e) => {
-  if (!e.target.closest('.modal-image')) {
-    closeModal();
-  }
-});
-
-inputSearch.addEventListener('keydown', (e) => {
-  if (e.code === 'Enter') {
-    if (inputSearch.value.trim()) {
-      getData(inputSearch.value, defOrientation);
-      inputRandom.checked = false;
-      inputSearch.blur();
-    } else {
-      getRandomData(defOrientation);
-      inputRandom.checked = true;
-      inputSearch.blur();
-    }
-  }
-})
-
-iconSearch.addEventListener('click', () => {
+function searchImages() {
   if (inputSearch.value.trim()) {
     getData(inputSearch.value, defOrientation);
     inputRandom.checked = false;
@@ -110,7 +90,17 @@ iconSearch.addEventListener('click', () => {
     inputRandom.checked = true;
     inputSearch.blur();
   }
-})
+}
+
+modal.addEventListener('click', (e) => {
+  if (!e.target.closest('.modal-image') && !e.target.closest('.modal-content')) {
+    closeModal();
+  }
+});
+
+inputSearch.addEventListener('change', searchImages);
+
+iconSearch.addEventListener('click', searchImages);
 
 iconClearInput.addEventListener('click', () => {
   inputSearch.value = '';
