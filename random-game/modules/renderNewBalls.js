@@ -3,8 +3,11 @@ import { getNumbsNewBoxes } from "./getNumbsNewBoxes.js";
 import { renderBall } from "./renderBall.js";
 
 
-export function renderNewBalls (ballColors, numbOfCells, matrix, state) {
-  const newColors = getNewColors(ballColors);
+export function renderNewBalls (numbOfCells, matrix, state) {
+  // const newColors = getNewColors(ballColors);
+
+  console.log('state1', state);
+  const newColors = state.nextColors;
   const numbsNewBoxes = getNumbsNewBoxes(numbOfCells, matrix);
   const newBalls = [];
   for(let i = 0; i < 3; i++) {

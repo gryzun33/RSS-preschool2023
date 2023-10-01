@@ -360,8 +360,7 @@ main {
   height: auto;
   border-radius: 10px;
   box-shadow: 0px 0px 7px 5px #152D59;
-  margin-top: 20px;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
 }
 
 .controls {
@@ -408,28 +407,29 @@ main {
   }
 }
 .controls .balls-time-box {
-  width: 150px;
+  width: 80px;
   display: flex;
   flex-direction: column;
   justify-content: normal;
   align-items: center;
 }
-.controls .balls-time-box .prev-balls {
+.controls .balls-time-box .next-balls {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: normal;
 }
-.controls .balls-time-box .prev-balls .prev-ball {
-  width: 30px;
-  height: 30px;
+.controls .balls-time-box .next-balls .next-ball {
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
 }
 .controls .balls-time-box .time {
   font-size: 18px;
+  margin-top: 10px;
 }
 .controls .score {
-  width: 100px;
+  width: 60px;
   display: flex;
   flex-direction: column;
   justify-content: normal;
@@ -491,7 +491,6 @@ main {
   z-index: 1;
   cursor: pointer;
   opacity: 1;
-  transition: all 0.5s ease-in-out;
 }
 
 footer {
@@ -524,17 +523,6 @@ footer .footer-wrapper {
   align-items: center;
 }
 
-.endScale {
-  animation: toBig 0.3s ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.hideall {
-  opacity: 0;
-  transform: scaleX(1.5);
-  transform: scaleX(1.5);
-}
-
 .hide {
   animation: hideBall 0.3s ease-in-out;
   animation-fill-mode: forwards;
@@ -544,6 +532,10 @@ footer .footer-wrapper {
   0% {
     width: 80%;
     height: 80%;
+  }
+  50% {
+    width: 0%;
+    height: 0%;
   }
   100% {
     width: 0%;
@@ -556,6 +548,21 @@ footer .footer-wrapper {
 }
 
 @keyframes showBall {
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  100% {
+    width: 80%;
+    height: 80%;
+  }
+}
+.show-first {
+  animation: showFirst 0.3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showFirst {
   0% {
     width: 0%;
     height: 0%;

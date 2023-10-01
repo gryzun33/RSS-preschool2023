@@ -39,8 +39,8 @@ main {
   height: auto;
   border-radius: 10px;
   box-shadow: 0px 0px 7px 5px $color-text-shadow;
-  margin-top: 20px;
-  margin-bottom: 80px;
+  // margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .controls {
@@ -89,27 +89,28 @@ main {
   }
 
   .balls-time-box {
-    width: 150px;
+    width: 80px;
     @include flex-column(normal, center);
 
-    .prev-balls {
+    .next-balls {
       width: 100%;
       @include flex(space-between);
 
-      .prev-ball {
-        width:30px;
-        height: 30px;
+      .next-ball {
+        width:15px;
+        height: 15px;
         border-radius: 50%;
       }
     }
 
     .time {
       font-size: 18px;
+      margin-top: 10px;
     }
   }
 
   .score {
-    width: 100px;
+    width: 60px;
     @include flex-column(normal, center);
     font-size: 20px;
 
@@ -169,7 +170,7 @@ main {
       z-index: 1;
       cursor: pointer;
       opacity: 1;
-      transition: all 0.5s ease-in-out;
+      // transition: all 0.5s ease-in-out;
     }
   }
 }
@@ -207,18 +208,18 @@ footer {
   }  
 }
 
-.endScale {
-  animation: toBig 0.3s ease-in-out;
-  animation-fill-mode: forwards;
-}
+// .endScale {
+//   animation: toBig 0.3s ease-in-out;
+//   animation-fill-mode: forwards;
+// }
 
 
 
-.hideall {
-  opacity: 0;
-  transform: scaleX(1.5);
-  transform: scaleX(1.5); 
-}
+// .hideall {
+//   opacity: 0;
+//   transform: scaleX(1.5);
+//   transform: scaleX(1.5); 
+// }
 
 .hide {
   animation: hideBall 0.3s ease-in-out;
@@ -227,6 +228,7 @@ footer {
 
 @keyframes hideBall {
   0% {width: 80%; height: 80%;}
+  50% {width: 0%; height: 0%;}
   100% {width: 0%; height: 0%;}
 }
 
@@ -239,6 +241,18 @@ footer {
   0% {width: 0%; height: 0%;}
   100% {width: 80%; height: 80%;}
 }
+
+.show-first {
+  animation: showFirst 0.3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes showFirst {
+  0% {width: 0%; height: 0%;}
+  100% {width: 80%; height: 80%;}
+}
+
+
 
 .active {
   animation: jump 0.5s infinite;

@@ -20,15 +20,15 @@ export function getNumbsNewBoxes(l, matrix) {
     const row = Math.floor(Math.random() * l);
     const column = Math.floor(Math.random() * l);
     const position = `${row}` + `${column}`;
-    console.log('newposition', position);
-    console.log('is in matrix', matrix[row][column].isBall);
+    // console.log('newposition', position);
+    // console.log('is in matrix', matrix[row][column].isBall);
     if(matrix[row][column].isBall || numbs.some((el) => el === position)) {
       continue;
     } else {
       numbs.push(position);
     }
   }
-  console.log('numbs', numbs);
+  // console.log('numbs', numbs);
   return numbs;
 }
 

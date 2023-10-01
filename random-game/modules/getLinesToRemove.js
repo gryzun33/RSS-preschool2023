@@ -1,8 +1,8 @@
 export function getLinesToRemove(xBall, yBall, color, matrix) {
-  console.log('getlinestoremove');
-  console.log('x=', xBall);
-  console.log('у=', yBall);
-  console.log('color=', color);
+  // console.log('getlinestoremove');
+  // console.log('x=', xBall);
+  // console.log('у=', yBall);
+  // console.log('color=', color);
   
   let diagonal1 = [];
   let diagonal2 = [];
@@ -11,7 +11,6 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
 
   // diagonal1
   if(xBall >= yBall) {
-    let currPos;
     let y = 0;
     let x = xBall - yBall;
     while(x < matrix.length && y < matrix.length) {
@@ -36,7 +35,7 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
       y += 1;
     } 
   }
-  console.log('diagonal1', diagonal1);
+  // console.log('diagonal1', diagonal1);
 
   // diagonal2
   if((xBall + yBall) < matrix.length) {
@@ -67,7 +66,7 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
       y += 1;
     } 
   }
-  console.log('diagonal1', diagonal2);
+  // console.log('diagonal1', diagonal2);
 
   // horizontal
   for (let x = 0; x < matrix.length; x++) {
