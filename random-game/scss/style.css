@@ -381,6 +381,11 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+}
+.controls .burger-menu .open {
+  transform: rotate(90deg);
 }
 .controls .burger-menu svg {
   fill: #E78583;
@@ -391,6 +396,13 @@ main {
   border-radius: 5px;
   width: 100px;
   height: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+@media (hover: hover) {
+  .controls .start-btn:hover {
+    background-color: #CE5A57;
+  }
 }
 .controls .balls-time-box {
   width: 150px;
@@ -432,6 +444,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .controls .volume-btn svg, .controls .volume-none-btn svg {
   fill: #CEA457;
@@ -484,6 +497,19 @@ footer {
   background-color: #CEA457;
   position: absolute;
   bottom: 0;
+}
+footer p {
+  font-family: "Play";
+  font-weight: 400;
+  font-size: 20px;
+}
+footer a {
+  transition: all 0.3s ease-in-out;
+}
+@media (hover: hover) {
+  footer a:hover {
+    transform: scale(1.1);
+  }
 }
 footer .footer-wrapper {
   margin: 0 auto;

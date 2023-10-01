@@ -56,6 +56,12 @@ main {
     width: 50px;
     height: 50px;
     @include flex(center, center);
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+
+    .open {
+      transform: rotate(90deg);
+    }
 
     svg {
       fill: $color-cell;
@@ -68,6 +74,14 @@ main {
     border-radius: 5px;
     width: 100px;
     height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    @media (hover:hover) {
+      &:hover {
+        background-color: $color-bg-body;
+      } 
+    }
   }
 
   .balls-time-box {
@@ -106,6 +120,7 @@ main {
     height: 40px;
     border: none;
     @include flex(center, center);
+    cursor: pointer;
 
     svg {
       fill: $color-title;
@@ -160,6 +175,22 @@ footer {
   background-color: $color-title;
   position: absolute;
   bottom: 0;
+
+  p {
+    font-family: "Play";
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  a {
+    transition: all 0.3s ease-in-out;
+    
+    @media (hover:hover) {
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
   
   .footer-wrapper {
     margin: 0 auto;    
