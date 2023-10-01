@@ -372,6 +372,8 @@ main {
   align-items: center;
   font-family: "Play";
   font-weight: 400;
+  color: #CEA457;
+  text-shadow: 2px 2px 3px #152D59;
 }
 .controls .burger-menu {
   background-color: transparent;
@@ -398,6 +400,7 @@ main {
   height: 30px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  color: #152D59;
 }
 @media (hover: hover) {
   .controls .start-btn:hover {
@@ -462,13 +465,13 @@ main {
   flex-wrap: wrap;
   width: 500px;
   height: 500px;
+  border: 1px solid #CE5A57;
 }
 .field .box {
   width: 11.11%;
   height: 11.11%;
   background-color: #E78583;
-  border: 2px solid white;
-  border-radius: 5px;
+  border: 2px solid #CE5A57;
   position: relative;
   display: flex;
   justify-content: center;
