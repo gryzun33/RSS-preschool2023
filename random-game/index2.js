@@ -5,8 +5,11 @@ import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
 import { getDirection } from "./modules/getDirection.js";
 import { renderNewBalls } from "./modules/renderNewBalls.js";
 import { getLinesToRemove } from "./modules/getLinesToRemove.js";
+import { renderNextBalls } from "./modules/renderNextBalls.js";
+import { removeLines } from "./modules/removeLines.js";
+import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 
-const ballColors = ['red', 'green', 'yellow', 'blue', 'indigo', 'aqua', 'maroon'];
+const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
 let isWay = false;
 
@@ -60,7 +63,7 @@ function renderField() {
       })
     }
   }
-  renderNextBalls();
+  renderNextBalls(state, ballColors);
   
   // renderNewBalls(ballColors, numbOfCells, matrix, state);
 }
@@ -83,24 +86,19 @@ startBtn.addEventListener('click', () => {
 
 
 function nextStep() {
-  console.log('nextstep');
+  const gameOver = checkAvailableGame(matrix);
+  if(!gameOver) {
+    // console.log('nextstep');
   renderNewBalls(numbOfCells, matrix, state);
-  renderNextBalls();
-  console.log('state', state);
+  renderNextBalls(state, ballColors);
+  // console.log('state', state);
+  } else {
+    alert('game over');
+  }  
 }
 
 
-function renderNextBalls() {
-  const nextBalls = document.querySelector('.next-balls');
-  nextBalls.innerHTML = '';
-  state.nextColors = getNewColors(ballColors);
-  for (let i = 0; i < state.nextColors.length; i++) {
-    const nextBall = document.createElement('div');
-    nextBall.classList.add('next-ball');
-    nextBall.style.backgroundColor = state.nextColors[i];
-    nextBalls.append(nextBall);
-  }
-}
+
 
 function clickOnEmptyBox(i, j) {
   if(!matrix[i][j].isBall) {
@@ -111,10 +109,10 @@ function clickOnEmptyBox(i, j) {
     copyOfMatrix = copyMatrix();
     findWay(+state.startPosition[0], +state.startPosition[1], i, j);
     if(isWay) {
-      // console.log('путь есть');
+      console.log('путь есть');
       moveBall(state.activeBall);
     } else {
-      // console.log('пути нет');
+      console.log('пути нет');
     }
   }
 }
@@ -170,30 +168,6 @@ function findWay(a, b, c, d) {
 }
 
 
-
-// const btn = document.querySelector('button');
-// btn.addEventListener('click', () => {
-//   let endOfGame = checkAvailableGame();
-//   if (endOfGame) {
-//      return;
-//   } else {
-//     const newBalls = renderNewBalls(ballColors, numbOfCells, matrix, state); 
-
-    
-//   }  
-// });
-
-function checkAvailableGame() {
-
-  let numbOfEpmtyBoxes = matrix.flat().filter((el) => !el.isBall);
-  // console.log('emptys',numbOfEpmtyBoxes);
-  if(numbOfEpmtyBoxes < 2) {
-    return true;
-  }
-  return false;
-}
-
-
 function moveBall(ball) {
   ball.classList.remove('active');
   ball.classList.add('hide');
@@ -227,44 +201,13 @@ function moveBall(ball) {
       if (lines.every((line) => line.length < 5)) {
         nextStep();        
       } else {
-        removeLines(lines, state.endPosition);
+        removeLines(lines, state, matrix);
       }  
       ball.classList.remove('show');
+      ball.dataset.position = state.endPosition;
       ball.removeEventListener('animationend', doAfterShowing);
     }
   }
   console.log('matrix', matrix);
 }
 
-function removeLines(lines, endPosition) {
-  let countActiveBall = 0;
-  // console.log('lines', lines);
-  lines.forEach((arr) => {
-    if (arr.length >= 5) {
-      state.count = state.count + arr.length;
-      arr.forEach((obj, i) => {
-        let k = i;
-        if(obj.x === +endPosition[0] && obj.y === +endPosition[1]) {
-          countActiveBall += 1;
-        }
-        let ball = matrix[obj.x][obj.y].ball;
-        // console.log('ball', ball);
-         setTimeout(() => {
-          ball.classList.add('hide'); 
-         }, (k+2) * 100);
-         
-         ball.addEventListener('animationend', () => {
-         ball.remove();
-         matrix[obj.x][obj.y].isBall = false;
-         matrix[obj.x][obj.y].ball = null;
-         matrix[obj.x][obj.y].color = null;
-        })
-      })
-    }
-  })
-  if(countActiveBall) {
-    state.count = state.count - countActiveBall + 1;
-  }  
-
-  console.log('count=', state.count);
-}

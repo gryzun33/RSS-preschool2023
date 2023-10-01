@@ -5,6 +5,7 @@ import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
 import { getDirection } from "./modules/getDirection.js";
 import { renderNewBalls } from "./modules/renderNewBalls.js";
 import { getLinesToRemove } from "./modules/getLinesToRemove.js";
+import { removeLines } from "./modules/removeLines.js";
 
 
 

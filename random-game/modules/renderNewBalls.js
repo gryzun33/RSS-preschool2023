@@ -1,7 +1,7 @@
 import { getNewColors } from "./getNewColors.js";
 import { getNumbsNewBoxes } from "./getNumbsNewBoxes.js";
 import { renderBall } from "./renderBall.js";
-
+import { checkAvailableGame } from "./checkAvailableGame.js";
 
 export function renderNewBalls (numbOfCells, matrix, state) {
   // const newColors = getNewColors(ballColors);
@@ -14,6 +14,13 @@ export function renderNewBalls (numbOfCells, matrix, state) {
    const ball = renderBall(newColors[i], numbsNewBoxes[i], matrix, state);
    newBalls.push(ball);
   }
-  return newBalls; 
+  
+  setTimeout(() => {
+    let endOfGame = checkAvailableGame(matrix);
+    if (endOfGame) {
+      alert('gameover');
+    }
+  },500);
+  
 }
 
