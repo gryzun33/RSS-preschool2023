@@ -27,6 +27,17 @@ export function removeLines(lines, state, matrix) {
   if(countActiveBall) {
     state.count = state.count - countActiveBall + 1;
   }  
-
+  renderScore(state);
   console.log('count=', state.count);
+}
+
+function renderScore(state) {
+  const score = document.querySelector('.score-count');
+  if (state.count < 10) {
+    score.innerHTML = '00' + state.count;
+  } else if (state.count >= 10 && state.count < 100) {
+    score.innerHTML = '0' + state.count;
+  } else {
+    score.innerHTML = state.count;
+  }
 }

@@ -407,14 +407,14 @@ main {
   }
 }
 .controls .balls-time-box {
-  width: 80px;
+  width: 100px;
   display: flex;
   flex-direction: column;
   justify-content: normal;
   align-items: center;
 }
 .controls .balls-time-box .next-balls {
-  width: 100%;
+  width: 80px;
   display: flex;
   justify-content: space-between;
   align-items: normal;

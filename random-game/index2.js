@@ -9,9 +9,22 @@ import { renderNextBalls } from "./modules/renderNextBalls.js";
 import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 
+const time = document.querySelector('.time');
+
+
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
 let isWay = false;
+
+let timeData = {
+  timerId: null,
+  min: 0,
+  sec: 0,
+  currMin: 0,
+  currSec: 0, 
+}
+
+
 
 const state = {
   nextColors: null,
@@ -48,9 +61,6 @@ function createMatrix() {
 }
 
 function renderField() {
-  // const container = document.createElement('div');
-  // container.classList.add('container');
-  // document.body.append(container);
   let field = document.querySelector('.field');
   for(let i = 0; i < numbOfCells; i++) {
     for (let j = 0; j < numbOfCells; j++) {
@@ -64,8 +74,6 @@ function renderField() {
     }
   }
   renderNextBalls(state, ballColors);
-  
-  // renderNewBalls(ballColors, numbOfCells, matrix, state);
 }
 
 const startBtn = document.querySelector('.start-btn');
@@ -73,13 +81,16 @@ startBtn.addEventListener('click', () => {
   if(state.isPlaying === false) {
     startBtn.innerHTML = 'Pause';
     state.isPlaying = true;
+    runTimer();
     nextStep();
   } else if (state.isPlaying === true) {
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
+    clearInterval(timeData.timerId);
   } else if (state.isPlaying === 'pause') {
     startBtn.innerHTML = 'Pause';
     state.isPlaying = true;
+    runTimer();
   }
   console.log('matrix1=', matrix);
 })
@@ -211,3 +222,17 @@ function moveBall(ball) {
   console.log('matrix', matrix);
 }
 
+
+function runTimer() {
+  timeData.timerId = setInterval(() => {
+    if (timeData.sec === 59) {
+      timeData.min += 1;
+      timeData.sec = 0;
+    } else {
+      timeData.sec += 1;
+    }
+    timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
+    timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
+    time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
+  }, 1000);
+}
