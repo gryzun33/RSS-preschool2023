@@ -15,17 +15,18 @@ export function removeLines(lines, state, matrix, removeLinesSound) {
           countActiveBall += 1;
         }
         let ball = matrix[obj.x][obj.y].ball;
-        // console.log('ball', ball);
-         setTimeout(() => {
-          ball.classList.add('hide'); 
-         }, (k+1) * 100);
-         
-         ball.addEventListener('animationend', () => {
-         ball.remove();
-         matrix[obj.x][obj.y].isBall = false;
-         matrix[obj.x][obj.y].ball = null;
-         matrix[obj.x][obj.y].color = null;
-        })
+        if (ball) {
+          setTimeout(() => {
+            ball.classList.add('hide'); 
+           }, (k+1) * 100);
+           
+           ball.addEventListener('animationend', () => {
+           ball.remove();
+           matrix[obj.x][obj.y].isBall = false;
+           matrix[obj.x][obj.y].ball = null;
+           matrix[obj.x][obj.y].color = null;
+          })
+        }
       })
     }
   })
@@ -33,7 +34,7 @@ export function removeLines(lines, state, matrix, removeLinesSound) {
     state.count = state.count - countActiveBall + 1;
   }  
   renderScore(state);
-  console.log('count=', state.count);
+  // console.log('count=', state.count);
 }
 
 function renderScore(state) {

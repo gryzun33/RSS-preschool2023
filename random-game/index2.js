@@ -119,11 +119,10 @@ function nextStep() {
 function clickOnEmptyBox(i, j) {
   // console.log('start=', state.startPosition);
   // console.log('end=', state.endPosition);
-  // if(state.startPosition === state.endPosition) {
-
-  //   alert('нельзя');
-  //   return;
-  // }
+  if(!state.startPosition) {
+    // alert('нельзя');
+    return;
+  }
   if(!matrix[i][j].isBall) {
  
     matrix[i][j].isEnd = true;
@@ -223,6 +222,7 @@ function moveBall(ball) {
 
       matrix[+state.startPosition[0]][+state.startPosition[1]].isBall = false;
       matrix[+state.startPosition[0]][+state.startPosition[1]].color = null;
+      state.startPosition = null;
       console.log('color2 =',matrix[+state.endPosition[0]][+state.endPosition[1]].color); 
       const lines = getLinesToRemove(+state.endPosition[0],+state.endPosition[1],
                     matrix[+state.endPosition[0]][+state.endPosition[1]].color, matrix);

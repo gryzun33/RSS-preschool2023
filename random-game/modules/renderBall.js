@@ -29,6 +29,7 @@ export function renderBall(color, position, matrix, state, sounds) {
 function addHandlersToBall(ballElem, matrix, state, sounds) {
   ballElem.addEventListener('click', () => {
     if(state.isVolume) {
+      sounds.clickOnBall.currentTime = 0;
       sounds.clickOnBall.play();
     }
     state.startPosition = null;
