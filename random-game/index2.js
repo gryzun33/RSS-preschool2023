@@ -10,6 +10,7 @@ import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
 
+const overlay = document.querySelector('.overlay');
 const time = document.querySelector('.time');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNonBtn = document.querySelector('.volume-non-btn');
@@ -91,10 +92,12 @@ startBtn.addEventListener('click', () => {
   } else if (state.isPlaying === true) {
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
+    overlay.classList.add('show-overlay');
     clearInterval(timeData.timerId);
   } else if (state.isPlaying === 'pause') {
     startBtn.innerHTML = 'Pause';
     state.isPlaying = true;
+    overlay.classList.remove('show-overlay');
     runTimer();
   }
   console.log('matrix1=', matrix);
