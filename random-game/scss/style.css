@@ -439,7 +439,7 @@ main {
 .controls .score .score-count {
   font-size: 25px;
 }
-.controls .volume-btn, .controls .volume-none-btn {
+.controls .volume-btn, .controls .volume-non-btn {
   background-color: transparent;
   width: 40px;
   height: 40px;
@@ -449,9 +449,13 @@ main {
   align-items: center;
   cursor: pointer;
 }
-.controls .volume-btn svg, .controls .volume-none-btn svg {
+.controls .volume-btn svg, .controls .volume-non-btn svg {
   fill: #CEA457;
   width: 25px;
+}
+.controls .volume-btn svg {
+  width: 20px;
+  margin-right: 6px;
 }
 .controls .hidden {
   display: none;

@@ -1,8 +1,13 @@
-export function removeLines(lines, state, matrix) {
+export function removeLines(lines, state, matrix, removeLinesSound) {
   let countActiveBall = 0;
-  // console.log('lines', lines);
+  console.log('lines3', lines);
   lines.forEach((arr) => {
     if (arr.length >= 5) {
+      if (state.isVolume) {
+        setTimeout(() => {
+          removeLinesSound.play()
+        }, 100);
+      }
       state.count = state.count + arr.length;
       arr.forEach((obj, i) => {
         let k = i;
@@ -13,7 +18,7 @@ export function removeLines(lines, state, matrix) {
         // console.log('ball', ball);
          setTimeout(() => {
           ball.classList.add('hide'); 
-         }, (k+2) * 100);
+         }, (k+1) * 100);
          
          ball.addEventListener('animationend', () => {
          ball.remove();

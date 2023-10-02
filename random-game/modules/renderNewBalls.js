@@ -3,7 +3,7 @@ import { getNumbsNewBoxes } from "./getNumbsNewBoxes.js";
 import { renderBall } from "./renderBall.js";
 import { checkAvailableGame } from "./checkAvailableGame.js";
 
-export function renderNewBalls (numbOfCells, matrix, state) {
+export function renderNewBalls (numbOfCells, matrix, state, sounds) {
   // const newColors = getNewColors(ballColors);
 
   console.log('state1', state);
@@ -11,7 +11,7 @@ export function renderNewBalls (numbOfCells, matrix, state) {
   const numbsNewBoxes = getNumbsNewBoxes(numbOfCells, matrix);
   const newBalls = [];
   for(let i = 0; i < 3; i++) {
-   const ball = renderBall(newColors[i], numbsNewBoxes[i], matrix, state);
+   const ball = renderBall(newColors[i], numbsNewBoxes[i], matrix, state, sounds);
    newBalls.push(ball);
   }
   
@@ -21,6 +21,6 @@ export function renderNewBalls (numbOfCells, matrix, state) {
       alert('gameover');
     }
   },500);
-  
+
 }
 

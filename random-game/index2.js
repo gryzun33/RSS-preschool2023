@@ -8,23 +8,24 @@ import { getLinesToRemove } from "./modules/getLinesToRemove.js";
 import { renderNextBalls } from "./modules/renderNextBalls.js";
 import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
+import { getSounds } from "./modules/getSounds.js";
 
 const time = document.querySelector('.time');
-
+const volumeBtn = document.querySelector('.volume-btn');
+const volumeNonBtn = document.querySelector('.volume-non-btn');
+const sounds = getSounds();
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
 let isWay = false;
 
-let timeData = {
+const timeData = {
   timerId: null,
   min: 0,
   sec: 0,
   currMin: 0,
   currSec: 0, 
 }
-
-
 
 const state = {
   nextColors: null,
@@ -33,9 +34,10 @@ const state = {
   activeBall: null,
   count: 0,
   isPlaying: false,
+  isVolume: false
 }
 
-let matrix = createMatrix();
+const matrix = createMatrix();
 let copyOfMatrix;
 renderField();
 
@@ -78,6 +80,9 @@ function renderField() {
 
 const startBtn = document.querySelector('.start-btn');
 startBtn.addEventListener('click', () => {
+  // if(state.isVolume) {
+  //   sounds.clickOnBall.play();
+  // }
   if(state.isPlaying === false) {
     startBtn.innerHTML = 'Pause';
     state.isPlaying = true;
@@ -100,7 +105,7 @@ function nextStep() {
   const gameOver = checkAvailableGame(matrix);
   if(!gameOver) {
     // console.log('nextstep');
-  renderNewBalls(numbOfCells, matrix, state);
+  renderNewBalls(numbOfCells, matrix, state, sounds);
   renderNextBalls(state, ballColors);
   // console.log('state', state);
   } else {
@@ -112,7 +117,15 @@ function nextStep() {
 
 
 function clickOnEmptyBox(i, j) {
+  // console.log('start=', state.startPosition);
+  // console.log('end=', state.endPosition);
+  // if(state.startPosition === state.endPosition) {
+
+  //   alert('нельзя');
+  //   return;
+  // }
   if(!matrix[i][j].isBall) {
+ 
     matrix[i][j].isEnd = true;
     state.endPosition = `${i}` + `${j}`;
     
@@ -120,12 +133,18 @@ function clickOnEmptyBox(i, j) {
     copyOfMatrix = copyMatrix();
     findWay(+state.startPosition[0], +state.startPosition[1], i, j);
     if(isWay) {
+      if(state.isVolume) {
+        sounds.clikOnBox.play();
+      }
       console.log('путь есть');
       moveBall(state.activeBall);
     } else {
+      if(state.isVolume) {
+        sounds.wrongBox.play();
+      }
       console.log('пути нет');
     }
-  }
+  } 
 }
 
 function copyMatrix() {
@@ -207,12 +226,12 @@ function moveBall(ball) {
       console.log('color2 =',matrix[+state.endPosition[0]][+state.endPosition[1]].color); 
       const lines = getLinesToRemove(+state.endPosition[0],+state.endPosition[1],
                     matrix[+state.endPosition[0]][+state.endPosition[1]].color, matrix);
-      console.log( 'lines', lines);  
+      // console.log( 'lines', lines);  
 
       if (lines.every((line) => line.length < 5)) {
         nextStep();        
       } else {
-        removeLines(lines, state, matrix);
+        removeLines(lines, state, matrix, sounds.removeLines);
       }  
       ball.classList.remove('show');
       ball.dataset.position = state.endPosition;
@@ -236,3 +255,16 @@ function runTimer() {
     time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
   }, 1000);
 }
+
+volumeBtn.addEventListener('click', () => {
+  volumeNonBtn.classList.remove('hidden');
+  volumeBtn.classList.add('hidden');
+  state.isVolume = !state.isVolume;
+})
+
+volumeNonBtn.addEventListener('click', () => {
+  volumeBtn.classList.remove('hidden');
+  volumeNonBtn.classList.add('hidden');
+  state.isVolume = !state.isVolume;
+})
+

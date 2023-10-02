@@ -1,7 +1,8 @@
 import { getLinesToRemove } from "./getLinesToRemove.js";
 import { removeLines } from "./removeLines.js";
+// import { sounds } from "./getSounds.js";
 
-export function renderBall(color, position, matrix, state) {
+export function renderBall(color, position, matrix, state, sounds) {
   const ballElem = document.createElement('div');
   ballElem.classList.add('ball');
   ballElem.style.backgroundColor = color;
@@ -14,19 +15,23 @@ export function renderBall(color, position, matrix, state) {
   matrix[+position[0]][+position[1]].color = color;
   matrix[+position[0]][+position[1]].ball = ballElem;
 
-  addHandlersToBall(ballElem, matrix, state);
+  addHandlersToBall(ballElem, matrix, state, sounds);
 
   // checkField
   const lines = getLinesToRemove(+position[0], +position[1], color, matrix);
   console.log('lines2=', lines);
   if (lines.some((line) => line.length >= 5)) {
-    removeLines(lines, state, matrix);
+    removeLines(lines, state, matrix, sounds.removeLines);
   }          
   return ballElem;
 }
 
-function addHandlersToBall(ballElem, matrix, state) {
+function addHandlersToBall(ballElem, matrix, state, sounds) {
   ballElem.addEventListener('click', () => {
+    if(state.isVolume) {
+      sounds.clickOnBall.play();
+    }
+    state.startPosition = null;
     state.endPosition = null;
     // matrix[+state.startPosition[0]][+position[1]].isStart = true;
     if(state.activeBall) {
