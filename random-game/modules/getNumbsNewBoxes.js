@@ -14,9 +14,9 @@
 //   return numbs;
 // }
 
-export function getNumbsNewBoxes(l, matrix) {
+export function getNumbsNewBoxes(l, matrix, emptyBoxesCount) {
   const numbs = [];
-  while (numbs.length < 3) {
+  while (numbs.length < emptyBoxesCount) {
     const row = Math.floor(Math.random() * l);
     const column = Math.floor(Math.random() * l);
     const position = `${row}` + `${column}`;

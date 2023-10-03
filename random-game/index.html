@@ -33,7 +33,13 @@
         </button>
       </div>
       <div class="field">
-        <div class="overlay"></div>
+        <div class="overlay">
+          <div class="gameover hidden">
+            <p class="gameover__title">GAME OVER!</p>
+            <p class="gameover__time">Your time is ${time.innerHTML}</p>
+            <p class="gameover__score">Your score is ${+state.score}</p>  
+          </div>
+        </div>
       </div>
     </main>  
     <footer>
@@ -51,3 +57,4 @@
   <script type="module" src="index2.js"></script>  
 </body>
 </html>
+

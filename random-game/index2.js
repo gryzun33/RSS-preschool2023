@@ -11,6 +11,7 @@ import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
 
 const overlay = document.querySelector('.overlay');
+const gameOverBox = document.querySelector('.gameover');
 const time = document.querySelector('.time');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNonBtn = document.querySelector('.volume-non-btn');
@@ -19,6 +20,7 @@ const sounds = getSounds();
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
 let isWay = false;
+let copyOfMatrix;
 
 const timeData = {
   timerId: null,
@@ -35,12 +37,20 @@ const state = {
   activeBall: null,
   count: 0,
   isPlaying: false,
-  isVolume: false
+  isVolume: false,
+  duration: 180,
+  emptyBoxes: 3
 }
-
+// initGame();
 const matrix = createMatrix();
-let copyOfMatrix;
+
 renderField();
+
+// function initGame() {
+  // let games = [];
+ 
+  
+// }
 
 function createMatrix() {
   let arr = [];
@@ -92,12 +102,12 @@ startBtn.addEventListener('click', () => {
   } else if (state.isPlaying === true) {
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
-    overlay.classList.add('show-overlay');
+    overlay.classList.add('overlay-show');
     clearInterval(timeData.timerId);
   } else if (state.isPlaying === 'pause') {
     startBtn.innerHTML = 'Pause';
     state.isPlaying = true;
-    overlay.classList.remove('show-overlay');
+    overlay.classList.remove('overlay-show');
     runTimer();
   }
   console.log('matrix1=', matrix);
@@ -105,14 +115,19 @@ startBtn.addEventListener('click', () => {
 
 
 function nextStep() {
-  const gameOver = checkAvailableGame(matrix);
+  const gameOver = checkAvailableGame(matrix, state);
+  console.log('gameover', gameOver);
   if(!gameOver) {
-    // console.log('nextstep');
-  renderNewBalls(numbOfCells, matrix, state, sounds);
-  renderNextBalls(state, ballColors);
-  // console.log('state', state);
+    renderNewBalls(numbOfCells, matrix, state, sounds);
+    renderNextBalls(state, ballColors);
+    setTimeout(() => {
+      const gameOverX = checkAvailableGame(matrix, state);
+      if (gameOverX) {
+        onGameOver();
+      }
+    },500);
   } else {
-    alert('game over');
+    onGameOver();
   }  
 }
 
@@ -232,6 +247,7 @@ function moveBall(ball) {
       // console.log( 'lines', lines);  
 
       if (lines.every((line) => line.length < 5)) {
+        console.log('next step239');
         nextStep();        
       } else {
         removeLines(lines, state, matrix, sounds.removeLines);
@@ -253,9 +269,14 @@ function runTimer() {
     } else {
       timeData.sec += 1;
     }
+    
     timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
     timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
     time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
+    // if(timeData.min === 1) {
+    //   gameOver();
+    //   return;
+    // }
   }, 1000);
 }
 
@@ -271,3 +292,41 @@ volumeNonBtn.addEventListener('click', () => {
   state.isVolume = !state.isVolume;
 })
 
+
+function onGameOver() {
+  clearInterval(timeData.timerId);
+  overlay.classList.add('overlay-show');
+  gameOverBox.classList.remove('hidden');
+  gameOverBox.innerHTML = `
+    <p class="gameover__title">GAME OVER!</p>
+    <p class="gameover__time">Your time is ${time.innerHTML}</p>
+    <p class="gameover__score">Your score is ${+state.count}</p>  
+  `;
+  
+  overlay.addEventListener('transitionend', showGameOver);
+
+  function showGameOver() {
+    gameOverBox.classList.add('gameover-show');
+    overlay.removeEventListener('transitionend', showGameOver);
+  }
+  
+  saveGame(); 
+}
+
+function saveGame() {
+  let game = {
+    timeMin: timeData.min, 
+    timeSec: timeData.sec, 
+    score: state.count
+  }
+  let games = JSON.parse(localStorage.getItem('gamesLine98'));
+  // let games = localStorage.setItem('gamesLine98', JSON.stringify(games));
+  if (!games) {
+    games = [];
+  }
+  games.push(game);
+  if(games.length > 10) {
+    games.shift();
+  }
+  localStorage.setItem('gamesLine98', JSON.stringify(games));
+}

@@ -19,15 +19,18 @@ export function renderBall(color, position, matrix, state, sounds) {
 
   // checkField
   const lines = getLinesToRemove(+position[0], +position[1], color, matrix);
-  console.log('lines2=', lines);
+  // console.log('lines2=', lines);
   if (lines.some((line) => line.length >= 5)) {
     removeLines(lines, state, matrix, sounds.removeLines);
   }          
-  return ballElem;
+  // return ballElem;
 }
 
 function addHandlersToBall(ballElem, matrix, state, sounds) {
   ballElem.addEventListener('click', () => {
+    let numbOfEpmtyBoxes = matrix.flat().filter((el) => !el.isBall);
+    console.log('emptys32',numbOfEpmtyBoxes);
+
     if(state.isVolume) {
       sounds.clickOnBall.currentTime = 0;
       sounds.clickOnBall.play();
