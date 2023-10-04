@@ -11,46 +11,87 @@ import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
 
 const overlay = document.querySelector('.overlay');
+const overlayInners = document.querySelectorAll('.overlay-inner');
+const burger = document.querySelector('.burger-menu');
+const menu = document.querySelector('.menu');
+const rules = document.querySelector('.rules');
+const bestBtn = document.querySelector('.best-btn');
+const rulesBtn = document.querySelector('.rules-btn');
+const newGameBtn = document.querySelector('.new-game-btn');
 const gameOverBox = document.querySelector('.gameover');
 const time = document.querySelector('.time');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNonBtn = document.querySelector('.volume-non-btn');
-const sounds = getSounds();
+const score = document.querySelector('.score-count');
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
-let isWay = false;
-let copyOfMatrix;
+const sounds = getSounds();
 
-const timeData = {
-  timerId: null,
-  min: 0,
-  sec: 0,
-  currMin: 0,
-  currSec: 0, 
-}
+let state, timeData, matrix, isWay, copyOfMatrix;
 
-const state = {
-  nextColors: null,
-  startPosition: null,
-  endPosition: null,
-  activeBall: null,
-  count: 0,
-  isPlaying: false,
-  isVolume: false,
-  duration: 180,
-  emptyBoxes: 3
-}
-// initGame();
-const matrix = createMatrix();
+function initGame() {
+  timeData = {
+    timerId: null,
+    min: 0,
+    sec: 0,
+    currMin: 0,
+    currSec: 0, 
+  }
 
-renderField();
+  state = {
+    nextColors: null,
+    startPosition: null,
+    endPosition: null,
+    activeBall: null,
+    count: 0,
+    isPlaying: 'false',
+    isVolume: false,
+    emptyBoxes: 3
+  }
 
-// function initGame() {
-  // let games = [];
- 
+  isWay = false;
+
+  matrix = createMatrix();
+  renderField(matrix);
+  time.innerHTML = '00 : 00';
+  score.innerHTML = '000';
   
+
+}
+
+initGame();
+// overlay.classList.add('overlay-show');
+// rules.classList.remove('hidden');
+
+
+// let isWay = false;
+// let copyOfMatrix;
+
+// const timeData = {
+//   timerId: null,
+//   min: 0,
+//   sec: 0,
+//   currMin: 0,
+//   currSec: 0, 
 // }
+
+// const state = {
+//   nextColors: null,
+//   startPosition: null,
+//   endPosition: null,
+//   activeBall: null,
+//   count: 0,
+//   isPlaying: false,
+//   isVolume: false,
+//   isOverlay: true,
+//   duration: 180,
+//   emptyBoxes: 3
+// }
+
+// const matrix = createMatrix();
+
+// renderField();
 
 function createMatrix() {
   let arr = [];
@@ -73,8 +114,9 @@ function createMatrix() {
   return arr;
 }
 
-function renderField() {
+function renderField(matrix) {
   let field = document.querySelector('.field');
+  field.innerHTML = '';
   for(let i = 0; i < numbOfCells; i++) {
     for (let j = 0; j < numbOfCells; j++) {
       const idBox = `${i}` + `${j}`;
@@ -93,20 +135,29 @@ const startBtn = document.querySelector('.start-btn');
 startBtn.addEventListener('click', () => {
   // if(state.isVolume) {
   //   sounds.clickOnBall.play();
-  // }
-  if(state.isPlaying === false) {
+  // }'
+  if(state.isPlaying === 'false') {
+    console.log('clickstart');
+    overlay.classList.remove('overlay-show');
+    rules.classList.add('hidden');
     startBtn.innerHTML = 'Pause';
-    state.isPlaying = true;
+    state.isPlaying = 'true';
+    // state.isOverlay = false;
     runTimer();
     nextStep();
-  } else if (state.isPlaying === true) {
+  } else if (state.isPlaying === 'true') {
+    console.log('pause149');
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
     overlay.classList.add('overlay-show');
+    if (state.activeBall) {
+      state.activeBall.classList.remove('active');
+      state.startPosition = null;
+    }
     clearInterval(timeData.timerId);
   } else if (state.isPlaying === 'pause') {
     startBtn.innerHTML = 'Pause';
-    state.isPlaying = true;
+    state.isPlaying = 'true';
     overlay.classList.remove('overlay-show');
     runTimer();
   }
@@ -306,7 +357,7 @@ function onGameOver() {
   overlay.addEventListener('transitionend', showGameOver);
 
   function showGameOver() {
-    gameOverBox.classList.add('gameover-show');
+    gameOverBox.classList.add('inner-show');
     overlay.removeEventListener('transitionend', showGameOver);
   }
   
@@ -330,3 +381,91 @@ function saveGame() {
   }
   localStorage.setItem('gamesLine98', JSON.stringify(games));
 }
+
+burger.addEventListener('click', () => {
+  startBtn.disabled = !startBtn.disabled;
+  if(burger.classList.contains('open')) {
+    burger.classList.remove('open');
+    overlayInners.forEach((item) => {
+      item.classList.add('hidden');
+      item.classList.remove('inner-show');
+    });
+    if (state.isPlaying === 'true') { 
+      runTimer(); 
+    } 
+    if (state.isPlaying === 'false' || state.isPlaying === 'true') {
+      overlay.classList.remove('overlay-show');
+    }
+  } else {
+    console.log('isplaying400', state.isPlaying);
+    burger.classList.add('open');
+    overlay.classList.add('overlay-show');
+    menu.classList.remove('hidden');
+
+    
+    if(state.isPlaying === 'false') {
+      rules.classList.add('hidden');
+    }
+    if(state.isPlaying === 'true') {
+      clearInterval(timeData.timerId);
+      if (state.activeBall) {
+        state.activeBall.classList.remove('active');
+        state.startPosition = null;
+        
+      }
+    }
+    if(state.isPlaying === 'true' || state.isPlaying === 'pause') {
+      console.log('isplaying417', state.isPlaying);
+      setTimeout(() => {
+        menu.classList.add('inner-show');
+      },0)
+    }
+
+  }
+})
+
+
+
+
+  
+  // startBtn.disabled = !startBtn.disabled;
+  // if(state.isPlaying === false) {
+  //   rules.classList.toggle('hidden');
+  //   menu.classList.add('hidden');
+  // }
+
+  
+  // 
+  // rules.classList.toggle('hidden');
+  
+  
+  // if (state.isPlaying === false && state.isOverlay === true) {
+  //   overlayInners.forEach((item) => {
+  //     item.classList.add('hidden');
+  //   });
+  //   menu.classList.remove('hidden');
+
+
+  // } else if (state.isPlaying === true && state.isOverlay === false) {
+  //   state.isPlaying = 'pause';
+  //   state.isOverlay = true;
+  //   startBtn.innerHTML = 'Continue';
+  //   overlay.classList.add('overlay-show');
+  //   state.activeBall.classList.remove('active');
+  //   state.startPosition = null;
+  //   clearInterval(timeData.timerId);
+
+  // } else if (state.isPlaying === 'pause' && state.isOverlay === true) {
+  //   menu.classList.toggle('hidden');
+  // } 
+ 
+
+
+newGameBtn.addEventListener('click', () => {
+
+   console.log('newGameclick');
+
+  // clearInterval(timeData.timerId);
+  // initGame();
+})
+

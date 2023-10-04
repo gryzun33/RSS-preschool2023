@@ -60,11 +60,7 @@ main {
     height: 50px;
     @include flex(center, center);
     cursor: pointer;
-    transition: transform 0.5s ease-in-out;
-
-    .open {
-      transform: rotate(90deg);
-    }
+    transition: transform 0.3s ease-in-out;
 
     svg {
       fill: $color-cell;
@@ -72,20 +68,17 @@ main {
     }
   }
 
+  .open {
+    transform: rotate(90deg);
+  }
+
   .start-btn {
-    background-color: $color-cell;
-    border: none;
-    border-radius: 5px;
+    @include btn;
     width: 100px;
     height: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    color: $color-text-shadow;
-
-    @media (hover:hover) {
-      &:hover {
-        background-color: $color-bg-body;
-      } 
+    &:disabled {
+      pointer-events: none;
+      background-color: rgba(21, 45, 89, 0.5);
     }
   }
 
@@ -149,12 +142,12 @@ main {
 
 }
 
-.field {
-  @include flex-column();
-  flex-wrap: wrap;
+.field-box {
+  // @include flex-column();
+  // flex-wrap: wrap;
   width: 500px;
   height: 500px;
-  border:  1px solid $color-bg-body;
+  // border:  1px solid $color-bg-body;
   position: relative;
 
   .overlay {
@@ -167,13 +160,64 @@ main {
     background-color: rgba(21, 45, 89, 0.8);
     transition: all 0.3s ease-in-out;
     @include flex-column(center, center);
+
+    .overlay-inner{
+      @include flex-column(center, center);
+      padding: 10px;
+    }
+
+    .menu {
+      opacity: 0;
+      transition: 0.3s ease-in-out;
+      transition-delay: 0.3s;
+
+      ul {
+        @include flex-column(normal, center);
+        gap: 30px;
+
+
+        li{
+          list-style-type: none;
+          
+          button {
+            @include btn;
+            width: 150px;
+            height: 40px;
+            font-weight: 700;
+          }
+        }
+
+      }
+    
+    }
+
+    .rules {
+
+      .rules-title {
+        font-size: 30px;
+        font-weight: 700;
+        color: $color-title;
+        // margin-bottom: 20px;
+        text-shadow: 3px 3px 3px $color-text-shadow;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 400;
+        color: #E79F9D;
+        text-shadow: 3px 3px 3px $color-text-shadow;
+        text-align: justify;
+      }
+
+    }
     
 
     .gameover {
       opacity: 0;
       transition: 1s ease-in-out;
       transition-delay: 0.3s;
-      @include flex-column(center, center);
+      
 
        &__title {
         font-size: 40px;
@@ -196,13 +240,22 @@ main {
       display: none;
     }
 
-    .gameover-show{
+    .inner-show {
       opacity: 1;
     }
   }
 
   .overlay-show {
     height: 100%;
+  }
+
+  .field {
+    @include flex-column();
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    border:  1px solid $color-bg-body;
+    // position: relative;
   }
 
   .box {
