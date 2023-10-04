@@ -169,7 +169,6 @@ main {
     .menu {
       opacity: 0;
       transition: 0.3s ease-in-out;
-      transition-delay: 0.3s;
 
       ul {
         @include flex-column(normal, center);

@@ -495,7 +495,6 @@ main {
 .field-box .overlay .menu {
   opacity: 0;
   transition: 0.3s ease-in-out;
-  transition-delay: 0.3s;
 }
 .field-box .overlay .menu ul {
   display: flex;

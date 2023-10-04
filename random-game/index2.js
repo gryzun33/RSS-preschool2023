@@ -405,6 +405,9 @@ burger.addEventListener('click', () => {
     
     if(state.isPlaying === 'false') {
       rules.classList.add('hidden');
+      setTimeout(() => {
+        menu.classList.add('inner-show');
+      },0)
     }
     if(state.isPlaying === 'true') {
       clearInterval(timeData.timerId);
@@ -418,9 +421,8 @@ burger.addEventListener('click', () => {
       console.log('isplaying417', state.isPlaying);
       setTimeout(() => {
         menu.classList.add('inner-show');
-      },0)
+      },300)
     }
-
   }
 })
 
@@ -462,10 +464,15 @@ burger.addEventListener('click', () => {
 
 
 newGameBtn.addEventListener('click', () => {
+  console.log('newGameclick');
+  clearInterval(timeData.timerId);
+  initGame();
+  burger.classList.remove('open');
+  menu.classList.add('hidden');
+  menu.classList.remove('inner-show');
+  overlay.classList.remove('overlay-show');
+  startBtn.disabled = false;
+  startBtn.innerHTML = 'Start game';
 
-   console.log('newGameclick');
-
-  // clearInterval(timeData.timerId);
-  // initGame();
 })
 
