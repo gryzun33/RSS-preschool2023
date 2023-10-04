@@ -492,6 +492,30 @@ main {
   align-items: center;
   padding: 10px;
 }
+.field-box .overlay .back-menu {
+  background-color: transparent;
+  border: 2px solid #415B89;
+  border-radius: 5px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 4;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.field-box .overlay .back-menu svg {
+  fill: #CEA457;
+}
+@media (hover: hover) {
+  .field-box .overlay .back-menu:hover {
+    background-color: #415B89;
+  }
+}
 .field-box .overlay .menu {
   opacity: 0;
   transition: 0.3s ease-in-out;
@@ -522,8 +546,31 @@ main {
     background-color: #CE5A57;
   }
 }
+.field-box .overlay .best {
+  width: 100%;
+}
+.field-box .overlay .best h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: #CEA457;
+  text-shadow: 3px 3px 3px #152D59;
+}
+.field-box .overlay .best table {
+  width: 70%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  border: 1px solid #CEA457;
+  border-radius: 5px;
+}
+.field-box .overlay .best table th, .field-box .overlay .best table td {
+  border: 1px solid #CEA457;
+  height: 30px;
+  text-align: center;
+  color: #E78583;
+  text-shadow: 3px 3px 3px #152D59;
+}
 .field-box .overlay .rules .rules-title {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
   color: #CEA457;
   text-shadow: 3px 3px 3px #152D59;

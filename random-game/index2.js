@@ -15,6 +15,7 @@ const overlayInners = document.querySelectorAll('.overlay-inner');
 const burger = document.querySelector('.burger-menu');
 const menu = document.querySelector('.menu');
 const rules = document.querySelector('.rules');
+const best = document.querySelector('.best');
 const bestBtn = document.querySelector('.best-btn');
 const rulesBtn = document.querySelector('.rules-btn');
 const newGameBtn = document.querySelector('.new-game-btn');
@@ -23,6 +24,7 @@ const time = document.querySelector('.time');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeNonBtn = document.querySelector('.volume-non-btn');
 const score = document.querySelector('.score-count');
+const backBtn = document.querySelector('.back-menu');
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
@@ -384,12 +386,18 @@ function saveGame() {
 
 burger.addEventListener('click', () => {
   startBtn.disabled = !startBtn.disabled;
-  if(burger.classList.contains('open')) {
-    burger.classList.remove('open');
-    overlayInners.forEach((item) => {
+   overlayInners.forEach((item) => {
       item.classList.add('hidden');
       item.classList.remove('inner-show');
     });
+
+
+  if(burger.classList.contains('open')) {
+    burger.classList.remove('open');
+    // overlayInners.forEach((item) => {
+    //   item.classList.add('hidden');
+    //   item.classList.remove('inner-show');
+    // });
     if (state.isPlaying === 'true') { 
       runTimer(); 
     } 
@@ -428,41 +436,6 @@ burger.addEventListener('click', () => {
 
 
 
-
-  
-  // startBtn.disabled = !startBtn.disabled;
-  // if(state.isPlaying === false) {
-  //   rules.classList.toggle('hidden');
-  //   menu.classList.add('hidden');
-  // }
-
-  
-  // 
-  // rules.classList.toggle('hidden');
-  
-  
-  // if (state.isPlaying === false && state.isOverlay === true) {
-  //   overlayInners.forEach((item) => {
-  //     item.classList.add('hidden');
-  //   });
-  //   menu.classList.remove('hidden');
-
-
-  // } else if (state.isPlaying === true && state.isOverlay === false) {
-  //   state.isPlaying = 'pause';
-  //   state.isOverlay = true;
-  //   startBtn.innerHTML = 'Continue';
-  //   overlay.classList.add('overlay-show');
-  //   state.activeBall.classList.remove('active');
-  //   state.startPosition = null;
-  //   clearInterval(timeData.timerId);
-
-  // } else if (state.isPlaying === 'pause' && state.isOverlay === true) {
-  //   menu.classList.toggle('hidden');
-  // } 
- 
-
-
 newGameBtn.addEventListener('click', () => {
   console.log('newGameclick');
   clearInterval(timeData.timerId);
@@ -473,6 +446,64 @@ newGameBtn.addEventListener('click', () => {
   overlay.classList.remove('overlay-show');
   startBtn.disabled = false;
   startBtn.innerHTML = 'Start game';
-
 })
 
+rulesBtn.addEventListener('click', () => {
+  menu.classList.add('hidden');
+  rules.classList.remove('hidden');
+  backBtn.classList.remove('hidden');
+});
+
+bestBtn.addEventListener('click', () => {
+  console.log('bestclick450');
+  menu.classList.add('hidden');
+  best.classList.remove('hidden');
+  renderLastScores();
+  backBtn.classList.remove('hidden');
+})
+
+backBtn.addEventListener('click', () => {
+  overlayInners.forEach((item) => {
+    item.classList.add('hidden');
+    // item.classList.remove('inner-show');
+  });
+  menu.classList.remove('hidden');
+}); 
+
+function renderLastScores() {
+  const lastTable = document.querySelector('.best-list');
+  lastTable.innerHTML = `
+    <tr>
+      <th>N</th>
+      <th>Score</th>
+      <th>Time</th>
+    </tr>
+  `;
+  let l = 0;
+  const scores = JSON.parse(localStorage.getItem('gamesLine98'));
+  if (scores) {
+    l = scores.length;
+    for (let i = 0; i < scores.length; i++) {
+      const min = (scores[i].timeMin < 10) ? '0' + scores[i].timeMin : scores[i].timeMin;
+      const sec = (scores[i].timeSec < 10) ? '0' + scores[i].timeSec : scores[i].timeSec;
+      const time = `${min} : ${sec}`;
+      const tableRow = document.createElement('tr');
+      tableRow.innerHTML = `
+        <td>${i+1}</td>
+        <td>${scores[i].score}</td>
+        <td>${time}</td>
+      `;
+      lastTable.append(tableRow);
+    }
+  }
+  while (l < 10) {
+    const tableRow = document.createElement('tr');
+    tableRow.innerHTML = `
+      <td>${l+1}</td>
+      <td>---</td>
+      <td>---</td>
+    `;
+    lastTable.append(tableRow);
+    l++;
+  }
+}

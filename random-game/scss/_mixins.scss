@@ -25,3 +25,10 @@
     } 
   }
 }
+
+@mixin title-h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: $color-title;
+  text-shadow: 3px 3px 3px $color-text-shadow;
+}

@@ -6,6 +6,9 @@ export function renderBall(color, position, matrix, state, sounds) {
   const ballElem = document.createElement('div');
   ballElem.classList.add('ball');
   ballElem.style.backgroundColor = color;
+  // ballElem.style.backgroundImage = `radial-gradient(50% 50%, circle, ${color}, #000)`;
+
+  
   ballElem.dataset.position = position;
   ballElem.dataset.color = color;
   ballElem.classList.add('show-first');
