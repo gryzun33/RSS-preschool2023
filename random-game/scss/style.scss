@@ -82,6 +82,7 @@ main {
     @include flex(center, center);
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     @include mobile {
       width: 40px;
@@ -129,7 +130,7 @@ main {
     }
 
     @include small-mobile {
-      width: 70px;
+      width: 80px;
       height: 25px;
       font-size: 12px;
     }
@@ -515,6 +516,7 @@ main {
       z-index: 1;
       cursor: pointer;
       opacity: 1;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       // background-color: black;
       // transition: all 0.5s ease-in-out;
     }

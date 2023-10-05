@@ -410,6 +410,7 @@ main {
   align-items: center;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 @media screen and (max-width: 540px) {
   .controls .burger-menu {
@@ -468,7 +469,7 @@ main {
 }
 @media screen and (max-width: 400px) {
   .controls .start-btn {
-    width: 70px;
+    width: 80px;
     height: 25px;
     font-size: 12px;
   }
@@ -872,6 +873,7 @@ main {
   z-index: 1;
   cursor: pointer;
   opacity: 1;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 footer {

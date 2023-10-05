@@ -378,9 +378,12 @@ function onGameOver() {
 }
 
 function saveGame() {
+  const fullSec = timeData.min * 60 + timeData.sec;
+
   let game = {
     timeMin: timeData.min, 
     timeSec: timeData.sec, 
+    fullTime: fullTime,
     score: state.count
   }
   let games = JSON.parse(localStorage.getItem('gamesLine98'));
@@ -389,9 +392,6 @@ function saveGame() {
     games = [];
   }
   games.push(game);
-  if(games.length > 10) {
-    games.shift();
-  }
   localStorage.setItem('gamesLine98', JSON.stringify(games));
 }
 
@@ -504,8 +504,13 @@ function renderLastScores() {
   let l = 0;
   const scores = JSON.parse(localStorage.getItem('gamesLine98'));
   if (scores) {
-    l = scores.length;
-    for (let i = 0; i < scores.length; i++) {
+    scores.sort((a,b) => {
+      if (b.score > a.score) return 1;
+      if (a.score > b.score) return -1;
+      return a.fullSec > b.fullTime ? 1 : -1;
+    });
+    l = (scores.length <= 10) ? scores.length : 10;
+    for (let i = 0; i < l; i++) {
       const min = (scores[i].timeMin < 10) ? '0' + scores[i].timeMin : scores[i].timeMin;
       const sec = (scores[i].timeSec < 10) ? '0' + scores[i].timeSec : scores[i].timeSec;
       const time = `${min} : ${sec}`;
