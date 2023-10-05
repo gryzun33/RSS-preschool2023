@@ -1,8 +1,4 @@
 import { renderBox } from "./modules/renderBox.js";
-import { renderBall } from "./modules/renderBall.js";
-import { getNewColors } from "./modules/getNewColors.js";
-import { getNumbsNewBoxes } from "./modules/getNumbsNewBoxes.js";
-import { getDirection } from "./modules/getDirection.js";
 import { renderNewBalls } from "./modules/renderNewBalls.js";
 import { getLinesToRemove } from "./modules/getLinesToRemove.js";
 import { renderNextBalls } from "./modules/renderNextBalls.js";
@@ -35,7 +31,6 @@ let state, timeData, matrix, isWay, copyOfMatrix;
 
 function initGame() {
   let volume = (typeof state === 'object' && state.isVolume) ? true : false;
-  // console.log('volume', volume);
   timeData = {
     timerId: null,
     min: 0,
@@ -442,7 +437,7 @@ burger.addEventListener('click', () => {
       rules.classList.add('hidden');
       setTimeout(() => {
         menu.classList.add('inner-show');
-      },0)
+      },100)
     }
     if(state.isPlaying === 'play') {
       clearInterval(timeData.timerId);

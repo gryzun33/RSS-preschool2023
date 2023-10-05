@@ -31,4 +31,24 @@
   font-weight: 700;
   color: $color-title;
   text-shadow: 3px 3px 3px $color-text-shadow;
+
+  @include mobile {
+    font-size: 20px;
+  }
+
+  @include small-mobile {
+    font-size: 18px;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 540px) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media screen and (max-width: 400px) {
+    @content;
+  }
 }

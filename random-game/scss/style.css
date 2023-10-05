@@ -353,6 +353,13 @@ header h1 {
   font-family: "Play";
   font-weight: 700;
 }
+@media screen and (max-width: 540px) {
+  header h1 {
+    font-size: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
 
 main {
   width: 520px;
@@ -362,6 +369,17 @@ main {
   border-radius: 10px;
   box-shadow: 0px 0px 7px 5px #152D59;
   margin-bottom: 100px;
+}
+@media screen and (max-width: 540px) {
+  main {
+    width: 93vw;
+    padding: 0 1.5vw 1.5vw 1.5vw;
+  }
+}
+@media screen and (max-width: 400px) {
+  main {
+    margin-bottom: 60px;
+  }
 }
 
 .controls {
@@ -375,6 +393,13 @@ main {
   color: #CEA457;
   text-shadow: 2px 2px 3px #152D59;
 }
+@media screen and (max-width: 540px) {
+  .controls {
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
 .controls .burger-menu {
   background-color: transparent;
   border: none;
@@ -386,8 +411,31 @@ main {
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
+@media screen and (max-width: 540px) {
+  .controls .burger-menu {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .controls .burger-menu {
+    width: 35px;
+    height: 35px;
+  }
+}
 .controls .burger-menu svg {
   fill: #E78583;
+  width: 30px;
+}
+@media screen and (max-width: 540px) {
+  .controls .burger-menu svg {
+    width: 25px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .controls .burger-menu svg {
+    width: 20px;
+  }
 }
 .controls .open {
   transform: rotate(90deg);
@@ -399,8 +447,8 @@ main {
   transition: all 0.3s ease-in-out;
   color: #152D59;
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 35px;
 }
 @media (hover: hover) {
   .controls .start-btn:hover {
@@ -411,6 +459,20 @@ main {
   pointer-events: none;
   background-color: rgba(21, 45, 89, 0.5);
 }
+@media screen and (max-width: 540px) {
+  .controls .start-btn {
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .controls .start-btn {
+    width: 70px;
+    height: 25px;
+    font-size: 12px;
+  }
+}
 .controls .balls-time-box {
   width: 100px;
   display: flex;
@@ -418,20 +480,47 @@ main {
   justify-content: normal;
   align-items: center;
 }
+@media screen and (max-width: 400px) {
+  .controls .balls-time-box {
+    width: 70px;
+  }
+}
 .controls .balls-time-box .next-balls {
   width: 80px;
   display: flex;
   justify-content: space-between;
   align-items: normal;
 }
+@media screen and (max-width: 400px) {
+  .controls .balls-time-box .next-balls {
+    width: 60px;
+  }
+}
 .controls .balls-time-box .next-balls .next-ball {
   width: 15px;
   height: 15px;
   border-radius: 50%;
 }
+@media screen and (max-width: 400px) {
+  .controls .balls-time-box .next-balls .next-ball {
+    width: 12px;
+    height: 12px;
+  }
+}
 .controls .balls-time-box .time {
   font-size: 18px;
   margin-top: 10px;
+}
+@media screen and (max-width: 540px) {
+  .controls .balls-time-box .time {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .controls .balls-time-box .time {
+    font-size: 14px;
+  }
 }
 .controls .score {
   width: 60px;
@@ -439,10 +528,37 @@ main {
   flex-direction: column;
   justify-content: normal;
   align-items: center;
+}
+@media screen and (max-width: 540px) {
+  .controls .score {
+    width: 50px;
+  }
+}
+.controls .score .score-title {
   font-size: 20px;
+}
+@media screen and (max-width: 540px) {
+  .controls .score .score-title {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .controls .score .score-title {
+    font-size: 16px;
+  }
 }
 .controls .score .score-count {
   font-size: 25px;
+}
+@media screen and (max-width: 540px) {
+  .controls .score .score-count {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .controls .score .score-count {
+    font-size: 18px;
+  }
 }
 .controls .volume-btn, .controls .volume-non-btn {
   background-color: transparent;
@@ -454,13 +570,30 @@ main {
   align-items: center;
   cursor: pointer;
 }
+@media screen and (max-width: 400px) {
+  .controls .volume-btn, .controls .volume-non-btn {
+    width: 35px;
+    height: 30px;
+  }
+}
 .controls .volume-btn svg, .controls .volume-non-btn svg {
   fill: #CEA457;
   width: 25px;
 }
+@media screen and (max-width: 400px) {
+  .controls .volume-btn svg, .controls .volume-non-btn svg {
+    width: 20px;
+  }
+}
 .controls .volume-btn svg {
   width: 20px;
   margin-right: 6px;
+}
+@media screen and (max-width: 400px) {
+  .controls .volume-btn svg {
+    width: 16px;
+    margin-right: 4px;
+  }
 }
 .controls .hidden {
   display: none;
@@ -470,6 +603,12 @@ main {
   width: 500px;
   height: 500px;
   position: relative;
+}
+@media screen and (max-width: 540px) {
+  .field-box {
+    width: 90vw;
+    height: 90vw;
+  }
 }
 .field-box .overlay {
   position: absolute;
@@ -492,12 +631,17 @@ main {
   align-items: center;
   padding: 10px;
 }
+@media screen and (max-width: 540px) {
+  .field-box .overlay .overlay-inner {
+    padding: 5px;
+  }
+}
 .field-box .overlay .back-menu {
   background-color: transparent;
   border: 2px solid #415B89;
   border-radius: 5px;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -507,6 +651,22 @@ main {
   z-index: 4;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 540px) {
+  .field-box .overlay .back-menu {
+    width: 35px;
+    height: 35px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .back-menu {
+    width: 25px;
+    height: 25px;
+    bottom: 5px;
+    right: 5px;
+  }
 }
 .field-box .overlay .back-menu svg {
   fill: #CEA457;
@@ -546,6 +706,13 @@ main {
     background-color: #CE5A57;
   }
 }
+@media screen and (max-width: 400px) {
+  .field-box .overlay .menu ul li button {
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
 .field-box .overlay .best {
   width: 100%;
 }
@@ -555,12 +722,27 @@ main {
   color: #CEA457;
   text-shadow: 3px 3px 3px #152D59;
 }
+@media screen and (max-width: 540px) {
+  .field-box .overlay .best h2 {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .best h2 {
+    font-size: 18px;
+  }
+}
 .field-box .overlay .best table {
   width: 70%;
   margin-top: 10px;
   border-collapse: collapse;
   border: 1px solid #CEA457;
-  border-radius: 5px;
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .best table {
+    width: 80%;
+    margin-top: 5px;
+  }
 }
 .field-box .overlay .best table th, .field-box .overlay .best table td {
   border: 1px solid #CEA457;
@@ -569,11 +751,33 @@ main {
   color: #E78583;
   text-shadow: 3px 3px 3px #152D59;
 }
+@media screen and (max-width: 540px) {
+  .field-box .overlay .best table th, .field-box .overlay .best table td {
+    height: 25px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .best table th, .field-box .overlay .best table td {
+    height: 20px;
+    font-size: 14px;
+  }
+}
 .field-box .overlay .rules .rules-title {
   font-size: 25px;
   font-weight: 700;
   color: #CEA457;
   text-shadow: 3px 3px 3px #152D59;
+}
+@media screen and (max-width: 540px) {
+  .field-box .overlay .rules .rules-title {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .rules .rules-title {
+    font-size: 18px;
+  }
 }
 .field-box .overlay .rules p {
   margin-top: 10px;
@@ -582,6 +786,19 @@ main {
   color: #E79F9D;
   text-shadow: 3px 3px 3px #152D59;
   text-align: justify;
+}
+@media screen and (max-width: 540px) {
+  .field-box .overlay .rules p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .field-box .overlay .rules p {
+    margin-top: 0px;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
 }
 .field-box .overlay .gameover {
   opacity: 0;
@@ -621,6 +838,11 @@ main {
   height: 100%;
   border: 1px solid #CE5A57;
 }
+@media screen and (max-width: 400px) {
+  .field-box .field {
+    border: 1px solid #CE5A57;
+  }
+}
 .field-box .box {
   width: 11.11%;
   height: 11.11%;
@@ -630,6 +852,11 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media screen and (max-width: 400px) {
+  .field-box .box {
+    border: 1px solid #CE5A57;
+  }
 }
 .field-box .box .small-ball {
   width: 30%;
@@ -654,11 +881,21 @@ footer {
   position: absolute;
   bottom: 0;
 }
+@media screen and (max-width: 400px) {
+  footer {
+    height: 50px;
+  }
+}
 footer p {
   font-family: "Play";
   font-weight: 400;
   font-size: 20px;
   color: #CEA457;
+}
+@media screen and (max-width: 400px) {
+  footer p {
+    font-size: 16px;
+  }
 }
 footer a {
   transition: all 0.3s ease-in-out;
@@ -669,6 +906,22 @@ footer a svg {
 @media (hover: hover) {
   footer a:hover {
     transform: scale(1.1);
+  }
+}
+footer .github-link svg {
+  width: 40px;
+}
+@media screen and (max-width: 400px) {
+  footer .github-link svg {
+    width: 30px;
+  }
+}
+footer .rss-link svg {
+  width: 70px;
+}
+@media screen and (max-width: 400px) {
+  footer .rss-link svg {
+    width: 60px;
   }
 }
 footer .footer-wrapper {

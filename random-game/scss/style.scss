@@ -30,6 +30,12 @@ header {
     text-shadow: 2px 2px 3px $color-text-shadow;
     font-family: "Play";
     font-weight: 700;
+
+    @include mobile {
+      font-size: 25px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -42,6 +48,15 @@ main {
   box-shadow: 0px 0px 7px 5px $color-text-shadow;
   // margin-top: 20px;
   margin-bottom: 100px;
+
+  @include mobile {
+    width: 93vw;
+    padding: 0 1.5vw 1.5vw 1.5vw;
+  }
+
+  @include small-mobile {
+    margin-bottom: 60px;
+  }
 }
 
 .controls {
@@ -53,6 +68,12 @@ main {
   color: $color-title;
   text-shadow: 2px 2px 3px $color-text-shadow;
 
+  @include mobile {
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
   .burger-menu {
     background-color: transparent;
     border: none;
@@ -62,9 +83,29 @@ main {
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 
+    @include mobile {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include small-mobile {
+      width: 35px;
+      height: 35px;
+    }
+
+    
+
     svg {
       fill: $color-cell;
+      width: 30px;
       // text-shadow: 2px 2px 3px $color-text-shadow;
+      @include mobile {
+        width: 25px;
+      }
+
+      @include mobile {
+        width: 20px;
+      }
     }
   }
 
@@ -74,11 +115,23 @@ main {
 
   .start-btn {
     @include btn;
-    width: 100px;
-    height: 30px;
+    width: 120px;
+    height: 35px;
     &:disabled {
       pointer-events: none;
       background-color: rgba(21, 45, 89, 0.5);
+    }
+
+    @include mobile {
+      width: 100px;
+      height: 30px;
+      font-size: 14px;
+    }
+
+    @include small-mobile {
+      width: 70px;
+      height: 25px;
+      font-size: 12px;
     }
   }
 
@@ -86,30 +139,76 @@ main {
     width: 100px;
     @include flex-column(normal, center);
 
+    @include small-mobile {
+      width: 70px;
+    }
+
     .next-balls {
       width: 80px;
       @include flex(space-between);
+      @include small-mobile {
+        width: 60px;
+      }
+   
 
       .next-ball {
         width:15px;
         height: 15px;
         border-radius: 50%;
+
+        @include small-mobile {
+          width: 12px;
+          height: 12px;
+        }
       }
     }
 
     .time {
       font-size: 18px;
       margin-top: 10px;
+
+      @include mobile {
+        font-size: 16px;
+        margin-top: 5px;
+      }
+
+      @include small-mobile {
+        font-size: 14px;
+      }
     }
   }
 
   .score {
     width: 60px;
     @include flex-column(normal, center);
-    font-size: 20px;
+
+    @include mobile {
+      width: 50px;
+    }
+
+    .score-title {
+      font-size: 20px;
+
+      @include mobile {
+        font-size: 18px;
+      }
+
+      @include small-mobile {
+        font-size: 16px;
+      }
+    }
+   
 
     .score-count {
       font-size: 25px;
+
+      @include mobile {
+        font-size: 20px;
+      }
+
+      @include small-mobile {
+        font-size: 18px;
+      }
     }
   }
 
@@ -121,17 +220,31 @@ main {
     @include flex(center, center);
     cursor: pointer;
 
+    @include small-mobile {
+      width: 35px;
+      height: 30px;
+    }
+
     svg {
       fill: $color-title;
       width: 25px;
+      @include small-mobile {
+        width: 20px;
+      }
+
     }
   }
 
-  .volume-btn {
-    svg {
+  .volume-btn svg{
+    
       width:20px;
       margin-right: 6px;
-    }
+
+      @include small-mobile {
+        width: 16px;
+        margin-right: 4px;
+      }
+    
     
   }
 
@@ -150,6 +263,11 @@ main {
   // border:  1px solid $color-bg-body;
   position: relative;
 
+  @include mobile {
+    width: 90vw;
+    height: 90vw;
+  }
+
   .overlay {
     position: absolute;
     top: 0;
@@ -164,6 +282,10 @@ main {
     .overlay-inner{
       @include flex-column(center, center);
       padding: 10px;
+
+      @include mobile {
+        padding: 5px;
+      }
     }
 
     .back-menu {
@@ -171,8 +293,8 @@ main {
       background-color: transparent;
       border: 2px solid $color-bg-main;
       border-radius: 5px;
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       @include flex(center, center);
       position: absolute;
       bottom: 15px;
@@ -181,8 +303,24 @@ main {
       cursor: pointer;
       transition: all 0.3s ease-in-out;
 
+      @include mobile {
+        width: 35px;
+        height: 35px;
+        bottom: 10px;
+        right: 10px;
+      }
+
+      @include small-mobile {
+        width: 25px;
+        height: 25px;
+        bottom: 5px;
+        right: 5px;
+      }
+
       svg {
         fill: $color-title;
+  
+
       }
 
       @media (hover:hover) {
@@ -210,6 +348,12 @@ main {
             width: 150px;
             height: 40px;
             font-weight: 700;
+
+            @include small-mobile {
+              width: 120px;
+              height: 35px;
+              font-size: 14px;
+            }
           }
         }
 
@@ -229,7 +373,14 @@ main {
         margin-top: 10px;
         border-collapse: collapse;
         border: 1px solid $color-title;
-        border-radius: 5px;
+        // border-radius: 5px;
+
+        @include small-mobile {
+          width: 80%;
+          margin-top: 5px;
+        }
+
+
         // display: block;
         // overflow: hidden;
 
@@ -239,6 +390,16 @@ main {
           text-align: center;
           color: $color-cell;
           text-shadow: 3px 3px 3px $color-text-shadow;
+
+          @include mobile {
+            height: 25px;
+            font-size: 14px;
+          }
+
+          @include small-mobile {
+            height: 20px;
+            font-size: 14px;
+          }
         }
 
         
@@ -260,6 +421,17 @@ main {
         color: #E79F9D;
         text-shadow: 3px 3px 3px $color-text-shadow;
         text-align: justify;
+
+        @include mobile {
+          margin-top: 5px;
+          font-size: 14px;
+        }
+
+        @include small-mobile{
+          margin-top: 0px;
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
       }
 
     }
@@ -307,6 +479,10 @@ main {
     width: 100%;
     height: 100%;
     border:  1px solid $color-bg-body;
+
+    @include small-mobile {
+      border: 1px solid $color-bg-body;
+    }
     // position: relative;
   }
 
@@ -318,6 +494,10 @@ main {
     // border-radius: 5px;
     position: relative;
     @include flex(center, center);
+
+    @include small-mobile {
+      border: 1px solid $color-bg-body;
+    }
 
     .small-ball {
       width:30%;
@@ -348,11 +528,19 @@ footer {
   position: absolute;
   bottom: 0;
 
+  @include small-mobile {
+    height: 50px;
+  }
+
   p {
     font-family: "Play";
     font-weight: 400;
     font-size: 20px;
     color: $color-title;
+
+    @include small-mobile {
+      font-size: 16px;
+    }
   }
 
   a {
@@ -368,6 +556,24 @@ footer {
       }
     }
   }
+
+  .github-link svg {
+    width: 40px;
+    
+    @include small-mobile {
+      width: 30px;
+    }
+
+  }
+
+  .rss-link svg {
+    width: 70px;
+
+    @include small-mobile {
+      width: 60px;
+    }
+  }
+  
   
   .footer-wrapper {
     margin: 0 auto;    
