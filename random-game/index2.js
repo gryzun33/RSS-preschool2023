@@ -25,6 +25,7 @@ const volumeBtn = document.querySelector('.volume-btn');
 const volumeNonBtn = document.querySelector('.volume-non-btn');
 const score = document.querySelector('.score-count');
 const backBtn = document.querySelector('.back-menu');
+const startBtn = document.querySelector('.start-btn');
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
@@ -33,6 +34,8 @@ const sounds = getSounds();
 let state, timeData, matrix, isWay, copyOfMatrix;
 
 function initGame() {
+  let volume = (typeof state === 'object' && state.isVolume) ? true : false;
+  // console.log('volume', volume);
   timeData = {
     timerId: null,
     min: 0,
@@ -47,8 +50,8 @@ function initGame() {
     endPosition: null,
     activeBall: null,
     count: 0,
-    isPlaying: 'false',
-    isVolume: false,
+    isPlaying: 'start',
+    isVolume: volume,
     emptyBoxes: 3
   }
 
@@ -58,8 +61,8 @@ function initGame() {
   renderField(matrix);
   time.innerHTML = '00 : 00';
   score.innerHTML = '000';
-  
-
+  console.log('typeofstate', typeof state);
+  console.log('stateisvolume65', state.isVolume);
 }
 
 initGame();
@@ -133,21 +136,34 @@ function renderField(matrix) {
   renderNextBalls(state, ballColors);
 }
 
-const startBtn = document.querySelector('.start-btn');
+
 startBtn.addEventListener('click', () => {
-  // if(state.isVolume) {
-  //   sounds.clickOnBall.play();
-  // }'
-  if(state.isPlaying === 'false') {
+ 
+
+  if(state.isPlaying === 'gameover') {
+    initGame();
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    overlay.classList.remove('overlay-show');
+    overlayInners.forEach((item) => {
+      item.classList.add('hidden');
+      item.classList.remove('inner-show');
+    });
+    runTimer();
+    nextStep();
+
+
+  } else
+  if(state.isPlaying === 'start') {
     console.log('clickstart');
     overlay.classList.remove('overlay-show');
     rules.classList.add('hidden');
     startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'true';
+    state.isPlaying = 'play';
     // state.isOverlay = false;
     runTimer();
     nextStep();
-  } else if (state.isPlaying === 'true') {
+  } else if (state.isPlaying === 'play') {
     console.log('pause149');
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
@@ -159,7 +175,7 @@ startBtn.addEventListener('click', () => {
     clearInterval(timeData.timerId);
   } else if (state.isPlaying === 'pause') {
     startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'true';
+    state.isPlaying = 'play';
     overlay.classList.remove('overlay-show');
     runTimer();
   }
@@ -204,12 +220,14 @@ function clickOnEmptyBox(i, j) {
     findWay(+state.startPosition[0], +state.startPosition[1], i, j);
     if(isWay) {
       if(state.isVolume) {
+        sounds.clikOnBox.currentTime = 0;
         sounds.clikOnBox.play();
       }
       console.log('путь есть');
       moveBall(state.activeBall);
     } else {
       if(state.isVolume) {
+        sounds.wrongBox.currentTime = 0;
         sounds.wrongBox.play();
       }
       console.log('пути нет');
@@ -326,10 +344,6 @@ function runTimer() {
     timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
     timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
     time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
-    // if(timeData.min === 1) {
-    //   gameOver();
-    //   return;
-    // }
   }, 1000);
 }
 
@@ -348,6 +362,8 @@ volumeNonBtn.addEventListener('click', () => {
 
 function onGameOver() {
   clearInterval(timeData.timerId);
+  state.isPlaying = 'gameover';
+  startBtn.innerHTML = 'Start game';
   overlay.classList.add('overlay-show');
   gameOverBox.classList.remove('hidden');
   gameOverBox.innerHTML = `
@@ -385,6 +401,7 @@ function saveGame() {
 }
 
 burger.addEventListener('click', () => {
+
   startBtn.disabled = !startBtn.disabled;
    overlayInners.forEach((item) => {
       item.classList.add('hidden');
@@ -392,16 +409,19 @@ burger.addEventListener('click', () => {
     });
 
 
+
+
   if(burger.classList.contains('open')) {
     burger.classList.remove('open');
-    // overlayInners.forEach((item) => {
-    //   item.classList.add('hidden');
-    //   item.classList.remove('inner-show');
-    // });
-    if (state.isPlaying === 'true') { 
+
+    if (state.isPlaying === 'gameover') {
+      menu.classList.add('hidden');
+    }
+    
+    if (state.isPlaying === 'play') { 
       runTimer(); 
     } 
-    if (state.isPlaying === 'false' || state.isPlaying === 'true') {
+    if (state.isPlaying === 'start' || state.isPlaying === 'play') {
       overlay.classList.remove('overlay-show');
     }
   } else {
@@ -409,15 +429,22 @@ burger.addEventListener('click', () => {
     burger.classList.add('open');
     overlay.classList.add('overlay-show');
     menu.classList.remove('hidden');
-
     
-    if(state.isPlaying === 'false') {
+    if(state.isPlaying === 'gameover') {
+      gameOverBox.classList.add('hidden');
+      gameOverBox.classList.remove('inner-show');
+      setTimeout(() => {
+        menu.classList.add('inner-show');
+      },0)
+    }
+    
+    if(state.isPlaying === 'start') {
       rules.classList.add('hidden');
       setTimeout(() => {
         menu.classList.add('inner-show');
       },0)
     }
-    if(state.isPlaying === 'true') {
+    if(state.isPlaying === 'play') {
       clearInterval(timeData.timerId);
       if (state.activeBall) {
         state.activeBall.classList.remove('active');
@@ -425,7 +452,7 @@ burger.addEventListener('click', () => {
         
       }
     }
-    if(state.isPlaying === 'true' || state.isPlaying === 'pause') {
+    if(state.isPlaying === 'play' || state.isPlaying === 'pause') {
       console.log('isplaying417', state.isPlaying);
       setTimeout(() => {
         menu.classList.add('inner-show');
