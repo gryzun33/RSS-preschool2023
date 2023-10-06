@@ -356,6 +356,8 @@ volumeNonBtn.addEventListener('click', () => {
 
 
 function onGameOver() {
+  sounds.gameOver.currentTime = 0;
+  sounds.gameOver.play();
   clearInterval(timeData.timerId);
   state.isPlaying = 'gameover';
   startBtn.innerHTML = 'Start game';
@@ -366,7 +368,6 @@ function onGameOver() {
     <p class="gameover__time">Your time is ${time.innerHTML}</p>
     <p class="gameover__score">Your score is ${+state.count}</p>  
   `;
-  
   overlay.addEventListener('transitionend', showGameOver);
 
   function showGameOver() {
@@ -378,7 +379,7 @@ function onGameOver() {
 }
 
 function saveGame() {
-  const fullSec = timeData.min * 60 + timeData.sec;
+  const fullTime = timeData.min * 60 + timeData.sec;
 
   let game = {
     timeMin: timeData.min, 

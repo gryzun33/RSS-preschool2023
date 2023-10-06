@@ -1,38 +1,62 @@
 export function removeLines(lines, state, matrix, removeLinesSound) {
-  let countActiveBall = 0;
+  // let countActiveBall = 0;
+  let x = 0;
   console.log('lines3', lines);
   lines.forEach((arr) => {
     if (arr.length >= 5) {
-      if (state.isVolume) {
-        setTimeout(() => {
-          removeLinesSound.play()
-        }, 100);
-      }
-      state.count = state.count + arr.length;
-      arr.forEach((obj, i) => {
-        let k = i;
-        if(obj.x === +state.endPosition[0] && obj.y === +state.endPosition[1]) {
-          countActiveBall += 1;
-        }
-        let ball = matrix[obj.x][obj.y].ball;
-        if (ball) {
+      x = x + 1;
+      state.count = state.count + arr.length - 1;
+      setTimeout (() => {
+
+
+        if (state.isVolume) {
           setTimeout(() => {
-            ball.classList.add('hide'); 
-           }, (k+1) * 100);
-           
-           ball.addEventListener('animationend', () => {
-           ball.remove();
-           matrix[obj.x][obj.y].isBall = false;
-           matrix[obj.x][obj.y].ball = null;
-           matrix[obj.x][obj.y].color = null;
-          })
+            removeLinesSound.currentTime = 0;
+            removeLinesSound.play()
+          }, 100);
         }
-      })
+        // state.count = state.count + arr.length;
+        arr.forEach((obj, i) => {
+          let k = i;
+          // if(obj.x === +state.endPosition[0] && obj.y === +state.endPosition[1]) {
+          //   countActiveBall += 1;
+          // }
+          let ball = matrix[obj.x][obj.y].ball;
+          if (ball) {
+            setTimeout(() => {
+              ball.classList.add('hide'); 
+             }, (k+1) * 100);
+             
+             ball.addEventListener('animationend', () => {
+             ball.remove();
+             matrix[obj.x][obj.y].isBall = false;
+             matrix[obj.x][obj.y].ball = null;
+             matrix[obj.x][obj.y].color = null;
+            //  state.count += 1;
+
+            })
+          }
+        })
+
+
+
+
+
+      }, (x - 1) * 500);
+
+
+
+
+
+      
+
+
+
     }
   })
-  if(countActiveBall) {
-    state.count = state.count - countActiveBall + 1;
-  }  
+  // if(countActiveBall) {
+    state.count = state.count + 1;
+  // }  
   renderScore(state);
   // console.log('count=', state.count);
 }

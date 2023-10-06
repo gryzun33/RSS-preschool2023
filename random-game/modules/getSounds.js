@@ -11,11 +11,15 @@ export function getSounds() {
   const wrongBoxSound = document.createElement('audio');
   wrongBoxSound.src = './assets/audio/wrong.mp3';
 
+  const gameOverSound = document.createElement('audio');
+  gameOverSound.src = './assets/audio/game-over.mp3';
+
   const sounds = {
     clickOnBall: clikOnBallSound,
     clikOnBox: clikOnBoxSound,
     removeLines: removeLinesSound,
-    wrongBox: wrongBoxSound
+    wrongBox: wrongBoxSound,
+    gameOver: gameOverSound,  
   }
 
   return sounds;
