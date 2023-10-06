@@ -9,7 +9,7 @@ export function getSounds() {
   removeLinesSound.src = './assets/audio/knopka-remove.mp3';
 
   const wrongBoxSound = document.createElement('audio');
-  wrongBoxSound.src = './assets/audio/wrong.mp3';
+  wrongBoxSound.src = './assets/audio/wrong-short.mp3';
 
   const gameOverSound = document.createElement('audio');
   gameOverSound.src = './assets/audio/game-over.mp3';
