@@ -1,0 +1,41 @@
+.welcome {
+  width: 100%;
+  height: 600px;
+  background-image: url('../assets/images/welcome-original.jpeg');
+  background-size: 100% auto;
+  background-position: 0% 50%;
+  position: relative;
+
+  &__overlay {
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%);
+  }
+
+  &__wrapper {
+    @include wrapper;
+    padding: 0;
+    height: 100%;
+  }
+
+  &__title {
+    width: 600px;
+    height: 220px;
+    background-color: $color-dark-l;
+    padding: 35px 40px;
+    color: $color-light;
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative;
+    top: 220px;
+    @include font-title;
+
+    span {
+      padding-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,293 @@
+.favorites {
+  width: 100%;
+  background-color: $color-light;
+  position: relative;
+
+  &__sticky-line {
+    position: sticky;
+    top: 128px;
+    width: 100%;
+    height: 1px;
+    background-color: $color-light;
+    box-shadow: 0 3px 2px 2px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  &__wrapper {
+    @include wrapper;
+    padding-top: 20px;
+    @include flex-column();
+    // position: relative;
+    // height: 1000px;
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__buttons-box {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: $color-light;
+    width: 100%;
+
+    @include desktop-1250 {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+  }
+
+  .sticky {
+ 
+    background-color: $color-light;
+    // border-bottom: 1px solid $color-dark;
+    // border-radius: 5px;
+  }
+
+  &__text {
+    color: $color-dark;
+    @include text-bold;
+    font-size: 20px;
+    height: 24px;
+  
+    @include desktop-1250 {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include laptops {
+      text-align: left;
+      margin-left: 0;
+      margin-right: 0;
+         
+    }
+  }
+
+  &__buttons {
+    margin-top: 35px;
+    height: 34px;
+    width: 715px;
+    @include flex(space-between);
+
+    @include desktop-1250 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include laptops {
+      margin-left: 0;
+      margin-right: 0;
+      max-width: 715px;
+      width:auto;
+      position: sticky;
+      top: 0;
+    }
+
+    input {
+      position: absolute;
+      opacity: 0;  
+    }
+
+    label {
+      display: inline-block;
+      padding: 5px;
+      color: $color-dark;
+      @include text-regular;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+
+      @media (hover:hover) {
+        &:hover {
+          cursor: pointer;
+        }
+      }     
+    }
+
+    label:first-child {
+      padding-left: 0;
+    }
+
+    input:checked + label {
+      font-weight: 700;
+    }
+
+    input:not(:checked) + label:before {
+      content: url('../assets/icons/icon-non-checked.svg'); 
+      display: inline-block;
+      margin-right: 20px;
+      position: relative;
+      top: 2px; 
+    }
+
+    input:checked + label:before {
+      content: url('../assets/icons/icon_checked.svg'); 
+      display: inline-block;
+      margin-right: 20px;
+      position: relative;
+      top: 2px;  
+    }
+  }
+
+  &__button:first-child label {
+    padding-left: 0;
+  }
+
+  &__button:first-child {
+    width: 138px;
+  }
+
+  &__button:nth-child(2) {
+    width: 140px;
+  }
+
+  &__button:nth-child(3) {
+    width: 157px;
+  }
+
+  &__button:nth-child(4) {
+    width: 130px;
+  }
+
+  .books {
+    margin-top: 20px;
+  
+    // height: 2380px;
+
+    @include desktop-1250 {
+      position: relative;
+      // min-height: 2380px;
+    }
+
+    
+    
+    &__box {
+      // position:absolute;
+      // top: 0;
+      // opacity: 1;
+
+
+      @include flex-wrap(wrap, space-between);
+
+      @include desktop-1250 {
+        // position:absolute;
+        // top: 0;
+        opacity: 1;
+        width: 100%;
+        @include flex-column (normal, center);
+        flex-wrap: nowrap;
+      }
+
+      &__hide {
+        animation: hideBooks 0.5s ease-in-out;
+        animation-fill-mode: forwards;
+      }
+
+      &__show {   
+        opacity: 0;
+        animation: showBooks 0.5s ease-in-out ;
+        // animation-delay: 1s;
+        animation-fill-mode: forwards;     
+      }
+
+      &__none {
+        display:none;
+      }
+
+      .book {
+        width: 590px;
+        height: 555px;
+        position: relative;
+        margin-bottom: 40px;
+
+        &__image {
+          width: 200px;
+          height: 300px;
+          position: absolute;
+          right:0;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        &__text {
+          border: 1px solid $color-dark;
+          padding-left: 20px;
+          width: 550px;
+          height: 100%;
+        }
+
+        &__header-text {
+           color: $color-dark;
+           font-size: 20px;
+           line-height: 40px;
+           letter-spacing: 2px;
+           margin-top: 13px;
+           @include  font-title;
+        }
+
+        &__header-line {
+          width: 60px;
+          height: 1px;
+          background-color: $color-secondary;
+       }
+
+        &__title {
+          @include text-bold; 
+          color: $color-dark;
+          font-size: 15px;
+          line-height: 40px;
+          letter-spacing: 2px;
+          margin-top: 20px;
+
+          span:first-child {
+            text-transform: uppercase;
+          }
+        }
+        
+        &__description {
+          width: 357px;
+          height: 320px;
+          margin-top: 20px;
+          color: $color-dark;
+          @include text-regular;
+          font-size: 15px;    
+          line-height: 40px;
+          letter-spacing: 2px;
+          text-transform: capitalize;          
+        }
+
+        &__btn {
+          @include button-light;
+          margin-top: 15px;
+
+          &:disabled {
+            border-color: $color-secondary;
+            color: $color-secondary;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }  
+}
+
+@keyframes hideBooks {
+  from {opacity: 1}
+  to {opacity: 0}
+ }
+
+ @keyframes showBooks {
+  from {opacity: 0}
+  to {opacity: 1}
+ }

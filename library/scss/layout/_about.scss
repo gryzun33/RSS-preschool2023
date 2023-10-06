@@ -1,0 +1,155 @@
+.about {
+  width: 100%;
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper;
+    padding-top: 20px;
+    padding-bottom: 35px;
+
+  }
+
+  &__title {
+    @include section-title;  
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__text {
+    margin-top: 40px;
+    color: $color-dark;
+    @include text-regular;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .slider {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include laptops {
+      display: flex;
+      justify-content: space-between;
+      max-width: 614px;
+    }
+
+    &__arrow {
+      display: none;
+      margin-top: 288.5px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background-color: transparent;
+      
+      &:hover {
+        cursor: pointer;
+      }
+
+      &__non-active {
+        pointer-events: none;
+
+        & svg g path {
+          stroke: $color-additional;
+        }
+      }
+
+      @include laptops {
+        display: block;
+      }
+
+    }
+
+    &__outer {
+      // position: relative;
+      width: 100%;
+      // height: 560px;
+      overflow: hidden; 
+
+      @include laptops {
+        width: 450px; 
+      }
+    }
+
+    &__inner {
+      position:relative;
+      top: 0;
+      left: 0;
+      display:flex;
+      column-gap: 1.79%;
+      transition: transform 0.5s ease-in-out;
+
+
+
+      @include laptops {
+        column-gap: 25px;
+      }
+
+      img {
+        width: 32.14%;
+
+        @include laptops  {
+          width: 450px; 
+        }
+      }
+    }
+
+    // .slider-active {
+    //   transition: transform 0.5s ease-in-out;
+    // }
+  }
+
+  .pagination {
+    margin: 35px auto 0 auto;
+    display: flex;
+    width: 78px;
+
+    @include laptops {
+      width: 130px;
+      margin-top: 20px;
+    }
+    
+
+    &__box {
+      width: 26px;
+      height: 26px;
+      @include flex(center, center);
+
+      &__active {
+        pointer-events: none;
+      }
+
+      @media (hover:hover) {
+        &:hover {
+          cursor: pointer;
+        }  
+      }
+
+      &:nth-child(4), &:nth-child(5) {
+        display: none;
+
+        @include laptops {
+          display: flex;
+        }
+      }
+    }
+
+    
+
+    &__inner {
+      width: 16px;
+      height: 16px;
+      border:none;
+      border-radius: 50%;
+      background-color: $color-dark-l;
+      cursor: pointer; 
+
+      &__active {
+        background-color: $color-secondary;
+      }
+    }
+  }
+}

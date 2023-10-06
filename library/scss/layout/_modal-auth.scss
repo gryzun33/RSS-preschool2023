@@ -1,0 +1,153 @@
+.modal-auth {
+  width: 250px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-light;
+  position: relative;
+
+  &__close-btn {
+    background-image: url('../assets/icons/close_btn.svg');
+    background-size: cover;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 19px;
+    height: 19px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    @include font-title;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    align-self: center;
+    
+  }
+
+
+
+  &__form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    // gap: 10px;
+
+    label {
+      @include text-regular;
+      font-size: 15px;
+      line-height: 20px;
+      letter-spacing: 0.3px;
+      color: $color-dark;
+      margin-top: 10px;
+    }
+
+    input {
+      margin-top: 10px;
+      border: 1px solid $color-secondary;
+      height: 20px;
+      outline: none;
+      padding: 0 3px;
+      @include text-regular;
+      font-size: 13px;
+    }
+    
+    .wrong {
+      border-color: red;
+    }
+  }
+
+  &__btn-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__error {
+    @include text-regular;
+    font-size: 10px;
+    color: red;
+    width: 110px;
+    align-self: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  &__btn {
+    @include button-light;
+    // margin-top: 20px;
+  } 
+
+  &__text {
+    @include text-regular;
+    font-size: 10px;
+    color: $color-dark;
+    text-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.16);
+    margin-top: 10px;
+
+    span {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: underline;
+      
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }   
+}
+
+.tooltip {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  top: 3px;
+ 
+
+  span {
+    position: absolute;
+    width: 100%;
+    // border: 1px solid ;
+    z-index: 20;
+    color: red;
+    @include text-regular;
+    font-size: 10px;
+    line-height: 10px;
+    background-color: $color-toolip;
+    padding-left: 3px;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px 3px rgba(0,0,0,0.22);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    
+  
+  }
+
+  
+
+  span:before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    z-index: 20;
+    border-top: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid $color-toolip;
+    // bottom: 20px;
+    top: -10px;
+ 
+    
+  }
+
+  .hidden {
+    display: none;
+  }
+}

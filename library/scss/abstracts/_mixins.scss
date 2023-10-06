@@ -1,0 +1,117 @@
+@mixin flex($justify: normal, $align: normal) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-column($justify: normal, $align: normal) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-wrap($wrap: wrap, $justify: normal, $align: normal) {
+  display: flex;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-content: $align;
+}
+
+@mixin font-title {
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-regular {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-bold {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin section-title {
+  color: $color-dark-l;
+  font-family: "Forum", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+@mixin line-under-title {
+  margin: 20px auto 0 auto; 
+  width: 50px;
+  height: 1px;
+  background-color: $color-dark-l;
+}
+
+@mixin button-light {
+  width: 75px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid $color-dark-l;
+  @include text-bold;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background-color: $color-light;
+  transition: all 0.3s ease-out;
+
+  @media (hover:hover) {
+    &:hover {
+      cursor: pointer;
+      background-color: $color-secondary;
+      border: 1px solid $color-secondary;
+    } 
+  }
+
+ 
+}
+
+@mixin text-inter-20 {
+  color: $color-dark;
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: 2px;
+  @include text-regular;
+}
+
+@mixin wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@mixin desktop-1439 {
+  @media screen and (max-width: 1439px) {
+    @content;
+  }
+}
+
+@mixin desktop-1250 {
+  @media screen and (max-width: 1250px) {
+    @content;
+  }
+}
+
+@mixin laptops {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablets {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}

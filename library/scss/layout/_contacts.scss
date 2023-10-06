@@ -1,0 +1,107 @@
+.contacts {
+  width: 100%; 
+  background-color: $color-light;
+
+  &__wrapper {
+    @include wrapper;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    @include flex-column();
+  }
+
+  &__title {
+    @include section-title;
+  }
+
+  &__line {
+    @include line-under-title;
+  }
+
+  &__content {
+    margin-top: 40px;
+    @include flex(space-between);
+    align-items: flex-start;
+
+    @include laptops {
+      flex-direction: column
+    }
+  }
+
+  &__text {
+    @include text-inter-20;
+    text-transform: capitalize;
+
+    @include desktop-1250 {
+      font-size: 18px;
+    }
+
+    @include laptops {
+      font-size: 20px;
+    }
+  }
+
+  &__subtitle {
+    font-weight: 700;
+
+    &__staff {
+      margin-top: 40px;
+    }
+    
+    &__staff + ul {
+      margin-top: 20px;
+
+      a {
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__list {
+    margin-top: 40px;
+
+    @include desktop-1250 {
+      margin-top: 30px;
+    }
+
+    @include laptops {
+      margin-top: 40px;
+    }
+
+    li {
+      margin-bottom: 20px;
+      list-style-type: none;
+
+      @include desktop-1250 {
+        margin-top: 15px;
+      }
+  
+      @include laptops {
+        margin-top: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: $color-dark;
+        transition: color 0.3s ease-out;
+
+        &:hover {
+          color: $color-secondary;
+        }
+      }
+    }
+  }
+
+  &__map {
+    width: 49.71%;
+    // max-width:696px;
+    // width:100%;
+
+    @include laptops {
+      // width: 95.6%;
+      max-width:696px;
+      width:100%;
+      margin-top: 80px;
+      align-self: center;
+    }
+  }
+}
