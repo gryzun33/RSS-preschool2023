@@ -1006,14 +1006,4 @@ footer .footer-wrapper {
     bottom: 10%;
     height: 80%;
   }
-}
-@keyframes toBig {
-  from {
-    width: 50%;
-    height: 50%;
-  }
-  to {
-    width: 80%;
-    height: 80%;
-  }
 }/*# sourceMappingURL=style.css.map */

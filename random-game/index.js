@@ -56,42 +56,9 @@ function initGame() {
   renderField(matrix);
   time.innerHTML = '00 : 00';
   score.innerHTML = '000';
-  console.log('typeofstate', typeof state);
-  console.log('stateisvolume65', state.isVolume);
 }
 
 initGame();
-// overlay.classList.add('overlay-show');
-// rules.classList.remove('hidden');
-
-
-// let isWay = false;
-// let copyOfMatrix;
-
-// const timeData = {
-//   timerId: null,
-//   min: 0,
-//   sec: 0,
-//   currMin: 0,
-//   currSec: 0, 
-// }
-
-// const state = {
-//   nextColors: null,
-//   startPosition: null,
-//   endPosition: null,
-//   activeBall: null,
-//   count: 0,
-//   isPlaying: false,
-//   isVolume: false,
-//   isOverlay: true,
-//   duration: 180,
-//   emptyBoxes: 3
-// }
-
-// const matrix = createMatrix();
-
-// renderField();
 
 function createMatrix() {
   let arr = [];
@@ -131,11 +98,8 @@ function renderField(matrix) {
   renderNextBalls(state, ballColors);
 }
 
-
 startBtn.addEventListener('click', () => {
- 
-
-  if(state.isPlaying === 'gameover') {
+  if (state.isPlaying === 'gameover') {
     initGame();
     startBtn.innerHTML = 'Pause';
     state.isPlaying = 'play';
@@ -146,20 +110,14 @@ startBtn.addEventListener('click', () => {
     });
     runTimer();
     nextStep();
-
-
-  } else
-  if(state.isPlaying === 'start') {
-    console.log('clickstart');
+  } else if (state.isPlaying === 'start') {
     overlay.classList.remove('overlay-show');
     rules.classList.add('hidden');
     startBtn.innerHTML = 'Pause';
     state.isPlaying = 'play';
-    // state.isOverlay = false;
     runTimer();
     nextStep();
   } else if (state.isPlaying === 'play') {
-    console.log('pause149');
     state.isPlaying = 'pause';
     startBtn.innerHTML = 'Continue';
     overlay.classList.add('overlay-show');
@@ -174,9 +132,7 @@ startBtn.addEventListener('click', () => {
     overlay.classList.remove('overlay-show');
     runTimer();
   }
-  console.log('matrix1=', matrix);
 })
-
 
 function nextStep() {
   const gameOver = checkAvailableGame(matrix, state);
@@ -199,17 +155,12 @@ function nextStep() {
 
 
 function clickOnEmptyBox(i, j) {
-  // console.log('start=', state.startPosition);
-  // console.log('end=', state.endPosition);
   if(!state.startPosition) {
-    // alert('нельзя');
     return;
   }
   if(!matrix[i][j].isBall) {
- 
     matrix[i][j].isEnd = true;
-    state.endPosition = `${i}` + `${j}`;
-    
+    state.endPosition = `${i}` + `${j}`;    
     isWay = false;
     copyOfMatrix = copyMatrix();
     findWay(+state.startPosition[0], +state.startPosition[1], i, j);
@@ -218,14 +169,10 @@ function clickOnEmptyBox(i, j) {
         sounds.clikOnBox.currentTime = 0;
         sounds.clikOnBox.play();
       }
-      console.log('путь есть');
       moveBall(state.activeBall);
-    } else {
-      if(state.isVolume) {
+    } else if (state.isVolume) { 
         sounds.wrongBox.currentTime = 0;
-        sounds.wrongBox.play();
-      }
-      console.log('пути нет');
+        sounds.wrongBox.play();      
     }
   } 
 }
@@ -280,7 +227,6 @@ function findWay(a, b, c, d) {
   }
 }
 
-
 function moveBall(ball) {
   ball.classList.remove('active');
   ball.classList.add('hide');
@@ -289,7 +235,6 @@ function moveBall(ball) {
 
   function doAfterHiding(e) {
     if (e.animationName === 'hideBall') {
-      // console.log('animationHide');
       ball.classList.remove('hide');
       ball.classList.add('show');
       matrix[+state.endPosition[0]][+state.endPosition[1]].box.append(ball);
@@ -302,7 +247,6 @@ function moveBall(ball) {
 
   function doAfterShowing(e) {
     if (e.animationName === 'showBall') {
-      // console.log('animationShow');
 
       matrix[+state.startPosition[0]][+state.startPosition[1]].isBall = false;
       matrix[+state.startPosition[0]][+state.startPosition[1]].color = null;
@@ -310,10 +254,8 @@ function moveBall(ball) {
       console.log('color2 =',matrix[+state.endPosition[0]][+state.endPosition[1]].color); 
       const lines = getLinesToRemove(+state.endPosition[0],+state.endPosition[1],
                     matrix[+state.endPosition[0]][+state.endPosition[1]].color, matrix);
-      // console.log( 'lines', lines);  
 
       if (lines.every((line) => line.length < 5)) {
-        console.log('next step239');
         nextStep();        
       } else {
         removeLines(lines, state, matrix, sounds.removeLines);
@@ -323,9 +265,7 @@ function moveBall(ball) {
       ball.removeEventListener('animationend', doAfterShowing);
     }
   }
-  console.log('matrix', matrix);
 }
-
 
 function runTimer() {
   timeData.timerId = setInterval(() => {
@@ -335,7 +275,6 @@ function runTimer() {
     } else {
       timeData.sec += 1;
     }
-    
     timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
     timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
     time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
@@ -353,7 +292,6 @@ volumeNonBtn.addEventListener('click', () => {
   volumeNonBtn.classList.add('hidden');
   state.isVolume = !state.isVolume;
 })
-
 
 function onGameOver() {
   if (state.isVolume) {
@@ -382,7 +320,6 @@ function onGameOver() {
 
 function saveGame() {
   const fullTime = timeData.min * 60 + timeData.sec;
-
   let game = {
     timeMin: timeData.min, 
     timeSec: timeData.sec, 
@@ -390,7 +327,6 @@ function saveGame() {
     score: state.count
   }
   let games = JSON.parse(localStorage.getItem('gamesLine98'));
-  // let games = localStorage.setItem('gamesLine98', JSON.stringify(games));
   if (!games) {
     games = [];
   }
@@ -399,16 +335,11 @@ function saveGame() {
 }
 
 burger.addEventListener('click', () => {
-
   startBtn.disabled = !startBtn.disabled;
    overlayInners.forEach((item) => {
       item.classList.add('hidden');
       item.classList.remove('inner-show');
     });
-
-
-
-
   if(burger.classList.contains('open')) {
     burger.classList.remove('open');
 
@@ -418,12 +349,13 @@ burger.addEventListener('click', () => {
     
     if (state.isPlaying === 'play') { 
       runTimer(); 
-    } 
+    }
+
     if (state.isPlaying === 'start' || state.isPlaying === 'play') {
       overlay.classList.remove('overlay-show');
     }
+    
   } else {
-    console.log('isplaying400', state.isPlaying);
     burger.classList.add('open');
     overlay.classList.add('overlay-show');
     menu.classList.remove('hidden');
@@ -442,16 +374,16 @@ burger.addEventListener('click', () => {
         menu.classList.add('inner-show');
       },100)
     }
+
     if(state.isPlaying === 'play') {
       clearInterval(timeData.timerId);
       if (state.activeBall) {
         state.activeBall.classList.remove('active');
-        state.startPosition = null;
-        
+        state.startPosition = null;        
       }
     }
+
     if(state.isPlaying === 'play' || state.isPlaying === 'pause') {
-      console.log('isplaying417', state.isPlaying);
       setTimeout(() => {
         menu.classList.add('inner-show');
       },300)
@@ -459,10 +391,7 @@ burger.addEventListener('click', () => {
   }
 })
 
-
-
 newGameBtn.addEventListener('click', () => {
-  console.log('newGameclick');
   clearInterval(timeData.timerId);
   initGame();
   burger.classList.remove('open');
@@ -490,7 +419,6 @@ bestBtn.addEventListener('click', () => {
 backBtn.addEventListener('click', () => {
   overlayInners.forEach((item) => {
     item.classList.add('hidden');
-    // item.classList.remove('inner-show');
   });
   menu.classList.remove('hidden');
 }); 
