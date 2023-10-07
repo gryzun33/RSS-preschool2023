@@ -639,6 +639,7 @@ main {
 }
 .field-box .overlay .back-menu {
   background-color: transparent;
+  border: none;
   border-radius: 5px;
   width: 40px;
   height: 40px;
