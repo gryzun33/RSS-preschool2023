@@ -6,6 +6,7 @@ import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
 import { createMatrix } from "./modules/createMatrix.js";
+import { copyMatrix } from "./modules/copyMatrix.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -142,7 +143,7 @@ function clickOnEmptyBox(i, j) {
     matrix[i][j].isEnd = true;
     state.endPosition = `${i}` + `${j}`;    
     isWay = false;
-    copyOfMatrix = copyMatrix();
+    copyOfMatrix = copyMatrix(matrix);
     findWay(+state.startPosition[0], +state.startPosition[1], i, j);
     if(isWay) {
       if(state.isVolume) {
@@ -157,21 +158,7 @@ function clickOnEmptyBox(i, j) {
   } 
 }
 
-function copyMatrix() {
-  let copy = [];
-  for(let i=0;i<9;i++){
-    let copyRow = [];
-    for(let j=0;j<9;j++){
-      if(matrix[i][j].isBall) {
-        copyRow.push(1);
-      } else {
-        copyRow.push(-1);
-      }
-    }
-   copy.push(copyRow); 
-  }
-  return copy;
-}
+
 
 function findWay(a, b, c, d) {
   if (!isWay) {
