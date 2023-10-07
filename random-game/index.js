@@ -7,6 +7,7 @@ import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
 import { createMatrix } from "./modules/createMatrix.js";
 import { copyMatrix } from "./modules/copyMatrix.js";
+import { runTimer } from "./modules/runTimer.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -79,42 +80,6 @@ function renderField(matrix) {
   renderNextBalls(state, ballColors);
 }
 
-startBtn.addEventListener('click', () => {
-  if (state.isPlaying === 'gameover') {
-    initGame();
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    overlay.classList.remove('overlay-show');
-    overlayInners.forEach((item) => {
-      item.classList.add('hidden');
-      item.classList.remove('inner-show');
-    });
-    runTimer();
-    nextStep();
-  } else if (state.isPlaying === 'start') {
-    overlay.classList.remove('overlay-show');
-    rules.classList.add('hidden');
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    runTimer();
-    nextStep();
-  } else if (state.isPlaying === 'play') {
-    state.isPlaying = 'pause';
-    startBtn.innerHTML = 'Continue';
-    overlay.classList.add('overlay-show');
-    if (state.activeBall) {
-      state.activeBall.classList.remove('active');
-      state.startPosition = null;
-    }
-    clearInterval(timeData.timerId);
-  } else if (state.isPlaying === 'pause') {
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    overlay.classList.remove('overlay-show');
-    runTimer();
-  }
-})
-
 function nextStep() {
   const gameOver = checkAvailableGame(matrix, state);
   console.log('gameover', gameOver);
@@ -131,9 +96,6 @@ function nextStep() {
     onGameOver();
   }  
 }
-
-
-
 
 function clickOnEmptyBox(i, j) {
   if(!state.startPosition) {
@@ -157,8 +119,6 @@ function clickOnEmptyBox(i, j) {
     }
   } 
 }
-
-
 
 function findWay(a, b, c, d) {
   if (!isWay) {
@@ -234,19 +194,41 @@ function moveBall(ball) {
   }
 }
 
-function runTimer() {
-  timeData.timerId = setInterval(() => {
-    if (timeData.sec === 59) {
-      timeData.min += 1;
-      timeData.sec = 0;
-    } else {
-      timeData.sec += 1;
+startBtn.addEventListener('click', () => {
+  if (state.isPlaying === 'gameover') {
+    initGame();
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    overlay.classList.remove('overlay-show');
+    overlayInners.forEach((item) => {
+      item.classList.add('hidden');
+      item.classList.remove('inner-show');
+    });
+    runTimer(timeData, time);
+    nextStep();
+  } else if (state.isPlaying === 'start') {
+    overlay.classList.remove('overlay-show');
+    rules.classList.add('hidden');
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    runTimer(timeData, time);
+    nextStep();
+  } else if (state.isPlaying === 'play') {
+    state.isPlaying = 'pause';
+    startBtn.innerHTML = 'Continue';
+    overlay.classList.add('overlay-show');
+    if (state.activeBall) {
+      state.activeBall.classList.remove('active');
+      state.startPosition = null;
     }
-    timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
-    timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
-    time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
-  }, 1000);
-}
+    clearInterval(timeData.timerId);
+  } else if (state.isPlaying === 'pause') {
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    overlay.classList.remove('overlay-show');
+    runTimer(timeData, time);
+  }
+})
 
 volumeBtn.addEventListener('click', () => {
   volumeNonBtn.classList.remove('hidden');
@@ -315,7 +297,7 @@ burger.addEventListener('click', () => {
     }
     
     if (state.isPlaying === 'play') { 
-      runTimer(); 
+      runTimer(timeData, time); 
     }
 
     if (state.isPlaying === 'start' || state.isPlaying === 'play') {
