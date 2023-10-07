@@ -5,6 +5,7 @@ import { renderNextBalls } from "./modules/renderNextBalls.js";
 import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
+import { createMatrix } from "./modules/createMatrix.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -52,34 +53,13 @@ function initGame() {
 
   isWay = false;
 
-  matrix = createMatrix();
+  matrix = createMatrix(numbOfCells);
   renderField(matrix);
   time.innerHTML = '00 : 00';
   score.innerHTML = '000';
 }
 
 initGame();
-
-function createMatrix() {
-  let arr = [];
-  for (let i = 0; i < numbOfCells; i++) {
-    let row = []; 
-    for (let j = 0; j < numbOfCells; j++) {
-      let obj = {
-        isBall: false,
-        color: null,
-        isStart: null,
-        isEnd: null,
-        id: `${i}` + `${j}`,
-        ball: null,
-        box: null
-      }
-      row.push(obj);
-    }
-    arr.push(row);
-  }
-  return arr;
-}
 
 function renderField(matrix) {
   let field = document.querySelector('.field');
