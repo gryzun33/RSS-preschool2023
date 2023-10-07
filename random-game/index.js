@@ -8,6 +8,7 @@ import { getSounds } from "./modules/getSounds.js";
 import { createMatrix } from "./modules/createMatrix.js";
 import { copyMatrix } from "./modules/copyMatrix.js";
 import { runTimer } from "./modules/runTimer.js";
+import { saveGame } from "./modules/saveGame.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -264,24 +265,10 @@ function onGameOver() {
     overlay.removeEventListener('transitionend', showGameOver);
   }
   
-  saveGame(); 
+  saveGame(state, timeData); 
 }
 
-function saveGame() {
-  const fullTime = timeData.min * 60 + timeData.sec;
-  let game = {
-    timeMin: timeData.min, 
-    timeSec: timeData.sec, 
-    fullTime: fullTime,
-    score: state.count
-  }
-  let games = JSON.parse(localStorage.getItem('gamesLine98'));
-  if (!games) {
-    games = [];
-  }
-  games.push(game);
-  localStorage.setItem('gamesLine98', JSON.stringify(games));
-}
+
 
 burger.addEventListener('click', () => {
   startBtn.disabled = !startBtn.disabled;
