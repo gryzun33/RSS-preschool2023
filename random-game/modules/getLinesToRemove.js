@@ -1,9 +1,5 @@
 export function getLinesToRemove(xBall, yBall, color, matrix) {
-  // console.log('getlinestoremove');
-  // console.log('x=', xBall);
-  // console.log('у=', yBall);
-  // console.log('color=', color);
-  
+ 
   let diagonal1 = [];
   let diagonal2 = [];
   let horizontal = [];
@@ -18,6 +14,8 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
         diagonal1.push( {x:x, y:y});
       } else if (diagonal1.length < 5) {
         diagonal1 = [];
+      } else if (diagonal1.length >= 5) {
+        break;
       }
       x += 1;
       y += 1;
@@ -30,12 +28,13 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
         diagonal1.push({x:x, y:y});
       } else if (diagonal1.length < 5) {
         diagonal1 = [];
+      } else if (diagonal1.length >= 5) {
+        break;
       }
       x += 1;
       y += 1;
     } 
   }
-  // console.log('diagonal1', diagonal1);
 
   // diagonal2
   if((xBall + yBall) < matrix.length) {
@@ -46,27 +45,27 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
         diagonal2.push({x:x, y:y});
       } else if (diagonal2.length < 5) {
         diagonal2 = [];
+      } else if (diagonal2.length >= 5) {
+        break;
       }
       x -= 1;
       y += 1;
     } 
   } else {
-
     let x = matrix.length - 1;
     let y = yBall - (matrix.length - 1 - xBall);
     while(x > 0 && y < matrix.length) {
-
-  
       if(matrix[x][y].isBall && matrix[x][y].color === color) {
         diagonal2.push({x:x, y:y});
       } else if (diagonal2.length < 5) {
         diagonal2 = [];
+      } else if (diagonal2.length >= 5) {
+        break;
       }
       x -= 1;
       y += 1;
     } 
   }
-  // console.log('diagonal1', diagonal2);
 
   // horizontal
   for (let x = 0; x < matrix.length; x++) {
@@ -76,6 +75,8 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
       horizontal.push({x:x, y:yBall});
     } else if (horizontal.length < 5) {
       horizontal = [];
+    } else if (horizontal.length >=5) {
+      break;
     }
   }
 
@@ -86,6 +87,8 @@ export function getLinesToRemove(xBall, yBall, color, matrix) {
       vertical.push({x:xBall, y:y});
     } else if (vertical.length < 5) {
       vertical = [];
+    } else if (vertical.length >= 5) {
+      break;
     }
   }
 

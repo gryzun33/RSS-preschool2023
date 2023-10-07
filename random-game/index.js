@@ -356,8 +356,10 @@ volumeNonBtn.addEventListener('click', () => {
 
 
 function onGameOver() {
-  sounds.gameOver.currentTime = 0;
-  sounds.gameOver.play();
+  if (state.isVolume) {
+    sounds.gameOver.currentTime = 0;
+    sounds.gameOver.play();
+  }
   clearInterval(timeData.timerId);
   state.isPlaying = 'gameover';
   startBtn.innerHTML = 'Start game';
