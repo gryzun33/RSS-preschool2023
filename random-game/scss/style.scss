@@ -46,7 +46,6 @@ main {
   height: auto;
   border-radius: 10px;
   box-shadow: 0px 0px 7px 5px $color-text-shadow;
-  // margin-top: 20px;
   margin-bottom: 100px;
 
   @include mobile {
@@ -94,12 +93,10 @@ main {
       height: 35px;
     }
 
-    
-
     svg {
       fill: $color-cell;
       width: 30px;
-      // text-shadow: 2px 2px 3px $color-text-shadow;
+
       @include mobile {
         width: 25px;
       }
@@ -151,7 +148,6 @@ main {
         width: 60px;
       }
    
-
       .next-ball {
         width:15px;
         height: 15px;
@@ -199,7 +195,6 @@ main {
       }
     }
    
-
     .score-count {
       font-size: 25px;
 
@@ -232,7 +227,6 @@ main {
       @include small-mobile {
         width: 20px;
       }
-
     }
   }
 
@@ -244,24 +238,17 @@ main {
       @include small-mobile {
         width: 16px;
         margin-right: 4px;
-      }
-    
-    
+      }    
   }
 
   .hidden {
     display: none;
   }
-
-
 }
 
 .field-box {
-  // @include flex-column();
-  // flex-wrap: wrap;
   width: 500px;
   height: 500px;
-  // border:  1px solid $color-bg-body;
   position: relative;
 
   @include mobile {
@@ -289,10 +276,8 @@ main {
       }
     }
 
-    .back-menu {
-      // @include btn;
-      background-color: transparent;
-      // border: 2px solid $color-bg-main;
+    .back-menu{
+      background-color: transparent;    
       border: none;
       border-radius: 5px;
       width: 40px;
@@ -321,8 +306,6 @@ main {
 
       svg {
         fill: $color-title;
-  
-
       }
 
       @media (hover:hover) {
@@ -330,7 +313,6 @@ main {
           background-color: $color-bg-main;
         } 
       }
-
     }
 
     .menu {
@@ -340,7 +322,6 @@ main {
       ul {
         @include flex-column(normal, center);
         gap: 30px;
-
 
         li{
           list-style-type: none;
@@ -358,9 +339,7 @@ main {
             }
           }
         }
-
-      }
-    
+      }   
     }
 
     .best {
@@ -375,16 +354,11 @@ main {
         margin-top: 10px;
         border-collapse: collapse;
         border: 1px solid $color-title;
-        // border-radius: 5px;
 
         @include small-mobile {
           width: 80%;
           margin-top: 5px;
         }
-
-
-        // display: block;
-        // overflow: hidden;
 
         th, td {
           border: 1px solid $color-title;
@@ -402,12 +376,8 @@ main {
             height: 20px;
             font-size: 14px;
           }
-        }
-
-        
+        }       
       }
-
-
     }
 
     .rules {
@@ -435,16 +405,13 @@ main {
           margin-bottom: 5px;
         }
       }
-
     }
     
-
     .gameover {
       opacity: 0;
       transition: 1s ease-in-out;
       transition-delay: 0.3s;
       
-
        &__title {
         font-size: 40px;
         color: $color-title;
@@ -485,7 +452,6 @@ main {
     @include small-mobile {
       border: 1px solid $color-bg-body;
     }
-    // position: relative;
   }
 
   .box {
@@ -493,7 +459,6 @@ main {
     height: 11.11%;
     background-color: $color-cell;
     border: 2px solid $color-bg-body;
-    // border-radius: 5px;
     position: relative;
     @include flex(center, center);
 
@@ -508,7 +473,6 @@ main {
       position: absolute;
     }
 
-
     .ball {
       width: 80%;
       height: 80%;
@@ -518,8 +482,6 @@ main {
       cursor: pointer;
       opacity: 1;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      // background-color: black;
-      // transition: all 0.5s ease-in-out;
     }
   }
 }
@@ -566,7 +528,6 @@ footer {
     @include small-mobile {
       width: 30px;
     }
-
   }
 
   .rss-link svg {
@@ -576,8 +537,7 @@ footer {
       width: 60px;
     }
   }
-  
-  
+   
   .footer-wrapper {
     margin: 0 auto;    
     max-width: 520px;
@@ -587,19 +547,6 @@ footer {
     @include flex(space-between, center );
   }  
 }
-
-// .endScale {
-//   animation: toBig 0.3s ease-in-out;
-//   animation-fill-mode: forwards;
-// }
-
-
-
-// .hideall {
-//   opacity: 0;
-//   transform: scaleX(1.5);
-//   transform: scaleX(1.5); 
-// }
 
 .hide {
   animation: hideBall 0.3s ease-in-out;
@@ -632,8 +579,6 @@ footer {
   100% {width: 80%; height: 80%;}
 }
 
-
-
 .active {
   animation: jump 0.5s infinite;
 }
@@ -643,16 +588,4 @@ footer {
   40%  {bottom:30%;height: 80%} 
   90%  {bottom:10%;height: 70%} 
   100% {bottom:10%;height: 80%}
-}
-
-@keyframes toBig {
-  from {
-    width: 50%;
-    height: 50%;
-  }
-
-  to {
-    width: 80%;
-    height: 80%;
-  }
 }
