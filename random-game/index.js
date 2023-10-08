@@ -8,8 +8,8 @@ import { getSounds } from "./modules/getSounds.js";
 import { createMatrix } from "./modules/createMatrix.js";
 import { copyMatrix } from "./modules/copyMatrix.js";
 import { runTimer } from "./modules/runTimer.js";
-import { saveGame } from "./modules/saveGame.js";
 import { renderBestScores } from "./modules/renderBestScores.js";
+import { onGameOver } from "./modules/onGameOver.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -91,11 +91,11 @@ function nextStep() {
     setTimeout(() => {
       const gameOverX = checkAvailableGame(matrix, state);
       if (gameOverX) {
-        onGameOver();
+        onGameOver(state, timeData, sounds, time, overlay, startBtn, gameOverBox);
       }
     },500);
   } else {
-    onGameOver();
+    onGameOver(state, timeData, sounds, time, overlay, startBtn, gameOverBox);
   }  
 }
 
@@ -243,30 +243,7 @@ volumeNonBtn.addEventListener('click', () => {
   state.isVolume = !state.isVolume;
 })
 
-function onGameOver() {
-  if (state.isVolume) {
-    sounds.gameOver.currentTime = 0;
-    sounds.gameOver.play();
-  }
-  clearInterval(timeData.timerId);
-  state.isPlaying = 'gameover';
-  startBtn.innerHTML = 'Start game';
-  overlay.classList.add('overlay-show');
-  gameOverBox.classList.remove('hidden');
-  gameOverBox.innerHTML = `
-    <p class="gameover__title">GAME OVER!</p>
-    <p class="gameover__time">Your time is ${time.innerHTML}</p>
-    <p class="gameover__score">Your score is ${+state.count}</p>  
-  `;
-  overlay.addEventListener('transitionend', showGameOver);
 
-  function showGameOver() {
-    gameOverBox.classList.add('inner-show');
-    overlay.removeEventListener('transitionend', showGameOver);
-  }
-  
-  saveGame(state, timeData); 
-}
 
 
 
