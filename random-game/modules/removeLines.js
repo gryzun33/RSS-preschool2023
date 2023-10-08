@@ -32,7 +32,6 @@ export function removeLines(lines, state, matrix, removeLinesSound, blockField) 
     }
   })
   setTimeout (() => {
-    console.log ('countofballs', countOfBalls);
     blockField.classList.add('hidden');
   }, (countOfBalls + 1) * 100 );
   state.count = state.count + 1;

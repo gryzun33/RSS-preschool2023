@@ -84,9 +84,7 @@ function renderField(matrix) {
 }
 
 function nextStep() {
-  // blockField.classList.add('hidden');
   const gameOver = checkAvailableGame(matrix, state);
-  console.log('gameover', gameOver);
   if(!gameOver) {
     renderNewBalls(numbOfCells, matrix, state, sounds, blockField);
     renderNextBalls(state, ballColors);
@@ -102,7 +100,6 @@ function nextStep() {
 }
 
 function clickOnEmptyBox(i, j) {
-  console.log('state=', state);
   if(!state.startPosition) {
     return;
   }
@@ -113,7 +110,6 @@ function clickOnEmptyBox(i, j) {
     copyOfMatrix = copyMatrix(matrix);
     findWay(+state.startPosition[0], +state.startPosition[1], i, j, state, copyOfMatrix, numbOfCells);
     if(state.isWay) {
-      console.log('путь есть');
       if(state.isVolume) {
         sounds.clikOnBox.currentTime = 0;
         sounds.clikOnBox.play();
@@ -124,7 +120,6 @@ function clickOnEmptyBox(i, j) {
       sounds.wrongBox.currentTime = 0;
       sounds.wrongBox.play();      
     }
-    console.log('пути нет');
   } 
 }
 
@@ -291,7 +286,6 @@ rulesBtn.addEventListener('click', () => {
 });
 
 bestBtn.addEventListener('click', () => {
-  console.log('bestclick450');
   menu.classList.add('hidden');
   best.classList.remove('hidden');
   renderBestScores();
