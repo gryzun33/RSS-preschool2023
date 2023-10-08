@@ -9,6 +9,7 @@ import { createMatrix } from "./modules/createMatrix.js";
 import { copyMatrix } from "./modules/copyMatrix.js";
 import { runTimer } from "./modules/runTimer.js";
 import { saveGame } from "./modules/saveGame.js";
+import { renderBestScores } from "./modules/renderBestScores.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -179,7 +180,6 @@ function moveBall(ball) {
       matrix[+state.startPosition[0]][+state.startPosition[1]].isBall = false;
       matrix[+state.startPosition[0]][+state.startPosition[1]].color = null;
       state.startPosition = null;
-      console.log('color2 =',matrix[+state.endPosition[0]][+state.endPosition[1]].color); 
       const lines = getLinesToRemove(+state.endPosition[0],+state.endPosition[1],
                     matrix[+state.endPosition[0]][+state.endPosition[1]].color, matrix);
 
@@ -348,7 +348,7 @@ bestBtn.addEventListener('click', () => {
   console.log('bestclick450');
   menu.classList.add('hidden');
   best.classList.remove('hidden');
-  renderLastScores();
+  renderBestScores();
   backBtn.classList.remove('hidden');
 })
 
@@ -358,46 +358,3 @@ backBtn.addEventListener('click', () => {
   });
   menu.classList.remove('hidden');
 }); 
-
-function renderLastScores() {
-  const lastTable = document.querySelector('.best-list');
-  lastTable.innerHTML = `
-    <tr>
-      <th>N</th>
-      <th>Score</th>
-      <th>Time</th>
-    </tr>
-  `;
-  let l = 0;
-  const scores = JSON.parse(localStorage.getItem('gamesLine98'));
-  if (scores) {
-    scores.sort((a,b) => {
-      if (b.score > a.score) return 1;
-      if (a.score > b.score) return -1;
-      return a.fullSec > b.fullTime ? 1 : -1;
-    });
-    l = (scores.length <= 10) ? scores.length : 10;
-    for (let i = 0; i < l; i++) {
-      const min = (scores[i].timeMin < 10) ? '0' + scores[i].timeMin : scores[i].timeMin;
-      const sec = (scores[i].timeSec < 10) ? '0' + scores[i].timeSec : scores[i].timeSec;
-      const time = `${min} : ${sec}`;
-      const tableRow = document.createElement('tr');
-      tableRow.innerHTML = `
-        <td>${i+1}</td>
-        <td>${scores[i].score}</td>
-        <td>${time}</td>
-      `;
-      lastTable.append(tableRow);
-    }
-  }
-  while (l < 10) {
-    const tableRow = document.createElement('tr');
-    tableRow.innerHTML = `
-      <td>${l+1}</td>
-      <td>---</td>
-      <td>---</td>
-    `;
-    lastTable.append(tableRow);
-    l++;
-  }
-}
