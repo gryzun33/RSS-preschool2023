@@ -28,6 +28,7 @@ const volumeNonBtn = document.querySelector('.volume-non-btn');
 const score = document.querySelector('.score-count');
 const backBtn = document.querySelector('.back-menu');
 const startBtn = document.querySelector('.start-btn');
+const blockField = document.querySelector('.block-field');
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
@@ -57,8 +58,6 @@ function initGame() {
     isWay: false,
   }
 
-  // isWay = false;
-
   matrix = createMatrix(numbOfCells);
   renderField(matrix);
   time.innerHTML = '00 : 00';
@@ -85,10 +84,11 @@ function renderField(matrix) {
 }
 
 function nextStep() {
+  // blockField.classList.add('hidden');
   const gameOver = checkAvailableGame(matrix, state);
   console.log('gameover', gameOver);
   if(!gameOver) {
-    renderNewBalls(numbOfCells, matrix, state, sounds);
+    renderNewBalls(numbOfCells, matrix, state, sounds, blockField);
     renderNextBalls(state, ballColors);
     setTimeout(() => {
       const gameOverX = checkAvailableGame(matrix, state);
@@ -129,6 +129,7 @@ function clickOnEmptyBox(i, j) {
 }
 
 function moveBall(ball) {
+  blockField.classList.remove('hidden');
   ball.classList.remove('active');
   ball.classList.add('hide');
   ball.addEventListener('animationend', doAfterHiding);
@@ -158,7 +159,7 @@ function moveBall(ball) {
       if (lines.every((line) => line.length < 5)) {
         nextStep();        
       } else {
-        removeLines(lines, state, matrix, sounds.removeLines);
+        removeLines(lines, state, matrix, sounds.removeLines, blockField);
       }  
       ball.classList.remove('show');
       ball.dataset.position = state.endPosition;
