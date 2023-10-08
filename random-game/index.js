@@ -10,6 +10,7 @@ import { copyMatrix } from "./modules/copyMatrix.js";
 import { runTimer } from "./modules/runTimer.js";
 import { renderBestScores } from "./modules/renderBestScores.js";
 import { onGameOver } from "./modules/onGameOver.js";
+import { findWay } from "./modules/findWay.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -52,10 +53,11 @@ function initGame() {
     count: 0,
     isPlaying: 'start',
     isVolume: volume,
-    emptyBoxes: 3
+    emptyBoxes: 3,
+    isWay: false,
   }
 
-  isWay = false;
+  // isWay = false;
 
   matrix = createMatrix(numbOfCells);
   renderField(matrix);
@@ -100,60 +102,30 @@ function nextStep() {
 }
 
 function clickOnEmptyBox(i, j) {
+  console.log('state=', state);
   if(!state.startPosition) {
     return;
   }
   if(!matrix[i][j].isBall) {
     matrix[i][j].isEnd = true;
     state.endPosition = `${i}` + `${j}`;    
-    isWay = false;
+    state.isWay = false;
     copyOfMatrix = copyMatrix(matrix);
-    findWay(+state.startPosition[0], +state.startPosition[1], i, j);
-    if(isWay) {
+    findWay(+state.startPosition[0], +state.startPosition[1], i, j, state, copyOfMatrix, numbOfCells);
+    if(state.isWay) {
+      console.log('путь есть');
       if(state.isVolume) {
         sounds.clikOnBox.currentTime = 0;
         sounds.clikOnBox.play();
       }
       moveBall(state.activeBall);
+      return;
     } else if (state.isVolume) { 
-        sounds.wrongBox.currentTime = 0;
-        sounds.wrongBox.play();      
+      sounds.wrongBox.currentTime = 0;
+      sounds.wrongBox.play();      
     }
+    console.log('пути нет');
   } 
-}
-
-function findWay(a, b, c, d) {
-  if (!isWay) {
-    copyOfMatrix[a][b] = 1;
-
-    if (a + 1 == c && b == d) {
-      isWay = true;
-    }
-    if (a + 1 < numbOfCells && copyOfMatrix[a+1][b] == -1) {
-      findWay(a+1,b,c,d);
-    }
-
-    if (a - 1 == c && b == d) {
-      isWay = true;
-    }
-    if (a - 1 >= 0 && copyOfMatrix[a-1][b] == -1) {
-      findWay(a-1,b,c,d);
-    }
-
-    if (a == c && b+1 == d) {
-      isWay = true;
-    }
-    if (b + 1 < numbOfCells && copyOfMatrix[a][b+1] == -1) {
-      findWay(a,b+1,c,d);
-    }
-
-    if (a == c && b-1 == d) {
-      isWay = true;
-    }
-    if (b - 1 >= 0 && copyOfMatrix[a][b-1] == -1) {
-      findWay(a,b-1,c,d);
-    }
-  }
 }
 
 function moveBall(ball) {
@@ -242,10 +214,6 @@ volumeNonBtn.addEventListener('click', () => {
   volumeNonBtn.classList.add('hidden');
   state.isVolume = !state.isVolume;
 })
-
-
-
-
 
 burger.addEventListener('click', () => {
   startBtn.disabled = !startBtn.disabled;

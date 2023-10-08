@@ -8,7 +8,7 @@ export function removeLines(lines, state, matrix, removeLinesSound) {
         if (state.isVolume) {
           setTimeout(() => {
             removeLinesSound.currentTime = 0;
-            removeLinesSound.play()
+            removeLinesSound.play();
           }, 100);
         }
         arr.forEach((obj, i) => {
