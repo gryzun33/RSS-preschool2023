@@ -1,14 +1,16 @@
-export function removeLines(lines, state, matrix, removeLinesSound) {
+export function removeLines(lines, state, matrix, removeLinesSound, blockField) {
   let x = 0;
+  let countOfBalls = 0;
   lines.forEach((arr) => {
     if (arr.length >= 5) {
       x = x + 1;
+      countOfBalls += arr.length;
       state.count = state.count + arr.length - 1;
       setTimeout (() => {
         if (state.isVolume) {
           setTimeout(() => {
             removeLinesSound.currentTime = 0;
-            removeLinesSound.play()
+            removeLinesSound.play();
           }, 100);
         }
         arr.forEach((obj, i) => {
@@ -29,6 +31,9 @@ export function removeLines(lines, state, matrix, removeLinesSound) {
       }, (x - 1) * 500);
     }
   })
+  setTimeout (() => {
+    blockField.classList.add('hidden');
+  }, (countOfBalls + 1) * 100 );
   state.count = state.count + 1;
   renderScore(state);
 }

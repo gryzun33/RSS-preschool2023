@@ -1,3 +1,15 @@
+console.log(`
+1. Вёрстка +10
+  - реализован интерфейс игры +5
+  - в футере приложения есть ссылка на гитхаб автора приложения, год создания приложения, логотип курса со ссылкой на курс +5
+2. Логика игры. Ходы, перемещения фигур, другие действия игрока подчиняются определённым свойственным игре правилам +10
+3. Реализовано завершение игры при достижении игровой цели +10
+4. По окончанию игры выводится её результат, например, количество ходов, время игры, набранные баллы, выигрыш или поражение и т.д +10
+5. Есть таблица результатов, в которой сохраняются результаты 10 игр с наибольшим счетом (лучшим временем и т.п.) или просто 10 последних игр (хранится в local storage) +10
+6. Анимации и звуки +10
+7. Высокое качество оформления приложения +10
+`);
+
 import { renderBox } from "./modules/renderBox.js";
 import { renderNewBalls } from "./modules/renderNewBalls.js";
 import { getLinesToRemove } from "./modules/getLinesToRemove.js";
@@ -5,6 +17,12 @@ import { renderNextBalls } from "./modules/renderNextBalls.js";
 import { removeLines } from "./modules/removeLines.js";
 import { checkAvailableGame } from "./modules/checkAvailableGame.js";
 import { getSounds } from "./modules/getSounds.js";
+import { createMatrix } from "./modules/createMatrix.js";
+import { copyMatrix } from "./modules/copyMatrix.js";
+import { runTimer } from "./modules/runTimer.js";
+import { renderBestScores } from "./modules/renderBestScores.js";
+import { onGameOver } from "./modules/onGameOver.js";
+import { findWay } from "./modules/findWay.js";
 
 const overlay = document.querySelector('.overlay');
 const overlayInners = document.querySelectorAll('.overlay-inner');
@@ -22,6 +40,7 @@ const volumeNonBtn = document.querySelector('.volume-non-btn');
 const score = document.querySelector('.score-count');
 const backBtn = document.querySelector('.back-menu');
 const startBtn = document.querySelector('.start-btn');
+const blockField = document.querySelector('.block-field');
 
 const ballColors = ['#861F1C', '#f0f075', '#152D59', '#149cb8', '#d92626', '#8a0f4d', '#145F35'];
 const numbOfCells = 9;
@@ -47,39 +66,17 @@ function initGame() {
     count: 0,
     isPlaying: 'start',
     isVolume: volume,
-    emptyBoxes: 3
+    emptyBoxes: 3,
+    isWay: false,
   }
 
-  isWay = false;
-
-  matrix = createMatrix();
+  matrix = createMatrix(numbOfCells);
   renderField(matrix);
   time.innerHTML = '00 : 00';
   score.innerHTML = '000';
 }
 
 initGame();
-
-function createMatrix() {
-  let arr = [];
-  for (let i = 0; i < numbOfCells; i++) {
-    let row = []; 
-    for (let j = 0; j < numbOfCells; j++) {
-      let obj = {
-        isBall: false,
-        color: null,
-        isStart: null,
-        isEnd: null,
-        id: `${i}` + `${j}`,
-        ball: null,
-        box: null
-      }
-      row.push(obj);
-    }
-    arr.push(row);
-  }
-  return arr;
-}
 
 function renderField(matrix) {
   let field = document.querySelector('.field');
@@ -98,61 +95,21 @@ function renderField(matrix) {
   renderNextBalls(state, ballColors);
 }
 
-startBtn.addEventListener('click', () => {
-  if (state.isPlaying === 'gameover') {
-    initGame();
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    overlay.classList.remove('overlay-show');
-    overlayInners.forEach((item) => {
-      item.classList.add('hidden');
-      item.classList.remove('inner-show');
-    });
-    runTimer();
-    nextStep();
-  } else if (state.isPlaying === 'start') {
-    overlay.classList.remove('overlay-show');
-    rules.classList.add('hidden');
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    runTimer();
-    nextStep();
-  } else if (state.isPlaying === 'play') {
-    state.isPlaying = 'pause';
-    startBtn.innerHTML = 'Continue';
-    overlay.classList.add('overlay-show');
-    if (state.activeBall) {
-      state.activeBall.classList.remove('active');
-      state.startPosition = null;
-    }
-    clearInterval(timeData.timerId);
-  } else if (state.isPlaying === 'pause') {
-    startBtn.innerHTML = 'Pause';
-    state.isPlaying = 'play';
-    overlay.classList.remove('overlay-show');
-    runTimer();
-  }
-})
-
 function nextStep() {
   const gameOver = checkAvailableGame(matrix, state);
-  console.log('gameover', gameOver);
   if(!gameOver) {
-    renderNewBalls(numbOfCells, matrix, state, sounds);
+    renderNewBalls(numbOfCells, matrix, state, sounds, blockField);
     renderNextBalls(state, ballColors);
     setTimeout(() => {
       const gameOverX = checkAvailableGame(matrix, state);
       if (gameOverX) {
-        onGameOver();
+        onGameOver(state, timeData, sounds, time, overlay, startBtn, gameOverBox);
       }
     },500);
   } else {
-    onGameOver();
+    onGameOver(state, timeData, sounds, time, overlay, startBtn, gameOverBox);
   }  
 }
-
-
-
 
 function clickOnEmptyBox(i, j) {
   if(!state.startPosition) {
@@ -161,73 +118,25 @@ function clickOnEmptyBox(i, j) {
   if(!matrix[i][j].isBall) {
     matrix[i][j].isEnd = true;
     state.endPosition = `${i}` + `${j}`;    
-    isWay = false;
-    copyOfMatrix = copyMatrix();
-    findWay(+state.startPosition[0], +state.startPosition[1], i, j);
-    if(isWay) {
+    state.isWay = false;
+    copyOfMatrix = copyMatrix(matrix);
+    findWay(+state.startPosition[0], +state.startPosition[1], i, j, state, copyOfMatrix, numbOfCells);
+    if(state.isWay) {
       if(state.isVolume) {
         sounds.clikOnBox.currentTime = 0;
         sounds.clikOnBox.play();
       }
       moveBall(state.activeBall);
+      return;
     } else if (state.isVolume) { 
-        sounds.wrongBox.currentTime = 0;
-        sounds.wrongBox.play();      
+      sounds.wrongBox.currentTime = 0;
+      sounds.wrongBox.play();      
     }
   } 
 }
 
-function copyMatrix() {
-  let copy = [];
-  for(let i=0;i<9;i++){
-    let copyRow = [];
-    for(let j=0;j<9;j++){
-      if(matrix[i][j].isBall) {
-        copyRow.push(1);
-      } else {
-        copyRow.push(-1);
-      }
-    }
-   copy.push(copyRow); 
-  }
-  return copy;
-}
-
-function findWay(a, b, c, d) {
-  if (!isWay) {
-    copyOfMatrix[a][b] = 1;
-
-    if (a + 1 == c && b == d) {
-      isWay = true;
-    }
-    if (a + 1 < numbOfCells && copyOfMatrix[a+1][b] == -1) {
-      findWay(a+1,b,c,d);
-    }
-
-    if (a - 1 == c && b == d) {
-      isWay = true;
-    }
-    if (a - 1 >= 0 && copyOfMatrix[a-1][b] == -1) {
-      findWay(a-1,b,c,d);
-    }
-
-    if (a == c && b+1 == d) {
-      isWay = true;
-    }
-    if (b + 1 < numbOfCells && copyOfMatrix[a][b+1] == -1) {
-      findWay(a,b+1,c,d);
-    }
-
-    if (a == c && b-1 == d) {
-      isWay = true;
-    }
-    if (b - 1 >= 0 && copyOfMatrix[a][b-1] == -1) {
-      findWay(a,b-1,c,d);
-    }
-  }
-}
-
 function moveBall(ball) {
+  blockField.classList.remove('hidden');
   ball.classList.remove('active');
   ball.classList.add('hide');
   ball.addEventListener('animationend', doAfterHiding);
@@ -251,14 +160,13 @@ function moveBall(ball) {
       matrix[+state.startPosition[0]][+state.startPosition[1]].isBall = false;
       matrix[+state.startPosition[0]][+state.startPosition[1]].color = null;
       state.startPosition = null;
-      console.log('color2 =',matrix[+state.endPosition[0]][+state.endPosition[1]].color); 
       const lines = getLinesToRemove(+state.endPosition[0],+state.endPosition[1],
                     matrix[+state.endPosition[0]][+state.endPosition[1]].color, matrix);
 
       if (lines.every((line) => line.length < 5)) {
         nextStep();        
       } else {
-        removeLines(lines, state, matrix, sounds.removeLines);
+        removeLines(lines, state, matrix, sounds.removeLines, blockField);
       }  
       ball.classList.remove('show');
       ball.dataset.position = state.endPosition;
@@ -267,19 +175,41 @@ function moveBall(ball) {
   }
 }
 
-function runTimer() {
-  timeData.timerId = setInterval(() => {
-    if (timeData.sec === 59) {
-      timeData.min += 1;
-      timeData.sec = 0;
-    } else {
-      timeData.sec += 1;
+startBtn.addEventListener('click', () => {
+  if (state.isPlaying === 'gameover') {
+    initGame();
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    overlay.classList.remove('overlay-show');
+    overlayInners.forEach((item) => {
+      item.classList.add('hidden');
+      item.classList.remove('inner-show');
+    });
+    runTimer(timeData, time);
+    nextStep();
+  } else if (state.isPlaying === 'start') {
+    overlay.classList.remove('overlay-show');
+    rules.classList.add('hidden');
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    runTimer(timeData, time);
+    nextStep();
+  } else if (state.isPlaying === 'play') {
+    state.isPlaying = 'pause';
+    startBtn.innerHTML = 'Continue';
+    overlay.classList.add('overlay-show');
+    if (state.activeBall) {
+      state.activeBall.classList.remove('active');
+      state.startPosition = null;
     }
-    timeData.currMin = (parseInt(timeData.min, 10) < 10 ? '0' : '') + timeData.min;
-    timeData.currSec = (parseInt(timeData.sec, 10) < 10 ? '0' : '') + timeData.sec;
-    time.innerHTML = `${timeData.currMin} : ${timeData.currSec}`;
-  }, 1000);
-}
+    clearInterval(timeData.timerId);
+  } else if (state.isPlaying === 'pause') {
+    startBtn.innerHTML = 'Pause';
+    state.isPlaying = 'play';
+    overlay.classList.remove('overlay-show');
+    runTimer(timeData, time);
+  }
+})
 
 volumeBtn.addEventListener('click', () => {
   volumeNonBtn.classList.remove('hidden');
@@ -292,47 +222,6 @@ volumeNonBtn.addEventListener('click', () => {
   volumeNonBtn.classList.add('hidden');
   state.isVolume = !state.isVolume;
 })
-
-function onGameOver() {
-  if (state.isVolume) {
-    sounds.gameOver.currentTime = 0;
-    sounds.gameOver.play();
-  }
-  clearInterval(timeData.timerId);
-  state.isPlaying = 'gameover';
-  startBtn.innerHTML = 'Start game';
-  overlay.classList.add('overlay-show');
-  gameOverBox.classList.remove('hidden');
-  gameOverBox.innerHTML = `
-    <p class="gameover__title">GAME OVER!</p>
-    <p class="gameover__time">Your time is ${time.innerHTML}</p>
-    <p class="gameover__score">Your score is ${+state.count}</p>  
-  `;
-  overlay.addEventListener('transitionend', showGameOver);
-
-  function showGameOver() {
-    gameOverBox.classList.add('inner-show');
-    overlay.removeEventListener('transitionend', showGameOver);
-  }
-  
-  saveGame(); 
-}
-
-function saveGame() {
-  const fullTime = timeData.min * 60 + timeData.sec;
-  let game = {
-    timeMin: timeData.min, 
-    timeSec: timeData.sec, 
-    fullTime: fullTime,
-    score: state.count
-  }
-  let games = JSON.parse(localStorage.getItem('gamesLine98'));
-  if (!games) {
-    games = [];
-  }
-  games.push(game);
-  localStorage.setItem('gamesLine98', JSON.stringify(games));
-}
 
 burger.addEventListener('click', () => {
   startBtn.disabled = !startBtn.disabled;
@@ -348,7 +237,7 @@ burger.addEventListener('click', () => {
     }
     
     if (state.isPlaying === 'play') { 
-      runTimer(); 
+      runTimer(timeData, time); 
     }
 
     if (state.isPlaying === 'start' || state.isPlaying === 'play') {
@@ -409,10 +298,9 @@ rulesBtn.addEventListener('click', () => {
 });
 
 bestBtn.addEventListener('click', () => {
-  console.log('bestclick450');
   menu.classList.add('hidden');
   best.classList.remove('hidden');
-  renderLastScores();
+  renderBestScores();
   backBtn.classList.remove('hidden');
 })
 
@@ -422,46 +310,3 @@ backBtn.addEventListener('click', () => {
   });
   menu.classList.remove('hidden');
 }); 
-
-function renderLastScores() {
-  const lastTable = document.querySelector('.best-list');
-  lastTable.innerHTML = `
-    <tr>
-      <th>N</th>
-      <th>Score</th>
-      <th>Time</th>
-    </tr>
-  `;
-  let l = 0;
-  const scores = JSON.parse(localStorage.getItem('gamesLine98'));
-  if (scores) {
-    scores.sort((a,b) => {
-      if (b.score > a.score) return 1;
-      if (a.score > b.score) return -1;
-      return a.fullSec > b.fullTime ? 1 : -1;
-    });
-    l = (scores.length <= 10) ? scores.length : 10;
-    for (let i = 0; i < l; i++) {
-      const min = (scores[i].timeMin < 10) ? '0' + scores[i].timeMin : scores[i].timeMin;
-      const sec = (scores[i].timeSec < 10) ? '0' + scores[i].timeSec : scores[i].timeSec;
-      const time = `${min} : ${sec}`;
-      const tableRow = document.createElement('tr');
-      tableRow.innerHTML = `
-        <td>${i+1}</td>
-        <td>${scores[i].score}</td>
-        <td>${time}</td>
-      `;
-      lastTable.append(tableRow);
-    }
-  }
-  while (l < 10) {
-    const tableRow = document.createElement('tr');
-    tableRow.innerHTML = `
-      <td>${l+1}</td>
-      <td>---</td>
-      <td>---</td>
-    `;
-    lastTable.append(tableRow);
-    l++;
-  }
-}
